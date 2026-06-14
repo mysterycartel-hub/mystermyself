@@ -390,6 +390,28 @@ input::placeholder, textarea::placeholder {
   color: rgba(245,240,232,0.3);
 }
 
+/* ── Coast map responsive ── */
+.coast-map-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 2px;
+}
+@media (max-width: 1024px) {
+  .coast-map-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Passport stamp ── */
+.passport-stamp {
+  border: 2px solid rgba(201,168,76,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 /* ── Admin table ── */
 table { border-collapse: collapse; width: 100%; }
 th { text-align: left; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); padding: 12px 16px; border-bottom: 1px solid rgba(201,168,76,0.15); }

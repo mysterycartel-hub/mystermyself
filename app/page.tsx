@@ -9,6 +9,9 @@ import EcosystemGrid from '@/components/home/EcosystemGrid'
 import WealthCity from '@/components/home/WealthCity'
 import HomeRoadmap from '@/components/home/HomeRoadmap'
 import CharacterSection from '@/components/home/CharacterSection'
+import FlagshipVideos from '@/components/home/FlagshipVideos'
+import ScottKingCoastMap from '@/components/map/ScottKingCoastMap'
+import PassportPreview from '@/components/passport/PassportPreview'
 
 export default function Home() {
   return (
@@ -16,10 +19,13 @@ export default function Home() {
       <Navbar />
       <HomeHero />
       <EcosystemMarquee />
-      <EcosystemGrid />
+      <FlagshipVideos />
       <EcosystemMarquee variant="dark" reverse />
+      <ScottKingCoastMap />
+      <EcosystemGrid />
       <WealthCity />
       <HomeRoadmap />
+      <PassportPreview />
       <CharacterSection />
       <LeadMagnetForm />
       <Footer />
