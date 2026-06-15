@@ -1,10 +1,19 @@
 'use client'
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { Lesson, CHARACTERS, LESSONS } from '@/lib/academy'
 import { getLessonMayhem } from '@/lib/mayhem'
+import {
+  loadProgress,
+  markLessonViewed,
+  markPracticeComplete,
+  markJournalSaved,
+  canAccessLesson,
+  getLevelProgress,
+} from '@/lib/progression'
+import { dispatchTrigger } from '@/lib/triggers'
 import CharacterCoach from './CharacterCoach'
 import KitchenMetaphor from './KitchenMetaphor'
 import VisualExample from './VisualExample'
@@ -14,6 +23,7 @@ import ReflectionJournal from './ReflectionJournal'
 import RiskWarning from './RiskWarning'
 import ProgressUnlock from './ProgressUnlock'
 import MayhemCard from './MayhemCard'
+import LevelGate from '../progression/LevelGate'
 
 interface Props {
   lesson: Lesson
@@ -31,16 +41,154 @@ const STEPS = [
 
 export default function LessonShell({ lesson }: Props) {
   const [practiceComplete, setPracticeComplete] = useState(false)
-  const [activeStep, setActiveStep] = useState(0)
+  const [journalComplete, setJournalComplete]   = useState(false)
+  const [activeStep, setActiveStep]             = useState(0)
+  const [levelJustCompleted, setLevelJustCompleted] = useState<number | null>(null)
+  const [isLocked, setIsLocked]                 = useState(false)
+  const [progressData, setProgressData]         = useState(() => loadProgress())
 
-  const character    = CHARACTERS[lesson.character]
-  const warnChar     = lesson.warningCharacter ? CHARACTERS[lesson.warningCharacter] : null
+  const character     = CHARACTERS[lesson.character]
+  const warnChar      = lesson.warningCharacter ? CHARACTERS[lesson.warningCharacter] : null
   const prevLessonObj = lesson.prevLesson ? LESSONS.find(l => l.slug === lesson.prevLesson) ?? null : null
   const nextLessonObj = lesson.nextLesson ? LESSONS.find(l => l.slug === lesson.nextLesson) ?? null : null
-  const mayhemData   = getLessonMayhem(lesson.id)
+  const mayhemData    = getLessonMayhem(lesson.id)
+
+  // Gate check + mark viewed on mount
+  useEffect(() => {
+    const data = loadProgress()
+    if (!canAccessLesson(data, lesson.id)) {
+      setIsLocked(true)
+      dispatchTrigger({ type: 'lesson-jumped', lessonId: lesson.id, level: lesson.level })
+      return
+    }
+    const { data: updated, levelJustCompleted: lvl } = markLessonViewed(lesson.id)
+    setProgressData(updated)
+    if (lvl !== null) {
+      setLevelJustCompleted(lvl)
+      dispatchTrigger({ type: 'level-complete', level: lvl })
+    }
+  }, [lesson.id, lesson.level])
+
+  function handlePracticeComplete() {
+    setPracticeComplete(true)
+    const { data: updated, levelJustCompleted: lvl } = markPracticeComplete(lesson.id)
+    setProgressData(updated)
+    if (lvl !== null) {
+      setLevelJustCompleted(lvl)
+      dispatchTrigger({ type: 'level-complete', level: lvl })
+    }
+    dispatchTrigger({ type: 'practice-complete', lessonId: lesson.id })
+  }
+
+  function handleJournalSaved() {
+    setJournalComplete(true)
+    const { data: updated, levelJustCompleted: lvl } = markJournalSaved(lesson.id)
+    setProgressData(updated)
+    if (lvl !== null) {
+      setLevelJustCompleted(lvl)
+      dispatchTrigger({ type: 'level-complete', level: lvl })
+    }
+    dispatchTrigger({ type: 'journal-complete', lessonId: lesson.id })
+  }
+
+  if (isLocked) {
+    return <LevelGate blockedLessonId={lesson.id} data={progressData} />
+  }
+
+  const levelProg = getLevelProgress(progressData, lesson.level)
 
   return (
     <div style={{ maxWidth: 900, margin: '0 auto' }}>
+
+      {/* Level completion banner */}
+      <AnimatePresence>
+        {levelJustCompleted !== null && (
+          <motion.div
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            style={{
+              background: 'rgba(201,168,76,0.1)',
+              border: '1px solid rgba(201,168,76,0.35)',
+              padding: '16px 24px',
+              marginBottom: 32,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 16,
+              justifyContent: 'space-between',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <span style={{ fontSize: '1.4rem' }}>👑</span>
+              <div>
+                <div style={{
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '0.5rem',
+                  letterSpacing: '0.25em',
+                  color: '#c9a84c',
+                  textTransform: 'uppercase',
+                  marginBottom: 2,
+                }}>
+                  Level {levelJustCompleted} Complete
+                </div>
+                <div style={{
+                  fontFamily: '"Bebas Neue", sans-serif',
+                  fontSize: '1.2rem',
+                  letterSpacing: '0.06em',
+                  color: 'rgba(245,240,232,0.9)',
+                }}>
+                  Next level unlocked →
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={() => setLevelJustCompleted(null)}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: 'rgba(245,240,232,0.3)',
+                cursor: 'none',
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.55rem',
+              }}
+            >
+              ✕
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Progress chips */}
+      <div style={{ display: 'flex', gap: 8, marginBottom: 24, flexWrap: 'wrap' }}>
+        {[
+          { label: 'Viewed', done: levelProg.viewedAll },
+          { label: 'Practice', done: practiceComplete || levelProg.practiceAll },
+          { label: 'Journal', done: journalComplete || levelProg.journalAll },
+        ].map(chip => (
+          <div
+            key={chip.label}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 5,
+              padding: '4px 10px',
+              border: `1px solid ${chip.done ? 'rgba(34,197,94,0.4)' : 'rgba(255,255,255,0.08)'}`,
+              background: chip.done ? 'rgba(34,197,94,0.06)' : 'transparent',
+            }}
+          >
+            <span style={{ fontSize: '0.7rem' }}>{chip.done ? '✓' : '○'}</span>
+            <span style={{
+              fontFamily: '"Space Mono", monospace',
+              fontSize: '0.48rem',
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              color: chip.done ? 'rgba(34,197,94,0.9)' : 'rgba(245,240,232,0.3)',
+            }}>
+              {chip.label}
+            </span>
+          </div>
+        ))}
+      </div>
 
       {/* Lesson header */}
       <div style={{ marginBottom: 48 }}>
@@ -318,7 +466,7 @@ export default function LessonShell({ lesson }: Props) {
           </div>
           <PracticePrompt
             practice={lesson.practice}
-            onComplete={() => setPracticeComplete(true)}
+            onComplete={handlePracticeComplete}
           />
         </section>
 
@@ -339,6 +487,7 @@ export default function LessonShell({ lesson }: Props) {
           <ReflectionJournal
             prompts={lesson.journalPrompts}
             lessonId={lesson.id}
+            onSaved={handleJournalSaved}
           />
         </section>
 

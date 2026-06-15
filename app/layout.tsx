@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import CustomCursor from '@/components/CustomCursor'
+import CharacterInterrupt from '@/components/triggers/CharacterInterrupt'
 
 export const metadata: Metadata = {
   title: {
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <CustomCursor />
+        <CharacterInterrupt />
         {children}
       </body>
     </html>

@@ -8,6 +8,7 @@ import { MELODY_JOURNAL_INTRO, MELISSA_JOURNAL_NOTE } from '@/lib/mayhem'
 interface Props {
   prompts: JournalPrompt[]
   lessonId: string
+  onSaved?: () => void
 }
 
 const typeStyles = {
@@ -16,15 +17,15 @@ const typeStyles = {
   emotion:      { color: '#F59E0B', label: 'Melody Mayhem · Psychology', icon: '🎭' },
 }
 
-export default function ReflectionJournal({ prompts, lessonId }: Props) {
+export default function ReflectionJournal({ prompts, lessonId, onSaved }: Props) {
   const [answers, setAnswers] = useState<Record<number, string>>({})
   const [saved, setSaved] = useState(false)
 
   const handleSave = () => {
-    // Persist to localStorage with lesson key
     const key = `tcu_journal_${lessonId}`
     localStorage.setItem(key, JSON.stringify({ answers, savedAt: new Date().toISOString() }))
     setSaved(true)
+    onSaved?.()
     setTimeout(() => setSaved(false), 3000)
   }
 
