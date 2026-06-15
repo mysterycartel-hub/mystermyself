@@ -58,12 +58,15 @@ export default function TCUHero() {
         </motion.p>
 
         {/* CTAs */}
-        <motion.div {...fadeUp(0.8)} style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+        <motion.div {...fadeUp(0.8)} style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
           <Link href="/trading-chef-university#pricing" className="btn-primary">
-            <span>Start For Free →</span>
+            <span>Join TCU →</span>
           </Link>
-          <Link href="/trading-chef-university#curriculum" className="btn-secondary">
-            See The Curriculum
+          <Link href="/academy" className="btn-secondary">
+            Free Academy
+          </Link>
+          <Link href="/kitchen" className="btn-secondary">
+            Market Kitchen
           </Link>
         </motion.div>
 

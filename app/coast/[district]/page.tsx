@@ -249,53 +249,141 @@ export default function DistrictPage({ params }: { params: { district: string } 
         </div>
       </section>
 
-      {/* V3 Passport teaser */}
+      {/* Passport + Academy CTA */}
       <section style={{ background: 'var(--black)', borderTop: '1px solid rgba(201,168,76,0.08)' }}>
-        <div style={{
-          border: '1px solid rgba(201,168,76,0.15)',
-          padding: '48px',
-          display: 'grid',
-          gridTemplateColumns: '1fr auto',
-          gap: 40,
-          alignItems: 'center',
-          background: 'rgba(201,168,76,0.02)',
-        }}>
-          <div>
-            <div style={{
-              fontFamily: '"Space Mono", monospace',
-              fontSize: '0.55rem',
-              letterSpacing: '0.25em',
-              textTransform: 'uppercase',
-              color: 'rgba(201,168,76,0.5)',
-              marginBottom: 12,
-            }}>
-              V3 · Coming Next
-            </div>
-            <h3 style={{
-              fontFamily: '"Bebas Neue", sans-serif',
-              fontSize: '2rem',
-              color: 'var(--gold)',
-              letterSpacing: '0.04em',
-              marginBottom: 12,
-            }}>
-              Passport System
-            </h3>
-            <p style={{ fontSize: '0.75rem', color: 'rgba(245,240,232,0.5)', lineHeight: 1.8, maxWidth: 480 }}>
-              Visit every district. Collect stamps. Earn XP. Unlock levels, badges, and exclusive content across the Scott-King Coast universe.
-              The Passport System drops with V3.
-            </p>
-          </div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+          {/* Passport */}
           <div style={{
-            border: '2px solid rgba(201,168,76,0.2)',
-            padding: '20px 32px',
-            fontFamily: '"Bebas Neue", sans-serif',
-            fontSize: '2rem',
-            letterSpacing: '0.25em',
-            color: 'rgba(201,168,76,0.3)',
-            transform: 'rotate(-4deg)',
-            flexShrink: 0,
+            border: '1px solid rgba(201,168,76,0.15)',
+            padding: '40px',
+            background: 'rgba(201,168,76,0.02)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 16,
+            justifyContent: 'space-between',
           }}>
-            {d.passportStamp}
+            <div>
+              <div style={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.5rem',
+                letterSpacing: '0.25em',
+                textTransform: 'uppercase',
+                color: 'rgba(201,168,76,0.5)',
+                marginBottom: 12,
+              }}>
+                V3 · Live Now
+              </div>
+              <h3 style={{
+                fontFamily: '"Bebas Neue", sans-serif',
+                fontSize: '1.8rem',
+                color: 'var(--gold)',
+                letterSpacing: '0.04em',
+                marginBottom: 10,
+                lineHeight: 1,
+              }}>
+                Coast Passport
+              </h3>
+              <p style={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.65rem',
+                color: 'rgba(245,240,232,0.45)',
+                lineHeight: 1.8,
+              }}>
+                Visit this district. Collect the stamp. Earn XP toward Captain, Admiral, and Legend levels.
+              </p>
+            </div>
+            <div style={{ display: 'flex', gap: 10 }}>
+              <Link href="/passport" style={{ textDecoration: 'none' }}>
+                <div className="btn-primary" style={{ padding: '10px 20px' }}><span>Claim Stamp →</span></div>
+              </Link>
+              <div style={{
+                border: '2px solid rgba(201,168,76,0.2)',
+                padding: '10px 20px',
+                fontFamily: '"Bebas Neue", sans-serif',
+                fontSize: '1.4rem',
+                letterSpacing: '0.25em',
+                color: 'rgba(201,168,76,0.3)',
+                transform: 'rotate(-3deg)',
+                flexShrink: 0,
+                display: 'flex',
+                alignItems: 'center',
+              }}>
+                {d.passportStamp}
+              </div>
+            </div>
+          </div>
+
+          {/* Academy — only show for market-marina */}
+          <div style={{
+            border: '1px solid rgba(34,197,94,0.15)',
+            padding: '40px',
+            background: 'rgba(34,197,94,0.02)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 16,
+            justifyContent: 'space-between',
+          }}>
+            <div>
+              <div style={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.5rem',
+                letterSpacing: '0.25em',
+                textTransform: 'uppercase',
+                color: 'rgba(34,197,94,0.5)',
+                marginBottom: 12,
+              }}>
+                V4 · Trading Chef Academy
+              </div>
+              <h3 style={{
+                fontFamily: '"Bebas Neue", sans-serif',
+                fontSize: '1.8rem',
+                color: '#22C55E',
+                letterSpacing: '0.04em',
+                marginBottom: 10,
+                lineHeight: 1,
+              }}>
+                Learn the Market
+              </h3>
+              <p style={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.65rem',
+                color: 'rgba(245,240,232,0.45)',
+                lineHeight: 1.8,
+              }}>
+                13 lessons. Bias → Flow → AOI → Delivery → Confirmation → The Pass → Tables Served → Management.
+              </p>
+            </div>
+            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+              <Link href="/academy" style={{ textDecoration: 'none' }}>
+                <div style={{
+                  background: '#22C55E',
+                  color: '#060608',
+                  padding: '10px 20px',
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '0.6rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  textDecoration: 'none',
+                }}>
+                  Academy →
+                </div>
+              </Link>
+              <Link href="/kitchen" style={{ textDecoration: 'none' }}>
+                <div style={{
+                  border: '1px solid rgba(34,197,94,0.3)',
+                  color: '#22C55E',
+                  padding: '10px 20px',
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '0.6rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                }}>
+                  Market Kitchen
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
