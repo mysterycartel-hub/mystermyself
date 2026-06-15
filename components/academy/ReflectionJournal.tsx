@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { JournalPrompt } from '@/lib/academy'
+import { MELODY_JOURNAL_INTRO, MELISSA_JOURNAL_NOTE } from '@/lib/mayhem'
 
 interface Props {
   prompts: JournalPrompt[]
@@ -12,7 +13,7 @@ interface Props {
 const typeStyles = {
   observation: { color: '#c9a84c', label: 'Observation', icon: '👁️' },
   invalidation: { color: '#3B82F6', label: 'Invalidation', icon: '❌' },
-  emotion:      { color: '#EC4899', label: 'Psychology',   icon: '🧠' },
+  emotion:      { color: '#F59E0B', label: 'Melody Mayhem · Psychology', icon: '🎭' },
 }
 
 export default function ReflectionJournal({ prompts, lessonId }: Props) {
@@ -70,6 +71,62 @@ export default function ReflectionJournal({ prompts, lessonId }: Props) {
         }}>
           No right answers. Honest reflection builds the skill. Write what you actually noticed.
         </p>
+      </div>
+
+      {/* Melody intro — always present before emotion prompts */}
+      {prompts.some(p => p.type === 'emotion') && (
+        <div style={{
+          background: 'rgba(245,158,11,0.04)',
+          border: '1px solid rgba(245,158,11,0.2)',
+          borderLeft: '3px solid #F59E0B',
+          padding: '14px 18px',
+          marginBottom: 20,
+          display: 'flex',
+          gap: 12,
+          alignItems: 'flex-start',
+        }}>
+          <span style={{ fontSize: '1.2rem', flexShrink: 0, lineHeight: 1 }}>🎭</span>
+          <div>
+            <div style={{
+              fontFamily: '"Space Mono", monospace',
+              fontSize: '0.42rem',
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              color: '#F59E0B',
+              marginBottom: 4,
+            }}>
+              Melody Mayhem · Reading Your Answers
+            </div>
+            <p style={{
+              fontFamily: '"Space Mono", monospace',
+              fontSize: '0.58rem',
+              lineHeight: 1.75,
+              color: 'rgba(245,240,232,0.5)',
+              margin: 0,
+            }}>
+              {MELODY_JOURNAL_INTRO}
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* Melissa reminder — always present */}
+      <div style={{
+        background: 'rgba(236,72,153,0.03)',
+        border: '1px solid rgba(236,72,153,0.15)',
+        borderLeft: '3px solid #EC4899',
+        padding: '10px 16px',
+        marginBottom: 20,
+        fontFamily: '"Space Mono", monospace',
+        fontSize: '0.52rem',
+        lineHeight: 1.7,
+        color: 'rgba(245,240,232,0.4)',
+        display: 'flex',
+        gap: 10,
+        alignItems: 'flex-start',
+      }}>
+        <span style={{ fontSize: '1rem', flexShrink: 0, lineHeight: 1.3 }}>⚡</span>
+        <span>{MELISSA_JOURNAL_NOTE}</span>
       </div>
 
       {/* Journal prompts */}

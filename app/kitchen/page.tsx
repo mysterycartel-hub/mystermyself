@@ -6,6 +6,7 @@ import ChartEmbed from '@/components/kitchen/ChartEmbed'
 import Watchlist from '@/components/kitchen/Watchlist'
 import AICoach from '@/components/kitchen/AICoach'
 import BiasPanel from '@/components/kitchen/BiasPanel'
+import MayhemWatch from '@/components/kitchen/MayhemWatch'
 import { KitchenSymbol, Timeframe, DEFAULT_SYMBOL, DEFAULT_TIMEFRAME } from '@/lib/kitchen'
 import Link from 'next/link'
 
@@ -154,8 +155,21 @@ export default function KitchenPage() {
           )}
         </div>
 
-        {/* Right: AI Coach */}
-        <AICoach symbol={symbol} timeframe={timeframe} />
+        {/* Right: Mayhem Watch + AI Coach */}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          width: 296,
+          flexShrink: 0,
+          borderLeft: '1px solid rgba(201,168,76,0.1)',
+          overflow: 'hidden',
+          background: 'rgba(4,4,6,0.97)',
+        }}>
+          <MayhemWatch activeMayhem="both" />
+          <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
+            <AICoach symbol={symbol} timeframe={timeframe} />
+          </div>
+        </div>
       </div>
     </div>
   )

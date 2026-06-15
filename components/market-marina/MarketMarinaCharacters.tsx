@@ -13,7 +13,8 @@ const COACH_ORDER = [
   'grandma-market',
   'nana-value',
 ]
-const ADVERSARY_ORDER = ['melissa-mayhem', 'melody-mayhem', 'burn-alarm']
+const MAYHEM_ORDER = ['melissa-mayhem', 'melody-mayhem']
+const ALERT_ORDER  = ['burn-alarm']
 
 export default function MarketMarinaCharacters() {
   const [active, setActive] = useState<string>('chef-goldie')
@@ -119,7 +120,31 @@ export default function MarketMarinaCharacters() {
               <CharChip key={id} id={id} c={CHARACTERS[id]} />
             ))}
 
-            {/* Adversaries */}
+            {/* The Mayhem — Melissa + Melody, co-equal section */}
+            <div style={{
+              fontFamily: '"Space Mono", monospace',
+              fontSize: '0.42rem',
+              letterSpacing: '0.22em',
+              textTransform: 'uppercase',
+              color: 'rgba(236,72,153,0.6)',
+              padding: '8px 16px',
+              background: 'linear-gradient(90deg, rgba(236,72,153,0.06) 0%, rgba(245,158,11,0.04) 100%)',
+              borderTop: '1px solid rgba(236,72,153,0.15)',
+              borderBottom: '1px solid rgba(245,158,11,0.1)',
+              marginTop: 2,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+            }}>
+              <span>⚡</span>
+              <span>The Mayhem</span>
+              <span style={{ color: 'rgba(245,158,11,0.6)' }}>🎭</span>
+            </div>
+            {MAYHEM_ORDER.map(id => (
+              <CharChip key={id} id={id} c={CHARACTERS[id]} />
+            ))}
+
+            {/* Alerts */}
             <div style={{
               fontFamily: '"Space Mono", monospace',
               fontSize: '0.42rem',
@@ -132,9 +157,9 @@ export default function MarketMarinaCharacters() {
               borderBottom: '1px solid rgba(239,68,68,0.06)',
               marginTop: 2,
             }}>
-              The Market
+              Alerts
             </div>
-            {ADVERSARY_ORDER.map(id => (
+            {ALERT_ORDER.map(id => (
               <CharChip key={id} id={id} c={CHARACTERS[id]} />
             ))}
           </div>

@@ -1,7 +1,13 @@
 'use client'
 
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { KitchenSymbol } from '@/lib/kitchen'
+import {
+  MELISSA_KITCHEN_TRIGGERS,
+  MELODY_KITCHEN_TRIGGERS,
+  MayhemKitchenTrigger,
+} from '@/lib/mayhem'
 
 interface Props {
   symbol: KitchenSymbol
@@ -19,6 +25,15 @@ const TCU_FIELDS = [
   { id: 'tables',       label: 'Tables Served',   placeholder: 'Target levels if price delivers', color: '#22C55E' },
   { id: 'management',   label: 'Management',      placeholder: 'Burn Point + invalidation level', color: '#EF4444' },
 ]
+
+function getActiveTrigger(fieldId: string, text: string): MayhemKitchenTrigger | null {
+  if (!text.trim()) return null
+  const allTriggers = [...MELISSA_KITCHEN_TRIGGERS, ...MELODY_KITCHEN_TRIGGERS]
+  return allTriggers.find(t => {
+    if (t.field !== fieldId) return false
+    return t.triggerPattern.split('|').some(p => text.toLowerCase().includes(p.toLowerCase()))
+  }) ?? null
+}
 
 export default function BiasPanel({ symbol }: Props) {
   const [notes, setNotes]         = useState<Record<string, string>>({})
@@ -152,41 +167,108 @@ export default function BiasPanel({ symbol }: Props) {
         gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
         gap: 8,
       }}>
-        {TCU_FIELDS.slice(1).map((f) => (
-          <div key={f.id}>
-            <div style={{
-              fontFamily: '"Space Mono", monospace',
-              fontSize: '0.42rem',
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              color: f.color,
-              marginBottom: 4,
-              opacity: 0.7,
-            }}>
-              {f.label}
-            </div>
-            <textarea
-              value={notes[f.id] ?? ''}
-              onChange={(e) => setNotes(prev => ({ ...prev, [f.id]: e.target.value }))}
-              placeholder={f.placeholder}
-              rows={2}
-              style={{
-                width: '100%',
-                background: 'rgba(245,240,232,0.02)',
-                border: `1px solid ${notes[f.id]?.trim() ? f.color + '30' : 'rgba(245,240,232,0.06)'}`,
-                color: 'rgba(245,240,232,0.65)',
+        {TCU_FIELDS.slice(1).map((f) => {
+          const activeTrigger = getActiveTrigger(f.id, notes[f.id] ?? '')
+          const isMelissa = activeTrigger?.character === 'melissa-mayhem'
+          const triggerAccent = isMelissa ? '#EC4899' : '#F59E0B'
+          return (
+            <div key={f.id}>
+              <div style={{
                 fontFamily: '"Space Mono", monospace',
-                fontSize: '0.5rem',
-                lineHeight: 1.6,
-                padding: '8px 10px',
-                resize: 'vertical',
-                outline: 'none',
-                transition: 'border-color 0.2s',
-                boxSizing: 'border-box',
-              }}
-            />
-          </div>
-        ))}
+                fontSize: '0.42rem',
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                color: activeTrigger ? triggerAccent : f.color,
+                marginBottom: 4,
+                opacity: 0.7,
+                transition: 'color 0.2s',
+              }}>
+                {f.label}
+                {activeTrigger && (
+                  <span style={{ marginLeft: 6, opacity: 1 }}>
+                    {isMelissa ? '⚡' : '🎭'}
+                  </span>
+                )}
+              </div>
+              <textarea
+                value={notes[f.id] ?? ''}
+                onChange={(e) => setNotes(prev => ({ ...prev, [f.id]: e.target.value }))}
+                placeholder={f.placeholder}
+                rows={2}
+                style={{
+                  width: '100%',
+                  background: activeTrigger
+                    ? `rgba(${isMelissa ? '236,72,153' : '245,158,11'},0.04)`
+                    : 'rgba(245,240,232,0.02)',
+                  border: `1px solid ${
+                    activeTrigger
+                      ? triggerAccent + '50'
+                      : notes[f.id]?.trim()
+                      ? f.color + '30'
+                      : 'rgba(245,240,232,0.06)'
+                  }`,
+                  color: 'rgba(245,240,232,0.65)',
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '0.5rem',
+                  lineHeight: 1.6,
+                  padding: '8px 10px',
+                  resize: 'vertical',
+                  outline: 'none',
+                  transition: 'border-color 0.2s, background 0.2s',
+                  boxSizing: 'border-box',
+                }}
+              />
+              <AnimatePresence>
+                {activeTrigger && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.2 }}
+                    style={{
+                      overflow: 'hidden',
+                      marginTop: 4,
+                      background: `rgba(${isMelissa ? '236,72,153' : '245,158,11'},0.05)`,
+                      border: `1px solid ${triggerAccent}30`,
+                      borderLeft: `2px solid ${triggerAccent}`,
+                      padding: '6px 10px',
+                    }}
+                  >
+                    <div style={{
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '0.42rem',
+                      color: triggerAccent,
+                      letterSpacing: '0.15em',
+                      textTransform: 'uppercase',
+                      marginBottom: 3,
+                    }}>
+                      {isMelissa ? '⚡ Melissa Mayhem' : '🎭 Melody Mayhem'}
+                    </div>
+                    <p style={{
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '0.46rem',
+                      lineHeight: 1.6,
+                      color: 'rgba(245,240,232,0.55)',
+                      margin: '0 0 4px',
+                    }}>
+                      {activeTrigger.warning}
+                    </p>
+                    <p style={{
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '0.44rem',
+                      lineHeight: 1.5,
+                      color: `${triggerAccent}70`,
+                      fontStyle: 'italic',
+                      margin: 0,
+                    }}>
+                      &ldquo;{activeTrigger.quote}&rdquo;
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          )
+        })}
       </div>
 
       {/* Action row */}

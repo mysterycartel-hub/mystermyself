@@ -118,17 +118,286 @@ export default function AcademyPage() {
         </div>
       </section>
 
-      {/* Characters intro */}
+      {/* ── The Mayhem — Featured Section ─────────────────────────────────── */}
       <section style={{
         background: 'var(--black)',
+        padding: '72px 48px',
+        borderTop: '1px solid rgba(236,72,153,0.1)',
+        borderBottom: '1px solid rgba(245,158,11,0.08)',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        {/* Background gradient sweep */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(135deg, rgba(236,72,153,0.04) 0%, transparent 50%, rgba(245,158,11,0.03) 100%)',
+          pointerEvents: 'none',
+        }} />
+
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: 1200, margin: '0 auto' }}>
+          {/* Section label */}
+          <div className="section-label" style={{ marginBottom: 24 }}>
+            <div className="section-label-line" style={{ background: '#EC4899' }} />
+            <span className="section-label-text" style={{ color: '#EC4899' }}>The Mayhem · Core TCU Characters</span>
+          </div>
+
+          <h2 style={{
+            fontFamily: '"Bebas Neue", sans-serif',
+            fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+            lineHeight: 0.95,
+            letterSpacing: '0.02em',
+            marginBottom: 16,
+          }}>
+            THEY ARE ALWAYS<br />
+            <span style={{ color: '#EC4899' }}>IN THE KITCHEN</span>
+          </h2>
+          <p style={{
+            fontFamily: '"Space Mono", monospace',
+            fontSize: '0.65rem',
+            lineHeight: 1.85,
+            color: 'rgba(245,240,232,0.4)',
+            maxWidth: 560,
+            marginBottom: 48,
+          }}>
+            Melissa Mayhem and Melody Mayhem are not characters to learn about — they are forces you will encounter on every chart, in every session. Learn to recognize them. Learn to beat them. That is the real curriculum.
+          </p>
+
+          {/* Two-column Mayhem cards */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(480px, 1fr))', gap: 2 }}>
+
+            {/* Melissa Card */}
+            <div style={{
+              background: 'rgba(236,72,153,0.04)',
+              border: '1px solid rgba(236,72,153,0.25)',
+              borderTop: '3px solid #EC4899',
+              padding: '32px',
+              position: 'relative',
+              overflow: 'hidden',
+            }}>
+              <div style={{
+                position: 'absolute',
+                right: -10, bottom: -20,
+                fontSize: '8rem',
+                opacity: 0.04,
+                lineHeight: 1,
+                pointerEvents: 'none',
+              }}>⚡</div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
+                <div style={{
+                  width: 56, height: 56,
+                  background: 'rgba(236,72,153,0.12)',
+                  border: '2px solid rgba(236,72,153,0.35)',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '1.8rem',
+                  flexShrink: 0,
+                }}>
+                  {CHARACTERS['melissa-mayhem']?.emoji ?? '⚡'}
+                </div>
+                <div>
+                  <div style={{
+                    fontFamily: '"Space Mono", monospace',
+                    fontSize: '0.4rem',
+                    letterSpacing: '0.22em',
+                    textTransform: 'uppercase',
+                    color: 'rgba(236,72,153,0.5)',
+                    marginBottom: 4,
+                  }}>
+                    Chaos · FOMO · Traps · Bad Decisions
+                  </div>
+                  <div style={{
+                    fontFamily: '"Bebas Neue", sans-serif',
+                    fontSize: '1.8rem',
+                    color: '#EC4899',
+                    letterSpacing: '0.04em',
+                    lineHeight: 1,
+                  }}>
+                    Melissa Mayhem
+                  </div>
+                </div>
+              </div>
+
+              <blockquote style={{
+                borderLeft: '3px solid rgba(236,72,153,0.4)',
+                paddingLeft: 16,
+                margin: '0 0 20px',
+              }}>
+                <p style={{
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '0.6rem',
+                  lineHeight: 1.85,
+                  color: 'rgba(236,72,153,0.8)',
+                  fontStyle: 'italic',
+                  margin: 0,
+                }}>
+                  &ldquo;{CHARACTERS['melissa-mayhem']?.catchphrase ?? "Are you just going to sit there and watch while everyone else gets in?"}&rdquo;
+                </p>
+              </blockquote>
+
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 6,
+                marginBottom: 20,
+              }}>
+                {['Impulsive entries before Confirmation', 'Chasing price after the move', 'FOMO on forming candles', 'Overriding The Recipe with urgency', 'Ignoring the close — entering mid-candle'].map(t => (
+                  <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span style={{ color: '#EC4899', fontSize: '0.6rem' }}>⚡</span>
+                    <span style={{
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '0.52rem',
+                      color: 'rgba(245,240,232,0.5)',
+                    }}>{t}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.46rem',
+                lineHeight: 1.7,
+                color: 'rgba(245,240,232,0.3)',
+                borderTop: '1px solid rgba(236,72,153,0.1)',
+                paddingTop: 16,
+              }}>
+                Appears in: Candles · Wicks · Bias · Flow · Delivery · Confirmation · The Pass · Kitchen Rush
+              </div>
+            </div>
+
+            {/* Melody Card */}
+            <div style={{
+              background: 'rgba(245,158,11,0.03)',
+              border: '1px solid rgba(245,158,11,0.2)',
+              borderTop: '3px solid #F59E0B',
+              padding: '32px',
+              position: 'relative',
+              overflow: 'hidden',
+            }}>
+              <div style={{
+                position: 'absolute',
+                right: -10, bottom: -20,
+                fontSize: '8rem',
+                opacity: 0.04,
+                lineHeight: 1,
+                pointerEvents: 'none',
+              }}>🎭</div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
+                <div style={{
+                  width: 56, height: 56,
+                  background: 'rgba(245,158,11,0.1)',
+                  border: '2px solid rgba(245,158,11,0.3)',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '1.8rem',
+                  flexShrink: 0,
+                }}>
+                  {CHARACTERS['melody-mayhem']?.emoji ?? '🎭'}
+                </div>
+                <div>
+                  <div style={{
+                    fontFamily: '"Space Mono", monospace',
+                    fontSize: '0.4rem',
+                    letterSpacing: '0.22em',
+                    textTransform: 'uppercase',
+                    color: 'rgba(245,158,11,0.5)',
+                    marginBottom: 4,
+                  }}>
+                    Fear · Greed · Hesitation · Revenge
+                  </div>
+                  <div style={{
+                    fontFamily: '"Bebas Neue", sans-serif',
+                    fontSize: '1.8rem',
+                    color: '#F59E0B',
+                    letterSpacing: '0.04em',
+                    lineHeight: 1,
+                  }}>
+                    Melody Mayhem
+                  </div>
+                </div>
+              </div>
+
+              <blockquote style={{
+                borderLeft: '3px solid rgba(245,158,11,0.35)',
+                paddingLeft: 16,
+                margin: '0 0 20px',
+              }}>
+                <p style={{
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '0.6rem',
+                  lineHeight: 1.85,
+                  color: 'rgba(245,158,11,0.8)',
+                  fontStyle: 'italic',
+                  margin: 0,
+                }}>
+                  &ldquo;{CHARACTERS['melody-mayhem']?.catchphrase ?? "Remember the last time you thought you had it figured out? Name your emotional state. Then do the opposite of what it tells you."}&rdquo;
+                </p>
+              </blockquote>
+
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 6,
+                marginBottom: 20,
+              }}>
+                {['Moving the Burn Point to avoid a loss', 'Revenge trading after a stop-out', 'Analysis paralysis from self-doubt', 'Moving Tables Served mid-trade from greed', 'Abandoning The Recipe after one loss'].map(t => (
+                  <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span style={{ color: '#F59E0B', fontSize: '0.6rem' }}>🎭</span>
+                    <span style={{
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '0.52rem',
+                      color: 'rgba(245,240,232,0.5)',
+                    }}>{t}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.46rem',
+                lineHeight: 1.7,
+                color: 'rgba(245,240,232,0.3)',
+                borderTop: '1px solid rgba(245,158,11,0.08)',
+                paddingTop: 16,
+              }}>
+                Appears in: Candles · AOI · Structure · Risk · Tables Served · Management · Kitchen Rush
+              </div>
+            </div>
+          </div>
+
+          {/* Combined footer note */}
+          <div style={{
+            marginTop: 24,
+            padding: '16px 24px',
+            background: 'rgba(245,240,232,0.02)',
+            border: '1px solid rgba(245,240,232,0.05)',
+            fontFamily: '"Space Mono", monospace',
+            fontSize: '0.5rem',
+            lineHeight: 1.7,
+            color: 'rgba(245,240,232,0.2)',
+            textAlign: 'center',
+          }}>
+            The Recipe defeats both. Complete every step before entering. If any step is missing — wait. That is the only answer.
+          </div>
+        </div>
+      </section>
+
+      {/* Characters intro — Coaches only */}
+      <section style={{
+        background: 'var(--deep)',
         padding: '60px 48px',
-        borderTop: '1px solid rgba(201,168,76,0.06)',
         borderBottom: '1px solid rgba(201,168,76,0.06)',
       }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div className="section-label" style={{ marginBottom: 32 }}>
             <div className="section-label-line" />
-            <span className="section-label-text">Your Instructors</span>
+            <span className="section-label-text">Your Coaches</span>
           </div>
 
           <div style={{
@@ -136,19 +405,15 @@ export default function AcademyPage() {
             gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
             gap: 2,
           }}>
-            {Object.values(CHARACTERS).map((c) => (
+            {Object.values(CHARACTERS).filter(c => c.role !== 'warning').map((c) => (
               <div
                 key={c.id}
                 style={{
                   background: c.role === 'alert'
                     ? 'rgba(239,68,68,0.03)'
-                    : c.role === 'warning'
-                    ? 'rgba(245,158,11,0.03)'
                     : 'rgba(245,240,232,0.015)',
                   border: `1px solid ${
-                    c.role === 'alert'   ? 'rgba(239,68,68,0.15)'    :
-                    c.role === 'warning' ? 'rgba(245,158,11,0.12)'   :
-                    'rgba(245,240,232,0.06)'
+                    c.role === 'alert' ? 'rgba(239,68,68,0.15)' : 'rgba(245,240,232,0.06)'
                   }`,
                   padding: '20px',
                 }}

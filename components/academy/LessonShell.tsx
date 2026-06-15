@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Lesson, CHARACTERS, LESSONS } from '@/lib/academy'
+import { getLessonMayhem } from '@/lib/mayhem'
 import CharacterCoach from './CharacterCoach'
 import KitchenMetaphor from './KitchenMetaphor'
 import VisualExample from './VisualExample'
@@ -12,6 +13,7 @@ import XPReward from './XPReward'
 import ReflectionJournal from './ReflectionJournal'
 import RiskWarning from './RiskWarning'
 import ProgressUnlock from './ProgressUnlock'
+import MayhemCard from './MayhemCard'
 
 interface Props {
   lesson: Lesson
@@ -35,6 +37,7 @@ export default function LessonShell({ lesson }: Props) {
   const warnChar     = lesson.warningCharacter ? CHARACTERS[lesson.warningCharacter] : null
   const prevLessonObj = lesson.prevLesson ? LESSONS.find(l => l.slug === lesson.prevLesson) ?? null : null
   const nextLessonObj = lesson.nextLesson ? LESSONS.find(l => l.slug === lesson.nextLesson) ?? null : null
+  const mayhemData   = getLessonMayhem(lesson.id)
 
   return (
     <div style={{ maxWidth: 900, margin: '0 auto' }}>
@@ -241,6 +244,25 @@ export default function LessonShell({ lesson }: Props) {
             )}
           </div>
         </section>
+
+        {/* ── MAYHEM CARDS — Melissa and/or Melody ── */}
+        {mayhemData && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            {mayhemData.primary === 'melissa-mayhem' && mayhemData.melissa && (
+              <MayhemCard moment={mayhemData.melissa} />
+            )}
+            {mayhemData.primary === 'melody-mayhem' && mayhemData.melody && (
+              <MayhemCard moment={mayhemData.melody} />
+            )}
+            {/* Secondary character — shown after primary */}
+            {mayhemData.primary === 'melissa-mayhem' && mayhemData.melody && (
+              <MayhemCard moment={mayhemData.melody} />
+            )}
+            {mayhemData.primary === 'melody-mayhem' && mayhemData.melissa && (
+              <MayhemCard moment={mayhemData.melissa} />
+            )}
+          </div>
+        )}
 
         {/* Risk warning */}
         {lesson.riskWarning && (

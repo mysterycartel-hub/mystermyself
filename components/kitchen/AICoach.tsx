@@ -115,10 +115,9 @@ export default function AICoach({ symbol, timeframe }: Props) {
 
   return (
     <div style={{
-      width: 296,
-      flexShrink: 0,
+      flex: 1,
+      minHeight: 0,
       background: 'rgba(4,4,6,0.97)',
-      borderLeft: '1px solid rgba(201,168,76,0.1)',
       display: 'flex',
       flexDirection: 'column',
       overflow: 'hidden',

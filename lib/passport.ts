@@ -69,6 +69,56 @@ export function getXPToNextLevel(xp: number): { current: number; next: number; l
 }
 
 export const PASSPORT_BADGES: PassportBadge[] = [
+  // ── Mayhem Badges (earned through Academy + Kitchen discipline) ───────────
+  {
+    id: 'melissa-survivor',
+    name: 'Melissa Survivor',
+    description: 'Completed a lesson where Melissa Mayhem appeared — and did not take the bait.',
+    icon: '⚡',
+    color: '#EC4899',
+    xpRequired: 0,
+  },
+  {
+    id: 'melody-named',
+    name: 'Name the Feeling',
+    description: "Completed Melody Mayhem's emotion journal prompt honestly in 3 lessons.",
+    icon: '🎭',
+    color: '#F59E0B',
+    xpRequired: 0,
+  },
+  {
+    id: 'discipline-holds',
+    name: 'Discipline Holds',
+    description: 'Wrote DNT (Did Not Trade) in the Recipe Journal during a Kitchen session.',
+    icon: '🔒',
+    color: '#c9a84c',
+    xpRequired: 250,
+  },
+  {
+    id: 'no-revenge',
+    name: 'No Revenge',
+    description: 'Logged a loss in the journal without taking a recovery trade immediately after.',
+    icon: '🧘',
+    color: '#A855F7',
+    xpRequired: 500,
+  },
+  {
+    id: 'burn-point-held',
+    name: 'Burn Point Held',
+    description: 'Completed the Management lesson without adjusting the Burn Point example.',
+    icon: '🔥',
+    color: '#EF4444',
+    xpRequired: 750,
+  },
+  {
+    id: 'mayhem-master',
+    name: 'Mayhem Master',
+    description: 'Completed all Melissa and Melody lessons without skipping the character coaching step.',
+    icon: '👑',
+    color: '#c9a84c',
+    xpRequired: 1500,
+  },
+  // ── Coast Badges ──────────────────────────────────────────────────────────
   {
     id: 'first-step',
     name: 'First Step',
