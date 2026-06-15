@@ -12,7 +12,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import { Lesson, CHARACTERS, LESSONS, LessonConcept, LessonExample, LessonTrap, GuidedPractice } from '@/lib/academy'
+import { Lesson, CHARACTERS, LESSONS, LessonConcept, LessonExample, LessonTrap, GuidedPractice, KitchenRushPrompt } from '@/lib/academy'
 import { getLessonMayhem } from '@/lib/mayhem'
 import { canAccessLesson, getLevelProgress } from '@/lib/progression'
 import { MissionEngine } from '@/lib/mission-engine'
@@ -39,6 +39,7 @@ type StepType =
   | 'example'
   | 'common-trap'
   | 'guided-practice'
+  | 'kitchen-rush'
   | 'practice'
   | 'reflection'
   | 'xp-reward'
@@ -55,6 +56,7 @@ function buildSteps(lesson: Lesson): StepDef[] {
   if (lesson.example)         steps.push({ type: 'example',          label: 'See It in Action' })
   if (lesson.commonTrap)      steps.push({ type: 'common-trap',      label: 'Common Trap' })
   if (lesson.guidedPractice)  steps.push({ type: 'guided-practice',  label: 'Guided Practice' })
+  if (lesson.kitchenRush)     steps.push({ type: 'kitchen-rush',     label: 'Kitchen Rush' })
   steps.push({ type: 'practice',   label: 'Your Turn' })
   steps.push({ type: 'reflection', label: 'Reflection' })
   steps.push({ type: 'xp-reward',  label: 'XP Reward' })
@@ -550,6 +552,93 @@ function GuidedPracticeStep({ gp, color }: { gp: GuidedPractice; color: string }
   )
 }
 
+// ── Kitchen Rush step renderer ────────────────────────────────────────────────
+
+function KitchenRushStep({ kr, color }: { kr: KitchenRushPrompt; color: string }) {
+  const [revealed, setRevealed] = useState(false)
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+      {/* Header callout */}
+      <div style={{
+        background: 'rgba(201,168,76,0.05)',
+        border: '1px solid rgba(201,168,76,0.2)',
+        borderLeft: '3px solid #c9a84c',
+        padding: '14px 18px',
+        display: 'flex', gap: 12, alignItems: 'flex-start',
+      }}>
+        <span style={{ fontSize: '1.1rem', flexShrink: 0 }}>⏱️</span>
+        <div>
+          <div style={{ fontFamily: '"Space Mono", monospace', fontSize: '0.42rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: '#c9a84c', marginBottom: 4 }}>
+            Kitchen Rush — {kr.timeTarget}s Target
+          </div>
+          <p style={{ fontFamily: '"Space Mono", monospace', fontSize: '0.55rem', lineHeight: 1.7, color: 'rgba(245,240,232,0.4)', margin: 0 }}>
+            Head Chefs execute this without hesitation. Time yourself.
+          </p>
+        </div>
+      </div>
+
+      {/* Scenario */}
+      <div style={{ background: `${color}08`, border: `1px solid ${color}25`, padding: '20px 24px' }}>
+        <div style={{ fontFamily: '"Space Mono", monospace', fontSize: '0.42rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: `${color}80`, marginBottom: 10 }}>
+          Scenario
+        </div>
+        <p style={{ fontFamily: '"Space Mono", monospace', fontSize: '0.65rem', lineHeight: 1.85, color: 'rgba(245,240,232,0.8)', margin: 0 }}>
+          {kr.scenario}
+        </p>
+      </div>
+
+      {/* Task */}
+      <div style={{ background: 'rgba(245,240,232,0.02)', border: '1px solid rgba(245,240,232,0.07)', padding: '18px 22px' }}>
+        <div style={{ fontFamily: '"Space Mono", monospace', fontSize: '0.42rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(245,240,232,0.25)', marginBottom: 10 }}>
+          Your Task
+        </div>
+        <p style={{ fontFamily: '"Space Mono", monospace', fontSize: '0.65rem', lineHeight: 1.85, color: 'rgba(245,240,232,0.75)', margin: 0 }}>
+          {kr.task}
+        </p>
+      </div>
+
+      {!revealed && (
+        <button
+          onClick={() => setRevealed(true)}
+          style={{
+            background: 'rgba(201,168,76,0.04)',
+            border: '1px solid rgba(201,168,76,0.2)',
+            color: 'rgba(201,168,76,0.6)',
+            padding: '12px 24px',
+            fontFamily: '"Space Mono", monospace',
+            fontSize: '0.52rem',
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            cursor: 'none',
+            textAlign: 'center',
+          }}
+        >
+          I answered — reveal Head Chef answer
+        </button>
+      )}
+
+      <AnimatePresence>
+        {revealed && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            style={{ background: 'rgba(201,168,76,0.05)', border: '1px solid rgba(201,168,76,0.25)', padding: '20px 24px' }}
+          >
+            <div style={{ fontFamily: '"Space Mono", monospace', fontSize: '0.42rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: '#c9a84c', marginBottom: 10 }}>
+              Head Chef Answer
+            </div>
+            <p style={{ fontFamily: '"Space Mono", monospace', fontSize: '0.62rem', lineHeight: 1.9, color: 'rgba(245,240,232,0.8)', margin: 0, whiteSpace: 'pre-line' }}>
+              {kr.answer}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
 // ── LessonTemplate ─────────────────────────────────────────────────────────────
 
 export default function LessonTemplate({ lesson }: Props) {
@@ -818,6 +907,15 @@ export default function LessonTemplate({ lesson }: Props) {
               <GuidedPracticeStep gp={lesson.guidedPractice} color={lesson.color} />
               <CharacterCoach character={character} message={lesson.characterCoaching} />
               <ContinueButton color={lesson.color} onClick={advance} label="I Studied This — Now I'll Practice →" />
+            </section>
+          )}
+
+          {/* ── KITCHEN RUSH ──────────────────────────────────────────────── */}
+          {currentStep.type === 'kitchen-rush' && lesson.kitchenRush && (
+            <section>
+              <StepLabel color={lesson.color} num={activeStep + 1} total={totalSteps} label="Kitchen Rush" />
+              <KitchenRushStep kr={lesson.kitchenRush} color={lesson.color} />
+              <ContinueButton color={lesson.color} onClick={advance} label="Rush Complete — Move to Practice →" />
             </section>
           )}
 

@@ -217,6 +217,13 @@ export interface GuidedPractice {
   whyItMatters: string    // Recipe connection
 }
 
+export interface KitchenRushPrompt {
+  scenario: string    // what to look at
+  task: string        // what to identify or decide
+  answer: string      // correct answer — revealed after attempt
+  timeTarget: number  // seconds — how fast a Head Chef executes this
+}
+
 export interface Lesson {
   id: string
   slug: string
@@ -252,6 +259,7 @@ export interface Lesson {
   example?: LessonExample
   commonTrap?: LessonTrap
   guidedPractice?: GuidedPractice
+  kitchenRush?: KitchenRushPrompt
 }
 
 export const LESSONS: Lesson[] = [
@@ -294,6 +302,39 @@ export const LESSONS: Lesson[] = [
       { question: "How does it feel knowing you must complete 10 levels before calling yourself a Head Chef? Honest reaction — motivating or discouraging?", type: 'emotion' },
     ],
     psychologyNote: "Every Market Child thinks they are the exception. That they can learn faster. That they already understand the basics from YouTube. They are almost always wrong — and the market charges tuition. The kitchen does not care about your confidence. It rewards preparation. Start from Level 0. Stay humble. That IS the recipe for Level 9.",
+    concept: {
+      definition: "Trading is speculating on whether the price of an asset will rise or fall. In TCU we trade XAUUSD — gold priced in US dollars. Every trade is a claim backed by evidence. The Recipe is how you build that evidence before clicking anything.",
+      kitchenAnalogy: "The kitchen does not run itself. Before the chef cooks, someone built the kitchen, stocked the ingredients, and wrote the menu. Before you trade, you need to understand the full operation you are walking into — what each station does and in what order service runs.",
+      marketMeaning: "Markets move because institutions — banks, hedge funds, central banks — execute large orders that push price toward liquidity. Retail traders follow those moves. TCU teaches you to read institutional intent and move with it, never against it.",
+    },
+    example: {
+      scenario: "Day 1. XAUUSD is at 2,340. A friend texts: 'gold going up today, buy it.' No chart open. No structure checked. No plan. You buy.",
+      walkthrough: "No Daily structure assessed. No liquidity identified. No AOI marked. No delivery read. No confirmation. By Wednesday the position is -$400. You are holding, hoping it returns. This is not a trade — it is a guess with leverage attached.",
+      keyTakeaway: "Every unplanned entry is a donation to prepared traders. The Recipe exists so every entry has evidence — not just feeling.",
+    },
+    commonTrap: {
+      mistake: "Believing you can skip foundational levels because you have watched trading content online.",
+      whyItHappens: "YouTube shows wins. It rarely shows the 6 months of Level 0-3 work that preceded those wins. The barrier to entry feels low.",
+      consequence: "You place trades before understanding structure, AOI, or confirmation. The market charges tuition. You pay it before you know what you are being taught.",
+    },
+    guidedPractice: {
+      scenario: "You open a chart and see a large green candle forming. Your instinct says buy. What do you do?",
+      steps: [
+        "Close the order window immediately.",
+        "Open the Academy. Identify which level you have completed.",
+        "Name the 8 steps of The Recipe from memory.",
+        "Ask: have I completed all 8 steps for this setup?",
+        "If any step is missing — close the platform. Come back tomorrow.",
+      ],
+      answer: "The correct answer is always: complete The Recipe first. One large green candle is not a trade signal. It is one data point in a market that has context you have not yet read. Market Child discipline means knowing you do not have enough information yet — and being comfortable with that.",
+      whyItMatters: "The Recipe is the only structure standing between you and an impulsive loss. You learn it here, at Level 0, so it is automatic by Level 9.",
+    },
+    kitchenRush: {
+      scenario: "Name the 10 TCU Academy levels in order.",
+      task: "Write them from memory — no looking — as fast as you can.",
+      answer: "Market Child → Candle Kitchen → Structure Kitchen → Flow Kitchen → AOI Kitchen → Delivery Kitchen → Confirmation Kitchen → The Pass → Tables Served → Head Chef",
+      timeTarget: 30,
+    },
     nextLesson: 'candles',
     prevLesson: null,
   },
@@ -336,6 +377,39 @@ export const LESSONS: Lesson[] = [
       { question: "Did you feel rushed to find a trade while looking at the chart? If yes — that is Melody Mayhem. Breathe.", type: 'emotion' },
     ],
     psychologyNote: "New traders often feel compelled to trade every candle. This is called overtrading. Most of trading is watching. Less than 10% is actually clicking. The best traders are patient observers first.",
+    concept: {
+      definition: "A candlestick shows four data points for one time period: Open (where price started), High (highest reached), Low (lowest reached), Close (where price ended). The body is the space between open and close. The wicks are the thin lines above and below.",
+      kitchenAnalogy: "A cooking timer tells you when service started, how hot things got, how cold they dipped, and where temperature settled when the bell rang. A candle is the market's cooking timer — same four readings, applied to price instead of heat.",
+      marketMeaning: "A bullish candle on XAUUSD closes above its open — buyers controlled that period. A bearish candle closes below its open — sellers controlled it. Body size = conviction. Large body with short wicks = strong directional move. Small body with long wicks = indecision or rejection.",
+    },
+    example: {
+      scenario: "XAUUSD 1H candle: Open 2,310. High 2,318. Low 2,306. Close 2,315.",
+      walkthrough: "Body: 2,315 − 2,310 = 5 points. Bullish (closed above open). Upper wick: 2,318 − 2,315 = 3 points — minor rejection at the high. Lower wick: 2,310 − 2,306 = 4 points — price dipped below the open but buyers recovered. Read: mild bullish conviction. Buyers in control but with resistance at the top and a brief dip below open. Not a high-conviction candle — watch what follows.",
+      keyTakeaway: "Every candle tells a story. The body is the ending. The wicks are the attempts that failed. Read both, always.",
+    },
+    commonTrap: {
+      mistake: "Reading only the color (green/red) and ignoring body size and wick length.",
+      whyItHappens: "Color is the fastest visual cue — it feels like enough information in the moment.",
+      consequence: "A tiny green candle with a massive upper wick tells a completely different story than a large green candle with no wicks. Ignoring body and wicks produces misread sequences and wrong bias.",
+    },
+    guidedPractice: {
+      scenario: "XAUUSD 4H. Three consecutive candles: C1: O=2,280 H=2,295 L=2,278 C=2,292. C2: O=2,292 H=2,303 L=2,289 C=2,300. C3: O=2,300 H=2,302 L=2,278 C=2,281.",
+      steps: [
+        "For each candle: calculate body size (|close − open|).",
+        "For each candle: calculate upper wick (high − max(open,close)) and lower wick (min(open,close) − low).",
+        "Determine direction: bullish or bearish.",
+        "Read the sequence: what story do these three candles tell together?",
+        "Write one sentence describing what the market did during this 12-hour period.",
+      ],
+      answer: "C1: Bullish, 12pt body, 3pt upper wick, 2pt lower wick — strong buying. C2: Bullish, 8pt body, 3pt upper/lower wicks — continued buying, slight resistance at highs. C3: Bearish, 19pt body, 2pt upper wick, 22pt lower wick — sellers pushed hard to 2,278 but buyers defended and closed at 2,281. Read: two candles of bullish progress followed by a contested reversal candle at the highs. The 22-point lower wick on C3 shows buyers defending — but the close is weak. This market is at a decision point.",
+      whyItMatters: "Reading three candles in sequence is the foundation of delivery reading, confirmation, and structure. Every advanced skill starts with reading individual candles accurately.",
+    },
+    kitchenRush: {
+      scenario: "Candle: Open 2,350. High 2,365. Low 2,345. Close 2,348.",
+      task: "State in 20 seconds: direction, body size, upper wick, lower wick, one-word conviction read.",
+      answer: "Bearish. Body: 2pt (2,350→2,348). Upper wick: 15pt (2,365−2,350). Lower wick: 3pt (2,348−2,345). Conviction: REJECTION — massive upper wick means sellers overwhelmed buyers at the highs.",
+      timeTarget: 20,
+    },
     nextLesson: 'wicks',
     prevLesson: 'market-child',
   },
@@ -378,6 +452,39 @@ export const LESSONS: Lesson[] = [
       { question: "Did you feel like the market was 'out to get you' when looking at fakeout wicks? That feeling is normal. Name it and move past it.", type: 'emotion' },
     ],
     psychologyNote: "Revenge trading often starts with a wick. Price hits your stop, reverses, and you feel cheated. Melissa Mayhem wins when you revenge trade. The proper response: note the wick in your journal, wait for the next setup, never add to a losing position.",
+    concept: {
+      definition: "A wick is the thin line above or below a candle body representing price that was temporarily reached but rejected before the candle closed. Long wicks at key levels are evidence of institutional order flow — a real decision was made at that price.",
+      kitchenAnalogy: "A store briefly marks down a product to see if customers bite. They rush in — then the price goes back up. The brief excursion was the wick. The market tested that price, found real opposition, and pulled back. The wick is the receipt.",
+      marketMeaning: "Upper wick on XAUUSD: buyers pushed to that high but sellers overwhelmed them before the close — that high is a rejection level. Lower wick: sellers pushed down but buyers defended — that low is a supported level. Wicks at previously-tested levels carry the most weight.",
+    },
+    example: {
+      scenario: "XAUUSD Daily candle at the top of a 3-week rally: O=2,410, H=2,447, L=2,408, C=2,413.",
+      walkthrough: "Body: 3 points bullish (2,410→2,413). Upper wick: 34 points (2,413 to 2,447) — 11× the body size. Price reached 2,447, likely sweeping stop losses placed by short sellers above the prior high, then collapsed back to 2,413. Sellers dominated completely after the initial push. This is a classic liquidity sweep wick at a major high — the kind Wickie watches for before any short consideration.",
+      keyTakeaway: "When the wick is multiple times the body size at a known level, the market is printing a rejection signal in large font. That price will be referenced again.",
+    },
+    commonTrap: {
+      mistake: "Entering a trade immediately after a long wick candle closes, without waiting for confirmation.",
+      whyItHappens: "The wick looks like obvious reversal evidence. It feels like an entry signal on its own.",
+      consequence: "A wick is evidence of rejection — not a confirmed entry. Price can extend further in the wick direction before reversing. Entering on the wick alone means entering before the structure shift is confirmed, leading to premature entries and wide stops.",
+    },
+    guidedPractice: {
+      scenario: "XAUUSD 4H. Price at 2,380. Candle forms: O=2,378, H=2,394, L=2,376, C=2,380. The level 2,390 was a prior high tested twice in the previous week.",
+      steps: [
+        "Calculate the upper wick size.",
+        "Did the wick sweep the prior high at 2,390? By how much?",
+        "What does the body tell you about conviction at the close?",
+        "What does this wick tell you about institutional intent above 2,390?",
+        "Is this wick alone sufficient to enter a short trade? What do you need to see next?",
+      ],
+      answer: "Upper wick: 2,394 − 2,380 = 14 points. Yes — swept the prior high at 2,390 by 4 points (stop hunt). Body: 2pt neutral/bullish — the close is near the open, sellers did not follow through strongly. Institutional intent: sellers rejected the area above 2,390, clearing retail stop losses before the close pulled back. The wick alone is NOT sufficient to short. You need: on 15M, a wick rejection candle followed by a candle closing below the nearest short-term swing low (micro-BOS bearish). The wick is the context. Confirmation is the entry.",
+      whyItMatters: "Stop-hunt wicks at prior highs and lows are among the most reliable XAUUSD patterns. Learning to identify them — and wait for confirmation — separates traders who profit from them from traders who become the stop being swept.",
+    },
+    kitchenRush: {
+      scenario: "4H candle: O=2,300, H=2,301, L=2,268, C=2,296.",
+      task: "State: wick direction, wick size, what it means, what you wait for next. 25 seconds.",
+      answer: "Lower wick. Size: 28pt (2,296−2,268) vs 4pt body. Means: sellers pushed hard below 2,300 — buyers stepped in at 2,268 and reclaimed. If bias is bullish: watch 15M for wick rejection + micro-BOS upward inside the AOI zone for long entry.",
+      timeTarget: 25,
+    },
     nextLesson: 'structure',
     prevLesson: 'candles',
   },
@@ -420,6 +527,39 @@ export const LESSONS: Lesson[] = [
       { question: "Did you notice an urge to predict where structure would go rather than observe where it already is? Prediction is gambling. Observation is trading.", type: 'emotion' },
     ],
     psychologyNote: "Needing to be right about structure is one of trading's most dangerous traps. Structure does not care about your opinion. When structure changes — your bias changes. Immediately. No arguing with the chart.",
+    concept: {
+      definition: "Market structure is the sequence of swing highs and swing lows that defines trend direction. Higher highs and higher lows (HH/HL) = bullish structure. Lower highs and lower lows (LH/LL) = bearish. A Break of Structure (BOS) confirms the trend continues. A Change of Character (CHOCH) signals the trend may be ending.",
+      kitchenAnalogy: "Before planning the menu, the head chef checks the walk-in cooler: what is available, what is running low, what has turned? You cannot build the menu without that assessment. Structure is the walk-in check. Every timeframe, every session — read the cooler before you cook.",
+      marketMeaning: "On the XAUUSD Daily: identify the last three swing highs and the last three swing lows. If each new high is higher than the previous and each new low is higher than the previous — bullish structure, bullish bias. If either the highs or lows break sequence — a CHOCH is forming. Both broke = new structure in the opposite direction.",
+    },
+    example: {
+      scenario: "XAUUSD Daily over 6 weeks. Lows: 2,180 → 2,205 → 2,230. Highs: 2,260 → 2,290 → 2,320. Then a new low forms at 2,195 — below the prior HL of 2,205.",
+      walkthrough: "Weeks 1–5: HH/HL confirmed — lows stepping up (2,180→2,205→2,230), highs stepping up (2,260→2,290→2,320). Bullish structure. Week 6: new low 2,195 breaks below the last HL of 2,205. This is a CHOCH. The bullish sequence is broken. Bias shifts to neutral immediately. Next confirmation needed: does a lower high (LH) form below 2,320? If yes — bearish structure begins.",
+      keyTakeaway: "Structure does not care about your opinion. When structure changes, bias changes — immediately, no arguing with the chart.",
+    },
+    commonTrap: {
+      mistake: "Calling a CHOCH immediately as a sell signal and entering short on the first lower low.",
+      whyItHappens: "Breaking below the prior low looks and feels like a reversal. The impulse is to sell immediately.",
+      consequence: "One lower low breaks bullish structure but does not confirm bearish structure. Price can form the lower low, then immediately reverse. Entering on CHOCH alone means entering before the new trend direction is confirmed. You need a subsequent lower high before selling structure.",
+    },
+    guidedPractice: {
+      scenario: "XAUUSD 4H. Sequence (oldest to newest): Low 2,308, High 2,340, Low 2,330, High 2,362, Low 2,318, High 2,345. Current price 2,322.",
+      steps: [
+        "List the highs in order: 2,340 → 2,362 → 2,345.",
+        "List the lows in order: 2,308 → 2,330 → 2,318.",
+        "Are the highs trending up or down?",
+        "Are the lows trending up or down?",
+        "State the current structure and the CHOCH level.",
+      ],
+      answer: "Highs: 2,340 → 2,362 → 2,345. Last high (2,345) is below the prior high (2,362) — lower high. Lows: 2,308 → 2,330 → 2,318. Last low (2,318) is below the prior low (2,330) — lower low. Structure: LH + LL = bearish CHOCH. Prior bullish sequence broken. Bias shifts neutral-to-bearish. CHOCH level: 2,330 (prior HL that was broken). For full bearish confirmation: need price to form a second LH below 2,362 and break below 2,308 (BOS bearish).",
+      whyItMatters: "Two-timeframe structure alignment — Daily and 4H both bearish — dramatically increases the probability of a short trade working. One timeframe alone is context. Two aligned = conviction.",
+    },
+    kitchenRush: {
+      scenario: "Sequence: Low 2,200 → High 2,250 → Low 2,215 → High 2,270 → Low 2,230 → High 2,260. Current: 2,240.",
+      task: "Bullish, bearish, or CHOCH? State in 15 seconds.",
+      answer: "Highs: 2,250 → 2,270 → 2,260 (last high is lower — LH forming). Lows: 2,200 → 2,215 → 2,230 (all higher — HL intact). Mixed: higher lows but last high is lower. CHOCH warning — bullish structure weakening. Bias: neutral. Wait for next swing to confirm.",
+      timeTarget: 15,
+    },
     nextLesson: 'bias',
     prevLesson: 'wicks',
   },
@@ -463,6 +603,39 @@ export const LESSONS: Lesson[] = [
     ],
     psychologyNote: "Entering without bias is the most common beginner mistake. Melody Mayhem thrives when you have no plan. If you cannot state your bias before the chart is fully loaded — do not trade today. No setup, no trade. This is the rule.",
     riskWarning: "BURN ALARM: If you find yourself saying 'I think both directions could work' — you do not have a bias. Neutral is a valid bias. Act accordingly. Watch. Wait.",
+    concept: {
+      definition: "Bias is your directional decision for the session, derived from higher-timeframe structure. It answers one question before anything else: is this market going up, down, or nowhere? Bias is set on the Daily chart. It does not change because of a single lower-timeframe candle.",
+      kitchenAnalogy: "Every morning before service, the chef decides: tonight we serve fish or steak. That decision — made before opening — is bias. You do not arrive at the stove at 6PM and improvise. You decide at home, based on what is available and what is in season. The Daily chart is your home kitchen decision.",
+      marketMeaning: "Bullish bias: Daily HH/HL sequence confirmed — look for long setups only. Bearish bias: Daily LH/LL sequence confirmed — short setups only. Neutral: price in a range, structure unclear, or a CHOCH just formed — no trades. If you cannot state your bias clearly in 30 seconds from the Daily chart, your bias is neutral. Neutral means watch. Not trade.",
+    },
+    example: {
+      scenario: "XAUUSD Weekly shows 3 consecutive HH/HL. Daily shows current pullback toward the last HL zone. 4H shows 5 corrective candles moving lower.",
+      walkthrough: "Weekly: bullish (strongest read). Daily: bullish, currently in pullback within the trend. 4H: corrective delivery downward — delivering price toward a potential AOI at the Daily HL zone. Bias: BULLISH. The 4H move lower is not a reversal — it is an opportunity. You look for buys only. You wait for price to arrive at the AOI and produce a confirmation. You do not sell the pullback.",
+      keyTakeaway: "Bias is top-down. Weekly informs Daily, Daily informs 4H, 4H informs 1H and 15M. Never work bottom-up. Never let a 15M candle change your Daily bias.",
+    },
+    commonTrap: {
+      mistake: "Flipping Daily bias to bearish because of a strong 1H or 4H move against the trend.",
+      whyItHappens: "The lower-timeframe counter-move feels significant. It looks like the trend is ending.",
+      consequence: "You enter a counter-trend short inside a Daily bullish structure. The Daily trend resumes. You are stopped out at the exact low where the setup should have been a long entry. This is Melissa Mayhem's favorite environment.",
+    },
+    guidedPractice: {
+      scenario: "XAUUSD Daily for 3 weeks. Week 1: H=2,300, L=2,250. Week 2: H=2,340, L=2,270. Week 3: H=2,365, L=2,295. Monday morning price: 2,305 (pulling back from Week 3 high).",
+      steps: [
+        "List the three swing highs in sequence.",
+        "List the three swing lows in sequence.",
+        "Are both sequences trending in the same direction?",
+        "State your bias for the week and the structural reason.",
+        "State the one price level that would force your bias to neutral.",
+      ],
+      answer: "Highs: 2,300 → 2,340 → 2,365 — each higher. HH sequence. Lows: 2,250 → 2,270 → 2,295 — each higher. HL sequence. Both trending up. Bias: BULLISH. Look for long setups only. Structural reason: confirmed HH/HL on the Daily. Invalidation price: 2,295 (most recent HL). If Daily closes below 2,295 — CHOCH. Bias shifts to neutral immediately and the long bias is abandoned.",
+      whyItMatters: "Setting bias before the week starts means you are not making decisions under market pressure. You know what you are looking for before the market opens Monday.",
+    },
+    kitchenRush: {
+      scenario: "Daily shows: HH at 2,380, HH at 2,410. HL at 2,340, HL at 2,370. Current price 2,375 pulling back.",
+      task: "State bias and the one price that cancels it. 10 seconds.",
+      answer: "Bias: BULLISH (HH/HL confirmed). Cancellation: 2,370 — if Daily closes below the most recent HL, CHOCH forms, bias goes neutral.",
+      timeTarget: 10,
+    },
     nextLesson: 'flow',
     prevLesson: 'structure',
   },
@@ -505,6 +678,39 @@ export const LESSONS: Lesson[] = [
       { question: "Did you feel FOMO watching price move toward a liquidity pool without you? That feeling is valid. Write it down. Then build a plan for next time instead of chasing.", type: 'emotion' },
     ],
     psychologyNote: "Chasing candles is how traders lose. When you see price sweeping a liquidity pool, the instinct is to jump in immediately. This is Melissa Mayhem in action. The proper move: mark the pool in advance, set a limit order, and walk away. Either it fills or it does not. No chasing.",
+    concept: {
+      definition: "Liquidity pools are price levels where retail traders predictably cluster their stop losses and pending orders — above old highs, below old lows, at equal highs and equal lows. Institutions move price to these pools to fill their large orders, then reverse. Following the flow means knowing where those pools are before price arrives.",
+      kitchenAnalogy: "Louie knows where every restaurant stores its walk-in cooler. Smart suppliers do not cold-call randomly — they go where the inventory is concentrated. Liquidity pools are the market's walk-in coolers. Price flows toward them because that is where the large orders are waiting to be filled.",
+      marketMeaning: "On XAUUSD 4H: Previous Day High (PDH) and Previous Day Low (PDL) are the most reliable daily pools. Equal highs (two candle highs at the same level) and equal lows (two troughs at the same level) are secondary pools. A sweep — a wick that pierces the pool level and closes back — followed by reversal is one of the most reliable patterns on XAUUSD.",
+    },
+    example: {
+      scenario: "XAUUSD 4H. PDH: 2,385. PDL: 2,345. Equal highs at 2,380 (two prior peaks). Equal lows at 2,348 (two prior troughs). Current price: 2,362. Bias: bullish.",
+      walkthrough: "Above: dense pool zone 2,380–2,385 (equal highs + PDH stacked). Below: dense pool zone 2,345–2,348 (PDL + equal lows stacked). Both sides have similar pool density. With bullish bias: smart money is more likely to sweep the lows first — taking out retail longs' stops at 2,345–2,348 — before pushing toward the highs at 2,380–2,385. Flow: expect price to move toward 2,345–2,348 first. That sweep is not a sell. It is the setup for the long.",
+      keyTakeaway: "When bias is bullish, a sweep of lows is a gift — it clears the liquidity needed to fuel the real move up. Do not sell the sweep. Prepare to buy after the sweep reverses.",
+    },
+    commonTrap: {
+      mistake: "Selling when price sweeps equal lows because the move looks like bearish momentum.",
+      whyItHappens: "The downside move feels real. Retail instinct is to follow the candle direction.",
+      consequence: "You sell the sweep. Institutions collect your short order at the low. Price reverses upward within 1–2 candles. You are now short in a bullish market, stopped out at the very high where the next leg up begins.",
+    },
+    guidedPractice: {
+      scenario: "XAUUSD 4H. Bullish bias. Pools identified: Equal highs 2,400 (three prior peaks). PDH 2,395. Equal lows 2,368 (two prior troughs). PDL 2,365. Current price: 2,380.",
+      steps: [
+        "Mark each pool and its distance from current price (2,380).",
+        "Which side has more pool density — above or below?",
+        "With bullish bias, which direction does Louie say price sweeps first?",
+        "Describe the sweep scenario: where does price go, what happens at that level, where does it reverse?",
+        "Where do you watch for the reversal confirmation?",
+      ],
+      answer: "Above: 2,395 (+15pt) and 2,400 (+20pt) — dense zone 2,395–2,400. Below: 2,365 (−15pt) and 2,368 (−12pt) — dense zone 2,365–2,368. Both sides similar density, below is slightly closer. With bullish bias: sweep lows first. Scenario: price drops from 2,380 into 2,363–2,368, creates long lower wicks sweeping equal lows and PDL, then reverses. Watch: as price enters 2,365–2,368 zone, drop to 15M and wait for wick rejection + micro-BOS upward. That is the long trigger.",
+      whyItMatters: "Understanding that a bearish sweep of lows inside a bullish bias is the setup — not the trade — changes everything. You are positioned for the real move before it happens instead of chasing it after.",
+    },
+    kitchenRush: {
+      scenario: "Bullish bias. PDH 2,350, PDL 2,310. Equal highs 2,348. Equal lows 2,312. Price at 2,330.",
+      task: "Name both pool zones and which direction price sweeps first. 20 seconds.",
+      answer: "Above pools: 2,348–2,350 zone. Below pools: 2,310–2,312 zone. With bullish bias: price sweeps the lows first (2,310–2,312). Watch for 15M wick rejection + micro-BOS upward at that zone for long entry.",
+      timeTarget: 20,
+    },
     nextLesson: 'aoi',
     prevLesson: 'bias',
   },
@@ -548,6 +754,39 @@ export const LESSONS: Lesson[] = [
     ],
     psychologyNote: "Moving your AOI to chase price is the same as paying full price because you missed the discount window. The value is gone. Wait for the next setup.",
     riskWarning: "BURN ALARM: An AOI with only one reason (e.g., 'it looks like support') is not an AOI — it is a guess. Require minimum two stacking confluences before calling something an AOI.",
+    concept: {
+      definition: "An Area of Interest (AOI) is a price zone — not a line — where multiple confluences stack to create a high-probability trade location. The AOI is where you want price to arrive. You mark it before the session. You wait for price to come to you. You do not chase price to it.",
+      kitchenAnalogy: "Chef Goldie does not cook anywhere in the kitchen at any time. She picks the exact station, the right prep window, the correct ingredient combination. An AOI is that intersection — where the discount zone, the leftover container, and prior structure all occupy the same 10–15 point range. She sets up there and waits. Everywhere else is the wrong spot.",
+      marketMeaning: "A valid AOI on XAUUSD requires minimum two stacking confluences: (1) Discount zone — below the 50% midpoint of the current swing range (for buys), (2) Leftover Container — an unfilled price gap from a fast impulse move, (3) Prior structure — a swing low or support zone. One reason = a location. Two or more reasons = an AOI worth waiting for.",
+    },
+    example: {
+      scenario: "XAUUSD 4H. Bullish bias. Swing low: 2,280. Swing high: 2,380. Midpoint: 2,330. Leftover Container (FVG): 2,318–2,326 from a fast upside impulse 4 days ago. Prior swing low at 2,320 (from 2 weeks ago).",
+      walkthrough: "Discount zone: everything below 2,330. LFC at 2,318–2,326: fully inside discount zone ✓. Prior swing low at 2,320: sits inside the LFC range ✓. Three confluences in the same 8-point zone. Mark AOI as 2,316–2,326 (add small buffer below LFC low). Set a price alert at 2,332 (approaching from above). Close the platform. Do not watch.",
+      keyTakeaway: "Three confluences stacked in the same zone is exceptional. Mark it, set the alert, close the chart. The AOI does the work while you are away.",
+    },
+    commonTrap: {
+      mistake: "Marking a single 'prior support' level as an AOI because price bounced there before.",
+      whyItHappens: "Prior bounces make a level feel significant. It looks clean and obvious.",
+      consequence: "A single bounce is one data point. Without additional confluence it holds approximately 50% of the time — which is not an edge. Real AOIs have stacked reasons. Single-reason levels are guesses with good-looking names.",
+    },
+    guidedPractice: {
+      scenario: "XAUUSD 4H. Bullish bias. Swing low: 2,340. Swing high: 2,420. You identify: FVG at 2,368–2,374 from a fast upside candle 3 days ago. Prior swing low from last week at 2,370.",
+      steps: [
+        "Calculate the 50% midpoint of the 2,340–2,420 range.",
+        "Is the FVG (2,368–2,374) in the discount zone?",
+        "Is the prior swing low (2,370) in the discount zone?",
+        "How many confluences stack in the 2,368–2,374 zone?",
+        "Define the AOI boundaries. State what you do after marking it.",
+      ],
+      answer: "Midpoint: (2,340 + 2,420) ÷ 2 = 2,380. Discount zone: below 2,380. FVG 2,368–2,374: YES, in discount ✓. Prior swing low 2,370: inside FVG range and in discount ✓. Confluences: 3 (discount zone + FVG + prior structure). AOI: 2,365–2,374 (3pt buffer below FVG low). After marking: set price alert at 2,378 (approaching from above), close the platform, prepare confirmation criteria. Do NOT watch the chart approach.",
+      whyItMatters: "Closing the platform after marking the AOI is professional discipline. The watch game erodes judgment. Alerts do the watching. You make the decision only when price is in the zone and confirmation is forming.",
+    },
+    kitchenRush: {
+      scenario: "Range: low 2,300, high 2,400. Midpoint 2,350. FVG at 2,328–2,335. Prior swing low at 2,332.",
+      task: "Valid AOI? How many confluences? AOI boundaries? Alert level? 15 seconds.",
+      answer: "Valid — 3 confluences: discount (below 2,350) + FVG (2,328–2,335) + prior structure (2,332). AOI: 2,325–2,335. Alert: set at 2,342.",
+      timeTarget: 15,
+    },
     nextLesson: 'delivery',
     prevLesson: 'flow',
   },
@@ -590,6 +829,39 @@ export const LESSONS: Lesson[] = [
       { question: "Did you feel impatient watching corrective candles? Impatience is Melody Mayhem's invitation. Write the plan for when you feel that impatience next time.", type: 'emotion' },
     ],
     psychologyNote: "Trading during chop is one of the most common account killers. Melissa Mayhem lives in corrective price action. The most profitable traders do almost nothing during chop. They have coffee. They wait. When delivery becomes impulsive — then they move.",
+    concept: {
+      definition: "Delivery is the quality of price movement — how price travels to and from key levels. Impulsive delivery: large consecutive candles closing in one direction with minimal overlap — institutional intent. Corrective delivery: small overlapping alternating candles — consolidation, indecision, or distribution. The delivery tells you whether the move is real before you engage.",
+      kitchenAnalogy: "A restaurant receives daily deliveries. Fresh ingredients arrive in sealed intact boxes — impulsive. Day-old stock arrives crumpled, mixed, falling apart — corrective. You can read the packaging before opening it. The candles are the packaging. Wickie reads every candle like a shipping label.",
+      marketMeaning: "Impulsive delivery into your AOI on XAUUSD 1H: large bodies, one direction, closes near the high or low of each candle, minimal body overlap. This shows institutional order flow pushing price toward your zone. Corrective delivery: overlapping small-body candles alternating color. This is chop — do not trade it. Wait for it to resolve impulsively.",
+    },
+    example: {
+      scenario: "AOI at 2,340–2,348. Over 8 hours: Hours 1–4: candles 3–4pt average, alternating green/red, heavy overlap. Hours 5–8: four consecutive bearish candles, 12–15pt bodies each, closes near lows, no overlap.",
+      walkthrough: "Hours 1–4: corrective. Small bodies, alternating direction, overlapping — not institutional. No trade consideration. Hours 5–8: impulsive. Large bodies, one direction (bearish), closes near lows — institutional selling delivering price toward the AOI. This is the 'truck departing the warehouse' phase. With bullish bias, this impulsive bearish delivery is not the trade direction — it is price being delivered to the buy zone. Prepare: when price enters 2,340–2,348, switch to 15M for confirmation.",
+      keyTakeaway: "Impulsive delivery in the opposite direction of your bias means price is being delivered to your AOI with conviction. Do not trade the delivery. Wait for arrival and confirmation.",
+    },
+    commonTrap: {
+      mistake: "Selling when large bearish candles appear delivering price toward a bullish AOI.",
+      whyItHappens: "Large red candles feel like a reversal. The momentum is bearish. It appears obvious to sell.",
+      consequence: "You sell the delivery. Institutions buy at your AOI. You are stopped out at the exact level where the long setup begins. This is the most common Melissa Mayhem trap in this lesson.",
+    },
+    guidedPractice: {
+      scenario: "Bullish bias. AOI: 2,360–2,368. Price at 2,395. Six 1H candles approach: C1 bearish 14pt body, C2 bearish 11pt body, C3 bearish 9pt body, C4 bearish 16pt body — all closing near their lows, no overlap. C5: bearish 3pt body, overlapping wicks. C6: bullish 2pt body, overlapping wicks.",
+      steps: [
+        "Assess C1–C4 delivery type.",
+        "Assess C5–C6 delivery type.",
+        "What changed between C4 and C5?",
+        "What does the delivery shift tell you about price relative to your AOI?",
+        "What do you do now — enter, wait, or mark a level?",
+      ],
+      answer: "C1–C4: IMPULSIVE — large bodies, same direction, no overlap. Institutional selling delivering price toward AOI. C5–C6: CORRECTIVE — small mixed bodies, overlapping. Delivery ended. Momentum slowed. The shift C4→C5: impulsive delivery is ending — price is approaching or entering the AOI zone (2,360–2,368) and decelerating. Do now: do NOT enter. Switch to 15M. Watch for price to enter the AOI zone and form a wick rejection candle followed by a micro-BOS upward. That is the confirmation. This is Step 5.",
+      whyItMatters: "Corrective delivery after impulsive delivery is the market pausing at a key level. That pause is where the confirmation play sets up. Recognizing the delivery shift is the difference between entering at the right time and entering into ongoing chop.",
+    },
+    kitchenRush: {
+      scenario: "5 consecutive candles: all bearish, bodies 8–14pt, closes near lows, zero body overlap.",
+      task: "One word: impulsive or corrective? What does this tell you? 10 seconds.",
+      answer: "IMPULSIVE. Institutional intent — either trend continuation or delivery toward a key zone. Do not trade against it without a valid AOI and confirmation on lower timeframe.",
+      timeTarget: 10,
+    },
     nextLesson: 'confirmation',
     prevLesson: 'aoi',
   },
@@ -633,6 +905,39 @@ export const LESSONS: Lesson[] = [
       { question: "Recall a time you entered without confirmation. What happened? What were you feeling at the moment of entry?", type: 'emotion' },
     ],
     psychologyNote: "The pressure to enter before confirmation is one of Melody Mayhem's specialties. She makes you feel like waiting will cost you the whole move. Reality: entries with confirmation have better risk/reward because you can place a tighter Burn Point below the wick low. Patience creates better entries.",
+    concept: {
+      definition: "Confirmation is a two-part micro-structure signal on a lower timeframe (15M) that proves price has rejected the AOI and is beginning to reverse. Part 1: a wick rejection candle — price wicks below the AOI boundary and closes back inside. Part 2: a micro-BOS — the next candle closes above the high of the wick rejection candle. Both together = confirmation. One alone = wait.",
+      kitchenAnalogy: "The AOI gets you to the tasting stage. Confirmation is the taste. The chef does not serve a dish until they taste it — even when the timer says it is ready and the aroma smells right. The taste is the final check. Without confirmation, the trade might still be raw.",
+      marketMeaning: "On XAUUSD 15M for a bullish setup: price enters AOI, forms a candle with a lower wick that penetrates below the AOI low and closes back inside, then the next candle closes above the first candle's high. Entry is at the close of the second candle. Burn Point sits 2pt below the wick low. This two-candle sequence is the only entry trigger.",
+    },
+    example: {
+      scenario: "AOI: 2,330–2,338. C1 (15M): O=2,332 H=2,335 L=2,327 C=2,334. C2 (15M): O=2,334 H=2,339 L=2,332 C=2,338.",
+      walkthrough: "C1 wick rejection: opens inside AOI at 2,332, wicks to 2,327 (below the 2,330 AOI boundary), closes back inside at 2,334. Part 1 CONFIRMED — AOI held, buyers defended. C2 micro-BOS: opens at 2,334, closes at 2,338 — above C1's high of 2,335. Part 2 CONFIRMED — micro-structure broken upward. Entry: 2,338 (close of C2). Burn Point: 2,327 − 2 = 2,325. Both parts confirmed in two candles. The pass is now valid.",
+      keyTakeaway: "Entry is at the close of the micro-BOS candle. Never the open. The close confirms the break. The open is a prediction.",
+    },
+    commonTrap: {
+      mistake: "Entering at the close of the wick rejection candle (C1), before the micro-BOS forms.",
+      whyItHappens: "The wick rejection looks like the reversal signal. Waiting one more candle feels like missing the entry.",
+      consequence: "C1 closes and price continues lower. A second wick forms. Then a third. You averaged down on a position that never had confirmation. Your Burn Point is hit before the actual micro-BOS ever forms.",
+    },
+    guidedPractice: {
+      scenario: "AOI: 2,378–2,386. Price arrives. C-A (15M): O=2,381 H=2,383 L=2,374 C=2,380. C-B (15M): O=2,380 H=2,382 L=2,378 C=2,381. C-C (15M): O=2,381 H=2,388 L=2,379 C=2,387.",
+      steps: [
+        "Does C-A qualify as a wick rejection? Check: (1) did it wick below the AOI low of 2,378? (2) did it close back inside?",
+        "Does C-B qualify as a micro-BOS? It must close ABOVE C-A's HIGH of 2,383.",
+        "Does C-C qualify as a micro-BOS? Check C-C close vs C-A high.",
+        "Which candle is the entry candle and what is the entry price?",
+        "Place the Burn Point.",
+      ],
+      answer: "C-A wick rejection: wicked to 2,374 (below 2,378 boundary) ✓, closed back inside at 2,380 ✓. Part 1 CONFIRMED. C-B micro-BOS: closes at 2,381 — C-A's high was 2,383. 2,381 < 2,383. FAILS. C-B is not a valid BOS. C-C micro-BOS: closes at 2,387 — above C-A's high of 2,383 ✓. Part 2 CONFIRMED on C-C. Entry: 2,387 (close of C-C). Burn Point: 2,374 − 2 = 2,372.",
+      whyItMatters: "The micro-BOS must clear the wick candle's HIGH — not just its open or close. This precise rule filters out dozens of false entries per month that look like confirmations but are not.",
+    },
+    kitchenRush: {
+      scenario: "AOI: 2,340–2,348. C1: O=2,344 H=2,347 L=2,337 C=2,345. C2: O=2,345 H=2,350 L=2,343 C=2,349.",
+      task: "Confirmation present? Entry price? Burn Point? 20 seconds.",
+      answer: "C1 wick rejection: wicked to 2,337 (below 2,340) ✓, closed inside at 2,345 ✓. C2 micro-BOS: closed 2,349 above C1 high of 2,347 ✓. CONFIRMED. Entry: 2,349. BP: 2,337 − 2 = 2,335.",
+      timeTarget: 20,
+    },
     nextLesson: 'risk',
     prevLesson: 'delivery',
   },
@@ -677,6 +982,39 @@ export const LESSONS: Lesson[] = [
     ],
     psychologyNote: "Moving the stop loss is the single most dangerous habit in trading. It is Melody Mayhem's favorite trick. The moment your finger hovers over that stop — close the platform. Walk away. Come back in 15 minutes. The urge will pass. The trade will resolve. Your account will thank you.",
     riskWarning: "BURN ALARM: Never risk more than 2% of account on a single trade. Never add to a losing position. Never remove a stop loss once placed. These are the three unbreakable rules.",
+    concept: {
+      definition: "Risk management determines how much of your account you are willing to lose on a single trade, then calculates position size backward from your Burn Point to match that exact dollar amount. It is not optional. It is the operating system that keeps you trading after losses.",
+      kitchenAnalogy: "Penny Stacks never bets the whole kitchen on one service. She reserves the budget. She never orders more inventory than a week can sell. The kitchen stays open even after a bad night because the math was right before service started. Risk management is kitchen budgeting — calculated, consistent, zero emotion.",
+      marketMeaning: "Formula: (1) Risk amount = account × 1–2%. (2) Distance = entry − Burn Point in points. (3) Dollar risk per micro lot = distance × pip value. (4) Lot size = risk amount ÷ dollar risk per micro lot (round DOWN). Every trade uses this formula. Confidence in the setup never changes the percentage.",
+    },
+    example: {
+      scenario: "Account $8,000. Max risk 1% = $80. Entry: 2,340. Burn Point: 2,326 (14 points below). XAUUSD pip value: $1 per 0.01 lot per point.",
+      walkthrough: "Risk amount: $8,000 × 1% = $80. Distance: 2,340 − 2,326 = 14pt. Dollar risk per micro lot: 14 × $1 = $14. Lot size: $80 ÷ $14 = 5.71 → round down to 5 micro lots (0.05 lots). Verify: 5 × $14 = $70 actual risk — within 1% ✓. If Burn Point hit: lose $70. If 2R target (2,368) hit: gain $140. The account survives either outcome.",
+      keyTakeaway: "Always round DOWN on lot size. Never round up. The market does not owe you the extra size, and the extra size is the difference between a controlled loss and an oversized one.",
+    },
+    commonTrap: {
+      mistake: "Increasing position size on setups that 'look really good' or after a winning streak.",
+      whyItHappens: "High confidence feels like it deserves more size. A winning streak feels like a signal to scale up.",
+      consequence: "No setup is guaranteed. Oversizing a high-confidence setup and losing converts a 1% loss into a 5% loss. Consecutive oversized losses after winning streaks are the most common account-destruction pattern.",
+    },
+    guidedPractice: {
+      scenario: "Account $12,000. Max risk 1%. Entry: 2,285. Burn Point: 2,270. Pip value $1/0.01 lot/pt. First Tables Served: 2,315.",
+      steps: [
+        "Calculate the dollar risk amount.",
+        "Calculate distance from entry to Burn Point in points.",
+        "Calculate dollar risk per micro lot.",
+        "Calculate lot size and round down.",
+        "Verify: loss if Burn Point hit. Gain if 2R (2,315) hit.",
+      ],
+      answer: "Risk amount: $12,000 × 1% = $120. Distance: 2,285 − 2,270 = 15pt. Per micro lot: 15 × $1 = $15. Lot size: $120 ÷ $15 = 8 micro lots (0.08 lots). BP loss: 8 × $15 = $120 ✓ (exactly 1%). 2R gain: (2,315 − 2,285) = 30pt. 8 × 30 × $1 = $240. R:R = 1:2 ✓.",
+      whyItMatters: "Running this math before every trade builds the habit that keeps you alive through losing streaks. Five losses at 1% leaves 95% of the account intact. Five losses at 5% leaves 77%. That difference compounds — in both directions.",
+    },
+    kitchenRush: {
+      scenario: "Account $5,000. 1% risk. Entry 2,310. Burn Point 2,298. Pip value $1/0.01 lot/pt.",
+      task: "Lot size in 15 seconds.",
+      answer: "Risk: $50. Distance: 12pt. Per micro lot: $12. Lot size: $50 ÷ $12 = 4.16 → 4 micro lots (0.04 lots).",
+      timeTarget: 15,
+    },
     nextLesson: 'pass',
     prevLesson: 'confirmation',
   },
@@ -718,6 +1056,39 @@ export const LESSONS: Lesson[] = [
       { question: "How did it feel to plan the full trade before entering rather than entering first and planning later? Note the difference in your emotional state.", type: 'emotion' },
     ],
     riskWarning: "BURN ALARM: If you cannot state your Burn Point before you place the trade — you are gambling, not trading. Close the order window. Build the plan. Then execute.",
+    concept: {
+      definition: "The Pass is the execution moment — placing the entry order after all preceding Recipe steps are complete. It is not an impulse. It is the output of a complete system. By the time you place The Pass, every variable is already decided: entry price, Burn Point, lot size, and Tables Served levels.",
+      kitchenAnalogy: "After hours of prep — mise en place, temperatures calibrated, timing locked — the head chef calls the pass. The dish is ready. You execute. Not before the prep is done. Not after the window closes. Exactly at the moment the system says: now. The Pass is the one moment where preparation becomes action.",
+      marketMeaning: "On XAUUSD: entry (The Pass) is placed at the close of the micro-BOS confirmation candle. Limit or market order at that close price. Burn Point is already set. Tables Served levels are already marked. Lot size is already calculated. The Pass is Step 6 — not Step 1.",
+    },
+    example: {
+      scenario: "Complete Recipe: Daily bullish. 4H: equal lows at 2,360. AOI: 2,358–2,366 (FVG in discount). 1H: impulsive bearish delivery into AOI. 15M: wick to 2,355, micro-BOS close at 2,369. Account $6,000, 1% = $60. BP: 2,353.",
+      walkthrough: "The Pass: 2,369 (micro-BOS close). BP: 2,353. Risk: 2,369 − 2,353 = 16pt. Lot size: $60 ÷ $16 = 3.75 → 3 micro lots. First TS: 2,369 + (16 × 2) = 2,401 (2R). Second TS: next liquidity pool (equal highs at 2,415). Order placed: 3 micro lots long at 2,369. Stop at 2,353. Partial TP at 2,401. Plan documented. Trade active.",
+      keyTakeaway: "If you cannot write out the full trade plan in 60 seconds before placing the order, you are not ready. Speed in execution comes from preparation, not impulse.",
+    },
+    commonTrap: {
+      mistake: "Entering at the OPEN of the micro-BOS candle instead of waiting for its close.",
+      whyItHappens: "The candle is forming and moving in your direction. Waiting for the close feels like leaving money on the table.",
+      consequence: "The candle reverses before closing. It becomes a wick, not a BOS. You entered a setup that never confirmed. Your Burn Point is hit before the actual confirmation candle forms.",
+    },
+    guidedPractice: {
+      scenario: "From confirmation lesson: AOI 2,378–2,386. Wick candle C-A: H=2,383, L=2,374, C=2,380. BOS candle C-C: C=2,387. Account $10,000. Risk 1%. BP: 2,372.",
+      steps: [
+        "State The Pass price.",
+        "Calculate risk in points.",
+        "Calculate lot size (pip value $1/0.01/pt). Round down.",
+        "Calculate First Tables Served at 2R.",
+        "Write the full trade plan as a single block.",
+      ],
+      answer: "The Pass: 2,387. Risk: 2,387 − 2,372 = 15pt. Lot size: $100 ÷ $15 = 6.66 → 6 micro lots (0.06). Actual risk: $90. First TS: 2,387 + (15 × 2) = 2,417. Full plan — Symbol: XAUUSD | Bias: BULLISH | Pass: 2,387 | BP: 2,372 | Size: 0.06 lots | TS1: 2,417 (2R — close 60%) | TS2: next pool | Management: BP to break even at TS1, trail to TS2.",
+      whyItMatters: "Writing the complete plan before executing forces you to catch errors before they cost money. Every professional trader runs a pre-trade checklist. This is yours.",
+    },
+    kitchenRush: {
+      scenario: "Micro-BOS close: 2,342. Wick low: 2,331. BP: 2,329. Account $4,000. Risk 1%.",
+      task: "Entry, lot size, First TS (2R). 20 seconds.",
+      answer: "Entry: 2,342. Risk: 13pt. Lot size: $40 ÷ $13 = 3.07 → 3 micro lots. First TS: 2,342 + 26 = 2,368.",
+      timeTarget: 20,
+    },
     nextLesson: 'tables-served',
     prevLesson: 'risk',
   },
@@ -760,6 +1131,39 @@ export const LESSONS: Lesson[] = [
       { question: "Do you feel the urge to exit early before your First Tables Served target? Write what emotion is driving that urge.", type: 'emotion' },
     ],
     psychologyNote: "Exiting too early is Melody Mayhem's second-favorite move (after moving the stop). She creates fear of losing the profit you already have. The plan is the plan. If you planned First Tables Served at 2R — let it arrive. Trust the work you did before the trade was placed.",
+    concept: {
+      definition: "Tables Served are your profit targets — the price levels where you exit part or all of your position and lock in gains. They are not arbitrary numbers. They are the next liquidity pools in the direction of your trade: where price is structurally drawn, where orders cluster, where the move has a logical endpoint.",
+      kitchenAnalogy: "The servers know which tables ordered first and when each dish needs to go out. Nobody guesses. The order sheet was written before service. Tables Served in trading is that sheet — written before you enter the trade. First table gets served first. Second table gets the trailing profit.",
+      marketMeaning: "On XAUUSD: First Tables Served = nearest liquidity pool in bias direction at minimum 2R from entry. Prior swing high for buys, prior swing low for sells, or equal level clusters. Take 50–70% of position there and move Burn Point to break even. Second Tables Served = next significant liquidity pool. Run remaining position with trailing stop.",
+    },
+    example: {
+      scenario: "Bullish trade. Entry: 2,342. BP: 2,329. Risk: 13pt. Pools ahead: equal highs at 2,355 (13pt away), FVG at 2,362–2,368, prior swing high at 2,378.",
+      walkthrough: "Equal highs 2,355: (2,355 − 2,342) ÷ 13 = 1.0R — below 2R minimum, skip as First TS. FVG 2,362: (2,362 − 2,342) ÷ 13 = 1.5R — still below 2R, skip. Prior swing high 2,378: (2,378 − 2,342) ÷ 13 = 2.77R ✓. First TS = 2,378 (2.77R). Path check: equal highs at 2,355 and FVG at 2,362 sit between entry and 2,378 — potential slowing zones but not blockers (both are below First TS). Second TS: next pool above 2,378. At 2,378: close 60%, move BP to 2,342 (break even), run 40% to Second TS.",
+      keyTakeaway: "First Tables Served must be 2R minimum. The nearest level is not automatically the first target — it must clear the R threshold.",
+    },
+    commonTrap: {
+      mistake: "Setting First Tables Served at the nearest level regardless of R-multiple.",
+      whyItHappens: "'Getting something off the table' feels conservative. The nearest level looks clean and real.",
+      consequence: "A sub-2R first target means your wins do not mathematically compensate for standard losses. Even at a 50% win rate, a 1R first target loses money over time. 2R minimum is not preference — it is the math floor for profitability.",
+    },
+    guidedPractice: {
+      scenario: "Bullish trade. Entry: 2,295. BP: 2,282. Risk: 13pt. Pools: PDH 2,305 (10pt), equal highs 2,316 (21pt), prior swing high 2,328 (33pt), weekly high 2,345 (50pt).",
+      steps: [
+        "Calculate R-multiple for each level.",
+        "Which levels meet the 2R minimum?",
+        "Select First TS and state the R-multiple.",
+        "Select Second TS.",
+        "Write the exit plan: % to close at First TS and where BP moves.",
+      ],
+      answer: "PDH 2,305: 10 ÷ 13 = 0.77R ✗. Equal highs 2,316: 21 ÷ 13 = 1.6R ✗. Swing high 2,328: 33 ÷ 13 = 2.5R ✓. Weekly high 2,345: 50 ÷ 13 = 3.8R ✓. First TS: 2,328 at 2.5R. Second TS: 2,345 at 3.8R. Exit plan: at 2,328 close 60%, move BP from 2,282 to 2,295 (break even). Remaining 40% trails to 2,345 — trail below each new higher low formed after First TS.",
+      whyItMatters: "Consistent 2R+ first targets with 1% risk means you need fewer than 35% win rate to be profitable over time. That margin is survivable even during poor stretches.",
+    },
+    kitchenRush: {
+      scenario: "Entry 2,380. BP 2,368. Risk: 12pt. Pools: 2,386 (6pt), 2,394 (14pt), 2,404 (24pt), 2,415 (35pt).",
+      task: "First valid TS and its R-multiple. 15 seconds.",
+      answer: "2,386: 0.5R ✗. 2,394: 1.17R ✗. 2,404: 24 ÷ 12 = 2.0R ✓. First TS = 2,404 at exactly 2R. Second TS = 2,415 at 2.9R.",
+      timeTarget: 15,
+    },
     nextLesson: 'management',
     prevLesson: 'pass',
   },
@@ -804,6 +1208,39 @@ export const LESSONS: Lesson[] = [
     ],
     psychologyNote: "Every time you deviate from the management plan — for any reason — write it down. Date, trade, deviation, outcome. After 30 deviations, read them back. You will see the pattern. You will see Melody Mayhem. And you will stop listening to her.",
     riskWarning: "BURN ALARM: Never move your Burn Point against the trade. Only move it in the direction of profit (to break even, then to trail). Moving a stop loss against the trade is the fastest way to turn a small loss into a catastrophic one.",
+    concept: {
+      definition: "Trade management is executing your pre-built plan after entry — and nothing else. Four phases: Phase 1 (entry to First TS): leave it alone. Phase 2 (First TS hit): take partial, move BP to break even. Phase 3 (First TS to Second TS): trail BP below each new higher low. Phase 4 (Second TS or trail hit): exit, document, review.",
+      kitchenAnalogy: "Penny Stacks does not rebuild the recipe after the dish is in the oven. She set the temperature. She set the timer. She trusts the system. Management is not 'watch and react.' Management is 'set and observe.' The plan is the chef. You are the witness.",
+      marketMeaning: "The two most destructive XAUUSD management errors: (1) moving the Burn Point against the trade when price pulls back in Phase 1, (2) exiting at 1R because of a red candle before First TS. Both destroy the math that makes the strategy work. The plan built before entry is the only plan. Your Burn Point handles all noise-exit decisions automatically.",
+    },
+    example: {
+      scenario: "Entry: 2,337. BP: 2,328. First TS: 2,355 (2R). Second TS: 2,378. At +4 hours, price reaches 2,348 and forms a large red candle dropping to 2,341. Strong psychological pressure to exit.",
+      walkthrough: "Check plan: Phase 1 (entry to First TS at 2,355). Price at 2,348 — moving toward First TS, has NOT hit BP of 2,328. Red candle to 2,341: still 13pt above BP. Phase 1 rule: no exit except BP hit. Action: close the chart. Come back in 2 hours. The red candle is noise. The Burn Point already has the answer built in. If the trade was wrong — 2,328 says so. Not the red candle.",
+      keyTakeaway: "In Phase 1 there is exactly one valid exit condition: price hits the Burn Point. No red candle, no news event, no 'feeling' is a valid Phase 1 exit.",
+    },
+    commonTrap: {
+      mistake: "Moving the Burn Point lower (for longs) when a red candle makes the trade feel uncomfortable.",
+      whyItHappens: "Fear of losing the trade outweighs fear of losing money. Widening the stop feels like 'giving it room.'",
+      consequence: "A widened stop is a larger loss when hit. A stop without a logical invalidation level always gets hit eventually. Moving stops against the trade consistently converts disciplined 1R losses into catastrophic 3–5R losses.",
+    },
+    guidedPractice: {
+      scenario: "Long trade: Entry 2,295. BP 2,282. First TS 2,321. Second TS 2,340. Timeline: +1hr: 2,305. +3hr: 2,315. +5hr: 2,321 (First TS hit). +6hr: 2,314 (pullback after partial close). +10hr: 2,340 (Second TS hit).",
+      steps: [
+        "At +5hr (First TS): what % do you close and where does BP move?",
+        "At +6hr (2,314 pullback): are you stopped? What is your current BP?",
+        "At +10hr (Second TS): close remaining position and calculate total outcome.",
+        "If BP (2,282) had been hit at +2hr instead: what is the loss?",
+        "Name the emotion you expect at the +6hr pullback and your correct response.",
+      ],
+      answer: "+5hr: Close 60% at 2,321. Move BP from 2,282 → 2,295 (break even). +6hr: NOT stopped. BP is 2,295. Price at 2,314 is above 2,295. Remain in trade. +10hr: Close remaining 40% at 2,340. 60% earned 2R (26pt). 40% earned 3.46R (45pt). Blended: excellent outcome. BP loss at 2,282: exactly 1% of account ($13pt on original size). Emotion at +6hr: anxiety, fear of losing open profit. Correct response: check the BP (2,295), confirm price is above it, close the chart.",
+      whyItMatters: "The pullback at +6hr is where most traders exit early or widen their stop. The plan already handled it — the BP answered the question before the question was asked. Writing this walkthrough before the trade builds the trust that sustains the plan during the real trade.",
+    },
+    kitchenRush: {
+      scenario: "Long trade. Entry 2,350. BP 2,338. First TS 2,374 — not yet hit. Price just pulled to 2,343. Your cursor is on the close button.",
+      task: "Stay or exit? Name the rule. 5 seconds.",
+      answer: "STAY. Price (2,343) is above BP (2,338). Phase 1 exit condition is BP hit only. 2,343 > 2,338. The plan says: do nothing. Close the chart.",
+      timeTarget: 5,
+    },
     nextLesson: 'kitchen-rush',
     prevLesson: 'tables-served',
   },
@@ -847,6 +1284,42 @@ export const LESSONS: Lesson[] = [
     ],
     psychologyNote: "The days you do not trade are not wasted days. They are the days you proved you have discipline. The market is open 250 days a year. You only need 30-40 great setups. Everything else is patience. Everything else is protecting your account for the next real Recipe.",
     riskWarning: "BURN ALARM: Never force a trade to end the Kitchen Rush with a win. A forced trade is not a trade — it is a bet. The Kitchen Rush is complete the moment you run all 8 steps, regardless of whether a trade exists.",
+    concept: {
+      definition: "Kitchen Rush is the full 8-step Recipe executed in real time on a live chart. Every skill from every level is called simultaneously. You run the Recipe in sequence without skipping steps. If any step fails — no trade. 'No Setup Today' is a successful Kitchen Rush. It means the Recipe protected you.",
+      kitchenAnalogy: "Dinner service at a full restaurant. Every table ordered at once. The timer is counting. The head chef does not invent new recipes mid-service. They execute the same prep they ran a hundred times in training. The Kitchen Rush is your first real service — and every service after it.",
+      marketMeaning: "The Kitchen Rush outcome has two valid results: (1) All 8 steps passed — full trade plan written and executed. (2) A step failed — 'No Setup Today' documented in the journal. Both are wins. The third outcome — forcing a trade when a step failed — is the only loss.",
+    },
+    example: {
+      scenario: "Monday 8AM. XAUUSD moving. Large news candle just formed. Trading room buzzing with alerts. Everyone entering positions.",
+      walkthrough: "Step 1 — Bias (Daily): if you cannot confirm HH/HL or LH/LL in 30 seconds → stop, no trade. Step 2 — Flow (4H): mark PDH, PDL, equal levels — do not enter while doing this. Step 3 — AOI (4H): discount zone + FVG — if no valid AOI → stop. Step 4 — Delivery (1H): impulsive or corrective approaching AOI? Corrective → wait. Step 5 — Confirmation (15M): wick rejection + micro-BOS? Both required. Step 6 — The Pass: all 5 complete — calculate and execute. Step 7 — Tables Served: mark both levels. Step 8 — Management: set alerts, close platform. Kitchen Rush complete whether or not a trade was placed.",
+      keyTakeaway: "The Kitchen Rush is complete at Step 8 regardless of outcome. A completed Recipe with no trade is a professional session.",
+    },
+    commonTrap: {
+      mistake: "Forcing a trade at the end of the Kitchen Rush because completing all 8 steps without trading feels like wasted effort.",
+      whyItHappens: "The effort invested in running the Recipe creates psychological pressure to 'get something' from the session.",
+      consequence: "Forced trades skip whatever step was missing — almost always confirmation. Price reverses at the first available wick. The Recipe told you: no setup. You overruled it. The loss is the price of overruling the system.",
+    },
+    guidedPractice: {
+      scenario: "Run The Full Recipe on XAUUSD right now — live or most recent session. No shortcuts.",
+      steps: [
+        "Step 1 (Daily): State your bias and the two structural reasons for it.",
+        "Step 2 (4H): Mark PDH, PDL, and any equal levels. Which side has more liquidity?",
+        "Step 3 (4H): Identify discount zone and any FVG. State your AOI or write 'No valid AOI.'",
+        "Step 4 (1H): If price is approaching the AOI — impulsive or corrective delivery?",
+        "Step 5 (15M): If in AOI — wick rejection present? Micro-BOS formed? Both required.",
+        "Step 6: If Step 5 complete — write the full trade plan. If not — write 'No Setup Today' and stop.",
+        "Step 7: If trade placed — mark both Tables Served levels on chart.",
+        "Step 8: Close the platform. Document which step failed if no trade was taken.",
+      ],
+      answer: "No single correct answer. A successful Kitchen Rush is one where all 8 steps were executed in sequence, every step result was documented, and no step was skipped or fabricated. Both outcomes — trade taken and no trade — are valid wins. The only failure is skipping steps or forcing a trade past a failed step.",
+      whyItMatters: "Running the Kitchen Rush 5 days per week for 90 days installs the Recipe as automatic behavior. That is how Head Chefs are made — not by being right more often, but by never skipping a step.",
+    },
+    kitchenRush: {
+      scenario: "The market is live. You have 5 minutes.",
+      task: "State your Daily bias, the highest-priority liquidity pool, and whether price is near a valid AOI. Three answers. Five minutes.",
+      answer: "This is a live exercise. Your journal entry for this session covering all three answers IS the Kitchen Rush completion. A documented 'No Setup Today' with the step that failed is as valid as a documented trade plan.",
+      timeTarget: 300,
+    },
     nextLesson: null,
     prevLesson: 'management',
   },
