@@ -12,6 +12,7 @@ const links = [
   { label: 'Passport',     href: '/passport' },
   { label: 'Academy',      href: '/academy' },
   { label: 'Kitchen',      href: '/kitchen' },
+  { label: 'TCU Theater',  href: '/tcu-theater' },
   { label: 'Trading Chef', href: '/trading-chef' },
   { label: 'TCU',          href: '/trading-chef-university' },
   { label: 'Courier Lab',  href: '/courier-income-lab' },
