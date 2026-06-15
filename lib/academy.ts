@@ -175,6 +175,14 @@ export interface PracticeTask {
   successCriteria: string
 }
 
+export interface GuidedExample {
+  scenario: string      // the situation to analyze
+  question: string      // what should the student notice?
+  answer: string        // the correct read — shown to student
+  trap?: string         // common wrong answer
+  whyItMatters: string  // connects to the Recipe
+}
+
 export interface Lesson {
   id: string
   slug: string
@@ -188,10 +196,12 @@ export interface Lesson {
   warningCharacter?: string
   color: string
   icon: string
+  tradingChefIntro?: string  // TC narrates context before lesson begins
   hook: string
   kitchenStory: string
   marketTranslation: string
   visualGuide: string
+  guidedExample?: GuidedExample  // worked example shown before independent practice
   characterCoaching: string
   practice: PracticeTask
   xpReward: number
@@ -217,9 +227,17 @@ export const LESSONS: Lesson[] = [
     character: 'trading-chef',
     color: '#c9a84c',
     icon: '👶',
+    tradingChefIntro: "Welcome. You are not a trader yet — and that is exactly right. Every person who has ever blown an account started by thinking they already knew enough. They did not come here first. You did. That decision — to start at zero — is the most important trade you will ever make.",
     hook: "Before a chef can cook, they have to understand why the kitchen exists. Before a trader can trade, they have to understand what trading actually is. You are a Market Child right now — and that is not an insult. It is the beginning. Every Head Chef started exactly here.",
     kitchenStory: "The first day in a professional kitchen, you do not cook. You learn the layout. You learn the equipment. You learn who runs what section. You learn the rules. The kitchen has rules for a reason: without them, people get burned. The Trading Chef University kitchen has the same rules. Your job today is to understand the kitchen before you touch anything.",
     marketTranslation: "The market is not a slot machine. It is not a game. It is a professional environment where money moves based on decisions made by banks, institutions, and retail traders — in that order. You are currently retail. Your job is to learn to read what institutions are doing and move with them, not against them. That is the only edge that lasts. TCU teaches you to develop it.",
+    guidedExample: {
+      scenario: "A student opens the Academy and immediately tries to click Level 5 (Delivery Kitchen) on their first day.",
+      question: "What happens when they try to access Level 5?",
+      answer: "The level is locked. They are redirected to Level 0. The system requires completion of each level in sequence — viewed, practiced, reflected — before the next unlocks.",
+      trap: "Many students assume they can skip to the 'interesting' material. The Kitchen does not allow it — and neither does the market.",
+      whyItMatters: "The gating is not a limitation. It is the Recipe in action. Every step you skip is a gap you will pay for later — in real money.",
+    },
     visualGuide: "You do not need a chart today. Open the Coast Map. Read every district name. Understand that each district represents a different income path. Trading is one of them. Your journey starts at Market Marina and progresses to Legacy Point (TCU). The Passport records every level you earn. Look at the 10 Academy levels on this page. Understand the road before you start walking it.",
     characterCoaching: "Trading Chef says: 'I have trained hundreds of students in this kitchen. The ones who become Head Chefs all have one thing in common: they stayed. They did not chase shortcuts. They completed every level before moving to the next. They earned the right to trade. That is what TCU is about. You earn it. You do not buy it. You do not fake it. You earn it — one level at a time.'",
     practice: {
@@ -251,9 +269,17 @@ export const LESSONS: Lesson[] = [
     character: 'candle-kid',
     color: '#22C55E',
     icon: '🕯️',
+    tradingChefIntro: "Candle Kid is one of the youngest chefs in the kitchen — and the most detail-oriented. He has spent years reading nothing but candles. Before you touch a single strategy, you need to speak his language. Candles are how the market communicates. Start here.",
     hook: "Before you can read a chart, you have to learn the alphabet. Candles are the letters. Every price story is written in candles — and you cannot understand the story if you cannot read the letters.",
     kitchenStory: "Think of a candle like a cooking timer. The open is when the timer starts. The close is when the timer ends. The high and low are how far the temperature swung in between. A big body means strong heat. A small body means the temperature barely moved.",
     marketTranslation: "Every candle has four data points: Open (where price started), Close (where price ended), High (highest point reached), Low (lowest point reached). The body is the space between open and close. The wicks are the thin lines above and below. A bullish candle closes higher than it opened. A bearish candle closes lower.",
+    guidedExample: {
+      scenario: "Candle A: Opens at 2,300. Closes at 2,318. High: 2,321. Low: 2,297.",
+      question: "What type of candle is this? What does the body tell you? What do the wicks tell you?",
+      answer: "Bullish candle — closed higher than it opened. Body: 18 points of buying pressure (2300→2318). Upper wick: 3 points — buyers reached 2,321 but slight rejection. Lower wick: 3 points — price briefly dropped to 2,297 but buyers recovered quickly. Net read: buyers controlled this period with moderate conviction.",
+      trap: "Seeing a bullish candle and thinking 'buy now.' One candle is not a signal. It is one data point.",
+      whyItMatters: "If you cannot read a single candle, you cannot read three. And three candles in sequence form the first chapter of every trade story.",
+    },
     visualGuide: "On any chart, zoom into a single daily candle. Find the body — the thick part. Notice the wicks above and below. A long body with short wicks = strong conviction. A small body with long wicks = indecision or rejection.",
     characterCoaching: "Candle Kid says: 'One candle tells you one story. Three candles in a row tell you a chapter. I never look at just one — I always read the sequence. Three big bullish bodies in a row? That is momentum. That is delivery with intent.'",
     practice: {
@@ -285,9 +311,17 @@ export const LESSONS: Lesson[] = [
     warningCharacter: 'melissa-mayhem',
     color: '#A855F7',
     icon: '📌',
+    tradingChefIntro: "Now that you can read a candle body, Wickie is going to teach you the part most traders ignore. The wicks. They look like noise until you understand what they are: evidence. Rejection. The market's way of saying 'we tried that price and refused it.' Wickie has made an entire career reading that refusal.",
     hook: "A wick is not just extra chart noise. It is evidence. Evidence of rejection, of manipulation, of smart money pushing price somewhere — then pulling it back. If you ignore wicks, you are ignoring the most honest part of the chart.",
     kitchenStory: "Imagine you are shopping and the store briefly puts an item on sale for a price that seems wrong — way too cheap or way too expensive. People rush in. Then the store pulls it back. That price spike that got rejected? That is a wick. The market tried that price and the market said: no.",
     marketTranslation: "A long upper wick means price tried to go higher but got rejected back down. Sellers overpowered buyers at that high. A long lower wick means price tried to go lower but got rejected up. Buyers stepped in at that low. Wicks at key levels are where the real money decisions happen.",
+    guidedExample: {
+      scenario: "A 4H candle on XAUUSD: Opens at 2,350. High: 2,389. Low: 2,348. Close: 2,352.",
+      question: "What does this wick tell you? What happened in this 4-hour period?",
+      answer: "This candle has a massive upper wick (37 points: 2,352 to 2,389) and virtually no body (2 points: 2,350 to 2,352). Price shot up to 2,389 — but sellers rejected it hard. By the close, all of that move was given back. The buyers tried. The sellers won. This is a bearish rejection wick at highs.",
+      trap: "Seeing the wick and thinking 'this means price is going down NOW.' A wick is evidence of rejection — not an immediate entry signal. You still need structure, AOI, and confirmation.",
+      whyItMatters: "Wicks at key levels are where institutional rejection happens. When Wickie sees a wick at a level that has been tested twice before — he knows something real is happening there.",
+    },
     visualGuide: "On any chart, zoom out to see 20+ candles. Look for candles with wicks at least twice the size of the body. These are rejection wicks. Now ask: are they rejecting from a level that has been tested before? Repeated rejection from the same level = strong signal.",
     characterCoaching: "Wickie says: 'I study wicks like a detective. A single long wick at a new high right before a massive drop — that is Melissa Mayhem setting a trap. She creates a fakeout to run your stop. I watch for the wick, then I watch for what happens next. The wick is the clue. The next candle is the verdict.'",
     practice: {
@@ -319,9 +353,17 @@ export const LESSONS: Lesson[] = [
     character: 'chef-goldie',
     color: '#c9a84c',
     icon: '🏗️',
+    tradingChefIntro: "You can read candles. You can read wicks. Now Chef Goldie will teach you the most important skill in the kitchen: reading where you are in the story. Structure tells you if the market is going up, down, or sideways. Without that knowledge, every candle you read is meaningless context.",
     hook: "Market structure is the blueprint of every price move that has ever happened. Every trend, every reversal, every range — all of it is built from the same materials. Once you learn to read structure, every chart tells you exactly what it is doing and where it is likely going.",
     kitchenStory: "A building does not fall up — it follows gravity. A market follows structure. When a building is under construction, you can see the scaffold going up, floor by floor. When structure breaks — when a major beam collapses — the whole direction changes. Break of Structure (BOS) is when the market confirms it is continuing. Change of Character (CHOCH) is when the scaffold comes down and rebuilding starts in the other direction.",
     marketTranslation: "In an uptrend: price makes higher highs (HH) and higher lows (HL). A Break of Structure (BOS) to the upside confirms the trend continues. A Change of Character (CHOCH) — a break below the most recent higher low — signals potential reversal. Ranges form when price stops making progress in either direction. Expansion is when price breaks from a range with momentum.",
+    guidedExample: {
+      scenario: "XAUUSD Daily over 8 candles: Lows at 2,200 → 2,220 → 2,245. Highs at 2,290 → 2,310 → 2,335. Then the next low forms at 2,210 — below the previous low of 2,220.",
+      question: "What was the structure before the final low? What changed when 2,210 formed?",
+      answer: "Before 2,210: Bullish structure. Higher highs (2,290→2,310→2,335) AND higher lows (2,200→2,220→2,245). After 2,210: the most recent higher low (2,220) is broken. This is a Change of Character (CHOCH). The bullish sequence is broken. Bias shifts to neutral or bearish pending further confirmation.",
+      trap: "Calling the CHOCH immediately as a sell signal. One lower low does not make a bearish structure. It breaks bullish structure. You wait for the sequence to confirm: a lower high must form before selling.",
+      whyItMatters: "Structure is the only thing that tells you where you are in the market story. Without it, you are trading blindfolded.",
+    },
     visualGuide: "On XAUUSD Daily, identify the most recent swing high and swing low. Label them. Then identify the one before each. Are the highs getting higher? Are the lows getting higher too? If yes — bullish structure. If the most recent low breaks below the previous low — that is a CHOCH. The structure has changed.",
     characterCoaching: "Chef Goldie says: 'I do not guess which way a market is going. I read what it already told me. Three higher lows in a row with three higher highs — that is the market speaking bullish. A single lower low does not erase that conversation. But two lower lows with a lower high in between? The recipe has changed. I close my bullish position and wait.'",
     practice: {
@@ -353,9 +395,17 @@ export const LESSONS: Lesson[] = [
     character: 'chef-goldie',
     color: '#c9a84c',
     icon: '🧭',
+    tradingChefIntro: "You learned structure. Now Chef Goldie teaches you what to do with it. Bias is the decision that structure produces. It is the single question you must answer before everything else: which direction is this kitchen cooking today? The entire Recipe depends on getting this right.",
     hook: "Every chef knows what they are cooking before they touch the stove. You need to know your directional bias before you look at a single lower-timeframe candle. Get this wrong and everything else is wasted effort.",
     kitchenStory: "Before a restaurant opens for the day, the chef decides: tonight we serve fish or tonight we serve steak. That decision — made before service begins — is bias. You do not walk in at 6PM and say 'what do I feel like cooking tonight?' You decide in the morning, based on what is fresh and what the customers want. The Daily chart is your morning decision.",
     marketTranslation: "Bias is your directional read on a market based on the higher timeframe (Daily, then 4H). Bullish bias: price is making higher highs and higher lows — you look for buys only. Bearish bias: lower highs and lower lows — sells only. Neutral: price is chopping in a range — you sit out. If bias is unclear, that IS your bias: no trade.",
+    guidedExample: {
+      scenario: "XAUUSD Daily. Last 6 swing highs: 2,280, 2,305, 2,330, 2,350, 2,370, 2,395. Last 5 swing lows between them: 2,260, 2,285, 2,310, 2,330, 2,348.",
+      question: "What is the bias and why? State it in one sentence.",
+      answer: "Bullish bias. Swing highs are sequentially higher (2,280→2,395) and swing lows are also sequentially higher (2,260→2,348). Both conditions confirmed — bullish structure = bullish bias. I look only for buy setups until structure changes.",
+      trap: "Looking for sells because 'it has gone up too much' or 'it is overbought.' Bias is structure, not intuition.",
+      whyItMatters: "A clear bias eliminates half of all trade decisions instantly. You only look for setups in one direction. This alone cuts poor trades by 40-60%.",
+    },
     visualGuide: "Open XAUUSD on the Daily chart. Look at the last 10-15 candles. Are the swing highs getting higher? Are the swing lows getting higher too? That is a bullish structure. Now ask: has there been any structural break (a swing low broken) that would shift this? That break changes your bias.",
     characterCoaching: "Chef Goldie says: 'I set my bias every Sunday night. I look at the Daily. I look at the Weekly. I ask one question: is this market making progress upward or downward, or is it spinning in place? If I cannot answer that question clearly in 30 seconds, my bias is neutral. Neutral means I watch. Not trade.'",
     practice: {
@@ -388,9 +438,17 @@ export const LESSONS: Lesson[] = [
     warningCharacter: 'melissa-mayhem',
     color: '#3B82F6',
     icon: '🌊',
+    tradingChefIntro: "Bias tells you what direction to cook. Flow — what Louie calls liquidity — tells you where the kitchen is heading next and why. Louie has one of the most valuable skills in this building: he can see where price is drawn before it gets there. That is what this lesson teaches.",
     hook: "Markets do not move randomly. They move with purpose — toward liquidity. Old highs, old lows, equal levels. Once you see liquidity pools, you cannot unsee them. And once you track the flow, you move with the smart money instead of against it.",
     kitchenStory: "Water always flows downhill to the lowest point. In a city, water is collected in reservoirs. In markets, liquidity is collected at price levels where lots of people placed stop losses or pending orders. The market — like water — flows toward those collection points. Louie's job is to spot the reservoir before the water reaches it.",
     marketTranslation: "Liquidity pools form wherever retail traders predictably place their stop losses: above the previous day's high (PDH), below the previous day's low (PDL), above equal highs, below equal lows. Smart money sweeps these levels to fill their own large orders, then reverses. The sweep is the flow. After the sweep comes the real move.",
+    guidedExample: {
+      scenario: "XAUUSD 4H. Previous Day High (PDH): 2,380. Previous Day Low (PDL): 2,340. There are two equal highs at 2,375 and two equal lows at 2,343. Current price: 2,358 (in the middle).",
+      question: "Where is more liquidity — above or below price? Where is price likely drawn first?",
+      answer: "Above: PDH at 2,380 AND equal highs at 2,375 — two pools above. Below: PDL at 2,340 AND equal lows at 2,343 — two pools below. Both sides have equal liquidity. Without a clear bias lean, this is a wait-and-see situation. If bias is bullish → price likely sweeps the lows first to collect that liquidity before pushing to new highs.",
+      trap: "Assuming price goes straight to the highest liquidity pool. Price often sweeps the nearest pool first (fakeout) before the real move.",
+      whyItMatters: "Knowing where liquidity sits tells you where smart money is likely going to move price BEFORE it gets there. That is the edge.",
+    },
     visualGuide: "On XAUUSD 4H, mark the Previous Day High and Previous Day Low. Mark any equal highs (two peaks at the same level) or equal lows (two troughs at the same level). These are your liquidity pools. Now ask: which direction has more pools nearby — above or below? That is the likely short-term flow direction.",
     characterCoaching: "Louie Liquidity says: 'I look for equal highs first. Two highs sitting at the same level — every retail trader who bought the first high put their stop above the second. That is a pool. When price sweeps above those equal highs and then closes back below — that sweep is the signal. The move is about to happen in the opposite direction. Melissa Mayhem set the trap. I was waiting for it.'",
     practice: {
@@ -422,9 +480,17 @@ export const LESSONS: Lesson[] = [
     character: 'nana-value',
     color: '#F97316',
     icon: '🏡',
+    tradingChefIntro: "You have your bias. You can read the flow. Now Nana Value teaches you the most important discipline in the kitchen: patience. An AOI is not where price is right now. It is where price needs to come for the trade to make sense. You mark it. You wait. You do not chase.",
     hook: "The most common mistake new traders make is buying in the wrong zone. Nana Value has one rule she has lived by for forty years: never overpay. In trading, the zone you enter from determines everything — your risk, your reward, your probability.",
     kitchenStory: "Nana Value goes to the market every Saturday morning at 7AM, not at noon. Why? Because prices are better early. She never buys the steak at full price when she knows it will be reduced in an hour. Your Area of Interest is the trading equivalent of Nana's 7AM market visit — it is the zone where price is at a discount, where the value is real, where the trade makes sense.",
     marketTranslation: "An AOI is a price zone where multiple confluences stack: a Discount zone (below the 50% midpoint of a range), a Leftover Container (FVG — an unfilled gap from a fast move), and previous structure support. One factor is a guess. Three factors is a zone worth waiting for. The AOI is where you set your limit orders and walk away from the screen.",
+    guidedExample: {
+      scenario: "XAUUSD 4H. Bullish bias. Current swing range: Low at 2,300, High at 2,400. There is a Leftover Container (FVG) between 2,325 and 2,333 from a fast impulse up candle 3 days ago.",
+      question: "Where is the AOI? What makes it valid?",
+      answer: "Discount zone: 50% midpoint of 2,300-2,400 range = 2,350. Everything below 2,350 is discount. AOI: the Leftover Container at 2,325-2,333 sits within the discount zone. Two confluences stack here: (1) Discount zone, (2) Leftover Container. This qualifies as a valid AOI. Mark 2,325-2,333 as the zone to watch for price to return to.",
+      trap: "Marking the current price level as the AOI because 'it looks like support.' An AOI requires stacking confluences — not intuition.",
+      whyItMatters: "Entering from a qualified AOI vs. entering at market price can be the difference between a 1:2 and a 1:4 risk/reward on the same trade.",
+    },
     visualGuide: "On XAUUSD 4H: (1) Identify the current swing range (last significant high to last significant low). (2) Find the 50% midpoint — price below this is Discount on a bullish bias. (3) Look for any Leftover Containers (gaps between candle bodies) in the Discount zone. Where the gap and the 50% level overlap — that is your AOI.",
     characterCoaching: "Nana Value says: 'I wait for the sale. I mark my AOI on Sunday night and I do not move it no matter what the market does Monday morning. If price comes to my zone — I evaluate my confirmation. If price does not come — I did not miss anything. I saved my money for the right opportunity. There is always another sale next week, baby.'",
     practice: {
@@ -457,9 +523,17 @@ export const LESSONS: Lesson[] = [
     character: 'candle-kid',
     color: '#22C55E',
     icon: '📦',
+    tradingChefIntro: "AOI is marked. Now Candle Kid comes back with something new: how does price arrive at your zone? Not all deliveries are the same. A rushed, choppy delivery is suspicious. A clean, impulsive delivery heading toward your AOI — that is a kitchen in motion. This lesson teaches you to read the packaging.",
     hook: "Two trades. Same direction. Same level. One makes money, one loses. The difference? Delivery. How price arrives at your AOI tells you everything about whether the move is real or a trap. Candle Kid reads delivery like a weather report — and it never lies.",
     kitchenStory: "When the restaurant receives a delivery, the quality is in the packaging. Fresh ingredients arrive in clean, intact boxes — impulsive delivery. Old or questionable ingredients arrive crushed and slow — corrective delivery. You can tell from the box whether what is inside is worth using. The candles are the boxes.",
     marketTranslation: "Impulsive delivery: strong, consecutive candles closing near their highs (bullish) or lows (bearish), with momentum and purpose. This shows institutional intent. Corrective delivery: overlapping, choppy candles that barely move net-net. This is either accumulation or distribution — wait, do not trade. Session opens (The Kitchen Is Open) produce the cleanest impulsive delivery.",
+    guidedExample: {
+      scenario: "Scenario A: 5 candles approach your AOI. Each closes within 2-3 points of its open. Bodies overlap with the previous candle. 3 green, 2 red mixed in. Scenario B: 4 candles approach your AOI. Each one closes near its high, body covers 8-12 points. All 4 are green. Minimal overlap.",
+      question: "Which is impulsive delivery? Which is corrective? What do you do with each?",
+      answer: "Scenario A is corrective: overlapping candles, mixed direction, small bodies = indecision or distribution. Do NOT enter from corrective delivery — wait for it to resolve. Scenario B is impulsive: large bodies, one direction, strong closes = institutional intent. Delivery to your AOI with this quality = high-probability setup to watch for confirmation.",
+      trap: "Entering on corrective delivery because price is 'near your AOI.' The zone means nothing if the delivery says uncertainty.",
+      whyItMatters: "Impulsive delivery into an AOI tells you institutions are moving price with intent. Corrective delivery says they are not ready yet — or they are distributing to trap retail.",
+    },
     visualGuide: "On XAUUSD 1H, look at the last major move to a key level. Count the candles involved. Are most of them closing in the direction of the move with large bodies and short wicks? Or are the candles small-bodied, alternating direction, overlapping? The first is impulsive. The second is corrective.",
     characterCoaching: "Candle Kid says: 'I never enter into corrective delivery. If the candles are choppy and overlapping — Melissa Mayhem is cooking. She wants you to guess direction in the chop. I wait for impulsive candles, clean moves, purpose. When three or four big bodies appear in a row heading toward my AOI — that is my signal to get ready. The delivery has arrived.'",
     practice: {
@@ -492,9 +566,17 @@ export const LESSONS: Lesson[] = [
     warningCharacter: 'melody-mayhem',
     color: '#A855F7',
     icon: '✅',
+    tradingChefIntro: "Bias. Flow. AOI. Delivery. Four steps completed. Wickie now teaches you the final gatekeeping step before action. Confirmation. Without it, you are anticipating — not trading. Wickie has saved more accounts by waiting for two things than any other lesson in this kitchen will.",
     hook: "This is where most traders fail. They get the bias right. They find the AOI. They watch the delivery arrive. And then they jump in one candle too early — before confirmation. Wickie has one rule: if you did not see the confirmation, you did not see the entry. Period.",
     kitchenStory: "A chef does not serve a dish until they taste it. The AOI gets you to the tasting stage. Confirmation is the taste. It tells you: yes, this is ready to serve. Without that taste — the dish might still be raw. You might be serving something that is not ready. Confirmation is the quality check before service.",
     marketTranslation: "Confirmation is a micro-structure shift on a lower timeframe (15M or 5M) after price reaches your AOI. A bullish confirmation: price hits your AOI, creates a wick rejection, then breaks above the nearest short-term swing high. Bearish: price hits AOI, wick rejection, breaks below nearest short-term swing low. One wick alone is not confirmation. One micro-BOS alone is not confirmation. Both together — that is confirmation.",
+    guidedExample: {
+      scenario: "15M chart. Price enters your AOI at 2,330-2,333. Candle 1: opens at 2,332, drops to 2,329 (below your AOI), closes at 2,334 — creating a 5-point lower wick. Candle 2: opens at 2,334, closes at 2,337 (above Candle 1's high of 2,336).",
+      question: "Do you have confirmation? Which elements are present?",
+      answer: "YES — confirmation is valid. Element 1 (wick rejection): Candle 1 created a long lower wick, reaching below the AOI to 2,329 and closing back inside at 2,334 — rejection confirmed. Element 2 (micro-BOS): Candle 2 closed at 2,337, above Candle 1's high of 2,336 — micro structure broken to the upside. Entry is valid at the close of Candle 2 (2,337). Burn Point sits below the wick low: 2,328.",
+      trap: "Entering at the wick alone (after Candle 1 closes). The wick is not confirmation — it is signal that confirmation is possible. Wait for the micro-BOS.",
+      whyItMatters: "The micro-BOS after the wick rejection is what separates a qualified entry from a guess. Wickie has missed many trades waiting for it. He has also avoided far more bad ones.",
+    },
     visualGuide: "On XAUUSD 15M, after price enters your AOI: (1) Watch for a long wick candle rejecting the lower boundary of your AOI. (2) Wait for the next candle to close above the high of that wick candle. That close above is the micro-BOS. That combination is your confirmation.",
     characterCoaching: "Wickie says: 'Melody Mayhem loves the first wick. She creates it to make you jump in. You see the rejection, you feel the fear of missing out, you buy — and then she reverses it again. I wait for two things: the wick AND the structural break. Two things. If I only see one, I close the platform and come back. I have missed many good trades waiting for confirmation. I have also saved myself from far more bad ones.'",
     practice: {
@@ -527,9 +609,17 @@ export const LESSONS: Lesson[] = [
     warningCharacter: 'burn-alarm',
     color: '#c0392b',
     icon: '🔔',
+    tradingChefIntro: "You have your entry setup. Before you place one single trade, Grandma Market requires you to pass through this lesson first. Risk is not a suggestion. It is the foundation that keeps the kitchen open. She has watched more talented traders than you blow their accounts by skipping what you are about to learn.",
     hook: "Risk management is not optional. It is the only reason any trader survives long enough to become profitable. Grandma Market has been in this kitchen since before most students were born. She will tell you: the traders who blow accounts are almost never wrong about direction. They are wrong about size.",
     kitchenStory: "A restaurant that burns through its entire budget on one dish service is not a restaurant for long. Grandma Market runs her kitchen like a business. She never bets the whole kitchen on one plate. She risks a small, controlled portion of her resources each service — enough to grow over time, small enough that one bad night does not close the restaurant.",
     marketTranslation: "The Burn Point (stop loss) is placed at the level that, if hit, proves the trade was wrong. Not just uncomfortable — wrong. For a bullish trade from an AOI, the Burn Point sits below the AOI. For a bearish trade, above. Risk no more than 1-2% of account balance on any single pass. Position size is calculated backward from your Burn Point — not from how many contracts feel right.",
+    guidedExample: {
+      scenario: "Account: $5,000. Maximum risk per trade: 1% = $50. XAUUSD entry: 2,340. Burn Point: 2,330 (10-point stop). XAUUSD pip value: approximately $1 per pip per 0.01 lot (micro lot).",
+      question: "What is the correct position size? Show the math.",
+      answer: "Step 1: Risk amount = $5,000 × 1% = $50. Step 2: Distance to Burn Point = 2,340 - 2,330 = 10 points. Step 3: Position size = $50 ÷ $10 (value per point per 0.01 lot × 10 points) = 5 micro lots (0.05 lots). If the trade hits the Burn Point, you lose $50 — exactly 1% of account. If it hits 2R target at 2,360, you gain $100.",
+      trap: "Choosing position size based on 'how confident I feel.' Confidence is Melissa Mayhem's favorite variable. The math is always the answer.",
+      whyItMatters: "Position sizing from the Burn Point is the only approach that keeps your risk consistent regardless of how big or small the setup looks.",
+    },
     visualGuide: "Before placing any trade: (1) Identify your entry (The Pass). (2) Identify your Burn Point — below the lowest point of your AOI for buys, above the highest point for sells. (3) Calculate the distance in pips/points. (4) Calculate the position size so that hitting the Burn Point costs no more than 1-2% of your total account.",
     characterCoaching: "Grandma Market says: 'I have seen traders with a 70% win rate go broke. You know how? They risk 10% on the losers and 1% on the winners. The math destroys them. I risk the same percentage on every single trade. Always. No exceptions. Not when I am confident. Not when I am on a winning streak. Always the same. That is discipline. That is what keeps the kitchen open.'",
     practice: {
@@ -561,9 +651,17 @@ export const LESSONS: Lesson[] = [
     character: 'chef-goldie',
     color: '#c9a84c',
     icon: '🎯',
+    tradingChefIntro: "Risk is calculated. Burn Point is set. Now Chef Goldie completes the pre-entry sequence with The Pass itself — how to enter with precision, not emotion. The Pass is a reward for completing the Recipe. Every step before this was preparation. This step is execution.",
     hook: "The Pass is not an impulse. It is the result of a complete Recipe. You have done the work: Bias set, Flow mapped, AOI marked, Delivery read, Confirmation received. The Pass is the reward for all of that patience. Chef Goldie says: make it count.",
     kitchenStory: "After hours of prep — mise en place, temperatures calibrated, timing lined up — the chef finally calls the pass. Every element is ready. The dish goes out. The Pass in trading is that moment. Everything is prepared. You execute. Not before. Not after. Exactly at the moment the system says: now.",
     marketTranslation: "The Pass (entry) is placed at the first candle close above the micro-BOS after confirmation, or via limit order at the top of the AOI zone. Your Burn Point goes below the wick low that produced your confirmation. Risk-to-reward minimum 1:2. Calculate your position size from the Burn Point first. Then place the trade. In that order.",
+    guidedExample: {
+      scenario: "From the previous lesson: AOI at 2,330-2,333. Confirmation: wick to 2,329, closed back at 2,334 (Candle 1). Micro-BOS candle closes at 2,337 (Candle 2). Account $5,000. Max risk 1% = $50.",
+      question: "Write out the complete pass: Entry, Burn Point, Risk in points, Risk in dollars, First Tables Served.",
+      answer: "Entry (The Pass): 2,337 (close of confirmation candle, micro-BOS). Burn Point: 2,328 (below the wick low of 2,329, minus 1 point buffer). Risk: 2,337 - 2,328 = 9 points. Position size: $50 ÷ $9 ≈ 5.5 micro lots → round to 5 micro lots ($45 risk). First Tables Served: 2,337 + (9 × 2) = 2,355 (2R). Second Tables Served: next liquidity pool (e.g., previous high at 2,370).",
+      trap: "Entering at the open of Candle 2 instead of the close. Entry at candle close ensures the micro-BOS is confirmed, not just attempted.",
+      whyItMatters: "The Pass executed at the right price with the right size is what separates a professional kitchen from an amateur one. Every variable is pre-calculated. Nothing is improvised.",
+    },
     visualGuide: "Your entry is the candle that closes above the micro-BOS swing high (for bullish). Place a market or limit order at the close of that candle. Your Burn Point is 3-5 pips below the wick low that formed in your AOI. Measure from entry to Burn Point = your risk. Multiply by 2 to find minimum First Tables Served. Confirm the path to target has no major blockers.",
     characterCoaching: "Chef Goldie says: 'I place my Burn Point first. Then I calculate my size. Then I set my targets. By the time I actually enter, the trade is already planned in its entirety. I am not deciding anything new in the moment. I am executing a plan I already built. Execution without a plan is gambling. Execution of a plan is the craft.'",
     practice: {
@@ -595,9 +693,17 @@ export const LESSONS: Lesson[] = [
     character: 'louie-liquidity',
     color: '#3B82F6',
     icon: '🍽️',
+    tradingChefIntro: "You are in the trade. Now Louie comes back to teach you the second half of his skill set: where does the trade end? Not randomly. Not at 'whatever feels right.' Tables Served are the liquidity pools in the direction of your trade — the places price is drawn toward. You mapped them before The Pass. Now you understand why.",
     hook: "Your targets are not random price levels. They are the next liquidity pools in the direction of your trade — the places where price is flowing. Louie Liquidity mapped them for you in Level 3. Now you use that map to decide where the profit gets locked in.",
     kitchenStory: "After the chef calls the pass and the dish goes out, the servers know exactly which tables need to be served first and which can wait. First Tables Served: the couple in the corner who ordered first. Second Tables Served: the larger group who can wait a moment. The restaurant serves in sequence — and so does a trade.",
     marketTranslation: "First Tables Served: the nearest liquidity pool in your bias direction — a previous high (bullish) or previous low (bearish). This is your minimum 2R target. Take 50-70% of your position here and move Burn Point to break even. Second Tables Served: the next significant liquidity pool. Let the remaining position run. If there is a Leftover Container or major structure between entry and target — shorten the target or skip the trade.",
+    guidedExample: {
+      scenario: "Bullish trade. Entry: 2,337. Burn Point: 2,328. Risk: 9 points. Scanning right of entry: Equal highs cluster at 2,355 (two prior peaks). Previous swing high at 2,378. One Leftover Container gap between 2,360-2,364.",
+      question: "Identify First Tables Served, R-multiple, path clearance, and Second Tables Served.",
+      answer: "First Tables Served: equal highs at 2,355. R-multiple: (2,355-2,337) ÷ 9 = 18 ÷ 9 = 2R. Path check: Leftover Container at 2,360-2,364 is ABOVE First Tables Served (2,355) — path to First Tables is clear. Second Tables Served: previous swing high at 2,378. R-multiple: (2,378-2,337) ÷ 9 = 41 ÷ 9 = ~4.5R. Full plan: take 60% at 2,355 (2R), trail remainder to 2,378 (4.5R).",
+      trap: "Setting First Tables Served at the Leftover Container (2,360-2,364) instead of the equal highs (2,355). Equal highs are a stronger magnet than an FVG alone.",
+      whyItMatters: "Tables Served at liquidity pools means price has a structural reason to reach your target. You are not guessing a number — you are reading where the market is drawn.",
+    },
     visualGuide: "After marking your entry, identify: (1) The nearest old high or equal high cluster above price (bullish). That is First Tables Served. (2) The next old high cluster beyond that. Second Tables Served. Mark both levels before placing the trade.",
     characterCoaching: "Louie Liquidity says: 'First table pays the session. Second table builds the week. I always know both levels before I enter. And I have one rule: I never let a 2R trade become a 1R trade by staying too long. When First Tables Served is hit, I take money. Every time. No exceptions. The only way to grow an account is to consistently take profit.'",
     practice: {
@@ -630,9 +736,17 @@ export const LESSONS: Lesson[] = [
     warningCharacter: 'melody-mayhem',
     color: '#c0392b',
     icon: '⚙️',
+    tradingChefIntro: "The Pass is placed. Tables Served are marked. Now Grandma Market teaches you the hardest skill in the kitchen: leaving the trade alone. Management is not about watching charts all day. It is about trusting the plan you built before you entered and executing it exactly. This is where Head Chefs are separated from everyone else.",
     hook: "Getting in is only the beginning. The traders who consistently grow accounts are the ones who manage their trades with discipline after entry. Grandma Market has a simple rule: once you are in, the plan runs the trade. Your emotions do not.",
     kitchenStory: "A great restaurant does not panic when a dish takes longer than expected. The chef set the timers. The chef built the system. Once service starts, the system runs itself. Grandma Market runs her trades the same way. The plan was built before entry. Management just follows the plan — adjusting temperatures, not rebuilding the recipe from scratch.",
     marketTranslation: "Phase 1 — Entry to First Tables Served: leave the trade alone. Do not move your Burn Point. Do not add size. Let the plan work. Phase 2 — At First Tables Served: take 50-70% partial, move Burn Point to break even (entry price). The trade is now risk-free. Phase 3 — From break even to Second Tables Served: trail Burn Point below each new higher low (bullish) or above each new lower high (bearish). Phase 4 — Exit at Second Tables Served or when trailing stop is hit.",
+    guidedExample: {
+      scenario: "Trade open. Entry: 2,337. Burn Point: 2,328. First Tables Served: 2,355. Second Tables Served: 2,378. 60% close at First Tables Served. Price reaches 2,345 and you feel the urge to exit early because a large red candle appeared.",
+      question: "Walk through all four management phases. What do you do when that red candle appears?",
+      answer: "Phase 1 (entry to 2,355): You do nothing. Burn Point stays at 2,328. You do not touch the trade. The red candle at 2,345 is noise — price has not hit your Burn Point. Phase 2 (2,355 hit): Close 60% of position, lock in ~2R profit. Move Burn Point to 2,337 (entry/break even). Remaining 40% now has zero risk. Phase 3 (2,355 to 2,378): Trail Burn Point below each new higher low. Phase 4 (2,378 or trail hit): Close remaining position. Trade complete.",
+      trap: "Exiting at 2,345 during the red candle because 'it might reverse.' Your Burn Point is the decision-maker, not the red candle.",
+      whyItMatters: "Management discipline is the only thing that preserves the risk/reward you calculated before entry. Without it, even a winning strategy becomes a losing one.",
+    },
     visualGuide: "After entry: draw a horizontal line at your Burn Point (do not move it until First Tables Served is hit). Draw a line at First Tables Served. Draw a line at Second Tables Served. Add a line at break even (your entry). This is your entire management plan visible on the chart before price moves.",
     characterCoaching: "Grandma Market says: 'The biggest lie trading teaches you is that active management means better trades. It does not. Better management means building the plan, placing the levels, and then not touching anything. The trade either works or it does not. My job after entry is to observe, not interfere. I watch. I sip my tea. I trust the Recipe. Most of the time — it works. When it does not — the Burn Point protects me. That is all.'",
     practice: {
@@ -665,9 +779,17 @@ export const LESSONS: Lesson[] = [
     warningCharacter: 'melissa-mayhem',
     color: '#c9a84c',
     icon: '⏱️',
+    tradingChefIntro: "This is the final lesson. Not because the learning stops — Head Chefs learn every day. But because this is where everything you have built becomes automatic. The Kitchen Rush is your first real test under the full pressure of a live chart, a moving market, and a complete Recipe. Melissa Mayhem will be here. Melody Mayhem will be here. The Recipe is your only defense.",
     hook: "You have learned every step of The Recipe. Now it is time to run the kitchen under pressure. The Kitchen Rush is where everything you have learned gets applied in sequence on a live chart. Melissa Mayhem will try to distract you. Trading Chef will guide you. Your job: run the full Recipe from start to finish without skipping a step.",
     kitchenStory: "During a dinner rush, a great chef does not slow down. They execute the same Recipe they practiced a hundred times. No shortcuts. No new experiments. The system carries them through. Your Kitchen Rush works the same way — practice running the Recipe until it becomes automatic, even when the charts are moving fast.",
     marketTranslation: "The full Recipe in sequence: Step 1: Set your Bias (Daily chart). Step 2: Map the Liquidity Flow (4H chart, PDH/PDL, equal levels). Step 3: Mark your AOI (4H discount zone + Leftover Container). Step 4: Read the Delivery (1H, impulsive vs corrective?). Step 5: Wait for Confirmation (15M wick rejection + micro-BOS). Step 6: Place The Pass (entry at micro-BOS break). Step 7: Set Tables Served (First 2R, Second open). Step 8: Run Management (break even at First, trail to Second).",
+    guidedExample: {
+      scenario: "It is Monday morning. XAUUSD Daily shows 5 consecutive higher highs and higher lows. 4H shows price pulling back. Current price is in the 50% discount zone. There is a Leftover Container at the current level. 1H candles approaching the level are large-bodied and one-directional (bullish). You are waiting on 15M.",
+      question: "How far through the Recipe are you? What are you waiting for now?",
+      answer: "Step 1 complete: Bullish bias (Daily HH/HL sequence). Step 2 complete: Flow mapped — pullback on 4H in progress. Step 3 complete: AOI identified (discount zone + Leftover Container). Step 4 complete: Delivery is impulsive (large-bodied bullish candles on 1H). Step 5: WAITING. You need the 15M confirmation — wick rejection in AOI + micro-BOS. Steps 6-8 come after confirmation appears. You do not enter. You wait.",
+      trap: "Entering at Step 4 because 'everything looks good.' Looking good is not The Recipe. The Recipe requires confirmation.",
+      whyItMatters: "Every step that holds protects you from the ones where the setup fails. A market that passes all 5 steps before entry has already filtered out the majority of bad trades.",
+    },
     visualGuide: "Open the Kitchen. Select XAUUSD. Work through every step of The Recipe in order. Do not skip any step. If you cannot complete a step — the trade does not exist. Journal every step you complete and every step where the setup breaks down.",
     characterCoaching: "Trading Chef says: 'Every new trader wants to skip steps. They want to get to The Pass quickly. But the fastest way to a great trade is running the full Recipe slowly. Every step that fails is a trade you saved. Every step that succeeds is a setup worth watching. You are a Head Chef now. Run the Recipe. Every time. Without exception. Welcome to the kitchen.'",
     practice: {

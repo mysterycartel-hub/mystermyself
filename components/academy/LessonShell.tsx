@@ -327,6 +327,43 @@ export default function LessonShell({ lesson }: Props) {
           {activeStep === 0 && (
             <section>
               <StepLabel color={lesson.color}>1 · Why This Matters</StepLabel>
+
+              {/* Trading Chef intro */}
+              {lesson.tradingChefIntro && (
+                <div style={{
+                  background: 'rgba(201,168,76,0.05)',
+                  border: '1px solid rgba(201,168,76,0.12)',
+                  padding: '16px 20px',
+                  marginBottom: 24,
+                  display: 'flex',
+                  gap: 12,
+                }}>
+                  <span style={{ fontSize: '1.1rem', flexShrink: 0 }}>👑</span>
+                  <div>
+                    <div style={{
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '0.48rem',
+                      letterSpacing: '0.2em',
+                      color: '#c9a84c',
+                      textTransform: 'uppercase',
+                      marginBottom: 5,
+                    }}>
+                      Trading Chef
+                    </div>
+                    <p style={{
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '0.62rem',
+                      lineHeight: 1.8,
+                      color: 'rgba(245,240,232,0.65)',
+                      margin: 0,
+                      fontStyle: 'italic',
+                    }}>
+                      {lesson.tradingChefIntro}
+                    </p>
+                  </div>
+                </div>
+              )}
+
               <div style={{ borderLeft: `4px solid ${lesson.color}`, paddingLeft: 28, marginBottom: 32 }}>
                 <p style={{
                   fontFamily: '"Space Mono", monospace',
@@ -440,11 +477,159 @@ export default function LessonShell({ lesson }: Props) {
             </section>
           )}
 
-          {/* ── STEP 4: PRACTICE ── */}
+          {/* ── STEP 4: GUIDED EXAMPLE + PRACTICE ── */}
           {activeStep === 4 && (
             <section>
-              <StepLabel color={lesson.color}>5 · Practice Task</StepLabel>
+              <StepLabel color={lesson.color}>5 · Guided Example → Practice</StepLabel>
+
+              {/* Guided example — worked answer shown first */}
+              {lesson.guidedExample && (
+                <div style={{
+                  background: 'rgba(245,240,232,0.02)',
+                  border: '1px solid rgba(245,240,232,0.06)',
+                  padding: '24px',
+                  marginBottom: 32,
+                }}>
+                  <div style={{
+                    fontFamily: '"Space Mono", monospace',
+                    fontSize: '0.5rem',
+                    letterSpacing: '0.22em',
+                    textTransform: 'uppercase',
+                    color: 'rgba(245,240,232,0.3)',
+                    marginBottom: 16,
+                  }}>
+                    Guided Example — Study Before You Practice
+                  </div>
+
+                  {/* Scenario */}
+                  <div style={{ marginBottom: 14 }}>
+                    <div style={{
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '0.5rem',
+                      letterSpacing: '0.15em',
+                      textTransform: 'uppercase',
+                      color: lesson.color,
+                      marginBottom: 6,
+                    }}>
+                      The Scenario
+                    </div>
+                    <p style={{
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '0.65rem',
+                      lineHeight: 1.7,
+                      color: 'rgba(245,240,232,0.7)',
+                      margin: 0,
+                    }}>
+                      {lesson.guidedExample.scenario}
+                    </p>
+                  </div>
+
+                  {/* Question */}
+                  <div style={{
+                    background: `${lesson.color}08`,
+                    border: `1px solid ${lesson.color}25`,
+                    padding: '12px 16px',
+                    marginBottom: 14,
+                  }}>
+                    <p style={{
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '0.65rem',
+                      lineHeight: 1.7,
+                      color: 'rgba(245,240,232,0.85)',
+                      margin: 0,
+                      fontStyle: 'italic',
+                    }}>
+                      {lesson.guidedExample.question}
+                    </p>
+                  </div>
+
+                  {/* Answer */}
+                  <div style={{ marginBottom: lesson.guidedExample.trap ? 14 : 0 }}>
+                    <div style={{
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '0.5rem',
+                      letterSpacing: '0.15em',
+                      textTransform: 'uppercase',
+                      color: '#22C55E',
+                      marginBottom: 6,
+                    }}>
+                      Correct Read
+                    </div>
+                    <p style={{
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '0.63rem',
+                      lineHeight: 1.8,
+                      color: 'rgba(245,240,232,0.75)',
+                      margin: 0,
+                    }}>
+                      {lesson.guidedExample.answer}
+                    </p>
+                  </div>
+
+                  {/* Trap */}
+                  {lesson.guidedExample.trap && (
+                    <div style={{
+                      marginTop: 14,
+                      background: 'rgba(236,72,153,0.04)',
+                      border: '1px solid rgba(236,72,153,0.15)',
+                      borderLeft: '3px solid #EC4899',
+                      padding: '10px 14px',
+                    }}>
+                      <div style={{
+                        fontFamily: '"Space Mono", monospace',
+                        fontSize: '0.48rem',
+                        letterSpacing: '0.15em',
+                        textTransform: 'uppercase',
+                        color: '#EC4899',
+                        marginBottom: 4,
+                      }}>
+                        ⚡ Melissa Trap
+                      </div>
+                      <p style={{
+                        fontFamily: '"Space Mono", monospace',
+                        fontSize: '0.6rem',
+                        lineHeight: 1.6,
+                        color: 'rgba(245,240,232,0.55)',
+                        margin: 0,
+                      }}>
+                        {lesson.guidedExample.trap}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Why It Matters */}
+                  <div style={{
+                    marginTop: 14,
+                    borderLeft: `2px solid ${lesson.color}`,
+                    paddingLeft: 12,
+                  }}>
+                    <p style={{
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '0.6rem',
+                      lineHeight: 1.6,
+                      color: 'rgba(245,240,232,0.5)',
+                      margin: 0,
+                      fontStyle: 'italic',
+                    }}>
+                      {lesson.guidedExample.whyItMatters}
+                    </p>
+                  </div>
+                </div>
+              )}
+
               {lesson.riskWarning && <RiskWarning message={lesson.riskWarning} />}
+
+              <div style={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.5rem',
+                letterSpacing: '0.22em',
+                textTransform: 'uppercase',
+                color: 'rgba(245,240,232,0.3)',
+                marginBottom: 16,
+              }}>
+                Now You Try — Independent Practice
+              </div>
+
               <PracticePrompt
                 practice={lesson.practice}
                 onComplete={() => {
@@ -452,7 +637,6 @@ export default function LessonShell({ lesson }: Props) {
                   setActiveStep(5)
                 }}
               />
-              {/* Melody appears if they've been sitting here without practicing */}
             </section>
           )}
 
