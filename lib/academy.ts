@@ -27,110 +27,112 @@ export interface Character {
   teaches: string[]
 }
 
+// ── TCU CANON CHARACTER LOCK ──────────────────────────────────────────────────
+// 10 canonical characters. Characters are behavioral systems — not curriculum topics.
+// Coach characters appear in lessons. Warning/alert characters fire from behavior.
+// Characters do NOT appear as standalone modules.
+//
+// Canon roles:
+//   Trading Chef   = Master Mentor
+//   Chef Goldie    = Execution
+//   Wickie         = Candles
+//   Louie          = Liquidity
+//   Rico Rhythm    = Sessions
+//   Penny Stacks   = Risk
+//   Mr. Stocks     = Ownership
+//   Burn Alarm     = Rule Violations (alert)
+//   Melissa Mayhem = FOMO · Overconfidence · Rule Breaking · Revenge · Emotional Entries (warning)
+//   Melody Mayhem  = Fear · Hesitation · Confidence Recovery · Discipline · Emotional Control (warning)
+
 export const CHARACTERS: Record<string, Character> = {
-  // ── Master Mentor ──────────────────────────────────────────────────────────
+
+  // ── Master Mentor ─────────────────────────────────────────────────────────
   'trading-chef': {
     id: 'trading-chef',
     name: 'Trading Chef',
-    title: 'Master Mentor · Head of the Kitchen',
+    title: 'Master Mentor',
     emoji: '👑',
     color: '#c9a84c',
     role: 'coach',
     catchphrase: "You do not earn a Michelin star in a week. You earn it by running the full Recipe — every time, under every condition, without shortcuts.",
-    teaches: ['market-child', 'kitchen-rush'],
+    teaches: ['master-mentor'],
   },
-  // ── Coaches ────────────────────────────────────────────────────────────────
+
+  // ── Execution ─────────────────────────────────────────────────────────────
   'chef-goldie': {
     id: 'chef-goldie',
     name: 'Chef Goldie',
-    title: 'Gold Market Guide',
+    title: 'Execution',
     emoji: '👨‍🍳',
     color: '#c9a84c',
     role: 'coach',
-    catchphrase: "Every great dish starts with the right ingredients. Every great trade starts with structure.",
-    teaches: ['bias', 'structure', 'pass'],
+    catchphrase: "Every great dish starts with the right ingredients. Every great trade starts with structure. Execution is what separates understanding from results.",
+    teaches: ['execution'],
   },
-  'candle-kid': {
-    id: 'candle-kid',
-    name: 'Candle Kid',
-    title: 'Candle Anatomy Expert',
-    emoji: '🕯️',
-    color: '#22C55E',
-    role: 'coach',
-    catchphrase: "It is not where price goes — it is HOW it gets there. Read the candle first.",
-    teaches: ['candles', 'delivery'],
-  },
+
+  // ── Candles ───────────────────────────────────────────────────────────────
   'wickie': {
     id: 'wickie',
     name: 'Wickie',
-    title: 'Wick & Manipulation Specialist',
+    title: 'Candles',
     emoji: '📍',
     color: '#A855F7',
     role: 'coach',
-    catchphrase: "A wick is a lie price tried to sell you. I read every single one.",
-    teaches: ['wicks', 'confirmation'],
+    catchphrase: "A wick is a lie price tried to sell you. Every candle tells a story. I read every single word.",
+    teaches: ['candles'],
   },
+
+  // ── Liquidity ─────────────────────────────────────────────────────────────
   'louie-liquidity': {
     id: 'louie-liquidity',
     name: 'Louie Liquidity',
-    title: 'Flow & Liquidity Expert',
+    title: 'Liquidity',
     emoji: '🌊',
     color: '#3B82F6',
     role: 'coach',
-    catchphrase: "Follow the flow. Smart money always needs a drink before it moves.",
-    teaches: ['flow', 'tables-served'],
+    catchphrase: "Follow the flow. Smart money always needs a drink before it moves. The pools are the map.",
+    teaches: ['liquidity'],
   },
+
+  // ── Sessions ──────────────────────────────────────────────────────────────
   'rico-rhythm': {
     id: 'rico-rhythm',
     name: 'Rico Rhythm',
-    title: 'Sessions & Timing Specialist',
+    title: 'Sessions',
     emoji: '⏰',
     color: '#8B5CF6',
     role: 'coach',
     catchphrase: "Every kitchen has a service window. Trade in the right session or stay out of the kitchen entirely.",
-    teaches: ['flow', 'delivery'],
+    teaches: ['sessions'],
   },
-  'grandma-market': {
-    id: 'grandma-market',
-    name: 'Grandma Market',
-    title: 'Patience & Discipline Sage',
-    emoji: '👵',
-    color: '#c0392b',
-    role: 'coach',
-    catchphrase: "The market always tells you where it wants to go, baby. You just have to be patient enough to listen.",
-    teaches: ['risk', 'management'],
-  },
-  'nana-value': {
-    id: 'nana-value',
-    name: 'Nana Value',
-    title: 'Premium & Discount Teacher',
-    emoji: '🏡',
-    color: '#F97316',
-    role: 'coach',
-    catchphrase: "Never overpay for anything — not groceries, not houses, not trades.",
-    teaches: ['aoi'],
-  },
+
+  // ── Risk ──────────────────────────────────────────────────────────────────
   'penny-stacks': {
     id: 'penny-stacks',
     name: 'Penny Stacks',
-    title: 'Money Management · Position Sizing',
+    title: 'Risk',
     emoji: '💰',
     color: '#10B981',
     role: 'coach',
-    catchphrase: "It is not about how much you make. It is about how much you keep. Size your risk. Protect the account. Stack the pennies.",
-    teaches: ['risk', 'management'],
+    catchphrase: "It is not about how much you make. It is about how much you keep. Size the risk. Protect the account. The math is the plan.",
+    teaches: ['risk'],
   },
+
+  // ── Ownership ─────────────────────────────────────────────────────────────
   'mr-stocks': {
     id: 'mr-stocks',
     name: 'Mr. Stocks',
-    title: 'Ownership & Long-Term Thinking',
+    title: 'Ownership',
     emoji: '📈',
     color: '#0EA5E9',
     role: 'coach',
-    catchphrase: "Every great trader eventually asks: why am I renting in a market I could own? The patient ones build wealth. The impatient ones build lessons.",
-    teaches: ['bias', 'structure'],
+    catchphrase: "Why are you renting a market you could own? The patient ones build wealth. The impatient ones build lessons.",
+    teaches: ['ownership'],
   },
-  // ── Core System Characters — Event-Driven ─────────────────────────────────
+
+  // ── Behavioral Warning System ─────────────────────────────────────────────
+  // These characters are trigger systems. They fire from behavior, not from lessons.
+
   'melissa-mayhem': {
     id: 'melissa-mayhem',
     name: 'Melissa Mayhem',
@@ -139,8 +141,9 @@ export const CHARACTERS: Record<string, Character> = {
     color: '#EC4899',
     role: 'warning',
     catchphrase: "I am everywhere in this market. The FOMO, the chasing, the skipped steps — that is all me. The only way to beat me is to finish The Recipe before you touch anything.",
-    teaches: ['wicks', 'flow', 'confirmation', 'pass'],
+    teaches: ['fomo', 'overconfidence', 'rule-breaking', 'revenge', 'emotional-entries'],
   },
+
   'melody-mayhem': {
     id: 'melody-mayhem',
     name: 'Melody Mayhem',
@@ -149,18 +152,19 @@ export const CHARACTERS: Record<string, Character> = {
     color: '#F59E0B',
     role: 'warning',
     catchphrase: "Your emotions are my favorite trading partner. But name them — write them down — and I lose all my power. The journal is your weapon against me.",
-    teaches: ['risk', 'management', 'aoi', 'tables-served'],
+    teaches: ['fear', 'hesitation', 'confidence-recovery', 'discipline', 'emotional-control'],
   },
-  // ── Alert System ──────────────────────────────────────────────────────────
+
+  // ── Rule Violation Alert ──────────────────────────────────────────────────
   'burn-alarm': {
     id: 'burn-alarm',
     name: 'Burn Alarm',
-    title: 'Risk Guardian · Burn Point Enforcer',
+    title: 'Rule Violations',
     emoji: '🔔',
     color: '#EF4444',
     role: 'alert',
     catchphrase: "STOP. Check your Burn Point before anything else. No Burn Point — no trade.",
-    teaches: ['risk'],
+    teaches: ['rule-violations'],
   },
 }
 
@@ -304,10 +308,10 @@ export const LESSONS: Lesson[] = [
     title: 'Candle Anatomy',
     tcuTerm: 'The Candle',
     subtitle: 'The Language of Price',
-    character: 'candle-kid',
+    character: 'wickie',
     color: '#22C55E',
     icon: '🕯️',
-    tradingChefIntro: "Candle Kid is one of the youngest chefs in the kitchen — and the most detail-oriented. He has spent years reading nothing but candles. Before you touch a single strategy, you need to speak his language. Candles are how the market communicates. Start here.",
+    tradingChefIntro: "Wickie has spent more hours reading candles than anyone else in this kitchen. Before you touch a single strategy, you need to speak his language. Candles are how the market communicates — and Wickie reads every word.",
     hook: "Before you can read a chart, you have to learn the alphabet. Candles are the letters. Every price story is written in candles — and you cannot understand the story if you cannot read the letters.",
     kitchenStory: "Think of a candle like a cooking timer. The open is when the timer starts. The close is when the timer ends. The high and low are how far the temperature swung in between. A big body means strong heat. A small body means the temperature barely moved.",
     marketTranslation: "Every candle has four data points: Open (where price started), Close (where price ended), High (highest point reached), Low (lowest point reached). The body is the space between open and close. The wicks are the thin lines above and below. A bullish candle closes higher than it opened. A bearish candle closes lower.",
@@ -319,7 +323,7 @@ export const LESSONS: Lesson[] = [
       whyItMatters: "If you cannot read a single candle, you cannot read three. And three candles in sequence form the first chapter of every trade story.",
     },
     visualGuide: "On any chart, zoom into a single daily candle. Find the body — the thick part. Notice the wicks above and below. A long body with short wicks = strong conviction. A small body with long wicks = indecision or rejection.",
-    characterCoaching: "Candle Kid says: 'One candle tells you one story. Three candles in a row tell you a chapter. I never look at just one — I always read the sequence. Three big bullish bodies in a row? That is momentum. That is delivery with intent.'",
+    characterCoaching: "Wickie says: 'One candle tells you one story. Three candles in a row tell you a chapter. I never look at just one — I always read the sequence. Three big bullish bodies in a row? That is momentum. That is delivery with intent.'",
     practice: {
       instruction: "Open the Kitchen and select XAUUSD on the 1H timeframe. Find one bullish candle and one bearish candle. For each, identify: body size (large/medium/small), wick length (long/medium/short).",
       hint: "A bullish candle has its close above its open — usually green or white. A bearish candle has its close below its open — red or black.",
@@ -331,7 +335,7 @@ export const LESSONS: Lesson[] = [
       { question: "What would need to happen on the next candle to change that story?", type: 'invalidation' },
       { question: "Did you feel rushed to find a trade while looking at the chart? If yes — that is Melody Mayhem. Breathe.", type: 'emotion' },
     ],
-    psychologyNote: "New traders often feel compelled to trade every candle. This is called overtrading. Grandma Market says: most of trading is watching. Less than 10% is actually clicking. The best traders are patient observers first.",
+    psychologyNote: "New traders often feel compelled to trade every candle. This is called overtrading. Most of trading is watching. Less than 10% is actually clicking. The best traders are patient observers first.",
     nextLesson: 'wicks',
     prevLesson: 'market-child',
   },
@@ -515,12 +519,12 @@ export const LESSONS: Lesson[] = [
     title: 'Area of Interest',
     tcuTerm: 'AOI',
     subtitle: 'Where Do You Want Price to Come To?',
-    character: 'nana-value',
+    character: 'chef-goldie',
     color: '#F97316',
     icon: '🏡',
-    tradingChefIntro: "You have your bias. You can read the flow. Now Nana Value teaches you the most important discipline in the kitchen: patience. An AOI is not where price is right now. It is where price needs to come for the trade to make sense. You mark it. You wait. You do not chase.",
-    hook: "The most common mistake new traders make is buying in the wrong zone. Nana Value has one rule she has lived by for forty years: never overpay. In trading, the zone you enter from determines everything — your risk, your reward, your probability.",
-    kitchenStory: "Nana Value goes to the market every Saturday morning at 7AM, not at noon. Why? Because prices are better early. She never buys the steak at full price when she knows it will be reduced in an hour. Your Area of Interest is the trading equivalent of Nana's 7AM market visit — it is the zone where price is at a discount, where the value is real, where the trade makes sense.",
+    tradingChefIntro: "You have your bias. You can read the flow. Now Chef Goldie teaches you the most important discipline in the kitchen: patience. An AOI is not where price is right now. It is where price needs to come for the trade to make sense. You mark it. You wait. You do not chase.",
+    hook: "The most common mistake new traders make is buying in the wrong zone. Chef Goldie has one rule: never overpay. In trading, the zone you enter from determines everything — your risk, your reward, your probability.",
+    kitchenStory: "A great chef does not buy ingredients at peak price when they know the market will discount them later. She visits early, before the rush, and pays for value — not urgency. Your Area of Interest is the trading equivalent of that early morning visit: the zone where price is at a discount, where the value is real, where the trade makes sense.",
     marketTranslation: "An AOI is a price zone where multiple confluences stack: a Discount zone (below the 50% midpoint of a range), a Leftover Container (FVG — an unfilled gap from a fast move), and previous structure support. One factor is a guess. Three factors is a zone worth waiting for. The AOI is where you set your limit orders and walk away from the screen.",
     guidedExample: {
       scenario: "XAUUSD 4H. Bullish bias. Current swing range: Low at 2,300, High at 2,400. There is a Leftover Container (FVG) between 2,325 and 2,333 from a fast impulse up candle 3 days ago.",
@@ -530,7 +534,7 @@ export const LESSONS: Lesson[] = [
       whyItMatters: "Entering from a qualified AOI vs. entering at market price can be the difference between a 1:2 and a 1:4 risk/reward on the same trade.",
     },
     visualGuide: "On XAUUSD 4H: (1) Identify the current swing range (last significant high to last significant low). (2) Find the 50% midpoint — price below this is Discount on a bullish bias. (3) Look for any Leftover Containers (gaps between candle bodies) in the Discount zone. Where the gap and the 50% level overlap — that is your AOI.",
-    characterCoaching: "Nana Value says: 'I wait for the sale. I mark my AOI on Sunday night and I do not move it no matter what the market does Monday morning. If price comes to my zone — I evaluate my confirmation. If price does not come — I did not miss anything. I saved my money for the right opportunity. There is always another sale next week, baby.'",
+    characterCoaching: "Chef Goldie says: 'I wait for the discount. I mark my AOI on Sunday night and I do not move it no matter what the market does Monday morning. If price comes to my zone — I evaluate my confirmation. If price does not come — I did not miss anything. I saved my execution for the right opportunity. There is always another setup next week.'",
     practice: {
       instruction: "On XAUUSD 4H: identify the most recent swing range (high and low). Calculate the 50% midpoint. Mark the discount zone (lower 50%). Find one Leftover Container (FVG) within that zone. That is your AOI. Mark it on the chart.",
       hint: "A Leftover Container appears as a gap between the body of one candle and the body of the candle two bars later — usually created during a fast impulse move. Price often returns to fill it.",
@@ -542,7 +546,7 @@ export const LESSONS: Lesson[] = [
       { question: "If price blows through your AOI without reacting — at what level would you say the AOI is invalidated and the structure has changed?", type: 'invalidation' },
       { question: "Was it difficult to mark a zone and then wait? The urge to chase is Melissa Mayhem. Write down what you will do instead of chasing if price moves without you.", type: 'emotion' },
     ],
-    psychologyNote: "Moving your AOI to chase price is the same as moving to the expensive grocery store because you missed Nana's 7AM sale. The value is gone. Wait for the next sale.",
+    psychologyNote: "Moving your AOI to chase price is the same as paying full price because you missed the discount window. The value is gone. Wait for the next setup.",
     riskWarning: "BURN ALARM: An AOI with only one reason (e.g., 'it looks like support') is not an AOI — it is a guess. Require minimum two stacking confluences before calling something an AOI.",
     nextLesson: 'delivery',
     prevLesson: 'flow',
@@ -558,10 +562,10 @@ export const LESSONS: Lesson[] = [
     title: 'Delivery',
     tcuTerm: 'Delivery',
     subtitle: 'How Price Gets Where It Is Going',
-    character: 'candle-kid',
+    character: 'wickie',
     color: '#22C55E',
     icon: '📦',
-    tradingChefIntro: "AOI is marked. Now Candle Kid comes back with something new: how does price arrive at your zone? Not all deliveries are the same. A rushed, choppy delivery is suspicious. A clean, impulsive delivery heading toward your AOI — that is a kitchen in motion. This lesson teaches you to read the packaging.",
+    tradingChefIntro: "AOI is marked. Now Wickie returns with something new: how does price arrive at your zone? Not all deliveries are the same. A rushed, choppy delivery is suspicious. A clean, impulsive delivery heading toward your AOI — that is a kitchen in motion. Wickie reads the packaging before he touches anything.",
     hook: "Two trades. Same direction. Same level. One makes money, one loses. The difference? Delivery. How price arrives at your AOI tells you everything about whether the move is real or a trap. Candle Kid reads delivery like a weather report — and it never lies.",
     kitchenStory: "When the restaurant receives a delivery, the quality is in the packaging. Fresh ingredients arrive in clean, intact boxes — impulsive delivery. Old or questionable ingredients arrive crushed and slow — corrective delivery. You can tell from the box whether what is inside is worth using. The candles are the boxes.",
     marketTranslation: "Impulsive delivery: strong, consecutive candles closing near their highs (bullish) or lows (bearish), with momentum and purpose. This shows institutional intent. Corrective delivery: overlapping, choppy candles that barely move net-net. This is either accumulation or distribution — wait, do not trade. Session opens (The Kitchen Is Open) produce the cleanest impulsive delivery.",
@@ -573,7 +577,7 @@ export const LESSONS: Lesson[] = [
       whyItMatters: "Impulsive delivery into an AOI tells you institutions are moving price with intent. Corrective delivery says they are not ready yet — or they are distributing to trap retail.",
     },
     visualGuide: "On XAUUSD 1H, look at the last major move to a key level. Count the candles involved. Are most of them closing in the direction of the move with large bodies and short wicks? Or are the candles small-bodied, alternating direction, overlapping? The first is impulsive. The second is corrective.",
-    characterCoaching: "Candle Kid says: 'I never enter into corrective delivery. If the candles are choppy and overlapping — Melissa Mayhem is cooking. She wants you to guess direction in the chop. I wait for impulsive candles, clean moves, purpose. When three or four big bodies appear in a row heading toward my AOI — that is my signal to get ready. The delivery has arrived.'",
+    characterCoaching: "Wickie says: 'I never enter into corrective delivery. If the candles are choppy and overlapping — Melissa Mayhem is cooking. She wants you to guess direction in the chop. I wait for impulsive candles, clean moves, purpose. When three or four big bodies appear in a row heading toward my AOI — that is my signal to get ready. The delivery has arrived.'",
     practice: {
       instruction: "On XAUUSD 1H, find one example of impulsive delivery (3+ consecutive candles closing strongly in one direction with minimal overlap) and one example of corrective delivery (choppy, overlapping candles). Note the time/price range of each.",
       hint: "For impulsive: look near major news events or session opens (New York 8AM ET, London 2AM ET). For corrective: look during mid-session lulls or late Asian session.",
@@ -643,13 +647,13 @@ export const LESSONS: Lesson[] = [
     title: 'Risk Management',
     tcuTerm: 'Burn Point',
     subtitle: 'How to Stay in the Game',
-    character: 'grandma-market',
+    character: 'penny-stacks',
     warningCharacter: 'burn-alarm',
     color: '#c0392b',
     icon: '🔔',
-    tradingChefIntro: "You have your entry setup. Before you place one single trade, Grandma Market requires you to pass through this lesson first. Risk is not a suggestion. It is the foundation that keeps the kitchen open. She has watched more talented traders than you blow their accounts by skipping what you are about to learn.",
-    hook: "Risk management is not optional. It is the only reason any trader survives long enough to become profitable. Grandma Market has been in this kitchen since before most students were born. She will tell you: the traders who blow accounts are almost never wrong about direction. They are wrong about size.",
-    kitchenStory: "A restaurant that burns through its entire budget on one dish service is not a restaurant for long. Grandma Market runs her kitchen like a business. She never bets the whole kitchen on one plate. She risks a small, controlled portion of her resources each service — enough to grow over time, small enough that one bad night does not close the restaurant.",
+    tradingChefIntro: "You have your entry setup. Before you place one single trade, Penny Stacks requires you to pass through this lesson first. Risk is not a suggestion. It is the foundation that keeps the kitchen open. She has watched more talented traders than you blow their accounts by skipping what you are about to learn.",
+    hook: "Risk management is not optional. It is the only reason any trader survives long enough to become profitable. Penny Stacks has one rule she never breaks: it is not about how much you make — it is about how much you keep. The traders who blow accounts are almost never wrong about direction. They are wrong about size.",
+    kitchenStory: "A restaurant that burns through its entire budget on one dish service is not a restaurant for long. Penny Stacks runs her kitchen like a business. She never bets the whole kitchen on one plate. She risks a small, controlled portion of her resources each service — enough to grow over time, small enough that one bad night does not close the restaurant.",
     marketTranslation: "The Burn Point (stop loss) is placed at the level that, if hit, proves the trade was wrong. Not just uncomfortable — wrong. For a bullish trade from an AOI, the Burn Point sits below the AOI. For a bearish trade, above. Risk no more than 1-2% of account balance on any single pass. Position size is calculated backward from your Burn Point — not from how many contracts feel right.",
     guidedExample: {
       scenario: "Account: $5,000. Maximum risk per trade: 1% = $50. XAUUSD entry: 2,340. Burn Point: 2,330 (10-point stop). XAUUSD pip value: approximately $1 per pip per 0.01 lot (micro lot).",
@@ -659,7 +663,7 @@ export const LESSONS: Lesson[] = [
       whyItMatters: "Position sizing from the Burn Point is the only approach that keeps your risk consistent regardless of how big or small the setup looks.",
     },
     visualGuide: "Before placing any trade: (1) Identify your entry (The Pass). (2) Identify your Burn Point — below the lowest point of your AOI for buys, above the highest point for sells. (3) Calculate the distance in pips/points. (4) Calculate the position size so that hitting the Burn Point costs no more than 1-2% of your total account.",
-    characterCoaching: "Grandma Market says: 'I have seen traders with a 70% win rate go broke. You know how? They risk 10% on the losers and 1% on the winners. The math destroys them. I risk the same percentage on every single trade. Always. No exceptions. Not when I am confident. Not when I am on a winning streak. Always the same. That is discipline. That is what keeps the kitchen open.'",
+    characterCoaching: "Penny Stacks says: 'I have seen traders with a 70% win rate go broke. You know how? They risk 10% on the losers and 1% on the winners. The math destroys them. I risk the same percentage on every single trade. Always. No exceptions. Not when I am confident. Not when I am on a winning streak. Always the same. That is discipline. That is what keeps the kitchen open.'",
     practice: {
       instruction: "Calculate a sample trade: Account size = $10,000. Max risk per trade = 1% = $100. Your AOI is at 2,300. Your Burn Point is at 2,290 (10 points below). If XAUUSD is priced at $1 per 0.01 lot per point — how many 0.01 lots can you trade to keep risk at $100?",
       hint: "Distance to Burn Point = 10 points. $100 risk ÷ $10 per point (for 1 standard lot) = 0.10 lots. Or in micro lots: 10 micro lots (0.01 × 10). Check your broker's pip value for exact calculation.",
@@ -770,13 +774,13 @@ export const LESSONS: Lesson[] = [
     title: 'Management',
     tcuTerm: 'Management',
     subtitle: 'How You Run the Trade Once In',
-    character: 'grandma-market',
+    character: 'penny-stacks',
     warningCharacter: 'melody-mayhem',
     color: '#c0392b',
     icon: '⚙️',
-    tradingChefIntro: "The Pass is placed. Tables Served are marked. Now Grandma Market teaches you the hardest skill in the kitchen: leaving the trade alone. Management is not about watching charts all day. It is about trusting the plan you built before you entered and executing it exactly. This is where Head Chefs are separated from everyone else.",
-    hook: "Getting in is only the beginning. The traders who consistently grow accounts are the ones who manage their trades with discipline after entry. Grandma Market has a simple rule: once you are in, the plan runs the trade. Your emotions do not.",
-    kitchenStory: "A great restaurant does not panic when a dish takes longer than expected. The chef set the timers. The chef built the system. Once service starts, the system runs itself. Grandma Market runs her trades the same way. The plan was built before entry. Management just follows the plan — adjusting temperatures, not rebuilding the recipe from scratch.",
+    tradingChefIntro: "The Pass is placed. Tables Served are marked. Now Penny Stacks teaches you the hardest skill in the kitchen: leaving the trade alone. Management is not about watching charts all day. It is about trusting the plan you built before you entered and executing it exactly. This is where Head Chefs are separated from everyone else.",
+    hook: "Getting in is only the beginning. The traders who consistently grow accounts are the ones who manage their trades with discipline after entry. Penny Stacks has a simple rule: once you are in, the plan runs the trade. Your emotions do not.",
+    kitchenStory: "A great restaurant does not panic when a dish takes longer than expected. The chef set the timers. The chef built the system. Once service starts, the system runs itself. Penny Stacks runs her trades the same way. The plan was built before entry. Management just follows the plan — adjusting the math, not rebuilding the recipe from scratch.",
     marketTranslation: "Phase 1 — Entry to First Tables Served: leave the trade alone. Do not move your Burn Point. Do not add size. Let the plan work. Phase 2 — At First Tables Served: take 50-70% partial, move Burn Point to break even (entry price). The trade is now risk-free. Phase 3 — From break even to Second Tables Served: trail Burn Point below each new higher low (bullish) or above each new lower high (bearish). Phase 4 — Exit at Second Tables Served or when trailing stop is hit.",
     guidedExample: {
       scenario: "Trade open. Entry: 2,337. Burn Point: 2,328. First Tables Served: 2,355. Second Tables Served: 2,378. 60% close at First Tables Served. Price reaches 2,345 and you feel the urge to exit early because a large red candle appeared.",
@@ -786,7 +790,7 @@ export const LESSONS: Lesson[] = [
       whyItMatters: "Management discipline is the only thing that preserves the risk/reward you calculated before entry. Without it, even a winning strategy becomes a losing one.",
     },
     visualGuide: "After entry: draw a horizontal line at your Burn Point (do not move it until First Tables Served is hit). Draw a line at First Tables Served. Draw a line at Second Tables Served. Add a line at break even (your entry). This is your entire management plan visible on the chart before price moves.",
-    characterCoaching: "Grandma Market says: 'The biggest lie trading teaches you is that active management means better trades. It does not. Better management means building the plan, placing the levels, and then not touching anything. The trade either works or it does not. My job after entry is to observe, not interfere. I watch. I sip my tea. I trust the Recipe. Most of the time — it works. When it does not — the Burn Point protects me. That is all.'",
+    characterCoaching: "Penny Stacks says: 'The biggest lie trading teaches you is that active management means better trades. It does not. Better management means building the plan, placing the levels, and then not touching anything. The trade either works or it does not. My job after entry is to observe, not interfere. I watch. I trust the math. I trust the Recipe. Most of the time — it works. When it does not — the Burn Point protects me. That is all.'",
     practice: {
       instruction: "Complete The Full Recipe: Using a real or paper trade, write out the complete management plan: (1) Burn Point price, (2) First Tables Served — price and % to close, (3) Burn Point move after First Tables Served (break even = entry), (4) Second Tables Served — price, (5) Trailing stop rule for the remainder. Execute or simulate it.",
       hint: "The management plan should be written before you enter. Not after. Write it, then trade it. The order matters.",
@@ -841,7 +845,7 @@ export const LESSONS: Lesson[] = [
       { question: "If you found no valid setup today — what was missing? Which step broke down and why?", type: 'invalidation' },
       { question: "How did it feel to run the full Recipe knowing Melissa Mayhem and Melody Mayhem were watching? What mental state were you in by Step 6?", type: 'emotion' },
     ],
-    psychologyNote: "Grandma Market's final lesson: the days you do not trade are not wasted days. They are the days you proved you have discipline. The market is open 250 days a year. You only need 30-40 great setups. Everything else is patience. Everything else is protecting your account for the next real Recipe.",
+    psychologyNote: "The days you do not trade are not wasted days. They are the days you proved you have discipline. The market is open 250 days a year. You only need 30-40 great setups. Everything else is patience. Everything else is protecting your account for the next real Recipe.",
     riskWarning: "BURN ALARM: Never force a trade to end the Kitchen Rush with a win. A forced trade is not a trade — it is a bet. The Kitchen Rush is complete the moment you run all 8 steps, regardless of whether a trade exists.",
     nextLesson: null,
     prevLesson: 'management',

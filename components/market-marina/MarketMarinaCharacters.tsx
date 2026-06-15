@@ -6,12 +6,13 @@ import Link from 'next/link'
 import { CHARACTERS, Character } from '@/lib/academy'
 
 const COACH_ORDER = [
+  'trading-chef',
   'chef-goldie',
-  'candle-kid',
   'wickie',
   'louie-liquidity',
-  'grandma-market',
-  'nana-value',
+  'rico-rhythm',
+  'penny-stacks',
+  'mr-stocks',
 ]
 const MAYHEM_ORDER = ['melissa-mayhem', 'melody-mayhem']
 const ALERT_ORDER  = ['burn-alarm']
