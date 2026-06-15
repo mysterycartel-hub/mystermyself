@@ -37,13 +37,42 @@ export default function TCUTheaterPage() {
     return sum + (v?.xpAward ?? 0)
   }, 0)
 
-  function handleMarkWatched(video: TheaterVideo) {
+  async function handleMarkWatched(video: TheaterVideo) {
     if (isWatched(video.id)) return
     const updated = [...watched, video.id]
     setWatched(updated)
     saveWatched(updated)
     setJustUnlocked(video.id)
     setTimeout(() => setJustUnlocked(null), 4000)
+
+    // Award XP locally
+    const { XPRewardEngine } = await import('@/lib/xp-reward-engine')
+    XPRewardEngine.awardXP(video.xpAward, 'theater-watch', video.id)
+
+    // Fire coach cue
+    const { CharacterTriggerEngine } = await import('@/lib/character-trigger-engine')
+    CharacterTriggerEngine.fireCoachCue('lesson-complete')
+
+    // Sync to Supabase if authenticated
+    try {
+      const { getSupabaseClient } = await import('@/lib/supabase')
+      const { data: { session } } = await getSupabaseClient().auth.getSession()
+      if (session?.access_token) {
+        await fetch('/api/passport/xp', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({
+            amount: video.xpAward,
+            eventType: 'theater-watch',
+            eventRef: video.id,
+            description: `Watched: ${video.title}`,
+          }),
+        }).catch(() => null)
+      }
+    } catch { /* Supabase not configured */ }
   }
 
   const char = CHARACTERS[active.character]

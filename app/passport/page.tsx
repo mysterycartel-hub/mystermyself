@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import PassportDashboard from '@/components/passport/PassportDashboard'
+import DailyQuestBoard from '@/components/quests/DailyQuestBoard'
 import Link from 'next/link'
 
 interface Session {
@@ -130,6 +131,16 @@ export default function PassportPage() {
                 </button>
               </div>
             )}
+          </div>
+
+          {/* Daily Quest Board — always visible, no auth required */}
+          <div style={{
+            background: 'rgba(201,168,76,0.03)',
+            border: '1px solid rgba(201,168,76,0.08)',
+            padding: '32px 40px',
+            marginBottom: 2,
+          }}>
+            <DailyQuestBoard />
           </div>
 
           {/* Content */}
