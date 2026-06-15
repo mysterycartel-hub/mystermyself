@@ -8,7 +8,7 @@ import { MELODY_JOURNAL_INTRO, MELISSA_JOURNAL_NOTE } from '@/lib/mayhem'
 interface Props {
   prompts: JournalPrompt[]
   lessonId: string
-  onSaved?: () => void
+  onSaved?: (answers: Record<number, string>) => void
 }
 
 const typeStyles = {
@@ -25,7 +25,7 @@ export default function ReflectionJournal({ prompts, lessonId, onSaved }: Props)
     const key = `tcu_journal_${lessonId}`
     localStorage.setItem(key, JSON.stringify({ answers, savedAt: new Date().toISOString() }))
     setSaved(true)
-    onSaved?.()
+    onSaved?.(answers)
     setTimeout(() => setSaved(false), 3000)
   }
 

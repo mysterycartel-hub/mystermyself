@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import LessonShell from '@/components/academy/LessonShell'
+import LessonTemplate from '@/components/academy/LessonTemplate'
 import { LESSONS, LESSON_SLUGS } from '@/lib/academy'
 
 export function generateStaticParams() {
@@ -49,7 +49,7 @@ export default function LessonPage({ params }: { params: { lesson: string } }) {
         </div>
 
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1200, margin: '0 auto' }}>
-          <LessonShell lesson={lesson} />
+          <LessonTemplate lesson={lesson} />
         </div>
       </section>
 

@@ -176,11 +176,41 @@ export interface PracticeTask {
 }
 
 export interface GuidedExample {
-  scenario: string      // the situation to analyze
-  question: string      // what should the student notice?
-  answer: string        // the correct read — shown to student
-  trap?: string         // common wrong answer
-  whyItMatters: string  // connects to the Recipe
+  scenario: string
+  question: string
+  answer: string
+  trap?: string
+  whyItMatters: string
+}
+
+// ── TCU CURRICULUM LOCK — Lesson data interfaces ─────────────────────────────
+// Characters (Melissa, Melody, Burn Alarm) are ENGINE-DRIVEN — not lesson sections.
+// They fire from student behavior events via CharacterTriggerEngine.
+// Lessons contain only the curriculum data. Engines handle the rest.
+
+export interface LessonConcept {
+  definition: string      // plain language — assumes zero prior knowledge
+  kitchenAnalogy: string  // TCU kitchen metaphor mapping
+  marketMeaning: string   // XAUUSD-specific application
+}
+
+export interface LessonExample {
+  scenario: string        // specific XAUUSD price situation with real numbers
+  walkthrough: string     // step-by-step read through the scenario
+  keyTakeaway: string     // one sentence — the thing that must stick
+}
+
+export interface LessonTrap {
+  mistake: string         // the specific wrong move students make
+  whyItHappens: string    // psychology / gap behind it
+  consequence: string     // what it costs them
+}
+
+export interface GuidedPractice {
+  scenario: string        // the practice situation
+  steps: string[]         // numbered steps to work through
+  answer: string          // full correct answer revealed after student attempts
+  whyItMatters: string    // Recipe connection
 }
 
 export interface Lesson {
@@ -201,7 +231,7 @@ export interface Lesson {
   kitchenStory: string
   marketTranslation: string
   visualGuide: string
-  guidedExample?: GuidedExample  // worked example shown before independent practice
+  guidedExample?: GuidedExample  // legacy — use guidedPractice for new lessons
   characterCoaching: string
   practice: PracticeTask
   xpReward: number
@@ -210,6 +240,14 @@ export interface Lesson {
   riskWarning?: string
   nextLesson: string | null
   prevLesson: string | null
+  // ── TCU Curriculum Lock — engine-fed data fields ──────────────────────────
+  // Each field present on a lesson = one additional rendered step in LessonTemplate.
+  // Characters (Melissa, Melody, Burn Alarm) fire from CharacterTriggerEngine —
+  // not from per-lesson configuration. Adding a field here adds a step. That is all.
+  concept?: LessonConcept
+  example?: LessonExample
+  commonTrap?: LessonTrap
+  guidedPractice?: GuidedPractice
 }
 
 export const LESSONS: Lesson[] = [
