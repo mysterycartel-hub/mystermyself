@@ -11,7 +11,7 @@
 // Components call MissionEngine methods — not raw progression/quest functions.
 
 import { markLessonViewed, markPracticeComplete, markJournalSaved, loadProgress } from './progression'
-import { completeQuest, getActiveQuests } from './quests'
+import { completeQuestForLesson, getActiveQuests } from './quests'
 import { CharacterTriggerEngine } from './character-trigger-engine'
 import { XPRewardEngine } from './xp-reward-engine'
 
@@ -33,14 +33,6 @@ export interface LifecycleResult {
   levelJustUnlocked?: number | null
 }
 
-// ── Quest ID conventions ──────────────────────────────────────────────────────
-// Quest IDs follow the pattern: `${type}-${lessonId}` or `${type}-level-${level}`
-// MissionEngine auto-completes matching quests on lifecycle events.
-
-function tryCompleteQuest(questId: string): void {
-  try { completeQuest(questId) } catch { /* quest may not exist */ }
-}
-
 // ── MissionEngine public API ──────────────────────────────────────────────────
 
 export const MissionEngine = {
@@ -50,7 +42,7 @@ export const MissionEngine = {
     const { data, levelJustCompleted } = markLessonViewed(lessonId)
 
     // Complete any view-lesson quests for this lesson
-    tryCompleteQuest(`view-lesson-${lessonId}`)
+    completeQuestForLesson(lessonId, 'view-lesson')
 
     // Fire level-complete coach cue if applicable
     if (levelJustCompleted !== null && levelJustCompleted !== undefined) {
@@ -80,8 +72,7 @@ export const MissionEngine = {
     CharacterTriggerEngine.fire('practice-complete', { lessonId })
 
     // Complete any practice quests
-    tryCompleteQuest(`practice-${lessonId}`)
-    tryCompleteQuest('complete-practice')
+    completeQuestForLesson(lessonId, 'complete-practice')
 
     if (levelJustCompleted !== null && levelJustCompleted !== undefined) {
       CharacterTriggerEngine.fire('level-complete', { level: levelJustCompleted })
@@ -113,8 +104,7 @@ export const MissionEngine = {
     CharacterTriggerEngine.fire('journal-complete', { lessonId, xp: xpAmount })
 
     // Complete quests
-    tryCompleteQuest(`journal-${lessonId}`)
-    tryCompleteQuest('save-journal')
+    completeQuestForLesson(lessonId, 'save-journal')
 
     if (levelJustCompleted !== null && levelJustCompleted !== undefined) {
       CharacterTriggerEngine.fireCoachCue('level-complete')

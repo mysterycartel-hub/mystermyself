@@ -26,12 +26,9 @@ export type TCUCharacter =
   | TriggerCharacter        // melissa | melody | burn-alarm
   | 'trading-chef'
   | 'chef-goldie'
-  | 'candle-kid'
   | 'wickie'
   | 'louie-liquidity'
   | 'rico-rhythm'
-  | 'grandma-market'
-  | 'nana-value'
   | 'penny-stacks'
   | 'mr-stocks'
 
@@ -174,7 +171,7 @@ const COACH_CUES: Record<string, CoachCue[]> = {
   ],
   'practice-complete': [
     {
-      character: 'grandma-market',
+      character: 'penny-stacks',
       message: "You practiced. That is more than most students do. Write what you noticed before the feeling fades.",
       quote: "Practice without reflection is just repetition. Reflection makes it skill.",
       autoDismissMs: 5000,

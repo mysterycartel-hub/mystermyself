@@ -481,6 +481,11 @@ export function isQuestCompleted(questId: string): boolean {
   return progress.completed.includes(questId)
 }
 
+export function completeQuestForLesson(lessonId: string, type: QuestType): void {
+  const quest = DAILY_QUESTS.find(q => q.targetId === lessonId && q.type === type)
+  if (quest) completeQuest(quest.id)
+}
+
 export function getUnlockedLevels(completedLevelNums: number[]): number[] {
   return ACADEMY_MODULES
     .filter(m => completedLevelNums.includes(m.level))

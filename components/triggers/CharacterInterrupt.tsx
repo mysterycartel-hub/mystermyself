@@ -4,6 +4,17 @@ import { useEffect, useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
 import { type CharacterTrigger, type TriggerEvent, getTrigger } from '@/lib/triggers'
+import { type CoachCue } from '@/lib/character-trigger-engine'
+
+const COACH_CONFIG: Record<string, { emoji: string; color: string }> = {
+  'trading-chef':    { emoji: '👨‍🍳', color: '#C9A84C' },
+  'chef-goldie':     { emoji: '🥇', color: '#F59E0B' },
+  'wickie':          { emoji: '🕯️', color: '#A78BFA' },
+  'louie-liquidity': { emoji: '💧', color: '#38BDF8' },
+  'rico-rhythm':     { emoji: '🎵', color: '#34D399' },
+  'penny-stacks':    { emoji: '🛡️', color: '#FB923C' },
+  'mr-stocks':       { emoji: '📈', color: '#60A5FA' },
+}
 
 const CHARACTER_CONFIG = {
   melissa: {
@@ -52,6 +63,7 @@ interface ActiveInterrupt {
 export default function CharacterInterrupt() {
   const [active, setActive] = useState<ActiveInterrupt | null>(null)
   const [queue, setQueue] = useState<ActiveInterrupt[]>([])
+  const [coachCue, setCoachCue] = useState<CoachCue | null>(null)
 
   const dismiss = useCallback(() => {
     setActive(null)
@@ -81,8 +93,17 @@ export default function CharacterInterrupt() {
       })
     }
 
+    function handleCoachCue(e: Event) {
+      const cue = (e as CustomEvent<CoachCue>).detail
+      setCoachCue(cue)
+    }
+
     window.addEventListener('tcu-trigger', handleTrigger)
-    return () => window.removeEventListener('tcu-trigger', handleTrigger)
+    window.addEventListener('tcu-coach-cue', handleCoachCue)
+    return () => {
+      window.removeEventListener('tcu-trigger', handleTrigger)
+      window.removeEventListener('tcu-coach-cue', handleCoachCue)
+    }
   }, [])
 
   // Auto-dismiss for non-interrupt modes
@@ -92,9 +113,87 @@ export default function CharacterInterrupt() {
     return () => clearTimeout(t)
   }, [active, dismiss])
 
+  // Auto-dismiss coach cues
+  useEffect(() => {
+    if (!coachCue) return
+    const t = setTimeout(() => setCoachCue(null), coachCue.autoDismissMs)
+    return () => clearTimeout(t)
+  }, [coachCue])
+
   const cfg = active ? CHARACTER_CONFIG[active.trigger.character] : null
+  const coachCfg = coachCue ? COACH_CONFIG[coachCue.character] : null
 
   return (
+    <>
+    {/* Coach cue toast */}
+    <AnimatePresence>
+      {coachCue && coachCfg && (
+        <motion.div
+          key={`coach-${coachCue.character}`}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 8 }}
+          transition={{ duration: 0.2 }}
+          style={{
+            position: 'fixed',
+            bottom: 24,
+            left: 24,
+            zIndex: 999,
+            width: 340,
+            background: '#0a0a0c',
+            border: `1px solid ${coachCfg.color}30`,
+            boxShadow: `0 0 24px ${coachCfg.color}10, 0 8px 32px rgba(0,0,0,0.5)`,
+            padding: '14px 18px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 8,
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ fontSize: '1.1rem' }}>{coachCfg.emoji}</span>
+              <span style={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.5rem',
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                color: coachCfg.color,
+              }}>
+                {String(coachCue.character).replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
+              </span>
+            </div>
+            <button
+              onClick={() => setCoachCue(null)}
+              style={{ background: 'none', border: 'none', color: 'rgba(245,240,232,0.2)', cursor: 'none', padding: 2 }}
+            >
+              <X size={11} />
+            </button>
+          </div>
+          <p style={{
+            fontFamily: '"Space Mono", monospace',
+            fontSize: '0.6rem',
+            color: 'rgba(245,240,232,0.7)',
+            lineHeight: 1.6,
+            margin: 0,
+          }}>
+            {coachCue.message}
+          </p>
+          <p style={{
+            fontFamily: '"Space Mono", monospace',
+            fontSize: '0.55rem',
+            color: coachCfg.color,
+            lineHeight: 1.5,
+            fontStyle: 'italic',
+            margin: 0,
+            borderLeft: `2px solid ${coachCfg.color}40`,
+            paddingLeft: 8,
+          }}>
+            &ldquo;{coachCue.quote}&rdquo;
+          </p>
+        </motion.div>
+      )}
+    </AnimatePresence>
+
     <AnimatePresence>
       {active && cfg && (
         <>
@@ -389,5 +488,6 @@ export default function CharacterInterrupt() {
         </>
       )}
     </AnimatePresence>
+    </>
   )
 }
