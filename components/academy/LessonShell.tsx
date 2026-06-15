@@ -257,270 +257,285 @@ export default function LessonShell({ lesson }: Props) {
         </p>
       </div>
 
-      {/* Step nav pills */}
-      <div style={{
-        display: 'flex',
-        gap: 6,
-        marginBottom: 48,
-        flexWrap: 'wrap',
-      }}>
-        {STEPS.map((s, i) => (
-          <button
-            key={s.id}
-            onClick={() => setActiveStep(i)}
-            style={{
-              background: activeStep === i ? lesson.color : 'transparent',
-              border: `1px solid ${activeStep === i ? lesson.color : 'rgba(245,240,232,0.1)'}`,
-              color: activeStep === i ? '#060608' : 'rgba(245,240,232,0.35)',
-              padding: '6px 14px',
-              fontFamily: '"Space Mono", monospace',
-              fontSize: '0.44rem',
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              cursor: 'none',
-              fontWeight: activeStep === i ? 700 : 400,
-              transition: 'all 0.2s',
-            }}
-          >
-            {s.label}
-          </button>
-        ))}
-      </div>
-
-      {/* Full lesson content (all sections, scrollable) */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
-
-        {/* 1. HOOK */}
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          id="hook"
-        >
-          <div style={{
-            fontFamily: '"Space Mono", monospace',
-            fontSize: '0.48rem',
-            letterSpacing: '0.25em',
-            textTransform: 'uppercase',
-            color: 'rgba(245,240,232,0.2)',
-            marginBottom: 16,
-          }}>
-            1 · Why This Matters
-          </div>
-          <div style={{
-            borderLeft: `4px solid ${lesson.color}`,
-            paddingLeft: 28,
-          }}>
-            <p style={{
-              fontFamily: '"Space Mono", monospace',
-              fontSize: '0.75rem',
-              lineHeight: 1.9,
-              color: 'rgba(245,240,232,0.8)',
-              margin: 0,
-              fontStyle: 'italic',
-            }}>
-              {lesson.hook}
-            </p>
-          </div>
-        </motion.section>
-
-        {/* Divider */}
-        <div style={{ height: 1, background: 'rgba(245,240,232,0.05)' }} />
-
-        {/* 2 & 3. KITCHEN + MARKET */}
-        <section id="kitchen">
-          <div style={{
-            fontFamily: '"Space Mono", monospace',
-            fontSize: '0.48rem',
-            letterSpacing: '0.25em',
-            textTransform: 'uppercase',
-            color: 'rgba(245,240,232,0.2)',
-            marginBottom: 16,
-          }}>
-            2 · Kitchen Story + Market Translation
-          </div>
-          <KitchenMetaphor
-            kitchenStory={lesson.kitchenStory}
-            marketTranslation={lesson.marketTranslation}
-          />
-        </section>
-
-        <div style={{ height: 1, background: 'rgba(245,240,232,0.05)' }} />
-
-        {/* 4. VISUAL */}
-        <section id="visual">
-          <div style={{
-            fontFamily: '"Space Mono", monospace',
-            fontSize: '0.48rem',
-            letterSpacing: '0.25em',
-            textTransform: 'uppercase',
-            color: 'rgba(245,240,232,0.2)',
-            marginBottom: 16,
-          }}>
-            3 · Visual Guide
-          </div>
-          <VisualExample
-            lessonId={lesson.id}
-            visualGuide={lesson.visualGuide}
-            tcuTerm={lesson.tcuTerm}
-          />
-        </section>
-
-        <div style={{ height: 1, background: 'rgba(245,240,232,0.05)' }} />
-
-        {/* 5. CHARACTER COACHING */}
-        <section id="coaching">
-          <div style={{
-            fontFamily: '"Space Mono", monospace',
-            fontSize: '0.48rem',
-            letterSpacing: '0.25em',
-            textTransform: 'uppercase',
-            color: 'rgba(245,240,232,0.2)',
-            marginBottom: 16,
-          }}>
-            4 · Character Coaching
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <CharacterCoach
-              character={character}
-              message={lesson.characterCoaching}
-            />
-            {warnChar && (
-              <CharacterCoach
-                character={warnChar}
-                message={`Watch out for ${warnChar.name}. ${warnChar.catchphrase}`}
+      {/* Step progress bar */}
+      <div style={{ marginBottom: 32 }}>
+        <div style={{
+          display: 'flex',
+          gap: 4,
+          marginBottom: 10,
+        }}>
+          {STEPS.map((s, i) => {
+            const isUnlocked = i <= activeStep
+            const isDone = i < activeStep
+            const isCurrent = i === activeStep
+            return (
+              <button
+                key={s.id}
+                onClick={() => {
+                  if (i <= activeStep) setActiveStep(i)
+                  else dispatchTrigger({ type: 'step-skipped', lessonId: lesson.id })
+                }}
+                title={isUnlocked ? s.label : 'Complete previous steps first'}
+                style={{
+                  flex: 1,
+                  height: 4,
+                  background: isDone
+                    ? lesson.color
+                    : isCurrent
+                    ? `${lesson.color}60`
+                    : 'rgba(255,255,255,0.06)',
+                  border: 'none',
+                  cursor: isUnlocked ? 'none' : 'not-allowed',
+                  transition: 'background 0.3s',
+                }}
               />
-            )}
-          </div>
-        </section>
-
-        {/* ── MAYHEM CARDS — Melissa and/or Melody ── */}
-        {mayhemData && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            {mayhemData.primary === 'melissa-mayhem' && mayhemData.melissa && (
-              <MayhemCard moment={mayhemData.melissa} />
-            )}
-            {mayhemData.primary === 'melody-mayhem' && mayhemData.melody && (
-              <MayhemCard moment={mayhemData.melody} />
-            )}
-            {/* Secondary character — shown after primary */}
-            {mayhemData.primary === 'melissa-mayhem' && mayhemData.melody && (
-              <MayhemCard moment={mayhemData.melody} />
-            )}
-            {mayhemData.primary === 'melody-mayhem' && mayhemData.melissa && (
-              <MayhemCard moment={mayhemData.melissa} />
-            )}
-          </div>
-        )}
-
-        {/* Risk warning */}
-        {lesson.riskWarning && (
-          <RiskWarning message={lesson.riskWarning} />
-        )}
-
-        {/* Psychology note */}
-        {lesson.psychologyNote && (
-          <div style={{
-            background: 'rgba(236,72,153,0.03)',
-            border: '1px solid rgba(236,72,153,0.15)',
-            padding: '20px 24px',
-            borderLeft: '3px solid #EC4899',
-          }}>
-            <div style={{
-              fontFamily: '"Space Mono", monospace',
-              fontSize: '0.44rem',
-              letterSpacing: '0.22em',
-              textTransform: 'uppercase',
-              color: 'rgba(236,72,153,0.6)',
-              marginBottom: 8,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 6,
-            }}>
-              🧠 Trading Psychology
-            </div>
-            <p style={{
-              fontFamily: '"Space Mono", monospace',
-              fontSize: '0.65rem',
-              lineHeight: 1.8,
-              color: 'rgba(245,240,232,0.65)',
-              margin: 0,
-            }}>
-              {lesson.psychologyNote}
-            </p>
-          </div>
-        )}
-
-        <div style={{ height: 1, background: 'rgba(245,240,232,0.05)' }} />
-
-        {/* 6. PRACTICE */}
-        <section id="practice">
-          <div style={{
+            )
+          })}
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <span style={{
             fontFamily: '"Space Mono", monospace',
             fontSize: '0.48rem',
-            letterSpacing: '0.25em',
+            letterSpacing: '0.15em',
             textTransform: 'uppercase',
-            color: 'rgba(245,240,232,0.2)',
-            marginBottom: 16,
+            color: lesson.color,
           }}>
-            5 · Practice Task
-          </div>
-          <PracticePrompt
-            practice={lesson.practice}
-            onComplete={handlePracticeComplete}
-          />
-        </section>
-
-        <div style={{ height: 1, background: 'rgba(245,240,232,0.05)' }} />
-
-        {/* 7. JOURNAL */}
-        <section id="journal">
-          <div style={{
+            {STEPS[activeStep].label}
+          </span>
+          <span style={{
             fontFamily: '"Space Mono", monospace',
             fontSize: '0.48rem',
-            letterSpacing: '0.25em',
-            textTransform: 'uppercase',
-            color: 'rgba(245,240,232,0.2)',
-            marginBottom: 16,
+            color: 'rgba(245,240,232,0.25)',
           }}>
-            6 · Reflection Journal
-          </div>
-          <ReflectionJournal
-            prompts={lesson.journalPrompts}
-            lessonId={lesson.id}
-            onSaved={handleJournalSaved}
-          />
-        </section>
-
-        <div style={{ height: 1, background: 'rgba(245,240,232,0.05)' }} />
-
-        {/* 8. XP + NEXT */}
-        <section id="xp">
-          <div style={{
-            fontFamily: '"Space Mono", monospace',
-            fontSize: '0.48rem',
-            letterSpacing: '0.25em',
-            textTransform: 'uppercase',
-            color: 'rgba(245,240,232,0.2)',
-            marginBottom: 16,
-          }}>
-            7 · XP Reward + Next Step
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <XPReward
-              xp={lesson.xpReward}
-              lessonTitle={lesson.title}
-              earned={practiceComplete}
-            />
-            <ProgressUnlock
-              nextLesson={nextLessonObj}
-              prevLesson={prevLessonObj}
-              currentXP={0}
-              lessonXP={lesson.xpReward}
-            />
-          </div>
-        </section>
-
+            {activeStep + 1} / {STEPS.length}
+          </span>
+        </div>
       </div>
+
+      {/* Step content — one step at a time */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeStep}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.25 }}
+          style={{ display: 'flex', flexDirection: 'column', gap: 32 }}
+        >
+
+          {/* ── STEP 0: WHY THIS MATTERS ── */}
+          {activeStep === 0 && (
+            <section>
+              <StepLabel color={lesson.color}>1 · Why This Matters</StepLabel>
+              <div style={{ borderLeft: `4px solid ${lesson.color}`, paddingLeft: 28, marginBottom: 32 }}>
+                <p style={{
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '0.75rem',
+                  lineHeight: 1.9,
+                  color: 'rgba(245,240,232,0.8)',
+                  margin: 0,
+                  fontStyle: 'italic',
+                }}>
+                  {lesson.hook}
+                </p>
+              </div>
+              <ContinueButton color={lesson.color} onClick={() => setActiveStep(1)} />
+            </section>
+          )}
+
+          {/* ── STEP 1: KITCHEN STORY ── */}
+          {activeStep === 1 && (
+            <section>
+              <StepLabel color={lesson.color}>2 · Kitchen Story</StepLabel>
+              <KitchenMetaphor
+                kitchenStory={lesson.kitchenStory}
+                marketTranslation={lesson.marketTranslation}
+              />
+              <div style={{ marginTop: 32 }}>
+                <ContinueButton color={lesson.color} onClick={() => setActiveStep(2)} />
+              </div>
+            </section>
+          )}
+
+          {/* ── STEP 2: VISUAL GUIDE ── */}
+          {activeStep === 2 && (
+            <section>
+              <StepLabel color={lesson.color}>3 · Visual Guide</StepLabel>
+              <VisualExample
+                lessonId={lesson.id}
+                visualGuide={lesson.visualGuide}
+                tcuTerm={lesson.tcuTerm}
+              />
+              <div style={{ marginTop: 32 }}>
+                <ContinueButton color={lesson.color} onClick={() => setActiveStep(3)} />
+              </div>
+            </section>
+          )}
+
+          {/* ── STEP 3: CHARACTER COACHING ── */}
+          {activeStep === 3 && (
+            <section>
+              <StepLabel color={lesson.color}>4 · Character Coaching</StepLabel>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <CharacterCoach character={character} message={lesson.characterCoaching} />
+                {warnChar && (
+                  <CharacterCoach
+                    character={warnChar}
+                    message={`Watch out for ${warnChar.name}. ${warnChar.catchphrase}`}
+                  />
+                )}
+              </div>
+
+              {/* Mayhem cards appear in coaching step */}
+              {mayhemData && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 16 }}>
+                  {mayhemData.primary === 'melissa-mayhem' && mayhemData.melissa && (
+                    <MayhemCard moment={mayhemData.melissa} />
+                  )}
+                  {mayhemData.primary === 'melody-mayhem' && mayhemData.melody && (
+                    <MayhemCard moment={mayhemData.melody} />
+                  )}
+                  {mayhemData.primary === 'melissa-mayhem' && mayhemData.melody && (
+                    <MayhemCard moment={mayhemData.melody} />
+                  )}
+                  {mayhemData.primary === 'melody-mayhem' && mayhemData.melissa && (
+                    <MayhemCard moment={mayhemData.melissa} />
+                  )}
+                </div>
+              )}
+
+              {lesson.psychologyNote && (
+                <div style={{
+                  background: 'rgba(236,72,153,0.03)',
+                  border: '1px solid rgba(236,72,153,0.15)',
+                  padding: '20px 24px',
+                  borderLeft: '3px solid #EC4899',
+                  marginTop: 16,
+                }}>
+                  <div style={{
+                    fontFamily: '"Space Mono", monospace',
+                    fontSize: '0.44rem',
+                    letterSpacing: '0.22em',
+                    textTransform: 'uppercase',
+                    color: 'rgba(236,72,153,0.6)',
+                    marginBottom: 8,
+                  }}>
+                    🧠 Trading Psychology
+                  </div>
+                  <p style={{
+                    fontFamily: '"Space Mono", monospace',
+                    fontSize: '0.65rem',
+                    lineHeight: 1.8,
+                    color: 'rgba(245,240,232,0.65)',
+                    margin: 0,
+                  }}>
+                    {lesson.psychologyNote}
+                  </p>
+                </div>
+              )}
+
+              <div style={{ marginTop: 32 }}>
+                <ContinueButton color={lesson.color} onClick={() => setActiveStep(4)} />
+              </div>
+            </section>
+          )}
+
+          {/* ── STEP 4: PRACTICE ── */}
+          {activeStep === 4 && (
+            <section>
+              <StepLabel color={lesson.color}>5 · Practice Task</StepLabel>
+              {lesson.riskWarning && <RiskWarning message={lesson.riskWarning} />}
+              <PracticePrompt
+                practice={lesson.practice}
+                onComplete={() => {
+                  handlePracticeComplete()
+                  setActiveStep(5)
+                }}
+              />
+              {/* Melody appears if they've been sitting here without practicing */}
+            </section>
+          )}
+
+          {/* ── STEP 5: JOURNAL ── */}
+          {activeStep === 5 && (
+            <section>
+              <StepLabel color={lesson.color}>6 · Reflection Journal</StepLabel>
+              <ReflectionJournal
+                prompts={lesson.journalPrompts}
+                lessonId={lesson.id}
+                onSaved={() => {
+                  handleJournalSaved()
+                  setActiveStep(6)
+                }}
+              />
+            </section>
+          )}
+
+          {/* ── STEP 6: XP + NEXT ── */}
+          {activeStep === 6 && (
+            <section>
+              <StepLabel color={lesson.color}>7 · XP + Next Step</StepLabel>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <XPReward
+                  xp={lesson.xpReward}
+                  lessonTitle={lesson.title}
+                  earned={practiceComplete}
+                />
+                <ProgressUnlock
+                  nextLesson={nextLessonObj}
+                  prevLesson={prevLessonObj}
+                  currentXP={0}
+                  lessonXP={lesson.xpReward}
+                />
+              </div>
+            </section>
+          )}
+
+        </motion.div>
+      </AnimatePresence>
+
     </div>
+  )
+}
+
+// ── Internal helpers ──────────────────────────────────────────────────────────
+
+function StepLabel({ color, children }: { color: string; children: React.ReactNode }) {
+  return (
+    <div style={{
+      fontFamily: '"Space Mono", monospace',
+      fontSize: '0.48rem',
+      letterSpacing: '0.25em',
+      textTransform: 'uppercase',
+      color: 'rgba(245,240,232,0.2)',
+      marginBottom: 20,
+    }}>
+      {children}
+    </div>
+  )
+}
+
+function ContinueButton({ color, onClick }: { color: string; onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        background: color,
+        color: '#060608',
+        border: 'none',
+        padding: '13px 32px',
+        fontFamily: '"Space Mono", monospace',
+        fontSize: '0.65rem',
+        fontWeight: 700,
+        letterSpacing: '0.12em',
+        textTransform: 'uppercase',
+        cursor: 'none',
+        transition: 'opacity 0.15s',
+      }}
+      onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '0.85' }}
+      onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '1' }}
+    >
+      Continue →
+    </button>
   )
 }
