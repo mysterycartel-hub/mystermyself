@@ -144,20 +144,37 @@ export default function DistrictPage({ params }: { params: { district: string } 
 
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             {d.externalHref && (
-              <Link href={d.externalHref} style={{ textDecoration: 'none' }}>
-                <div style={{
-                  background: d.color,
-                  color: '#060608',
-                  padding: '16px 36px',
-                  fontFamily: '"Space Mono", monospace',
-                  fontSize: '0.7rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.15em',
-                  textTransform: 'uppercase',
-                }}>
-                  {d.cta} →
-                </div>
-              </Link>
+              d.externalHref.startsWith('http') ? (
+                <a href={d.externalHref} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                  <div style={{
+                    background: d.color,
+                    color: '#060608',
+                    padding: '16px 36px',
+                    fontFamily: '"Space Mono", monospace',
+                    fontSize: '0.7rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.15em',
+                    textTransform: 'uppercase',
+                  }}>
+                    {d.cta} →
+                  </div>
+                </a>
+              ) : (
+                <Link href={d.externalHref} style={{ textDecoration: 'none' }}>
+                  <div style={{
+                    background: d.color,
+                    color: '#060608',
+                    padding: '16px 36px',
+                    fontFamily: '"Space Mono", monospace',
+                    fontSize: '0.7rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.15em',
+                    textTransform: 'uppercase',
+                  }}>
+                    {d.cta} →
+                  </div>
+                </Link>
+              )
             )}
             <Link href="/coast" style={{ textDecoration: 'none' }}>
               <div style={{

@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
-const BEEHIIV = 'https://maurices-newsletter-b7274b.beehiiv.com'
+const BEEHIIV = process.env.NEXT_PUBLIC_BEEHIIV_SIGNUP_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com/subscribe'
 
 const fadeUp = (delay: number) => ({
   initial: { opacity: 0, y: 30 },

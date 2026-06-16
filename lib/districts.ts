@@ -1,3 +1,5 @@
+const BEEHIIV_SIGNUP = process.env.NEXT_PUBLIC_BEEHIIV_SIGNUP_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com/subscribe'
+
 export interface District {
   id: string
   slug: string
@@ -78,9 +80,9 @@ export const districts: District[] = [
     description: 'The logistics and courier income operations center. Medical Courier Insider Edge, contract delivery, and road-based income systems.',
     longDescription: 'Route Harbor is where the road warriors dock. The Medical Courier Insider Edge program lives here — helping you find pharmacy, lab, and medical courier opportunities without depending only on job boards or delivery apps. Courier Income Lab is the research engine inside Route Harbor.',
     features: ['Medical Courier Insider Edge — $37', 'Pharmacy & Lab Route Research', 'Contract Delivery Systems', 'Route Acquisition Math', 'Vehicle Strategy', 'Courier Income Lab (Inside Route Harbor)'],
-    cta: 'Get Insider Edge',
+    cta: 'Get the Free Courier Chapter',
     href: '/map/route-harbor',
-    externalHref: '/products/medical-courier-guide/',
+    externalHref: BEEHIIV_SIGNUP,
     mapX: 22,
     mapY: 35,
     size: 'lg',
@@ -187,9 +189,9 @@ export const districts: District[] = [
     description: 'Game destination and live-update automation district for fantasy football. Draft Bible, rankings, injury alerts, subscriber drops, XP, rewards, and the TCU/trading simulation bridge.',
     longDescription: 'Fantasy Island is a game destination and live-update automation district for fantasy football. The Draft Bible, rankings, injury and news alerts, subscriber segments, Beehiiv drops, XP rewards, unlocks, and the TCU/trading simulation bridge all live here. Where competitive play meets automated income infrastructure.',
     features: ['Fantasy Draft Bible', 'Live Injury & News Alerts', 'Automated Rankings Updates', 'Subscriber Segments & Beehiiv Drops', 'XP Rewards & Unlocks', 'TCU / Trading Simulation Bridge'],
-    cta: 'Hit the Island',
+    cta: 'Get Fantasy Island Live Drops',
     href: '/map/fantasy-island',
-    externalHref: '/fantasy',
+    externalHref: BEEHIIV_SIGNUP,
     mapX: 82,
     mapY: 78,
     size: 'md',

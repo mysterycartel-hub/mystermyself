@@ -24,12 +24,15 @@ const legal = [
   { label: 'Terms of Use',   href: '#' },
   { label: 'Refund Policy',  href: '#' },
 ]
+const PUBLICATION_URL = process.env.NEXT_PUBLIC_BEEHIIV_PUBLICATION_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com'
+
 const socials = [
-  { label: '@mysterycartel', href: 'https://x.com/mysterycartel' },
-  { label: 'YouTube',        href: 'https://youtube.com' },
-  { label: 'TikTok',         href: 'https://tiktok.com' },
-  { label: 'Instagram',      href: 'https://instagram.com' },
-  { label: 'Email Us',       href: 'mailto:mysterycartel@gmail.com' },
+  { label: 'The Opportunity List', href: PUBLICATION_URL },
+  { label: '@mysterycartel',       href: 'https://x.com/mysterycartel' },
+  { label: 'YouTube',              href: 'https://youtube.com' },
+  { label: 'TikTok',               href: 'https://tiktok.com' },
+  { label: 'Instagram',            href: 'https://instagram.com' },
+  { label: 'Email Us',             href: 'mailto:mysterycartel@gmail.com' },
 ]
 
 function FooterLink({ href, children, external }: { href: string; children: React.ReactNode; external?: boolean }) {
