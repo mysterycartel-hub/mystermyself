@@ -30,7 +30,7 @@ Last updated: 2026-06-15 · Build: 63 routes · Status: LAUNCH-READY
 | `/` | `app/page.tsx` | Home | Landing page |
 | `/coast` | `app/coast/page.tsx` | CoastMap | V2 district map |
 | `/academy` | `app/academy/page.tsx` | AcademyDashboard | Curriculum hub |
-| `/academy/[lessonId]` | `app/academy/[lessonId]/page.tsx` | LessonTemplate | SSG — 14 lesson pages |
+| `/academy/[lesson]` | `app/academy/[lesson]/page.tsx` | LessonTemplate | SSG — 13 lesson pages |
 | `/kitchen` | `app/kitchen/page.tsx` | MarketKitchen | TradingView shell |
 | `/kitchen-rush` | `app/kitchen-rush/page.tsx` | KitchenRushPage | Recognition trainer |
 | `/tcu-theater` | `app/tcu-theater/page.tsx` | TCUTheaterPage | Video + XP sync |
@@ -201,7 +201,7 @@ Student tries locked lesson → MissionEngine.onLockedAccess(lessonId)
 | System | Storage | Controls |
 |---|---|---|
 | **Curriculum XP** | `localStorage: tcu_progression_v1` → `data.totalXP` | `XPRewardEngine.awardXP()` |
-| **Passport XP** | Supabase `passport_xp_events` + `passport_profiles.total_xp` | `POST /api/passport/xp` |
+| **Passport XP** | Supabase `passport_xp_events` + `passport_profiles.xp` | `POST /api/passport/xp` |
 
 Curriculum XP is always local. Passport XP requires auth.
 
@@ -277,8 +277,8 @@ XP Award → POST /api/passport/xp  { amount, eventType, eventRef, description }
   → validateToken()
   → INSERT passport_xp_events
   → RPC increment_passport_xp(userId, amount)
-    → UPDATE passport_profiles SET total_xp = total_xp + amount
-    → UPDATE rank based on new total
+    → UPDATE passport_profiles SET xp = xp + amount
+    → UPDATE level based on new xp total
 
 District Stamp → POST /api/passport/stamp  { districtId, districtName }
   → validateToken()
@@ -357,7 +357,7 @@ Full Passport Read → GET /api/passport/status
 | `lib/progression.ts` | Level gating, lesson completion, localStorage reads/writes |
 | `lib/mission-engine.ts` | Lifecycle orchestrator |
 | `app/academy/page.tsx` | Academy hub |
-| `app/academy/[lessonId]/page.tsx` | SSG lesson page |
+| `app/academy/[lesson]/page.tsx` | SSG lesson page |
 | `components/tcu/LessonTemplate.tsx` | Lesson renderer |
 
 ### TCU Canon Terminology
@@ -533,10 +533,12 @@ ANTHROPIC_API_KEY=sk-ant-...
 # STRIPE_SECRET_KEY=sk_live_...
 # STRIPE_WEBHOOK_SECRET=whsec_...
 # NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_...
-# STRIPE_PRICE_COAST_PASS=price_...
-# STRIPE_PRICE_TCU_SEMESTER=price_...
-# STRIPE_PRICE_CROWN_METHOD=price_...
-# STRIPE_PRICE_MARKET_KITCHEN=price_...
+# STRIPE_PRICE_GOLD_PLAYBOOK=price_...
+# STRIPE_PRICE_TCU_MEMBERSHIP=price_...
+# STRIPE_PRICE_COURIER_STARTER=price_...
+# STRIPE_PRICE_FOOD_POPUP=price_...
+# STRIPE_PRICE_FANTASY_DRAFT_BIBLE=price_...
+# STRIPE_PRICE_AI_OPERATOR=price_...
 
 # OPTIONAL — Site URL (Supabase redirect URLs)
 # NEXT_PUBLIC_SITE_URL=https://mysterymyself.com
@@ -700,7 +702,7 @@ create policy "Users can read own missions"            on passport_missions  for
 
 ### Build Status
 - Build: 63 routes, 0 errors, 0 warnings
-- Last clean commit: `1ba03ef4`
+- Last clean commit: `336285cf`
 - Branch: `main` — up to date with `origin/main`
 - Vercel autodeploys from `main`
 

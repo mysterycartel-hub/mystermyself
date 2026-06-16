@@ -61,11 +61,12 @@ npm run dev
 
 ### Recent Commits
 ```
+336285cf Add zero-assumption LAUNCH_GUIDE + correct schema column names
+c4e2f1a3 Add full MysterMyself documentation suite
 34fc094e Add TCU Source of Truth — complete system documentation
 1ba03ef4 V4/V5 platform mechanics — quest board, kitchen rush trainer, crown method, theater XP sync
 88efab9a Add TCU Sound Identity System page
 7f697c29 Wire quest completion, coach cues, and canon character cleanup
-e9dc08ee Populate full TCU curriculum engine — all 14 lessons
 ```
 
 ---
