@@ -561,42 +561,45 @@ Run once in Supabase SQL Editor:
 
 ```sql
 -- ── passport_profiles ────────────────────────────────────────────────────────
+-- NOTE: columns are 'xp' and 'level' — NOT 'total_xp' and 'rank'
 create table if not exists passport_profiles (
-  id              uuid primary key default gen_random_uuid(),
-  user_id         uuid not null unique references auth.users(id) on delete cascade,
-  username        text unique,
-  display_name    text,
-  avatar_url      text,
-  bio             text,
-  total_xp        integer not null default 0,
-  rank            text not null default 'Recruit',
-  created_at      timestamptz not null default now(),
-  updated_at      timestamptz not null default now()
+  id           uuid primary key default gen_random_uuid(),
+  user_id      uuid not null unique references auth.users(id) on delete cascade,
+  username     text unique,
+  display_name text,
+  avatar_url   text,
+  bio          text,
+  xp           integer not null default 0,
+  level        text    not null default 'Recruit',
+  created_at   timestamptz not null default now(),
+  updated_at   timestamptz not null default now()
 );
 create index if not exists passport_profiles_user_id_idx on passport_profiles(user_id);
 create index if not exists passport_profiles_username_idx on passport_profiles(username);
 
 -- ── passport_xp_events ───────────────────────────────────────────────────────
+-- NOTE: column is 'xp_amount' — NOT 'amount'
 create table if not exists passport_xp_events (
-  id              uuid primary key default gen_random_uuid(),
-  user_id         uuid not null references auth.users(id) on delete cascade,
-  amount          integer not null,
-  event_type      text not null,
-  event_ref       text,
-  description     text,
-  created_at      timestamptz not null default now()
+  id          uuid primary key default gen_random_uuid(),
+  user_id     uuid not null references auth.users(id) on delete cascade,
+  xp_amount   integer not null,
+  event_type  text    not null,
+  event_ref   text,
+  description text,
+  created_at  timestamptz not null default now()
 );
-create index if not exists passport_xp_events_user_id_idx on passport_xp_events(user_id);
+create index if not exists passport_xp_events_user_id_idx    on passport_xp_events(user_id);
 create index if not exists passport_xp_events_created_at_idx on passport_xp_events(created_at desc);
 
 -- ── passport_stamps ──────────────────────────────────────────────────────────
+-- NOTE: column is 'stamp_code' — NOT 'stamp_image_url'
 create table if not exists passport_stamps (
-  id              uuid primary key default gen_random_uuid(),
-  user_id         uuid not null references auth.users(id) on delete cascade,
-  district_id     text not null,
-  district_name   text,
-  stamp_image_url text,
-  earned_at       timestamptz not null default now(),
+  id            uuid primary key default gen_random_uuid(),
+  user_id       uuid not null references auth.users(id) on delete cascade,
+  district_id   text not null,
+  district_name text,
+  stamp_code    text,
+  earned_at     timestamptz not null default now(),
   unique(user_id, district_id)
 );
 create index if not exists passport_stamps_user_id_idx on passport_stamps(user_id);
@@ -624,18 +627,19 @@ create table if not exists passport_missions (
 create index if not exists passport_missions_user_id_idx on passport_missions(user_id);
 
 -- ── RPC: increment_passport_xp ───────────────────────────────────────────────
+-- Updates 'xp' and 'level' columns (NOT 'total_xp' / 'rank')
 create or replace function increment_passport_xp(p_user_id uuid, p_amount integer)
 returns void language plpgsql security definer as $$
 declare
-  new_xp integer;
-  new_rank text;
+  new_xp    integer;
+  new_level text;
 begin
   update passport_profiles
-  set total_xp = total_xp + p_amount, updated_at = now()
+  set xp = xp + p_amount, updated_at = now()
   where user_id = p_user_id
-  returning total_xp into new_xp;
+  returning xp into new_xp;
 
-  new_rank := case
+  new_level := case
     when new_xp >= 6000 then 'Legend'
     when new_xp >= 3000 then 'Admiral'
     when new_xp >= 1500 then 'Captain'
@@ -644,7 +648,8 @@ begin
     else 'Recruit'
   end;
 
-  update passport_profiles set rank = new_rank where user_id = p_user_id;
+  update passport_profiles set level = new_level, updated_at = now()
+  where user_id = p_user_id;
 end;
 $$;
 

@@ -119,25 +119,27 @@ All code paths are correct and verified. Issues below are configuration gaps, no
 
 ## MISSING TABLES
 
-**All 5 Supabase tables must be created before Passport features work.**
+**All 6 Supabase tables must be created before Passport features work.**
 
-The SQL schema is in `docs/TCU_SOURCE_OF_TRUTH.md` §Database Schema.
+Use the SQL schema in `docs/LAUNCH_GUIDE.md` Section 1 — that file has the CORRECT column names matching the actual code.
 
-| Table | Purpose | Status |
+> ⚠️ Note: `TCU_SOURCE_OF_TRUTH.md` contains an earlier schema draft with incorrect column names (`total_xp`, `rank`, `amount`). The correct column names used by the code are `xp`, `level`, `xp_amount`. Always use `LAUNCH_GUIDE.md` as the SQL source.
+
+| Table | Key Columns | Status |
 |---|---|---|
-| `passport_profiles` | User XP, rank, username | NOT CREATED — run SQL |
-| `passport_xp_events` | XP event log | NOT CREATED — run SQL |
-| `passport_stamps` | District stamps | NOT CREATED — run SQL |
-| `passport_badges` | Badge awards | NOT CREATED — run SQL |
-| `passport_missions` | Completed missions | NOT CREATED — run SQL |
-| `increment_passport_xp` | RPC function | NOT CREATED — run SQL |
-| `leads` | Email lead capture | NOT CREATED — needs separate migration |
+| `passport_profiles` | `user_id`, `xp`, `level` | NOT CREATED — run SQL from LAUNCH_GUIDE.md |
+| `passport_xp_events` | `user_id`, `xp_amount`, `event_type` | NOT CREATED — run SQL from LAUNCH_GUIDE.md |
+| `passport_stamps` | `user_id`, `district_id`, `stamp_code` | NOT CREATED — run SQL from LAUNCH_GUIDE.md |
+| `passport_badges` | `user_id`, `badge_id`, `badge_name` | NOT CREATED — run SQL from LAUNCH_GUIDE.md |
+| `passport_missions` | `user_id`, `mission_id` | NOT CREATED — run SQL from LAUNCH_GUIDE.md |
+| `leads` | `email`, `name`, `interest` | NOT CREATED — run SQL from LAUNCH_GUIDE.md |
+| `increment_passport_xp` | RPC — updates `xp` + `level` | NOT CREATED — run SQL from LAUNCH_GUIDE.md |
 
 ### One-Time Setup
 1. Supabase Dashboard → SQL Editor
-2. Paste full schema from `docs/TCU_SOURCE_OF_TRUTH.md`
+2. Paste full schema from `docs/LAUNCH_GUIDE.md` Section 1
 3. Run
-4. Verify in Table Editor — all 5 tables should appear
+4. Verify in Table Editor — all 6 tables should appear
 
 ---
 
