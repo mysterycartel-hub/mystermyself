@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+
+const BEEHIIV = 'https://maurices-newsletter-b7274b.beehiiv.com'
 
 const fadeUp = (delay: number) => ({
   initial: { opacity: 0, y: 30 },
@@ -18,16 +19,12 @@ export default function HomeHero() {
       alignItems: 'center',
       position: 'relative',
       overflow: 'hidden',
-      padding: '120px 48px 80px',
+      padding: 'clamp(100px, 15vw, 160px) clamp(20px, 5vw, 48px) 80px',
     }}>
-      {/* Animated grid */}
       <div className="hero-grid" />
-      {/* Gold glow */}
       <div className="hero-glow" />
-      {/* Red slash */}
       <div className="hero-slash" />
 
-      {/* Content */}
       <div style={{ position: 'relative', zIndex: 2, maxWidth: 860 }}>
         {/* Eyebrow */}
         <motion.div
@@ -35,8 +32,14 @@ export default function HomeHero() {
           style={{ display: 'inline-flex', alignItems: 'center', gap: 12, marginBottom: 28 }}
         >
           <div style={{ width: 40, height: 1, background: 'var(--gold)' }} />
-          <span style={{ fontSize: '0.65rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--gold)', fontFamily: '"Space Mono", monospace' }}>
-            MysterMyself Ecosystem OS
+          <span style={{
+            fontSize: '0.65rem',
+            letterSpacing: '0.3em',
+            textTransform: 'uppercase',
+            color: 'var(--gold)',
+            fontFamily: '"Space Mono", monospace',
+          }}>
+            MysterMyself Presents · Scott-King Coast
           </span>
         </motion.div>
 
@@ -45,27 +48,30 @@ export default function HomeHero() {
           {...fadeUp(0.4)}
           style={{
             fontFamily: '"Bebas Neue", sans-serif',
-            fontSize: 'clamp(5rem, 11vw, 9.5rem)',
+            fontSize: 'clamp(4rem, 10vw, 9rem)',
             lineHeight: 0.92,
             letterSpacing: '0.02em',
             marginBottom: 32,
           }}
         >
-          LEARN<br />
-          <span style={{ color: 'var(--gold)' }}>SKILLS.</span><br />
-          <span style={{ WebkitTextStroke: '1px rgba(201,168,76,0.5)', color: 'transparent' }}>FIND INCOME</span><br />
-          <span style={{ color: 'var(--red)' }}>PLAYS.</span><br />
           BUILD YOUR<br />
-          <span style={{ color: 'var(--gold)' }}>NEXT MONEY</span><br />
-          MOVE.
+          LIFE LIKE A<br />
+          <span style={{ color: 'var(--gold)' }}>BUSINESS.</span>
         </motion.h1>
 
         {/* Subtitle */}
         <motion.p
           {...fadeUp(0.6)}
-          style={{ fontSize: '0.85rem', lineHeight: 1.8, color: 'rgba(245,240,232,0.65)', maxWidth: 540, marginBottom: 48, fontFamily: '"Space Mono", monospace' }}
+          style={{
+            fontSize: '0.85rem',
+            lineHeight: 1.8,
+            color: 'rgba(245,240,232,0.65)',
+            maxWidth: 520,
+            marginBottom: 48,
+            fontFamily: '"Space Mono", monospace',
+          }}
         >
-          Trading, courier income, food business, digital products, and ownership education — all in one powerful ecosystem.
+          Skills become income. Income becomes assets. Assets create freedom.
         </motion.p>
 
         {/* CTAs */}
@@ -73,14 +79,11 @@ export default function HomeHero() {
           {...fadeUp(0.8)}
           style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}
         >
-          <Link href="/#lead" className="btn-primary">
-            <span>Start Here →</span>
-          </Link>
-          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="btn-secondary">
-            Watch YouTube
+          <a href={BEEHIIV} target="_blank" rel="noopener noreferrer" className="btn-primary">
+            <span>Join The Opportunity List →</span>
           </a>
-          <Link href="/#lead" className="btn-red">
-            <span>Get Free Guide</span>
+          <Link href="/coast" className="btn-secondary">
+            Enter The Coast
           </Link>
         </motion.div>
 
@@ -97,16 +100,30 @@ export default function HomeHero() {
           }}
         >
           {[
-            { num: '8', label: 'Divisions' },
+            { num: '10', label: 'Districts' },
             { num: '6+', label: 'Income Lanes' },
             { num: 'XAUUSD', label: 'Primary Market' },
             { num: '∞', label: 'Money Moves' },
           ].map((s) => (
             <div key={s.label}>
-              <span style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '2.8rem', color: 'var(--gold)', lineHeight: 1, display: 'block' }}>
+              <span style={{
+                fontFamily: '"Bebas Neue", sans-serif',
+                fontSize: '2.8rem',
+                color: 'var(--gold)',
+                lineHeight: 1,
+                display: 'block',
+              }}>
                 {s.num}
               </span>
-              <span style={{ fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(245,240,232,0.4)', marginTop: 4, display: 'block', fontFamily: '"Space Mono", monospace' }}>
+              <span style={{
+                fontSize: '0.6rem',
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                color: 'rgba(245,240,232,0.4)',
+                marginTop: 4,
+                display: 'block',
+                fontFamily: '"Space Mono", monospace',
+              }}>
                 {s.label}
               </span>
             </div>
@@ -114,7 +131,7 @@ export default function HomeHero() {
         </motion.div>
       </div>
 
-      {/* Candlestick SVG — right side */}
+      {/* Candlestick SVG — right side desktop */}
       <div style={{
         position: 'absolute',
         right: '6%',
@@ -122,7 +139,6 @@ export default function HomeHero() {
         transform: 'translateY(-50%)',
         width: 380,
         opacity: 0.9,
-        display: 'none',
       }}
         className="hidden xl:block"
       >

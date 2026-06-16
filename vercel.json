@@ -1,0 +1,34 @@
+{
+  "redirects": [
+    {
+      "source": "/courier-income-lab",
+      "destination": "/coast/route-harbor",
+      "permanent": true
+    },
+    {
+      "source": "/pages/route-harbor",
+      "destination": "/coast/route-harbor",
+      "permanent": true
+    },
+    {
+      "source": "/pages/route-harbor/:path*",
+      "destination": "/coast/route-harbor",
+      "permanent": true
+    },
+    {
+      "source": "/pages/fantasy-island",
+      "destination": "/coast/fantasy-island",
+      "permanent": true
+    },
+    {
+      "source": "/pages/fantasy-island/:path*",
+      "destination": "/coast/fantasy-island",
+      "permanent": true
+    },
+    {
+      "source": "/products/medical-courier-guide",
+      "destination": "/products/medical-courier-guide/",
+      "permanent": false
+    }
+  ]
+}

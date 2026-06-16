@@ -12,6 +12,7 @@ import CharacterSection from '@/components/home/CharacterSection'
 import FlagshipVideos from '@/components/home/FlagshipVideos'
 import ScottKingCoastMap from '@/components/map/ScottKingCoastMap'
 import PassportPreview from '@/components/passport/PassportPreview'
+import ProductPriority from '@/components/home/ProductPriority'
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <Navbar />
       <HomeHero />
       <EcosystemMarquee />
+      <ProductPriority />
       <FlagshipVideos />
       <EcosystemMarquee variant="dark" reverse />
       <ScottKingCoastMap />

@@ -3,13 +3,13 @@
 import Link from 'next/link'
 
 const divisions = [
-  { label: 'Trading Chef',            href: '/trading-chef' },
-  { label: 'Trading Chef University', href: '/trading-chef-university' },
-  { label: 'Courier Income Lab',      href: '/courier-income-lab' },
-  { label: 'Breaded Or Not?!',        href: '/breaded' },
-  { label: 'Money Move Playbooks',    href: '/playbooks' },
-  { label: 'Fantasy Draft Bible',     href: '/fantasy' },
-  { label: 'AI Operator Lab',         href: '/about' },
+  { label: 'Trading Chef',              href: '/trading-chef' },
+  { label: 'Trading Chef University',   href: '/trading-chef-university' },
+  { label: 'Route Harbor',             href: '/coast/route-harbor' },
+  { label: 'Medical Courier Insider Edge', href: '/products/medical-courier-guide/' },
+  { label: 'Breaded Or Not?!',          href: '/breaded' },
+  { label: 'Money Move Playbooks',      href: '/playbooks' },
+  { label: 'Fantasy Draft Bible',       href: '/fantasy' },
 ]
 const quickLinks = [
   { label: 'Home',       href: '/' },
@@ -139,8 +139,8 @@ export default function Footer() {
           flexWrap: 'wrap',
           gap: 16,
         }}>
-          <span style={{ fontSize: '0.62rem', color: 'rgba(245,240,232,0.25)', letterSpacing: '0.05em', fontFamily: '"Space Mono", monospace' }}>
-            © {new Date().getFullYear()} MysterMyself Ecosystem. All rights reserved. Trading involves risk. Educational content only — not financial advice.
+          <span style={{ fontSize: '0.62rem', color: 'rgba(245,240,232,0.25)', letterSpacing: '0.05em', fontFamily: '"Space Mono", monospace', lineHeight: 1.6 }}>
+            © 2026 MysterMyself / Scott-King Coast. All rights reserved. Trading involves risk — educational content only, not financial advice. As an affiliate, MysterMyself may earn from qualifying purchases.
           </span>
           <a href="https://x.com/mysterycartel" target="_blank" rel="noopener noreferrer"
             style={{ fontSize: '0.62rem', color: 'var(--gold)', letterSpacing: '0.1em', textDecoration: 'none', fontFamily: '"Space Mono", monospace' }}
