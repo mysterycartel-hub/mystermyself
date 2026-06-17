@@ -6,21 +6,20 @@ import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
+const BEEHIIV_SIGNUP = process.env.NEXT_PUBLIC_BEEHIIV_SIGNUP_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com/subscribe'
+
 const links = [
-  { label: 'Home',         href: '/' },
-  { label: 'The Coast',    href: '/coast' },
-  { label: 'Passport',     href: '/passport' },
-  { label: 'Academy',      href: '/academy' },
-  { label: 'Kitchen',      href: '/kitchen' },
-  { label: 'TCU Theater',  href: '/tcu-theater' },
-  { label: 'Trading Chef', href: '/trading-chef' },
-  { label: 'TCU',          href: '/trading-chef-university' },
-  { label: 'Courier Lab',  href: '/courier-income-lab' },
-  { label: 'Breaded',      href: '/breaded' },
-  { label: 'Playbooks',    href: '/playbooks' },
-  { label: 'Fantasy',      href: '/fantasy' },
-  { label: 'Community',    href: '/community' },
-  { label: 'About',        href: '/about' },
+  { label: 'Home',          href: '/' },
+  { label: 'The Coast',     href: '/coast' },
+  { label: 'Route Harbor',  href: '/coast/route-harbor' },
+  { label: 'Academy',       href: '/academy' },
+  { label: 'Kitchen',       href: '/kitchen' },
+  { label: 'TCU Theater',   href: '/tcu-theater' },
+  { label: 'Trading Chef',  href: '/trading-chef' },
+  { label: 'Fantasy',       href: '/fantasy' },
+  { label: 'Playbooks',     href: '/playbooks' },
+  { label: 'Community',     href: '/community' },
+  { label: 'About',         href: '/about' },
 ]
 
 export default function Navbar() {
@@ -108,8 +107,10 @@ export default function Navbar() {
       </ul>
 
       {/* CTA */}
-      <Link
-        href="/trading-chef-university#pricing"
+      <a
+        href={BEEHIIV_SIGNUP}
+        target="_blank"
+        rel="noopener noreferrer"
         className="hidden xl:inline-block"
         style={{
           background: '#c9a84c',
@@ -121,14 +122,11 @@ export default function Navbar() {
           letterSpacing: '0.12em',
           textTransform: 'uppercase',
           textDecoration: 'none',
-          transition: 'background 0.2s, transform 0.2s',
           whiteSpace: 'nowrap',
         }}
-        onMouseEnter={(e) => { (e.target as HTMLElement).style.background = '#f0c96e' }}
-        onMouseLeave={(e) => { (e.target as HTMLElement).style.background = '#c9a84c' }}
       >
         Start Here →
-      </Link>
+      </a>
 
       {/* Mobile burger */}
       <button
@@ -201,14 +199,16 @@ export default function Navbar() {
                 transition={{ delay: 0.45 }}
                 style={{ marginTop: 12 }}
               >
-                <Link
-                  href="/trading-chef-university#pricing"
+                <a
+                  href={BEEHIIV_SIGNUP}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setOpen(false)}
                   className="btn-primary"
-                  style={{ width: '100%', justifyContent: 'center' }}
+                  style={{ width: '100%', justifyContent: 'center', textDecoration: 'none' }}
                 >
                   <span>Start Here →</span>
-                </Link>
+                </a>
               </motion.div>
             </div>
           </motion.div>

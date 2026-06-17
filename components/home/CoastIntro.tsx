@@ -27,11 +27,17 @@ export default function CoastIntro() {
           color: 'rgba(245,240,232,0.6)',
           lineHeight: 1.9,
           maxWidth: 620,
+          marginBottom: 32,
         }}>
-          Scott-King Coast is the MysterMyself ecosystem — a connected world of income
-          districts where skills become income, income becomes assets, and assets create
-          freedom.
+          Scott-King Coast is the MysterMyself world where skills become income,
+          income becomes assets, and assets create freedom.
         </p>
+
+        <a href="#districts" style={{ textDecoration: 'none', display: 'inline-block' }}>
+          <div className="btn-secondary">
+            Choose Your District →
+          </div>
+        </a>
       </div>
     </section>
   )

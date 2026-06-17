@@ -11,18 +11,22 @@ const divisions = [
   { label: 'Money Move Playbooks',      href: '/playbooks' },
   { label: 'Fantasy Draft Bible',       href: '/fantasy' },
 ]
+const SIGNUP_URL = process.env.NEXT_PUBLIC_BEEHIIV_SIGNUP_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com/subscribe'
+
 const quickLinks = [
-  { label: 'Home',       href: '/' },
-  { label: 'Community',  href: '/community' },
-  { label: 'About',      href: '/about' },
-  { label: 'Free Guide', href: '/#lead' },
-  { label: 'Admin',      href: '/admin' },
+  { label: 'Home',                       href: '/' },
+  { label: 'Subscribe',                  href: SIGNUP_URL },
+  { label: 'Route Harbor',               href: '/coast/route-harbor' },
+  { label: 'Fantasy Island',             href: '/coast/fantasy-island' },
+  { label: 'Medical Courier Guide',      href: '/products/medical-courier-guide' },
+  { label: 'Community',                  href: '/community' },
+  { label: 'About',                      href: '/about' },
 ]
 const legal = [
-  { label: 'Disclaimer',     href: '#' },
-  { label: 'Privacy Policy', href: '#' },
-  { label: 'Terms of Use',   href: '#' },
-  { label: 'Refund Policy',  href: '#' },
+  { label: 'Disclaimer',     href: '/about' },
+  { label: 'Privacy Policy', href: '/about' },
+  { label: 'Terms of Use',   href: '/about' },
+  { label: 'Refund Policy',  href: '/about' },
 ]
 const PUBLICATION_URL = process.env.NEXT_PUBLIC_BEEHIIV_PUBLICATION_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com'
 

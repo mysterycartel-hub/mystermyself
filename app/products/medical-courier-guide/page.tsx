@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     'Learn how to find pharmacy, lab, and medical courier opportunities without depending only on job boards or delivery apps. The Route Harbor method.',
 }
 
-const BEEHIIV = 'https://maurices-newsletter-b7274b.beehiiv.com'
+const BEEHIIV = process.env.NEXT_PUBLIC_BEEHIIV_SIGNUP_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com/subscribe'
 const BLUE = '#0EA5E9'
 
 const whatsInside = [
@@ -165,10 +165,10 @@ export default function MedicalCourierGuidePage() {
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
               }}>
-                Get Instant Access — $37 →
+                Join Waitlist / Get First Chapter Free →
               </div>
             </a>
-            <a href={BEEHIIV} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+            <Link href="/coast/route-harbor" style={{ textDecoration: 'none' }}>
               <div style={{
                 border: `1px solid ${BLUE}50`,
                 color: BLUE,
@@ -179,9 +179,9 @@ export default function MedicalCourierGuidePage() {
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
               }}>
-                Get First Chapter Free
+                ← Back to Route Harbor
               </div>
-            </a>
+            </Link>
           </div>
         </div>
       </section>

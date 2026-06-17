@@ -13,7 +13,7 @@ const fadeUp = (delay: number) => ({
 
 export default function HomeHero() {
   return (
-    <section className="hero" style={{
+    <section id="start-here" className="hero" style={{
       minHeight: '100vh',
       display: 'flex',
       alignItems: 'center',
@@ -82,9 +82,9 @@ export default function HomeHero() {
           <a href={BEEHIIV} target="_blank" rel="noopener noreferrer" className="btn-primary">
             <span>Join The Opportunity List →</span>
           </a>
-          <Link href="/coast" className="btn-secondary">
-            Enter The Coast
-          </Link>
+          <a href="#districts" className="btn-secondary">
+            Explore The Coast
+          </a>
         </motion.div>
 
         {/* Stats */}

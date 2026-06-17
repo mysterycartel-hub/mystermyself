@@ -2,7 +2,7 @@ const SIGNUP_URL = process.env.NEXT_PUBLIC_BEEHIIV_SIGNUP_URL ?? 'https://mauric
 
 export default function BeehiivSubscribe() {
   return (
-    <section style={{
+    <section id="subscribe" style={{
       background: 'var(--deep)',
       borderTop: '1px solid rgba(201,168,76,0.12)',
       borderBottom: '1px solid rgba(201,168,76,0.12)',
@@ -36,8 +36,8 @@ export default function BeehiivSubscribe() {
           letterSpacing: '0.02em',
           marginBottom: 20,
         }}>
-          JOIN THE MYSTERMYSELF<br />
-          <span style={{ color: 'var(--gold)' }}>OPPORTUNITY LIST</span>
+          GET THE NEXT<br />
+          <span style={{ color: 'var(--gold)' }}>OPPORTUNITY DROP.</span>
         </h2>
 
         <p style={{
@@ -47,8 +47,8 @@ export default function BeehiivSubscribe() {
           marginBottom: 32,
           fontFamily: '"Space Mono", monospace',
         }}>
-          Get weekly drops from Scott-King Coast — courier income, Trading Chef lessons,
-          Fantasy Island updates, AI tools, affiliate plays, and business-building systems.
+          Courier income, Trading Chef lessons, Fantasy Island updates, AI tools,
+          affiliate plays, and business-building systems — sent free.
         </p>
 
         <a
@@ -58,7 +58,7 @@ export default function BeehiivSubscribe() {
           style={{ textDecoration: 'none', display: 'inline-block' }}
         >
           <div className="btn-primary" style={{ padding: '16px 44px' }}>
-            <span>Get Free Access →</span>
+            <span>Join Free →</span>
           </div>
         </a>
       </div>

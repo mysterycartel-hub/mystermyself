@@ -3,12 +3,12 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
-const BEEHIIV = 'https://maurices-newsletter-b7274b.beehiiv.com'
+const SIGNUP = process.env.NEXT_PUBLIC_BEEHIIV_SIGNUP_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com/subscribe'
 
 export default function ProductPriority() {
   return (
-    <section style={{
-      background: 'var(--deep)',
+    <section id="featured-opportunity" style={{
+      background: 'var(--black)',
       borderTop: '1px solid rgba(14,165,233,0.15)',
       borderBottom: '1px solid rgba(14,165,233,0.15)',
       padding: 'clamp(64px, 10vw, 120px) clamp(20px, 5vw, 80px)',
@@ -22,7 +22,7 @@ export default function ProductPriority() {
       >
         <div className="section-label">
           <div className="section-label-line" style={{ background: '#0EA5E9' }} />
-          <span className="section-label-text" style={{ color: '#0EA5E9' }}>Route Harbor · Featured Product</span>
+          <span className="section-label-text" style={{ color: '#0EA5E9' }}>Featured Opportunity</span>
         </div>
       </motion.div>
 
@@ -39,7 +39,6 @@ export default function ProductPriority() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          {/* District badge */}
           <div style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -57,7 +56,7 @@ export default function ProductPriority() {
               textTransform: 'uppercase',
               color: '#0EA5E9',
             }}>
-              Route Harbor Program
+              Start with Route Harbor
             </span>
           </div>
 
@@ -66,7 +65,7 @@ export default function ProductPriority() {
             fontSize: 'clamp(3rem, 6vw, 5.5rem)',
             lineHeight: 0.95,
             letterSpacing: '0.02em',
-            marginBottom: 24,
+            marginBottom: 16,
           }}>
             MEDICAL COURIER<br />
             <span style={{ color: '#0EA5E9' }}>INSIDER EDGE</span>
@@ -74,45 +73,28 @@ export default function ProductPriority() {
 
           <p style={{
             fontSize: '0.82rem',
+            color: 'rgba(245,240,232,0.5)',
+            lineHeight: 1.7,
+            maxWidth: 440,
+            marginBottom: 12,
+            fontFamily: '"Space Mono", monospace',
+          }}>
+            Medical Courier Insider Edge is the first live opportunity path.
+          </p>
+
+          <p style={{
+            fontSize: '0.82rem',
             color: 'rgba(245,240,232,0.65)',
             lineHeight: 1.9,
             maxWidth: 480,
-            marginBottom: 32,
+            marginBottom: 36,
           }}>
             Learn how to find pharmacy, lab, and medical courier opportunities
             without depending only on job boards or delivery apps.
           </p>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 40 }}>
-            {[
-              'How to identify active medical courier contracts in your area',
-              'Pharmacy, lab, and health system client research methods',
-              'Route math — what you can realistically earn per run',
-              'How to position yourself without a track record',
-              'The Route Harbor method for landing your first contract',
-            ].map((item) => (
-              <div key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-                <div style={{
-                  width: 6, height: 6,
-                  background: '#0EA5E9',
-                  borderRadius: '50%',
-                  marginTop: 6,
-                  flexShrink: 0,
-                }} />
-                <span style={{
-                  fontSize: '0.78rem',
-                  color: 'rgba(245,240,232,0.6)',
-                  lineHeight: 1.7,
-                  fontFamily: '"Space Mono", monospace',
-                }}>
-                  {item}
-                </span>
-              </div>
-            ))}
-          </div>
-
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <Link href="/products/medical-courier-guide/" style={{ textDecoration: 'none' }}>
+            <Link href="/products/medical-courier-guide" style={{ textDecoration: 'none' }}>
               <div style={{
                 background: '#0EA5E9',
                 color: '#060608',
@@ -123,10 +105,10 @@ export default function ProductPriority() {
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
               }}>
-                Get Instant Access →
+                View The Guide →
               </div>
             </Link>
-            <a href={BEEHIIV} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+            <a href={SIGNUP} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
               <div style={{
                 border: '1px solid rgba(14,165,233,0.4)',
                 color: '#0EA5E9',
@@ -137,7 +119,7 @@ export default function ProductPriority() {
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
               }}>
-                Get First Chapter Free
+                Get Free Courier Chapter
               </div>
             </a>
           </div>
@@ -151,13 +133,12 @@ export default function ProductPriority() {
           transition={{ duration: 0.7, delay: 0.1 }}
         >
           <div style={{
-            background: 'var(--black)',
+            background: 'var(--deep)',
             border: '1px solid rgba(14,165,233,0.25)',
             padding: 'clamp(32px, 5vw, 48px)',
             position: 'relative',
             overflow: 'hidden',
           }}>
-            {/* Top accent line */}
             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: '#0EA5E9' }} />
 
             <div style={{
@@ -172,37 +153,19 @@ export default function ProductPriority() {
             </div>
 
             <div style={{ display: 'flex', alignItems: 'flex-end', gap: 12, marginBottom: 8 }}>
-              <span style={{
-                fontFamily: '"Bebas Neue", sans-serif',
-                fontSize: '5rem',
-                color: 'var(--cream)',
-                lineHeight: 1,
-              }}>
+              <span style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '5rem', color: 'var(--cream)', lineHeight: 1 }}>
                 $37
               </span>
-              <span style={{
-                fontFamily: '"Bebas Neue", sans-serif',
-                fontSize: '2rem',
-                color: 'rgba(245,240,232,0.25)',
-                textDecoration: 'line-through',
-                lineHeight: 1,
-                marginBottom: 8,
-              }}>
+              <span style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '2rem', color: 'rgba(245,240,232,0.25)', textDecoration: 'line-through', lineHeight: 1, marginBottom: 8 }}>
                 $47
               </span>
             </div>
 
-            <p style={{
-              fontSize: '0.72rem',
-              color: 'rgba(245,240,232,0.45)',
-              fontFamily: '"Space Mono", monospace',
-              lineHeight: 1.7,
-              marginBottom: 32,
-            }}>
+            <p style={{ fontSize: '0.72rem', color: 'rgba(245,240,232,0.45)', fontFamily: '"Space Mono", monospace', lineHeight: 1.7, marginBottom: 28 }}>
               One-time access. Instant delivery. No subscription.
             </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 32 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
               {['Digital guide — instant access', 'Route Harbor method included', 'Real income math, no hype', 'Free first chapter via newsletter'].map((f) => (
                 <div key={f} style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                   <span style={{ color: '#0EA5E9', fontSize: '0.8rem' }}>✓</span>
@@ -211,7 +174,7 @@ export default function ProductPriority() {
               ))}
             </div>
 
-            <Link href="/products/medical-courier-guide/" style={{ textDecoration: 'none', display: 'block' }}>
+            <Link href="/products/medical-courier-guide" style={{ textDecoration: 'none', display: 'block' }}>
               <div style={{
                 background: '#0EA5E9',
                 color: '#060608',
@@ -222,20 +185,12 @@ export default function ProductPriority() {
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
                 textAlign: 'center',
-                width: '100%',
               }}>
-                Get Instant Access →
+                View The Guide →
               </div>
             </Link>
 
-            <p style={{
-              fontSize: '0.6rem',
-              color: 'rgba(245,240,232,0.25)',
-              fontFamily: '"Space Mono", monospace',
-              textAlign: 'center',
-              marginTop: 16,
-              lineHeight: 1.6,
-            }}>
+            <p style={{ fontSize: '0.6rem', color: 'rgba(245,240,232,0.25)', fontFamily: '"Space Mono", monospace', textAlign: 'center', marginTop: 16, lineHeight: 1.6 }}>
               As an affiliate, MysterMyself may earn from qualifying purchases.
             </p>
           </div>

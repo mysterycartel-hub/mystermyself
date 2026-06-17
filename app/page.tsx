@@ -5,7 +5,6 @@ import Footer from '@/components/Footer'
 import EcosystemMarquee from '@/components/EcosystemMarquee'
 import LeadMagnetForm from '@/components/LeadMagnetForm'
 import HomeHero from '@/components/home/HomeHero'
-import EcosystemGrid from '@/components/home/EcosystemGrid'
 import WealthCity from '@/components/home/WealthCity'
 import HomeRoadmap from '@/components/home/HomeRoadmap'
 import CharacterSection from '@/components/home/CharacterSection'
@@ -15,6 +14,7 @@ import PassportPreview from '@/components/passport/PassportPreview'
 import ProductPriority from '@/components/home/ProductPriority'
 import BeehiivSubscribe from '@/components/home/BeehiivSubscribe'
 import CoastIntro from '@/components/home/CoastIntro'
+import DistrictActionGrid from '@/components/home/DistrictActionGrid'
 
 export default function Home() {
   return (
@@ -24,11 +24,11 @@ export default function Home() {
       <BeehiivSubscribe />
       <CoastIntro />
       <EcosystemMarquee />
+      <DistrictActionGrid />
       <ProductPriority />
       <FlagshipVideos />
       <EcosystemMarquee variant="dark" reverse />
       <ScottKingCoastMap />
-      <EcosystemGrid />
       <WealthCity />
       <HomeRoadmap />
       <PassportPreview />
