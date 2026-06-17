@@ -27,10 +27,23 @@ export default function CoastIntro() {
           color: 'rgba(245,240,232,0.6)',
           lineHeight: 1.9,
           maxWidth: 620,
+          marginBottom: 16,
+        }}>
+          Scott-King Coast is an open information hub. Nine districts covering courier income,
+          trading education, fantasy tools, AI resources, affiliate plays, food business, and more.
+          Free to subscribers. No paywalls yet — just resources, guides, and opportunity drops.
+        </p>
+
+        <p style={{
+          fontSize: '0.72rem',
+          color: 'rgba(245,240,232,0.35)',
+          fontFamily: '"Space Mono", monospace',
+          lineHeight: 1.7,
+          maxWidth: 560,
           marginBottom: 32,
         }}>
-          Scott-King Coast is the MysterMyself world where skills become income,
-          income becomes assets, and assets create freedom.
+          Every district gives value before asking for anything. Paid sections will be added later
+          after the community grows.
         </p>
 
         <a href="#districts" style={{ textDecoration: 'none', display: 'inline-block' }}>

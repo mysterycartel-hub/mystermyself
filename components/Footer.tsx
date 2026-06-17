@@ -16,6 +16,7 @@ const SIGNUP_URL = process.env.NEXT_PUBLIC_BEEHIIV_SIGNUP_URL ?? 'https://mauric
 const quickLinks = [
   { label: 'Home',                       href: '/' },
   { label: 'Subscribe',                  href: SIGNUP_URL },
+  { label: 'Follow The Coast',           href: '/follow-the-coast' },
   { label: 'Route Harbor',               href: '/coast/route-harbor' },
   { label: 'Fantasy Island',             href: '/coast/fantasy-island' },
   { label: 'Medical Courier Guide',      href: '/products/medical-courier-guide' },
@@ -147,7 +148,8 @@ export default function Footer() {
           gap: 16,
         }}>
           <span style={{ fontSize: '0.62rem', color: 'rgba(245,240,232,0.25)', letterSpacing: '0.05em', fontFamily: '"Space Mono", monospace', lineHeight: 1.6 }}>
-            © 2026 MysterMyself / Scott-King Coast. All rights reserved. Trading involves risk — educational content only, not financial advice. As an affiliate, MysterMyself may earn from qualifying purchases.
+            © 2026 MysterMyself / Scott-King Coast. All rights reserved. Trading involves risk — educational content only, not financial advice.<br />
+            <strong style={{ color: 'rgba(245,240,232,0.35)' }}>Affiliate Disclosure:</strong> MysterMyself may earn a commission from qualifying purchases through links on this site. This does not affect our editorial content or recommendations.
           </span>
           <a href="https://x.com/mysterycartel" target="_blank" rel="noopener noreferrer"
             style={{ fontSize: '0.62rem', color: 'var(--gold)', letterSpacing: '0.1em', textDecoration: 'none', fontFamily: '"Space Mono", monospace' }}

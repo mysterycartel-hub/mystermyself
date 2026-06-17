@@ -125,7 +125,7 @@ export default function MedicalCourierGuidePage() {
             border: `1px solid ${BLUE}30`,
             marginBottom: 28,
           }}>
-            🚢 Route Harbor Program · Road-Based Income
+            🚢 Route Harbor · Free Resource Hub
           </div>
 
           <h1 style={{
@@ -146,11 +146,21 @@ export default function MedicalCourierGuidePage() {
             color: 'rgba(245,240,232,0.65)',
             lineHeight: 1.9,
             maxWidth: 560,
-            marginBottom: 40,
+            marginBottom: 16,
             fontFamily: '"Space Mono", monospace',
           }}>
-            Learn how to find pharmacy, lab, and medical courier opportunities
-            without depending only on job boards or delivery apps.
+            Free resource hub covering how to find pharmacy, lab, and medical courier
+            opportunities without depending only on job boards or delivery apps.
+          </p>
+
+          <p style={{
+            fontSize: '0.72rem',
+            color: 'rgba(245,240,232,0.35)',
+            lineHeight: 1.8,
+            maxWidth: 520,
+            marginBottom: 40,
+          }}>
+            Subscribe free to get the first chapter now. The full paid guide is coming soon.
           </p>
 
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -165,7 +175,7 @@ export default function MedicalCourierGuidePage() {
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
               }}>
-                Join Waitlist / Get First Chapter Free →
+                Get The Free Chapter →
               </div>
             </a>
             <Link href="/coast/route-harbor" style={{ textDecoration: 'none' }}>
@@ -397,7 +407,7 @@ export default function MedicalCourierGuidePage() {
           <div>
             <div className="section-label" style={{ marginBottom: 32 }}>
               <div className="section-label-line" style={{ background: BLUE }} />
-              <span className="section-label-text" style={{ color: BLUE }}>Get Access</span>
+              <span className="section-label-text" style={{ color: BLUE }}>Free Resources</span>
             </div>
 
             <h2 style={{
@@ -406,21 +416,31 @@ export default function MedicalCourierGuidePage() {
               lineHeight: 0.95,
               marginBottom: 24,
             }}>
-              STOP WAITING FOR<br />
-              <span style={{ color: BLUE }}>JOB BOARDS</span><br />
-              TO FIND YOU.
+              START FREE.<br />
+              <span style={{ color: BLUE }}>FIRST CHAPTER</span><br />
+              DELIVERED NOW.
             </h2>
 
             <p style={{
               fontSize: '0.8rem',
               color: 'rgba(245,240,232,0.55)',
               lineHeight: 1.9,
+              marginBottom: 16,
+              maxWidth: 420,
+            }}>
+              Subscribe to The Opportunity List and get the first chapter of Medical Courier
+              Insider Edge free. The full guide launches soon at $37 — subscribers get early access.
+            </p>
+
+            <p style={{
+              fontSize: '0.7rem',
+              color: 'rgba(245,240,232,0.3)',
+              fontFamily: '"Space Mono", monospace',
+              lineHeight: 1.7,
               marginBottom: 36,
               maxWidth: 420,
             }}>
-              Medical courier contracts exist. Pharmacies, labs, and clinics hire
-              independent couriers every week. This guide shows you exactly how
-              to find them — before anyone else does.
+              No payment required. Just subscribe.
             </p>
 
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -435,21 +455,7 @@ export default function MedicalCourierGuidePage() {
                   letterSpacing: '0.12em',
                   textTransform: 'uppercase',
                 }}>
-                  Get Instant Access →
-                </div>
-              </a>
-              <a href={BEEHIIV} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                <div style={{
-                  border: `1px solid ${BLUE}50`,
-                  color: BLUE,
-                  padding: '18px 36px',
-                  fontFamily: '"Space Mono", monospace',
-                  fontSize: '0.7rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                }}>
-                  Get First Chapter Free
+                  Get First Chapter Free →
                 </div>
               </a>
             </div>
@@ -504,7 +510,7 @@ export default function MedicalCourierGuidePage() {
               lineHeight: 1.7,
               marginBottom: 28,
             }}>
-              One-time. Instant access. No upsell.
+              Full guide coming soon. Subscribe free to get the first chapter now and early access when it launches.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
@@ -534,7 +540,7 @@ export default function MedicalCourierGuidePage() {
                 textTransform: 'uppercase',
                 textAlign: 'center',
               }}>
-                Get Instant Access →
+                Get First Chapter Free →
               </div>
             </a>
           </div>

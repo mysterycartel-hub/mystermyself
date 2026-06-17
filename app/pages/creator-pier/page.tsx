@@ -2,23 +2,25 @@ import DistrictPage from '@/components/DistrictPage'
 
 export const metadata = {
   title: 'Creator Pier | Scott-King Coast — MysterMyself',
-  description: 'AI tools, affiliate systems, YouTube growth, and creator income infrastructure.',
+  description: 'AI Tool Vault, Affiliate Tool Vault, YouTube growth, and creator income infrastructure.',
 }
 
 export default function Page() {
   return (
     <DistrictPage
       name="Creator Pier"
-      eyebrow="AI + Affiliate + Content"
-      headline="Turn tools into assets and content into income."
-      copy="Creator Pier organizes AI tools, affiliate programs, YouTube growth, Beehiiv, Canva, and the tool vault into a practical creator income lane."
+      eyebrow="AI Tool Vault · Affiliate Picks · Creator Systems"
+      headline="The tools that run the Coast — and how to monetize them."
+      copy="Creator Pier is the AI Tool Vault and Affiliate Tool Vault for the MysterMyself ecosystem. Every tool used to build, grow, and monetize is documented here with affiliate links, use-case guides, and income plays."
       accent="#A855F7"
-      primary="Get AI + Affiliate Tools"
+      primary="Get AI + Affiliate Tool Drops"
       bullets={[
-        'AI Tool Vault for the tools used to build the Coast.',
-        'Affiliate program research and placement.',
-        'YouTube and short-form content systems.',
-        'Beehiiv audience growth and newsletter drops.',
+        'AI Tool Vault: the exact tools used to build Scott-King Coast.',
+        'Affiliate Picks: vetted tools with earning potential for creators.',
+        'YouTube and short-form content systems for audience growth.',
+        'Beehiiv audience growth and newsletter monetization guides.',
+        'Canva, Claude, and automation stacks broken down step by step.',
+        'Affiliate disclosure on every recommendation — no hidden deals.',
       ]}
     />
   )

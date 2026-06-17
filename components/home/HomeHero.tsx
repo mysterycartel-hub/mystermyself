@@ -80,10 +80,10 @@ export default function HomeHero() {
           style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}
         >
           <a href={BEEHIIV} target="_blank" rel="noopener noreferrer" className="btn-primary">
-            <span>Join The Opportunity List →</span>
+            <span>Join The Free Hub →</span>
           </a>
           <a href="#districts" className="btn-secondary">
-            Explore The Coast
+            Explore The Free Hub
           </a>
         </motion.div>
 

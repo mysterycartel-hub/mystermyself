@@ -61,6 +61,20 @@ export default function BeehiivSubscribe() {
             <span>Join Free →</span>
           </div>
         </a>
+
+        <p style={{
+          marginTop: 20,
+          fontSize: '0.62rem',
+          color: 'rgba(245,240,232,0.3)',
+          fontFamily: '"Space Mono", monospace',
+          lineHeight: 1.7,
+        }}>
+          After joining, visit the{' '}
+          <a href="/follow-the-coast" style={{ color: 'var(--gold)', textDecoration: 'none' }}>
+            Follow The Coast
+          </a>{' '}
+          page to subscribe to district drops and follow all channels.
+        </p>
       </div>
     </section>
   )
