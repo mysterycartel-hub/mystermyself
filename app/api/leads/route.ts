@@ -13,29 +13,26 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid email' }, { status: 400 })
     }
 
-    // ── Supabase insert ──────────────────────────────────────────────────
-    // Uncomment when Supabase is configured:
-    //
-    // const { createServerClient } = await import('@/lib/supabase')
-    // const supabase = createServerClient()
-    // const { error } = await supabase.from('leads').upsert(
-    //   { name: name.trim(), email: email.toLowerCase().trim(), interest, division, source: 'website' },
-    //   { onConflict: 'email', ignoreDuplicates: false }
-    // )
-    // if (error) {
-    //   console.error('Supabase lead insert error:', error)
-    //   return NextResponse.json({ error: 'Database error' }, { status: 500 })
-    // }
-    // ────────────────────────────────────────────────────────────────────
-
-    // Local fallback — log to console in dev
-    console.log('[LEAD CAPTURED]', {
-      name: name.trim(),
-      email: email.toLowerCase().trim(),
-      interest,
-      division,
-      timestamp: new Date().toISOString(),
-    })
+    if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      const { createServerClient } = await import('@/lib/supabase')
+      const supabase = createServerClient()
+      const { error } = await supabase.from('leads').upsert(
+        { name: name.trim(), email: email.toLowerCase().trim(), interest, division, source: 'website' },
+        { onConflict: 'email', ignoreDuplicates: false }
+      )
+      if (error) {
+        console.error('Supabase lead insert error:', error)
+        // Do not block — log and continue
+      }
+    } else {
+      console.log('[LEAD CAPTURED — no Supabase]', {
+        name: name.trim(),
+        email: email.toLowerCase().trim(),
+        interest,
+        division,
+        timestamp: new Date().toISOString(),
+      })
+    }
 
     return NextResponse.json({ success: true, message: 'Lead captured' }, { status: 201 })
   } catch (err) {
