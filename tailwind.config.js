@@ -8,6 +8,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        /* shadcn CSS variable references */
+        border:      'hsl(var(--border))',
+        input:       'hsl(var(--input))',
+        ring:        'hsl(var(--ring))',
+        background:  'hsl(var(--background))',
+        foreground:  'hsl(var(--foreground))',
+        card: {
+          DEFAULT:    'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+        muted: {
+          DEFAULT:    'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
         black:    '#060608',
         deep:     '#0d0d10',
         gold:     '#c9a84c',

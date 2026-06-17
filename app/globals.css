@@ -16,6 +16,17 @@
   --red-bright: #e74c3c;
   --cream:      #f5f0e8;
   --white:      #f5f0e8;
+
+  /* shadcn-compatible HSL tokens (dark palette matching project aesthetic) */
+  --background:       240 6% 3%;   /* #060608 */
+  --foreground:       40 33% 92%;  /* #f5f0e8 cream */
+  --card:             240 14% 6%;  /* #0d0d10 deep */
+  --card-foreground:  40 33% 92%;
+  --border:           38 45% 25%;  /* gold-dim at low opacity */
+  --input:            240 14% 6%;
+  --ring:             38 55% 55%;  /* gold */
+  --muted:            240 10% 10%;
+  --muted-foreground: 40 20% 55%;
 }
 
 /* ── Base reset ── */
