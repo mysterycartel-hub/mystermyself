@@ -1,7 +1,3 @@
-export const BEEHIIV_SIGNUP_URL =
-  process.env.NEXT_PUBLIC_BEEHIIV_SIGNUP_URL ||
-  'https://maurices-newsletter-b7274b.beehiiv.com/subscribe'
-
 export const BEEHIIV_PUBLICATION_URL =
   process.env.NEXT_PUBLIC_BEEHIIV_PUBLICATION_URL ||
   'https://maurices-newsletter-b7274b.beehiiv.com'
@@ -15,7 +11,7 @@ export const site = {
 
 export const routes = {
   home: '/',
-  subscribe: BEEHIIV_SIGNUP_URL,
+  subscribe: '/opportunity-list',
   publication: BEEHIIV_PUBLICATION_URL,
   medicalCourierGuide: '/products/medical-courier-guide',
   routeHarbor: '/pages/route-harbor',

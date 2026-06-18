@@ -1,12 +1,11 @@
 'use client'
 
 import { useEffect, Suspense } from 'react'
-import { useSearchParams } from 'next/navigation'
-
-const BEEHIIV_URL = process.env.NEXT_PUBLIC_BEEHIIV_SIGNUP_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com/subscribe'
+import { useSearchParams, useRouter } from 'next/navigation'
 
 function JoinRedirect() {
   const params = useSearchParams()
+  const router = useRouter()
 
   useEffect(() => {
     const returnPath = params.get('return')
@@ -17,15 +16,8 @@ function JoinRedirect() {
     }
     try { localStorage.setItem('skc_join_source', source) } catch { /* noop */ }
 
-    const url = new URL(BEEHIIV_URL)
-    if (source && source !== 'website') {
-      url.searchParams.set('utm_source', source)
-      url.searchParams.set('utm_medium', 'organic')
-      url.searchParams.set('utm_campaign', 'opportunity_list')
-    }
-
-    window.location.href = url.toString()
-  }, [params])
+    router.replace('/opportunity-list')
+  }, [params, router])
 
   return (
     <main style={{
