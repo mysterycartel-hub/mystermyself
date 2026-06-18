@@ -23,7 +23,7 @@ const credentials = [
   { icon: '🍳', label: 'Food Entrepreneur', sub: 'Founder of Breaded Or Not?! — wings, catering, brand.' },
   { icon: '🚚', label: 'Logistics Researcher', sub: 'Medical courier, contract routes, road-based income systems.' },
   { icon: '🤖', label: 'AI Operator', sub: 'Claude, ChatGPT, business automation, and AI-powered systems.' },
-  { icon: '📱', label: '@mysterycartel', sub: 'Follow the journey in real time.' },
+  { icon: '📱', label: '@mystermyself', sub: 'Follow the journey in real time.' },
 ]
 
 export default function AboutPage() {
@@ -106,7 +106,7 @@ export default function AboutPage() {
             </blockquote>
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
               <Link href="/trading-chef-university" className="btn-primary"><span>See The Curriculum →</span></Link>
-              <a href="https://x.com/mysterycartel" target="_blank" rel="noopener noreferrer" className="btn-secondary">@mysterycartel</a>
+              <a href="https://x.com/mystermyself" target="_blank" rel="noopener noreferrer" className="btn-secondary">@mystermyself</a>
             </div>
           </motion.div>
         </div>

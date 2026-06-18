@@ -167,7 +167,7 @@ export default function Footer() {
             <a href={SOCIAL.x} target="_blank" rel="noopener noreferrer"
               style={{ fontSize: '0.62rem', color: 'var(--gold)', letterSpacing: '0.1em', textDecoration: 'none', fontFamily: '"Space Mono", monospace' }}
             >
-              @mysterycartel
+              @mystermyself
             </a>
           )}
         </div>

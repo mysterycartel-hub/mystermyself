@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    creator: '@mysterycartel',
+    creator: '@mystermyself',
     title: 'MysterMyself | Scott-King Coast',
     description: 'One City. One System. Your Legacy.',
   },

@@ -327,7 +327,7 @@ export default function FlagshipVideos() {
             borderTop: '1px solid rgba(201,168,76,0.08)',
           }}>
             <a
-              href="https://youtube.com/@mysterycartel"
+              href="https://www.youtube.com/@mystermyself"
               target="_blank"
               rel="noopener noreferrer"
               style={{

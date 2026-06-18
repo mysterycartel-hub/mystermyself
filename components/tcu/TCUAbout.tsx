@@ -6,7 +6,7 @@ const credentials = [
   { icon: '📍', strong: 'West Palm Beach, FL', rest: ' — local roots, global market focus' },
   { icon: '📊', strong: 'XAUUSD specialist', rest: ' — gold-only focus for depth over breadth' },
   { icon: '🍳', strong: 'Founder, Breaded Or Not?!', rest: ' — entrepreneur first, trader second' },
-  { icon: '📱', strong: '@mysterycartel', rest: ' — follow the journey in real time' },
+  { icon: '📱', strong: '@mystermyself', rest: ' — follow the journey in real time' },
 ]
 
 export default function TCUAbout() {
