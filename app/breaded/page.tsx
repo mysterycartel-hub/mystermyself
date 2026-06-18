@@ -5,6 +5,7 @@ import Footer from '@/components/Footer'
 import LeadMagnetForm from '@/components/LeadMagnetForm'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { BREADED, isRealUrl } from '@/lib/social-links'
 
 const pillars = [
   { icon: '🍗', title: 'Wings & Flavor', desc: 'The product is the brand. Flavor profiles, sauce development, and menu strategy that makes people come back.' },
@@ -78,10 +79,57 @@ export default function BreadedPage() {
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }}
-            style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}
+            style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}
           >
-            <Link href="/#lead" className="btn-red"><span>Get The Food Biz Guide →</span></Link>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="btn-secondary">Watch on YouTube</a>
+            <Link href="/opportunity-list" className="btn-red"><span>Get The Food Biz Guide →</span></Link>
+            {isRealUrl(BREADED.orderUrl) && (
+              <a href={BREADED.orderUrl} target="_blank" rel="noopener noreferrer" style={{
+                display: 'inline-block',
+                background: 'var(--red)',
+                color: '#fff',
+                padding: '14px 28px',
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.65rem',
+                fontWeight: 700,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+              }}>
+                Order Now →
+              </a>
+            )}
+            {isRealUrl(BREADED.instagram) && (
+              <a href={BREADED.instagram} target="_blank" rel="noopener noreferrer" style={{
+                display: 'inline-block',
+                border: '1px solid rgba(192,57,43,0.4)',
+                color: 'var(--red)',
+                padding: '14px 24px',
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.62rem',
+                fontWeight: 700,
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+              }}>
+                Instagram →
+              </a>
+            )}
+            {isRealUrl(BREADED.tiktok) && (
+              <a href={BREADED.tiktok} target="_blank" rel="noopener noreferrer" style={{
+                display: 'inline-block',
+                border: '1px solid rgba(192,57,43,0.4)',
+                color: 'var(--red)',
+                padding: '14px 24px',
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.62rem',
+                fontWeight: 700,
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+              }}>
+                TikTok →
+              </a>
+            )}
           </motion.div>
         </div>
       </section>

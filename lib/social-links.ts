@@ -17,6 +17,14 @@ export const SOCIAL = {
   email:       process.env.NEXT_PUBLIC_CONTACT_EMAIL  ?? 'mysterycartel@gmail.com',
 } as const
 
+// ── Breaded Or Not — Flavor District brand links ──────────────────────────
+export const BREADED = {
+  instagram: process.env.NEXT_PUBLIC_BREADED_INSTAGRAM_URL ?? 'https://www.instagram.com/breaded_or_not/',
+  tiktok:    process.env.NEXT_PUBLIC_BREADED_TIKTOK_URL    ?? 'https://www.tiktok.com/@breaded.or.not',
+  facebook:  process.env.NEXT_PUBLIC_BREADED_FACEBOOK_URL  ?? '[NEEDS OWNER URL]',
+  orderUrl:  process.env.NEXT_PUBLIC_BREADED_ORDER_URL     ?? '[NEEDS OWNER URL]',
+} as const
+
 // Returns true if a social URL is real (not a placeholder)
 export function isRealUrl(url: string): boolean {
   return url !== '[NEEDS OWNER URL]' && url.startsWith('http')
