@@ -44,6 +44,14 @@ const CHANNELS = [
     emoji: '◎',
   },
   {
+    platform: 'Facebook',
+    desc: 'MrMyself Scott — community posts, food business updates, and coast drops.',
+    cta: 'Follow on Facebook',
+    href: SOCIAL.facebook,
+    color: '#1877F2',
+    emoji: 'f',
+  },
+  {
     platform: 'X / Twitter',
     desc: 'Real-time commentary, trades in progress, and short-form coast drops.',
     cta: 'Follow on X',

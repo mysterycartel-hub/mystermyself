@@ -69,6 +69,7 @@ const SOCIAL_BUTTONS = [
   { label: 'Subscribe on YouTube',  href: SOCIAL.youtube,   emoji: '▶' },
   { label: 'Follow on TikTok',      href: SOCIAL.tiktok,    emoji: '♪' },
   { label: 'Follow on Instagram',   href: SOCIAL.instagram, emoji: '◎' },
+  { label: 'Follow on Facebook',    href: SOCIAL.facebook,  emoji: 'f' },
   { label: 'Follow on X',           href: SOCIAL.x,         emoji: 'X' },
   { label: 'Follow on Rumble',      href: SOCIAL.rumble,    emoji: '◉' },
 ]

@@ -37,6 +37,7 @@ const socialLinks = [
   { label: 'YouTube',              href: SOCIAL.youtube,   external: true },
   { label: 'TikTok',               href: SOCIAL.tiktok,    external: true },
   { label: 'Instagram',            href: SOCIAL.instagram, external: true },
+  { label: 'Facebook',             href: SOCIAL.facebook,  external: true },
   { label: 'X / Twitter',          href: SOCIAL.x,         external: true },
   { label: 'Rumble',               href: SOCIAL.rumble,    external: true },
 ]
