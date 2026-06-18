@@ -1,7 +1,7 @@
 {
   "redirects": [
     { "source": "/courier-income-lab", "destination": "/route-harbor", "permanent": true },
-    { "source": "/subscribe",          "destination": "/join",          "permanent": false },
+    { "source": "/subscribe",          "destination": "/opportunity-list", "permanent": false },
     { "source": "/newsletter",         "destination": "/opportunity-list", "permanent": false },
     { "source": "/districts",          "destination": "/districts",     "permanent": false },
     { "source": "/start",              "destination": "/dashboard",     "permanent": false }
