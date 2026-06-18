@@ -1,4 +1,4 @@
-const SIGNUP_URL = process.env.NEXT_PUBLIC_BEEHIIV_SIGNUP_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com/subscribe'
+import Link from 'next/link'
 
 export default function BeehiivSubscribe() {
   return (
@@ -51,16 +51,11 @@ export default function BeehiivSubscribe() {
           affiliate plays, and business-building systems — sent free.
         </p>
 
-        <a
-          href={SIGNUP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ textDecoration: 'none', display: 'inline-block' }}
-        >
+        <Link href="/opportunity-list" style={{ textDecoration: 'none', display: 'inline-block' }}>
           <div className="btn-primary" style={{ padding: '16px 44px' }}>
-            <span>Join Free →</span>
+            <span>Enter The Coast →</span>
           </div>
-        </a>
+        </Link>
 
         <p style={{
           marginTop: 20,
@@ -69,11 +64,11 @@ export default function BeehiivSubscribe() {
           fontFamily: '"Space Mono", monospace',
           lineHeight: 1.7,
         }}>
-          After joining, visit the{' '}
-          <a href="/follow-the-coast" style={{ color: 'var(--gold)', textDecoration: 'none' }}>
+          After joining, visit{' '}
+          <Link href="/follow-the-coast" style={{ color: 'var(--gold)', textDecoration: 'none' }}>
             Follow The Coast
-          </a>{' '}
-          page to subscribe to district drops and follow all channels.
+          </Link>{' '}
+          to subscribe across all channels.
         </p>
       </div>
     </section>

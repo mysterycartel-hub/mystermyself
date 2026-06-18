@@ -10,22 +10,22 @@ export const metadata = {
 const RESOURCES = [
   { category: 'Route Harbor · Courier',  color: '#0EA5E9', items: [
     { title: 'Medical Courier Starter Guide', desc: 'How to find pharmacy, lab, and medical courier routes without relying on apps.', href: '/products/medical-courier-guide', badge: 'Free Chapter' },
-    { title: 'Courier Income Math Sheet',     desc: 'Estimate your potential earnings by route type, frequency, and vehicle.', href: '/join', badge: 'Subscriber' },
-    { title: 'Route Acquisition Checklist',   desc: 'Step-by-step process for landing your first courier contract.', href: '/join', badge: 'Subscriber' },
+    { title: 'Courier Income Math Sheet',     desc: 'Estimate your potential earnings by route type, frequency, and vehicle.', href: '/opportunity-list', badge: 'Subscriber' },
+    { title: 'Route Acquisition Checklist',   desc: 'Step-by-step process for landing your first courier contract.', href: '/opportunity-list', badge: 'Subscriber' },
   ]},
   { category: 'Market Marina · Trading',  color: '#c9a84c', items: [
     { title: 'Market Child Lesson',         desc: 'The foundation: what market structure actually is and why it matters.', href: '/academy/market-child', badge: 'Free' },
-    { title: 'XAUUSD Session Playbook',     desc: 'London and New York session behavior for gold traders.', href: '/join', badge: 'Subscriber' },
+    { title: 'XAUUSD Session Playbook',     desc: 'London and New York session behavior for gold traders.', href: '/opportunity-list', badge: 'Subscriber' },
     { title: 'Liquidity Concepts Intro',    desc: 'What liquidity sweeps are and how institutions use them.', href: '/academy/liquidity', badge: 'Free' },
   ]},
   { category: 'Creator Pier · AI Tools',  color: '#A855F7', items: [
     { title: 'Tool Vault Directory',    desc: 'The full Scott-King Coast tool directory — AI, affiliate, and creator tools.', href: '/tools', badge: 'Free' },
-    { title: 'Affiliate Starter Pack',  desc: 'First 5 affiliate programs every content creator should join.', href: '/join', badge: 'Subscriber' },
-    { title: 'Claude Prompt Bible',     desc: 'AI prompts for business, content, research, and opportunity analysis.', href: '/join', badge: 'Subscriber' },
+    { title: 'Affiliate Starter Pack',  desc: 'First 5 affiliate programs every content creator should join.', href: '/opportunity-list', badge: 'Subscriber' },
+    { title: 'Claude Prompt Bible',     desc: 'AI prompts for business, content, research, and opportunity analysis.', href: '/opportunity-list', badge: 'Subscriber' },
   ]},
   { category: 'Fantasy Island',           color: '#22C55E', items: [
-    { title: 'Draft Bible Preview',     desc: 'Introduction to the Fantasy Island ranking methodology.', href: '/join', badge: 'Subscriber' },
-    { title: 'Injury Alert Framework',  desc: 'How to track and react to injury news before your opponents do.', href: '/join', badge: 'Subscriber' },
+    { title: 'Draft Bible Preview',     desc: 'Introduction to the Fantasy Island ranking methodology.', href: '/opportunity-list', badge: 'Subscriber' },
+    { title: 'Injury Alert Framework',  desc: 'How to track and react to injury news before your opponents do.', href: '/opportunity-list', badge: 'Subscriber' },
   ]},
 ]
 

@@ -5,7 +5,7 @@ import MagicTree, { type MagicNode } from "@/components/ui/magic-tree"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 
-const SIGNUP = process.env.NEXT_PUBLIC_BEEHIIV_SIGNUP_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com/subscribe'
+const SIGNUP = '/opportunity-list'
 
 // Scott-King Coast district + resource structure
 const coastStructure: MagicNode[] = [

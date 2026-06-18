@@ -126,7 +126,7 @@ export default function AuthPage() {
               color: 'rgba(245,240,232,0.25)',
               lineHeight: 1.6,
             }}>
-              Don&apos;t have an account? <a href="/join" style={{ color: 'rgba(201,168,76,0.5)', textDecoration: 'none' }}>Subscribe free to The Opportunity List first →</a>
+              Don&apos;t have an account? <a href="/opportunity-list" style={{ color: 'rgba(201,168,76,0.5)', textDecoration: 'none' }}>Join The Opportunity List free →</a>
             </p>
           </div>
 

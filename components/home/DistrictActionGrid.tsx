@@ -2,8 +2,7 @@
 
 import { motion } from 'framer-motion'
 
-const SIGNUP = process.env.NEXT_PUBLIC_BEEHIIV_SIGNUP_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com/subscribe'
-const PUBLICATION = process.env.NEXT_PUBLIC_BEEHIIV_PUBLICATION_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com'
+import Link from 'next/link'
 
 interface DistrictAction {
   id: string
@@ -13,102 +12,18 @@ interface DistrictAction {
   purpose: string
   cta: string
   href: string
-  external: boolean
   disabled?: boolean
 }
 
 const districts: DistrictAction[] = [
-  {
-    id: 'founder-island',
-    emoji: '🏝️',
-    name: 'Founder Island',
-    color: '#C9A84C',
-    purpose: 'The origin story. The brand mission. The blueprint.',
-    cta: 'Start Here',
-    href: '#start-here',
-    external: false,
-  },
-  {
-    id: 'route-harbor',
-    emoji: '🚢',
-    name: 'Route Harbor',
-    color: '#0EA5E9',
-    purpose: 'Medical courier income and road-based opportunity research.',
-    cta: 'Get Courier Drops',
-    href: SIGNUP,
-    external: true,
-  },
-  {
-    id: 'market-marina',
-    emoji: '⚓',
-    name: 'Market Marina',
-    color: '#C9A84C',
-    purpose: 'XAUUSD trading, market structure, and TCU curriculum.',
-    cta: 'Get Trading Lessons',
-    href: SIGNUP,
-    external: true,
-  },
-  {
-    id: 'fantasy-island',
-    emoji: '🏈',
-    name: 'Fantasy Island',
-    color: '#22C55E',
-    purpose: 'Fantasy football, live rankings, Draft Bible, and automation drops.',
-    cta: 'Get Live Fantasy Drops',
-    href: SIGNUP,
-    external: true,
-  },
-  {
-    id: 'creator-pier',
-    emoji: '🎬',
-    name: 'Creator Pier',
-    color: '#A855F7',
-    purpose: 'AI tools, affiliate systems, and creator income infrastructure.',
-    cta: 'Get AI + Affiliate Tools',
-    href: SIGNUP,
-    external: true,
-  },
-  {
-    id: 'flavor-district',
-    emoji: '🍗',
-    name: 'Flavor District',
-    color: '#c0392b',
-    purpose: 'Food business, pop-up systems, and Breaded Or Not?! brand plays.',
-    cta: 'Follow Food Business Drops',
-    href: SIGNUP,
-    external: true,
-  },
-  {
-    id: 'legacy-point',
-    emoji: '🎓',
-    name: 'Legacy Point',
-    color: '#C9A84C',
-    purpose: 'Trading Chef University and ownership education.',
-    cta: 'Learn Ownership',
-    href: SIGNUP,
-    external: true,
-  },
-  {
-    id: 'library-vault',
-    emoji: '📖',
-    name: 'Library Vault',
-    color: '#94A3B8',
-    purpose: 'Free guides, starter frameworks, and resource library.',
-    cta: 'View Resources',
-    href: PUBLICATION,
-    external: true,
-  },
-  {
-    id: 'blueprint-bay',
-    emoji: '📐',
-    name: 'Blueprint Bay',
-    color: '#22C55E',
-    purpose: 'Reserved for AI automation, agents, workflows, and dashboards.',
-    cta: 'Coming Soon',
-    href: '',
-    external: false,
-    disabled: true,
-  },
+  { id: 'route-harbor',    emoji: '🚢', name: 'Route Harbor',    color: '#0EA5E9', purpose: 'Medical courier income and road-based opportunity research.',             cta: 'Enter Route Harbor',    href: '/coast/route-harbor' },
+  { id: 'market-marina',   emoji: '⚓', name: 'Market Marina',   color: '#0D9488', purpose: 'XAUUSD trading, market structure, and Trading Chef curriculum.',          cta: 'Enter Market Marina',   href: '/coast/market-marina' },
+  { id: 'blueprint-bay',   emoji: '📐', name: 'Blueprint Bay',   color: '#6366F1', purpose: 'AI tools, automations, agents, and business system builds.',              cta: 'Enter Blueprint Bay',   href: '/coast/blueprint-bay' },
+  { id: 'fantasy-island',  emoji: '🏈', name: 'Fantasy Island',  color: '#22C55E', purpose: 'Fantasy football, live rankings, Draft Bible, and automation drops.',    cta: 'Enter Fantasy Island',  href: '/coast/fantasy-island' },
+  { id: 'creator-pier',    emoji: '🎬', name: 'Creator Pier',    color: '#A855F7', purpose: 'AI tools, affiliate systems, and creator income infrastructure.',         cta: 'Enter Creator Pier',    href: '/coast/creator-pier' },
+  { id: 'flavor-district', emoji: '🍗', name: 'Flavor District', color: '#F97316', purpose: 'Food business, pop-up systems, and Breaded Or Not?! brand plays.',        cta: 'Enter Flavor District', href: '/coast/flavor-district' },
+  { id: 'library-vault',   emoji: '📚', name: 'Library Vault',   color: '#c9a84c', purpose: 'Free guides, starter frameworks, and resource library.',                  cta: 'View Resources',        href: '/resources' },
+  { id: 'legacy-point',    emoji: '🏛️', name: 'Legacy Point',    color: '#EC4899', purpose: 'Ownership education, asset building, and wealth-path systems.',           cta: 'Enter Legacy Point',    href: '/coast/legacy-point' },
 ]
 
 export default function DistrictActionGrid() {
@@ -196,30 +111,8 @@ export default function DistrictActionGrid() {
               }}>
                 Coming Soon
               </div>
-            ) : d.external ? (
-              <a
-                href={d.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ textDecoration: 'none' }}
-              >
-                <div style={{
-                  padding: '12px 20px',
-                  background: `${d.color}18`,
-                  border: `1px solid ${d.color}40`,
-                  color: d.color,
-                  fontFamily: '"Space Mono", monospace',
-                  fontSize: '0.6rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                  textAlign: 'center',
-                }}>
-                  {d.cta} →
-                </div>
-              </a>
             ) : (
-              <a href={d.href} style={{ textDecoration: 'none' }}>
+              <Link href={d.href} style={{ textDecoration: 'none' }}>
                 <div style={{
                   padding: '12px 20px',
                   background: `${d.color}18`,
@@ -234,7 +127,7 @@ export default function DistrictActionGrid() {
                 }}>
                   {d.cta} →
                 </div>
-              </a>
+              </Link>
             )}
           </motion.div>
         ))}

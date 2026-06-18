@@ -15,7 +15,7 @@ const TIERS = [
     color: '#22C55E',
     badge: null,
     cta: 'Join Free Now',
-    href: '/join',
+    href: '/opportunity-list',
     external: false,
     features: [
       'The Opportunity List — weekly drops',
@@ -35,7 +35,7 @@ const TIERS = [
     color: '#c9a84c',
     badge: 'MOST POPULAR',
     cta: 'Coming Soon',
-    href: '/join',
+    href: '/opportunity-list',
     external: false,
     features: [
       'Everything in Free Subscriber',
@@ -57,7 +57,7 @@ const TIERS = [
     color: '#6366F1',
     badge: 'FULL ACCESS',
     cta: 'Join Waitlist',
-    href: '/join',
+    href: '/opportunity-list',
     external: false,
     features: [
       'Everything in District Pass',

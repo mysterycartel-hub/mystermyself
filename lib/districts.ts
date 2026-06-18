@@ -1,4 +1,4 @@
-const BEEHIIV_SIGNUP = process.env.NEXT_PUBLIC_BEEHIIV_SIGNUP_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com/subscribe'
+const BEEHIIV_SIGNUP = '/opportunity-list'
 
 export interface District {
   id: string

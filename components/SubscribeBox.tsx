@@ -1,6 +1,4 @@
-'use client'
-
-import { useState } from 'react'
+import Link from 'next/link'
 
 interface SubscribeBoxProps {
   headline?: string
@@ -9,22 +7,12 @@ interface SubscribeBoxProps {
   accentColor?: string
 }
 
-const BEEHIIV_URL = process.env.NEXT_PUBLIC_BEEHIIV_SIGNUP_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com/subscribe'
-
 export default function SubscribeBox({
-  headline = 'Join The Free Hub',
+  headline = 'Join The Opportunity List',
   sub = 'Get district drops, free resources, and opportunity intel delivered.',
-  ctaLabel = 'Subscribe Free →',
+  ctaLabel = 'Enter The Coast →',
   accentColor = 'var(--gold)',
 }: SubscribeBoxProps) {
-  const [email, setEmail] = useState('')
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    const url = `${BEEHIIV_URL}?email=${encodeURIComponent(email.trim())}`
-    window.open(url, '_blank', 'noopener,noreferrer')
-  }
-
   return (
     <div style={{
       background: 'var(--deep)',
@@ -60,48 +48,21 @@ export default function SubscribeBox({
       }}>
         {sub}
       </p>
-      <form onSubmit={handleSubmit} style={{ display: 'flex', gap: 0, flexWrap: 'wrap' }}>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="your@email.com"
-          required
-          style={{
-            flex: '1 1 220px',
-            padding: '14px 18px',
-            background: 'var(--black)',
-            border: `1px solid ${accentColor}25`,
-            borderRight: 'none',
-            color: 'var(--cream)',
-            fontFamily: '"Space Mono", monospace',
-            fontSize: '0.72rem',
-            outline: 'none',
-            minWidth: 0,
-          }}
-          onFocus={(e) => { e.target.style.borderColor = accentColor }}
-          onBlur={(e) => { e.target.style.borderColor = `${accentColor}25` }}
-        />
-        <button
-          type="submit"
-          style={{
-            padding: '14px 24px',
-            background: accentColor,
-            color: '#060608',
-            fontFamily: '"Space Mono", monospace',
-            fontSize: '0.65rem',
-            fontWeight: 700,
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-            border: 'none',
-            cursor: 'pointer',
-            flexShrink: 0,
-            whiteSpace: 'nowrap',
-          }}
-        >
+      <Link href="/opportunity-list" style={{ textDecoration: 'none', display: 'inline-block' }}>
+        <div style={{
+          padding: '14px 28px',
+          background: accentColor,
+          color: '#060608',
+          fontFamily: '"Space Mono", monospace',
+          fontSize: '0.65rem',
+          fontWeight: 700,
+          letterSpacing: '0.12em',
+          textTransform: 'uppercase',
+          whiteSpace: 'nowrap',
+        }}>
           {ctaLabel}
-        </button>
-      </form>
+        </div>
+      </Link>
     </div>
   )
 }

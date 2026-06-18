@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const LANES = [
@@ -20,11 +21,11 @@ interface Props {
 }
 
 export default function OpportunitySignup({ source = 'website', accentColor = '#c9a84c', compact = false }: Props) {
+  const router                = useRouter()
   const [email, setEmail]     = useState('')
   const [name, setName]       = useState('')
   const [lane, setLane]       = useState('')
   const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
   const [error, setError]     = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -48,7 +49,14 @@ export default function OpportunitySignup({ source = 'website', accentColor = '#
       const data = await res.json()
 
       if (!res.ok) throw new Error(data.error ?? 'Subscription failed')
-      setSuccess(true)
+
+      // Store join source for welcome page personalization
+      try {
+        localStorage.setItem('skc_join_source', source)
+      } catch { /* noop */ }
+
+      // Immediately redirect to welcome — no code gate, no success screen
+      router.push('/welcome')
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Something went wrong'
       setError(msg)
@@ -73,57 +81,7 @@ export default function OpportunitySignup({ source = 'website', accentColor = '#
   return (
     <div style={{ maxWidth: compact ? 480 : 560, width: '100%' }}>
       <AnimatePresence mode="wait">
-        {success ? (
-          <motion.div
-            key="success"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            style={{
-              padding: '40px 36px',
-              border: `1px solid ${accentColor}30`,
-              background: `${accentColor}08`,
-              textAlign: 'center',
-            }}
-          >
-            <div style={{ fontSize: '3rem', marginBottom: 16 }}>⚓</div>
-            <h3 style={{
-              fontFamily: '"Bebas Neue", sans-serif',
-              fontSize: '2rem',
-              color: accentColor,
-              letterSpacing: '0.05em',
-              marginBottom: 12,
-            }}>
-              You&apos;re In.
-            </h3>
-            <p style={{
-              fontFamily: '"Space Mono", monospace',
-              fontSize: '0.72rem',
-              color: 'rgba(245,240,232,0.6)',
-              lineHeight: 1.8,
-              marginBottom: 20,
-            }}>
-              Your first Opportunity List drop is on the way. Check your inbox and confirm your spot.
-            </p>
-            <a
-              href="/welcome"
-              style={{
-                display: 'inline-block',
-                background: accentColor,
-                color: '#060608',
-                padding: '12px 28px',
-                fontFamily: '"Space Mono", monospace',
-                fontSize: '0.65rem',
-                fontWeight: 700,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                textDecoration: 'none',
-              }}
-            >
-              Enter The Coast →
-            </a>
-          </motion.div>
-        ) : (
-          <motion.form
+        <motion.form
             key="form"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -247,7 +205,7 @@ export default function OpportunitySignup({ source = 'website', accentColor = '#
                 transition: 'all 0.2s',
               }}
             >
-              {loading ? 'Joining...' : 'Join Free →'}
+              {loading ? 'Entering...' : 'Enter The Coast →'}
             </button>
 
             <p style={{
@@ -261,7 +219,6 @@ export default function OpportunitySignup({ source = 'website', accentColor = '#
               Free. No card. Unsubscribe anytime.
             </p>
           </motion.form>
-        )}
       </AnimatePresence>
     </div>
   )

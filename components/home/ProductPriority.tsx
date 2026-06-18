@@ -3,8 +3,6 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
-const SIGNUP = process.env.NEXT_PUBLIC_BEEHIIV_SIGNUP_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com/subscribe'
-
 export default function ProductPriority() {
   return (
     <section id="featured-opportunity" style={{
@@ -108,7 +106,7 @@ export default function ProductPriority() {
                 View The Guide →
               </div>
             </Link>
-            <a href={SIGNUP} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+            <Link href="/opportunity-list" style={{ textDecoration: 'none' }}>
               <div style={{
                 border: '1px solid rgba(14,165,233,0.4)',
                 color: '#0EA5E9',
@@ -121,7 +119,7 @@ export default function ProductPriority() {
               }}>
                 Get Free Courier Chapter
               </div>
-            </a>
+            </Link>
           </div>
         </motion.div>
 

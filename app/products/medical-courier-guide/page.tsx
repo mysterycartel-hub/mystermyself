@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     'Learn how to find pharmacy, lab, and medical courier opportunities without depending only on job boards or delivery apps. The Route Harbor method.',
 }
 
-const BEEHIIV = process.env.NEXT_PUBLIC_BEEHIIV_SIGNUP_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com/subscribe'
+const BEEHIIV = '/opportunity-list'
 const BLUE = '#0EA5E9'
 
 const whatsInside = [

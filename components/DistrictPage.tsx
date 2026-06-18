@@ -1,7 +1,5 @@
 import Link from 'next/link'
-import { BEEHIIV_SIGNUP_URL, routes } from '@/lib/site'
-
-const external = { target: '_blank', rel: 'noopener noreferrer' }
+import { routes } from '@/lib/site'
 
 export default function DistrictPage({
   name,
@@ -34,7 +32,7 @@ export default function DistrictPage({
           <h2 className="mt-5 text-3xl font-black md:text-5xl">{headline}</h2>
           <p className="mt-6 max-w-3xl text-lg text-white/70">{copy}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href={BEEHIIV_SIGNUP_URL} {...external} className="inline-flex rounded-full bg-[#C9A84C] px-6 py-3 text-sm font-black text-black">{primary}</a>
+            <Link href="/opportunity-list" className="inline-flex rounded-full bg-[#C9A84C] px-6 py-3 text-sm font-black text-black">{primary}</Link>
             {productHref && productText ? (
               <Link href={productHref} className="inline-flex rounded-full border border-[#C9A84C]/60 px-6 py-3 text-sm font-bold text-[#C9A84C]">{productText}</Link>
             ) : null}
@@ -50,7 +48,7 @@ export default function DistrictPage({
         <footer className="mt-16 border-t border-white/10 py-8 text-sm text-white/60">
           <div className="flex flex-wrap gap-4">
             <Link href="/">Home</Link>
-            <a href={BEEHIIV_SIGNUP_URL} {...external}>Subscribe</a>
+            <Link href="/opportunity-list">Opportunity List</Link>
             <Link href={routes.medicalCourierGuide}>Medical Courier Guide</Link>
           </div>
         </footer>
