@@ -4,7 +4,7 @@ import CustomCursor from '@/components/CustomCursor'
 import CharacterInterrupt from '@/components/triggers/CharacterInterrupt'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://mystermyself.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mystermyself.com'),
   title: {
     default: 'MysterMyself | Scott-King Coast — One City. One System. Your Legacy.',
     template: '%s | MysterMyself',

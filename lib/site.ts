@@ -1,3 +1,6 @@
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://mystermyself.com'
+
 export const BEEHIIV_PUBLICATION_URL =
   process.env.NEXT_PUBLIC_BEEHIIV_PUBLICATION_URL ||
   'https://maurices-newsletter-b7274b.beehiiv.com'

@@ -541,7 +541,7 @@ ANTHROPIC_API_KEY=sk-ant-...
 # STRIPE_PRICE_AI_OPERATOR=price_...
 
 # OPTIONAL — Site URL (Supabase redirect URLs)
-# NEXT_PUBLIC_SITE_URL=https://mysterymyself.com
+# NEXT_PUBLIC_SITE_URL=https://mystermyself.com
 ```
 
 ### Behavior Without Env Vars
