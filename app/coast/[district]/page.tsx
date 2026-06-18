@@ -442,16 +442,14 @@ export default function DistrictPage({ params }: { params: { district: string } 
           }}>
             Build your life like a business. New income plays, district drops, and resources — straight to your inbox.
           </p>
-          <a
-            href="https://maurices-newsletter-b7274b.beehiiv.com"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/opportunity-list"
             style={{ textDecoration: 'none', display: 'inline-block' }}
           >
             <div className="btn-primary" style={{ padding: '14px 36px' }}>
               <span>Join The Opportunity List →</span>
             </div>
-          </a>
+          </Link>
         </div>
       </section>
 

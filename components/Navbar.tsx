@@ -6,20 +6,14 @@ import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
-const BEEHIIV_SIGNUP = process.env.NEXT_PUBLIC_BEEHIIV_SIGNUP_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com/subscribe'
-
 const links = [
-  { label: 'Home',          href: '/' },
-  { label: 'The Coast',     href: '/coast' },
-  { label: 'Route Harbor',  href: '/coast/route-harbor' },
-  { label: 'Academy',       href: '/academy' },
-  { label: 'Kitchen',       href: '/kitchen' },
-  { label: 'TCU Theater',   href: '/tcu-theater' },
-  { label: 'Trading Chef',  href: '/trading-chef' },
-  { label: 'Fantasy',       href: '/fantasy' },
-  { label: 'Playbooks',     href: '/playbooks' },
-  { label: 'Community',     href: '/community' },
-  { label: 'About',         href: '/about' },
+  { label: 'Home',             href: '/' },
+  { label: 'The Coast',        href: '/coast' },
+  { label: 'Districts',        href: '/coast' },
+  { label: 'Opportunity List', href: '/opportunity-list' },
+  { label: 'Resources',        href: '/resources' },
+  { label: 'Products',         href: '/products/medical-courier-guide' },
+  { label: 'Follow The Coast', href: '/follow-the-coast' },
 ]
 
 export default function Navbar() {
@@ -55,26 +49,22 @@ export default function Navbar() {
       {/* Logo */}
       <Link href="/" style={{ textDecoration: 'none' }}>
         <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.1 }}>
-          <span
-            style={{
-              fontFamily: '"Bebas Neue", sans-serif',
-              fontSize: '1.5rem',
-              letterSpacing: '0.12em',
-              color: '#c9a84c',
-            }}
-          >
+          <span style={{
+            fontFamily: '"Bebas Neue", sans-serif',
+            fontSize: '1.5rem',
+            letterSpacing: '0.12em',
+            color: '#c9a84c',
+          }}>
             MysterMyself
           </span>
-          <span
-            style={{
-              fontFamily: '"Space Mono", monospace',
-              fontSize: '0.5rem',
-              letterSpacing: '0.35em',
-              textTransform: 'uppercase',
-              color: 'rgba(245,240,232,0.35)',
-            }}
-          >
-            Ecosystem OS
+          <span style={{
+            fontFamily: '"Space Mono", monospace',
+            fontSize: '0.5rem',
+            letterSpacing: '0.35em',
+            textTransform: 'uppercase',
+            color: 'rgba(245,240,232,0.35)',
+          }}>
+            Scott-King Coast
           </span>
         </div>
       </Link>
@@ -85,7 +75,7 @@ export default function Navbar() {
         style={{ gap: 28, listStyle: 'none', alignItems: 'center' }}
       >
         {links.map((l) => (
-          <li key={l.href}>
+          <li key={l.label}>
             <Link
               href={l.href}
               style={{
@@ -106,11 +96,9 @@ export default function Navbar() {
         ))}
       </ul>
 
-      {/* CTA */}
-      <a
-        href={BEEHIIV_SIGNUP}
-        target="_blank"
-        rel="noopener noreferrer"
+      {/* Primary CTA — Enter The Coast → /opportunity-list */}
+      <Link
+        href="/opportunity-list"
         className="hidden xl:inline-block"
         style={{
           background: '#c9a84c',
@@ -125,8 +113,8 @@ export default function Navbar() {
           whiteSpace: 'nowrap',
         }}
       >
-        Start Here →
-      </a>
+        Enter The Coast →
+      </Link>
 
       {/* Mobile burger */}
       <button
@@ -137,7 +125,7 @@ export default function Navbar() {
           border: '1px solid rgba(201,168,76,0.3)',
           color: '#c9a84c',
           padding: '8px',
-          cursor: 'none',
+          cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -168,7 +156,7 @@ export default function Navbar() {
             <div style={{ padding: '24px 32px', display: 'flex', flexDirection: 'column', gap: 4 }}>
               {links.map((l, i) => (
                 <motion.div
-                  key={l.href}
+                  key={l.label}
                   initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}
@@ -196,19 +184,28 @@ export default function Navbar() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.45 }}
+                transition={{ delay: 0.4 }}
                 style={{ marginTop: 12 }}
               >
-                <a
-                  href={BEEHIIV_SIGNUP}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/opportunity-list"
                   onClick={() => setOpen(false)}
-                  className="btn-primary"
-                  style={{ width: '100%', justifyContent: 'center', textDecoration: 'none' }}
+                  style={{
+                    display: 'block',
+                    background: '#c9a84c',
+                    color: '#060608',
+                    padding: '16px',
+                    fontFamily: '"Space Mono", monospace',
+                    fontSize: '0.72rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.14em',
+                    textTransform: 'uppercase',
+                    textDecoration: 'none',
+                    textAlign: 'center',
+                  }}
                 >
-                  <span>Start Here →</span>
-                </a>
+                  Enter The Coast →
+                </Link>
               </motion.div>
             </div>
           </motion.div>

@@ -1,291 +1,322 @@
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 import Link from 'next/link'
+import { SOCIAL, isRealUrl } from '@/lib/social-links'
 
 export const metadata = {
-  title: "You're In. Now Follow The Coast. | MysterMyself",
-  description: 'Subscribe to district drops and follow all MysterMyself channels.',
+  title: 'Follow The Coast | MysterMyself',
+  description: 'Stay connected across every lane: newsletter, videos, shorts, social updates, and live drops from Scott-King Coast.',
 }
 
-const SIGNUP = process.env.NEXT_PUBLIC_BEEHIIV_SIGNUP_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com/subscribe'
-const PUBLICATION = process.env.NEXT_PUBLIC_BEEHIIV_PUBLICATION_URL ?? 'https://maurices-newsletter-b7274b.beehiiv.com'
-
-const external = { target: '_blank' as const, rel: 'noopener noreferrer' }
-
-const districts = [
+const CHANNELS = [
   {
-    name: 'Route Harbor',
-    desc: 'Courier income, medical courier drops, logistics tools.',
-    cta: 'Get Route Harbor Drops',
-    href: SIGNUP,
-    color: '#0EA5E9',
-  },
-  {
-    name: 'Market Marina',
-    desc: 'Trading Chef lessons, market structure, TCU updates.',
-    cta: 'Get Trading Chef Drops',
-    href: SIGNUP,
-    color: '#0D9488',
-  },
-  {
-    name: 'Fantasy Island',
-    desc: 'Draft updates, rankings, alerts, and live fantasy drops.',
-    cta: 'Get Fantasy Island Drops',
-    href: SIGNUP,
-    color: '#22C55E',
-  },
-  {
-    name: 'Creator Pier',
-    desc: 'AI tools, affiliate plays, content systems, creator resources.',
-    cta: 'Explore Tool Vault',
-    href: '/pages/creator-pier',
-    color: '#A855F7',
+    platform: 'The Opportunity List',
+    desc: 'All district drops, opportunity research, affiliate picks, and tools delivered free. The primary channel.',
+    cta: 'Join The Opportunity List',
+    href: '/opportunity-list',
+    color: '#c9a84c',
+    emoji: '⚓',
     internal: true,
+    priority: true,
+  },
+  {
+    platform: 'YouTube',
+    desc: 'Full-length videos: Trading Chef lessons, courier income walkthroughs, AI system builds, and Scott-King Coast world updates.',
+    cta: 'Subscribe on YouTube',
+    href: SOCIAL.youtube,
+    color: '#FF0000',
+    emoji: '▶',
+  },
+  {
+    platform: 'TikTok',
+    desc: 'Short drops, quick income plays, chart reads, and behind-the-scenes from the coast.',
+    cta: 'Follow on TikTok',
+    href: SOCIAL.tiktok,
+    color: '#69C9D0',
+    emoji: '♪',
+  },
+  {
+    platform: 'Instagram',
+    desc: 'Visual posts, district updates, product previews, and community content.',
+    cta: 'Follow on Instagram',
+    href: SOCIAL.instagram,
+    color: '#E1306C',
+    emoji: '◎',
+  },
+  {
+    platform: 'X / Twitter',
+    desc: 'Real-time commentary, trades in progress, and short-form coast drops.',
+    cta: 'Follow on X',
+    href: SOCIAL.x,
+    color: '#1DA1F2',
+    emoji: 'X',
+  },
+  {
+    platform: 'Rumble',
+    desc: 'Long-form uncensored drops and coast archives.',
+    cta: 'Follow on Rumble',
+    href: SOCIAL.rumble,
+    color: '#85C742',
+    emoji: '◉',
   },
 ]
 
-const socials = [
-  { name: 'YouTube', cta: 'Subscribe on YouTube', href: '', disabled: true },
-  { name: 'Instagram', cta: 'Follow on Instagram', href: '', disabled: true },
-  { name: 'TikTok', cta: 'Follow on TikTok', href: '', disabled: true },
-  { name: 'Facebook', cta: 'Follow on Facebook', href: '', disabled: true },
+const RESOURCE_BUTTONS = [
+  { label: 'Enter Scott-King Coast',  href: '/',                internal: true },
+  { label: 'View Resource Library',   href: '/resources',       internal: true },
+  { label: 'Work With MysterMyself',  href: `mailto:${SOCIAL.email}`, internal: false },
 ]
 
-export default function FollowTheCoast() {
+export default function FollowTheCoastPage() {
   return (
-    <main style={{ background: 'var(--black)', minHeight: '100vh', padding: 'clamp(80px, 12vw, 140px) clamp(20px, 5vw, 80px) 80px' }}>
-      <div style={{ maxWidth: 800, margin: '0 auto' }}>
+    <main>
+      <Navbar />
 
-        {/* Header */}
-        <div style={{ marginBottom: 16 }}>
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 10,
-            marginBottom: 24,
-          }}>
-            <div style={{ width: 32, height: 1, background: 'var(--gold)' }} />
-            <span style={{
-              fontFamily: '"Space Mono", monospace',
-              fontSize: '0.55rem',
-              letterSpacing: '0.3em',
-              textTransform: 'uppercase',
-              color: 'var(--gold)',
-            }}>
-              Scott-King Coast
-            </span>
-          </div>
-        </div>
+      <section style={{
+        minHeight: '100vh',
+        background: 'var(--black)',
+        padding: '120px 48px 80px',
+        position: 'relative',
+      }}>
+        <div className="hero-grid" style={{ opacity: 0.3 }} />
 
-        <h1 style={{
-          fontFamily: '"Bebas Neue", sans-serif',
-          fontSize: 'clamp(3rem, 8vw, 6rem)',
-          lineHeight: 0.92,
-          letterSpacing: '0.02em',
-          marginBottom: 20,
-        }}>
-          YOU&apos;RE IN.<br />
-          NOW FOLLOW <span style={{ color: 'var(--gold)' }}>THE COAST.</span>
-        </h1>
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: 1000, margin: '0 auto' }}>
 
-        <p style={{
-          fontSize: '0.85rem',
-          color: 'rgba(245,240,232,0.6)',
-          lineHeight: 1.9,
-          maxWidth: 560,
-          marginBottom: 56,
-        }}>
-          Your first step is complete. Follow the lanes you care about most so you
-          don&apos;t miss drops, updates, tools, and opportunities.
-        </p>
-
-        {/* Opportunity List */}
-        <div style={{
-          background: 'var(--deep)',
-          border: '1px solid rgba(201,168,76,0.25)',
-          padding: 'clamp(24px, 4vw, 36px)',
-          marginBottom: 2,
-          position: 'relative',
-          overflow: 'hidden',
-        }}>
-          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'var(--gold)' }} />
-          <div style={{
-            fontFamily: '"Space Mono", monospace',
-            fontSize: '0.55rem',
-            letterSpacing: '0.25em',
-            textTransform: 'uppercase',
-            color: 'var(--gold)',
-            marginBottom: 12,
-          }}>
-            Primary Channel
-          </div>
-          <h2 style={{
-            fontFamily: '"Bebas Neue", sans-serif',
-            fontSize: '1.8rem',
-            letterSpacing: '0.04em',
-            color: 'var(--cream)',
-            marginBottom: 8,
-          }}>
-            The Opportunity List
-          </h2>
-          <p style={{
-            fontSize: '0.75rem',
-            color: 'rgba(245,240,232,0.5)',
-            fontFamily: '"Space Mono", monospace',
-            lineHeight: 1.7,
-            marginBottom: 20,
-          }}>
-            All district drops, opportunity research, affiliate picks, and tools delivered free.
-          </p>
-          <a href={PUBLICATION} {...external} style={{ textDecoration: 'none', display: 'inline-block' }}>
+          {/* Header */}
+          <div style={{ marginBottom: 64 }}>
             <div style={{
-              background: 'var(--gold)',
-              color: '#060608',
-              padding: '14px 28px',
+              display: 'inline-block',
+              padding: '6px 14px',
+              border: '1px solid rgba(201,168,76,0.3)',
+              background: 'rgba(201,168,76,0.04)',
               fontFamily: '"Space Mono", monospace',
-              fontSize: '0.65rem',
-              fontWeight: 700,
-              letterSpacing: '0.12em',
+              fontSize: '0.5rem',
+              letterSpacing: '0.25em',
               textTransform: 'uppercase',
+              color: 'rgba(201,168,76,0.7)',
+              marginBottom: 24,
             }}>
-              Open The Opportunity List →
+              Scott-King Coast · Social Hub
             </div>
-          </a>
-        </div>
 
-        {/* District drops */}
-        <div style={{ marginBottom: 48, marginTop: 2 }}>
-          <div style={{
-            fontFamily: '"Space Mono", monospace',
-            fontSize: '0.55rem',
-            letterSpacing: '0.25em',
-            textTransform: 'uppercase',
-            color: 'rgba(245,240,232,0.4)',
-            padding: '20px 0 16px',
-          }}>
-            District Drops
+            <h1 style={{
+              fontFamily: '"Bebas Neue", sans-serif',
+              fontSize: 'clamp(3rem, 7vw, 6rem)',
+              lineHeight: 0.9,
+              letterSpacing: '0.02em',
+              marginBottom: 20,
+            }}>
+              FOLLOW THE<br />
+              <span style={{ color: 'var(--gold)' }}>COAST</span>
+            </h1>
+
+            <p style={{
+              fontSize: '0.85rem',
+              color: 'rgba(245,240,232,0.55)',
+              lineHeight: 1.85,
+              maxWidth: 520,
+              marginBottom: 16,
+            }}>
+              Stay connected across every lane: newsletter, videos, shorts, social updates, and live drops.
+            </p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 2 }}>
-            {districts.map((d) => (
-              <div key={d.name} style={{
-                background: 'var(--deep)',
-                border: `1px solid ${d.color}20`,
-                padding: '24px',
-              }}>
-                <h3 style={{
-                  fontFamily: '"Bebas Neue", sans-serif',
-                  fontSize: '1.2rem',
-                  color: d.color,
-                  letterSpacing: '0.04em',
-                  marginBottom: 8,
+
+          {/* Channel cards */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginBottom: 64 }}>
+            {CHANNELS.map((ch) => {
+              const real = ch.internal || isRealUrl(ch.href)
+              return (
+                <div key={ch.platform} style={{
+                  background: 'var(--deep)',
+                  border: `1px solid ${real ? ch.color + '18' : 'rgba(245,240,232,0.05)'}`,
+                  padding: '28px 32px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: 24,
+                  flexWrap: 'wrap',
+                  position: 'relative',
+                  overflow: 'hidden',
                 }}>
-                  {d.name}
-                </h3>
-                <p style={{
-                  fontSize: '0.7rem',
-                  color: 'rgba(245,240,232,0.45)',
-                  lineHeight: 1.7,
-                  marginBottom: 16,
-                  fontFamily: '"Space Mono", monospace',
-                }}>
-                  {d.desc}
-                </p>
-                {d.internal ? (
-                  <Link href={d.href} style={{ textDecoration: 'none', display: 'inline-block' }}>
+                  {ch.priority && (
+                    <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'var(--gold)', opacity: 0.5 }} />
+                  )}
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 20, flex: 1, minWidth: 200 }}>
                     <div style={{
-                      border: `1px solid ${d.color}40`,
-                      color: d.color,
-                      padding: '10px 20px',
+                      width: 44,
+                      height: 44,
+                      background: real ? `${ch.color}15` : 'rgba(245,240,232,0.03)',
+                      border: `1px solid ${real ? ch.color + '30' : 'rgba(245,240,232,0.06)'}`,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontFamily: '"Bebas Neue", sans-serif',
+                      fontSize: '1.1rem',
+                      color: real ? ch.color : 'rgba(245,240,232,0.2)',
+                      flexShrink: 0,
+                    }}>
+                      {ch.emoji}
+                    </div>
+                    <div>
+                      <div style={{
+                        fontFamily: '"Bebas Neue", sans-serif',
+                        fontSize: '1.1rem',
+                        letterSpacing: '0.04em',
+                        color: real ? 'var(--cream)' : 'rgba(245,240,232,0.3)',
+                        lineHeight: 1.1,
+                        marginBottom: 6,
+                      }}>
+                        {ch.platform}
+                        {!real && (
+                          <span style={{
+                            fontFamily: '"Space Mono", monospace',
+                            fontSize: '0.44rem',
+                            letterSpacing: '0.12em',
+                            color: 'rgba(245,240,232,0.2)',
+                            marginLeft: 10,
+                            textTransform: 'uppercase',
+                          }}>
+                            [NEEDS OWNER URL]
+                          </span>
+                        )}
+                      </div>
+                      <p style={{ fontSize: '0.68rem', color: 'rgba(245,240,232,0.4)', lineHeight: 1.7, fontFamily: '"Space Mono", monospace' }}>
+                        {ch.desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  {real ? (
+                    ch.internal ? (
+                      <Link href={ch.href} style={{ textDecoration: 'none', flexShrink: 0 }}>
+                        <div style={{
+                          background: ch.color,
+                          color: '#060608',
+                          padding: '12px 24px',
+                          fontFamily: '"Space Mono", monospace',
+                          fontSize: '0.62rem',
+                          fontWeight: 700,
+                          letterSpacing: '0.1em',
+                          textTransform: 'uppercase',
+                          whiteSpace: 'nowrap',
+                        }}>
+                          {ch.cta} →
+                        </div>
+                      </Link>
+                    ) : (
+                      <a href={ch.href} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', flexShrink: 0 }}>
+                        <div style={{
+                          background: `${ch.color}15`,
+                          border: `1px solid ${ch.color}40`,
+                          color: ch.color,
+                          padding: '12px 24px',
+                          fontFamily: '"Space Mono", monospace',
+                          fontSize: '0.62rem',
+                          fontWeight: 700,
+                          letterSpacing: '0.1em',
+                          textTransform: 'uppercase',
+                          whiteSpace: 'nowrap',
+                        }}>
+                          {ch.cta} →
+                        </div>
+                      </a>
+                    )
+                  ) : (
+                    <div style={{
+                      border: '1px solid rgba(245,240,232,0.06)',
+                      color: 'rgba(245,240,232,0.15)',
+                      padding: '12px 24px',
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '0.62rem',
+                      letterSpacing: '0.1em',
+                      textTransform: 'uppercase',
+                      flexShrink: 0,
+                      cursor: 'default',
+                    }}>
+                      Link Pending
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+
+          {/* Additional resource buttons */}
+          <div style={{
+            background: 'var(--deep)',
+            border: '1px solid rgba(201,168,76,0.1)',
+            padding: '36px 32px',
+          }}>
+            <div style={{
+              fontFamily: '"Space Mono", monospace',
+              fontSize: '0.52rem',
+              letterSpacing: '0.22em',
+              textTransform: 'uppercase',
+              color: 'rgba(201,168,76,0.5)',
+              marginBottom: 20,
+            }}>
+              More From Scott-King Coast
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+              {RESOURCE_BUTTONS.map((b) =>
+                b.internal ? (
+                  <Link key={b.label} href={b.href} style={{ textDecoration: 'none' }}>
+                    <div style={{
+                      background: 'rgba(201,168,76,0.06)',
+                      border: '1px solid rgba(201,168,76,0.2)',
+                      color: 'var(--gold)',
+                      padding: '12px 20px',
                       fontFamily: '"Space Mono", monospace',
                       fontSize: '0.6rem',
                       fontWeight: 700,
                       letterSpacing: '0.1em',
                       textTransform: 'uppercase',
                     }}>
-                      {d.cta} →
+                      {b.label}
                     </div>
                   </Link>
                 ) : (
-                  <a href={d.href} {...external} style={{ textDecoration: 'none', display: 'inline-block' }}>
+                  <a key={b.label} href={b.href} style={{ textDecoration: 'none' }}>
                     <div style={{
-                      border: `1px solid ${d.color}40`,
-                      color: d.color,
-                      padding: '10px 20px',
+                      background: 'rgba(201,168,76,0.06)',
+                      border: '1px solid rgba(201,168,76,0.2)',
+                      color: 'var(--gold)',
+                      padding: '12px 20px',
                       fontFamily: '"Space Mono", monospace',
                       fontSize: '0.6rem',
                       fontWeight: 700,
                       letterSpacing: '0.1em',
                       textTransform: 'uppercase',
                     }}>
-                      {d.cta} →
+                      {b.label}
                     </div>
                   </a>
-                )}
-              </div>
-            ))}
+                )
+              )}
+            </div>
           </div>
-        </div>
 
-        {/* Social channels */}
-        <div style={{ marginBottom: 56 }}>
+          {/* Owner note */}
           <div style={{
+            marginTop: 40,
+            padding: '16px 20px',
+            background: 'rgba(201,168,76,0.03)',
+            border: '1px solid rgba(201,168,76,0.08)',
             fontFamily: '"Space Mono", monospace',
-            fontSize: '0.55rem',
-            letterSpacing: '0.25em',
-            textTransform: 'uppercase',
-            color: 'rgba(245,240,232,0.4)',
-            marginBottom: 16,
+            fontSize: '0.5rem',
+            color: 'rgba(245,240,232,0.2)',
+            letterSpacing: '0.1em',
+            lineHeight: 1.8,
           }}>
-            Social Channels
+            OWNER NOTE: Channels marked [NEEDS OWNER URL] require real social profile URLs.<br />
+            Add to Vercel env vars: NEXT_PUBLIC_YOUTUBE_URL, NEXT_PUBLIC_TIKTOK_URL, NEXT_PUBLIC_INSTAGRAM_URL, NEXT_PUBLIC_RUMBLE_URL
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 2 }}>
-            {socials.map((s) => (
-              <div key={s.name} style={{
-                background: 'var(--deep)',
-                border: '1px solid rgba(245,240,232,0.06)',
-                padding: '20px',
-                opacity: s.disabled ? 0.4 : 1,
-              }}>
-                <div style={{
-                  fontFamily: '"Bebas Neue", sans-serif',
-                  fontSize: '1.1rem',
-                  color: 'rgba(245,240,232,0.5)',
-                  letterSpacing: '0.04em',
-                  marginBottom: 12,
-                }}>
-                  {s.name}
-                </div>
-                <div style={{
-                  border: '1px solid rgba(245,240,232,0.1)',
-                  color: 'rgba(245,240,232,0.25)',
-                  padding: '10px 16px',
-                  fontFamily: '"Space Mono", monospace',
-                  fontSize: '0.58rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                  cursor: 'default',
-                  textAlign: 'center',
-                }}>
-                  Coming Soon
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
 
-        {/* Footer nav */}
-        <div style={{
-          borderTop: '1px solid rgba(201,168,76,0.1)',
-          paddingTop: 32,
-          display: 'flex',
-          gap: 24,
-          flexWrap: 'wrap',
-        }}>
-          <Link href="/" style={{ fontSize: '0.65rem', color: 'rgba(245,240,232,0.4)', textDecoration: 'none', fontFamily: '"Space Mono", monospace' }}>← Back to Scott-King Coast</Link>
-          <a href={SIGNUP} {...external} style={{ fontSize: '0.65rem', color: 'var(--gold)', textDecoration: 'none', fontFamily: '"Space Mono", monospace' }}>Subscribe to Opportunity List</a>
-          <Link href="/products/medical-courier-guide" style={{ fontSize: '0.65rem', color: 'rgba(245,240,232,0.4)', textDecoration: 'none', fontFamily: '"Space Mono", monospace' }}>Medical Courier Guide</Link>
         </div>
+      </section>
 
-      </div>
+      <Footer />
     </main>
   )
 }

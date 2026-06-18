@@ -4,36 +4,41 @@ import CustomCursor from '@/components/CustomCursor'
 import CharacterInterrupt from '@/components/triggers/CharacterInterrupt'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://mystermyself.com'),
   title: {
-    default: 'MysterMyself Ecosystem OS | Skills. Plays. Freedom.',
+    default: 'MysterMyself | Scott-King Coast — One City. One System. Your Legacy.',
     template: '%s | MysterMyself',
   },
   description:
-    'The MysterMyself Ecosystem OS — Trading Chef University, Courier Income Lab, Breaded Or Not?!, Money Move Playbooks, Fantasy Draft Bible, and AI Operator Lab. Learn skills, find income plays, build your next money move.',
+    'Scott-King Coast — the complete ecosystem for building skills, income plays, and ownership systems. Join The Opportunity List for courier drops, trading lessons, AI tools, fantasy intel, creator resources, and wealth-building systems.',
   keywords: [
+    'Scott-King Coast',
+    'MysterMyself',
+    'The Opportunity List',
     'trading education',
+    'courier income',
+    'medical courier',
     'XAUUSD',
     'gold trading',
-    'courier income',
     'food business',
-    'money moves',
+    'AI tools',
+    'fantasy football',
     'Maurice Scott',
-    'MysterMyself',
-    'Trading Chef University',
     'income plays',
   ],
-  authors: [{ name: 'Maurice Scott', url: 'https://mysterymyself.com' }],
+  authors: [{ name: 'Maurice Scott', url: 'https://mystermyself.com' }],
   openGraph: {
-    title: 'MysterMyself Ecosystem OS',
-    description: 'Skills. Plays. Freedom.',
+    title: 'MysterMyself | Scott-King Coast',
+    description: 'One City. One System. Your Legacy.',
     type: 'website',
     siteName: 'MysterMyself',
+    url: 'https://mystermyself.com',
   },
   twitter: {
     card: 'summary_large_image',
     creator: '@mysterycartel',
-    title: 'MysterMyself Ecosystem OS',
-    description: 'Skills. Plays. Freedom.',
+    title: 'MysterMyself | Scott-King Coast',
+    description: 'One City. One System. Your Legacy.',
   },
 }
 
