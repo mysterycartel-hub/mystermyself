@@ -2,11 +2,12 @@ import type { Metadata } from 'next'
 import './globals.css'
 import CustomCursor from '@/components/CustomCursor'
 import CharacterInterrupt from '@/components/triggers/CharacterInterrupt'
+import { SITE_URL } from '@/lib/site'
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mystermyself.com'),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: 'MysterMyself | Scott-King Coast — One City. One System. Your Legacy.',
+    default: 'MysterMyself | Scott-King Coast',
     template: '%s | MysterMyself',
   },
   description:
@@ -26,13 +27,13 @@ export const metadata: Metadata = {
     'Maurice Scott',
     'income plays',
   ],
-  authors: [{ name: 'Maurice Scott', url: 'https://mystermyself.com' }],
+  authors: [{ name: 'Maurice Scott', url: SITE_URL }],
   openGraph: {
     title: 'MysterMyself | Scott-King Coast',
     description: 'One City. One System. Your Legacy.',
     type: 'website',
     siteName: 'MysterMyself',
-    url: 'https://mystermyself.com',
+    url: SITE_URL,
   },
   twitter: {
     card: 'summary_large_image',

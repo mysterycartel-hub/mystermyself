@@ -1,9 +1,10 @@
 {
   "redirects": [
-    { "source": "/courier-income-lab", "destination": "/route-harbor", "permanent": true },
-    { "source": "/subscribe",          "destination": "/opportunity-list", "permanent": false },
-    { "source": "/newsletter",         "destination": "/opportunity-list", "permanent": false },
-    { "source": "/districts",          "destination": "/districts",     "permanent": false },
-    { "source": "/start",              "destination": "/dashboard",     "permanent": false }
+    { "source": "/courier-income-lab", "destination": "/route-harbor",      "permanent": true  },
+    { "source": "/subscribe",          "destination": "/opportunity-list",   "permanent": false },
+    { "source": "/newsletter",         "destination": "/opportunity-list",   "permanent": false },
+    { "source": "/join",               "destination": "/opportunity-list",   "permanent": false },
+    { "source": "/districts",          "destination": "/coast",              "permanent": false },
+    { "source": "/start",              "destination": "/opportunity-list",   "permanent": false }
   ]
 }

@@ -68,7 +68,7 @@ export default function FreeContentPage() {
               </div>
             </div>
             <a
-              href="https://youtube.com"
+              href="https://www.youtube.com/@mystermyself"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-red text-sm shrink-0"

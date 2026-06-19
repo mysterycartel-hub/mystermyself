@@ -164,7 +164,7 @@ export default function Hero() {
             </Link>
 
             <a
-              href="https://youtube.com"
+              href="https://www.youtube.com/@mystermyself"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-outline-gold text-sm sm:text-base"

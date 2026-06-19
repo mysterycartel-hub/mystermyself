@@ -1,3 +1,8 @@
+export const BRAND_NAME   = 'MysterMyself'
+export const WORLD_NAME   = 'Scott-King Coast'
+export const SOCIAL_HANDLE = '@mystermyself'
+export const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'mysterycartel@gmail.com'
+
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || 'https://mystermyself.com'
 
@@ -5,37 +10,36 @@ export const BEEHIIV_PUBLICATION_URL =
   process.env.NEXT_PUBLIC_BEEHIIV_PUBLICATION_URL ||
   'https://maurices-newsletter-b7274b.beehiiv.com'
 
+export function absoluteUrl(path: string): string {
+  return `${SITE_URL}${path.startsWith('/') ? path : `/${path}`}`
+}
+
 export const site = {
-  name: 'MysterMyself',
-  world: 'Scott-King Coast',
+  name: BRAND_NAME,
+  world: WORLD_NAME,
   headline: 'Build Your Life Like a Business.',
   subheadline: 'Skills become income. Income becomes assets. Assets create freedom.',
 }
 
 export const routes = {
   home: '/',
-  subscribe: '/opportunity-list',
-  publication: BEEHIIV_PUBLICATION_URL,
-  medicalCourierGuide: '/products/medical-courier-guide',
-  routeHarbor: '/pages/route-harbor',
-  fantasyIsland: '/pages/fantasy-island',
-  creatorPier: '/pages/creator-pier',
-  marketMarina: '/pages/market-marina',
-  flavorDistrict: '/pages/flavor-district',
-  legacyPoint: '/pages/legacy-point',
-  libraryVault: '/pages/library-vault',
-  founderIsland: '/pages/founder-island',
-  blueprintBay: '/pages/blueprint-bay',
+  subscribe:    '/opportunity-list',
+  newsletter:   '/opportunity-list',
+  join:         '/opportunity-list',
+  publication:  BEEHIIV_PUBLICATION_URL,
   opportunityList: '/opportunity-list',
+  medicalCourierGuide: '/products/medical-courier-guide',
+  routeHarbor:  '/coast/route-harbor',
+  fantasyIsland: '/coast/fantasy-island',
+  creatorPier:  '/coast/creator-pier',
+  marketMarina: '/coast/market-marina',
+  flavorDistrict: '/coast/flavor-district',
+  legacyPoint:  '/coast/legacy-point',
+  libraryVault: '/coast/library-vault',
+  blueprintBay: '/coast/blueprint-bay',
 }
 
 export const districts = [
-  {
-    name: 'Founder Island',
-    purpose: 'Start here: the mission, founder story, and map of the Coast.',
-    href: routes.founderIsland,
-    action: 'Start Here',
-  },
   {
     name: 'Route Harbor',
     purpose: 'Courier income, logistics lanes, contracts, and medical delivery opportunities.',

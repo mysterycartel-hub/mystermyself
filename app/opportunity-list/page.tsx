@@ -4,7 +4,7 @@ import OpportunitySignup from '@/components/OpportunitySignup'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'The Opportunity List | MysterMyself',
+  title: 'The Opportunity List',
   description: 'Your entry pass into Scott-King Coast. Get courier drops, trading lessons, AI tools, fantasy updates, creator plays, food business resources, and ownership systems delivered to your inbox.',
 }
 
