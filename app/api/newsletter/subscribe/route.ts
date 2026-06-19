@@ -14,6 +14,17 @@ function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
+function logFallbackSubscriber(data: {
+  email: string
+  name?: string
+  selectedLane?: string
+  source: string
+  reason: string
+}) {
+  console.warn('[newsletter/subscribe] FALLBACK SUBSCRIBER — requires manual Beehiiv import:')
+  console.warn(JSON.stringify(data))
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
@@ -23,25 +34,23 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Valid email required.' }, { status: 400 })
     }
 
-    const apiKey = process.env.BEEHIIV_API_KEY
-    const publicationId = process.env.BEEHIIV_PUBLICATION_ID
+    const apiKey         = process.env.BEEHIIV_API_KEY
+    const publicationId  = process.env.BEEHIIV_PUBLICATION_ID
 
-    // If Beehiiv credentials are not configured, return a graceful stub response
+    // Missing env vars — log fallback, still redirect user
     if (!apiKey || !publicationId) {
-      console.warn('[newsletter/subscribe] BEEHIIV_API_KEY or BEEHIIV_PUBLICATION_ID not set — skipping API call')
-      return NextResponse.json({
-        ok: true,
-        message: 'Subscribed (dev mode — Beehiiv not configured)',
-        dev: true,
-      })
+      console.warn(
+        '[newsletter/subscribe] BEEHIIV_API_KEY or BEEHIIV_PUBLICATION_ID not set in Vercel env vars.'
+      )
+      logFallbackSubscriber({ email, name, selectedLane, source, reason: 'missing_env_vars' })
+      return NextResponse.json({ ok: true, fallback: true, reason: 'missing_env_vars' })
     }
 
     const customFields: { name: string; value: string }[] = [
-      { name: 'source', value: source },
-      { name: 'signup_page', value: 'opportunity_list' },
-      { name: 'brand', value: 'mystermyself' },
+      { name: 'source',       value: source },
+      { name: 'signup_page',  value: 'opportunity_list' },
+      { name: 'brand',        value: 'mystermyself' },
     ]
-
     if (name) {
       customFields.push({ name: 'first_name', value: name })
     }
@@ -57,40 +66,57 @@ export async function POST(req: NextRequest) {
     const payload = {
       email,
       reactivate_existing: false,
-      send_welcome_email: true,
-      utm_source: source,
-      utm_medium: 'organic',
-      utm_campaign: 'opportunity_list',
-      referring_site: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mystermyself.com',
-      custom_fields: customFields,
+      send_welcome_email:  true,
+      utm_source:          source,
+      utm_medium:          'organic',
+      utm_campaign:        'opportunity_list',
+      referring_site:      process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mystermyself.com',
+      custom_fields:       customFields,
       tags,
     }
 
-    const res = await fetch(
-      `https://api.beehiiv.com/v2/publications/${publicationId}/subscriptions`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify(payload),
-      }
-    )
-
-    if (!res.ok) {
-      const err = await res.text()
-      console.error('[newsletter/subscribe] Beehiiv error:', err)
-      return NextResponse.json(
-        { error: 'Subscription service error. Please try again.' },
-        { status: 502 }
+    let beehiivRes: Response
+    try {
+      beehiivRes = await fetch(
+        `https://api.beehiiv.com/v2/publications/${publicationId}/subscriptions`,
+        {
+          method:  'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization:  `Bearer ${apiKey}`,
+          },
+          body: JSON.stringify(payload),
+        }
       )
+    } catch (fetchErr) {
+      // Network error / timeout — log fallback, do not block user
+      console.error('[newsletter/subscribe] Beehiiv network error:', fetchErr)
+      logFallbackSubscriber({ email, name, selectedLane, source, reason: 'network_error' })
+      return NextResponse.json({ ok: true, fallback: true, reason: 'network_error' })
     }
 
-    const data = await res.json()
+    if (!beehiivRes.ok) {
+      const errBody = await beehiivRes.text()
+      console.error(
+        `[newsletter/subscribe] Beehiiv API error ${beehiivRes.status}:`, errBody
+      )
+      if (beehiivRes.status === 401 || beehiivRes.status === 403) {
+        console.error(
+          '[newsletter/subscribe] BEEHIIV_API_KEY is invalid or expired. ' +
+          'Rotate the key in Beehiiv dashboard and update BEEHIIV_API_KEY in Vercel env vars.'
+        )
+      }
+      logFallbackSubscriber({ email, name, selectedLane, source, reason: `beehiiv_${beehiivRes.status}` })
+      // Fallback — still redirect user, do not surface third-party error
+      return NextResponse.json({ ok: true, fallback: true, reason: `beehiiv_${beehiivRes.status}` })
+    }
+
+    const data = await beehiivRes.json()
     return NextResponse.json({ ok: true, id: data?.data?.id })
+
   } catch (err) {
     console.error('[newsletter/subscribe] Unexpected error:', err)
-    return NextResponse.json({ error: 'Unexpected error. Please try again.' }, { status: 500 })
+    // Even on unexpected errors, log and redirect rather than breaking the form
+    return NextResponse.json({ ok: true, fallback: true, reason: 'unexpected_error' })
   }
 }
