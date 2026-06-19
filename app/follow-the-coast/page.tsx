@@ -4,8 +4,13 @@ import Link from 'next/link'
 import { SOCIAL, isRealUrl } from '@/lib/social-links'
 
 export const metadata = {
-  title: 'Follow The Coast | MysterMyself',
+  title: 'Follow The Coast',
   description: 'Stay connected across every lane: newsletter, videos, shorts, social updates, and live drops from Scott-King Coast.',
+  openGraph: {
+    title: 'Follow The Coast — MysterMyself',
+    description: 'Stay connected across every lane: newsletter, videos, shorts, social updates, and live drops from Scott-King Coast.',
+    url: 'https://mystermyself.com/follow-the-coast',
+  },
 }
 
 const CHANNELS = [

@@ -33,7 +33,7 @@ const legalLinks = [
 ]
 
 const socialLinks = [
-  { label: 'The Opportunity List', href: SOCIAL.beehiivPublication, external: true },
+  { label: 'The Opportunity List', href: '/opportunity-list' },
   { label: 'YouTube',              href: SOCIAL.youtube,   external: true },
   { label: 'TikTok',               href: SOCIAL.tiktok,    external: true },
   { label: 'Instagram',            href: SOCIAL.instagram, external: true },

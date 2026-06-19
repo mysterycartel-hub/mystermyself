@@ -4,9 +4,14 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'Medical Courier Insider Edge | Route Harbor — MysterMyself',
+  title: 'Medical Courier Insider Edge | Route Harbor',
   description:
     'Learn how to find pharmacy, lab, and medical courier opportunities without depending only on job boards or delivery apps. The Route Harbor method.',
+  openGraph: {
+    title: 'Medical Courier Insider Edge — Route Harbor',
+    description: 'Learn how to find pharmacy, lab, and medical courier opportunities without depending only on job boards or delivery apps.',
+    url: 'https://mystermyself.com/products/medical-courier-guide',
+  },
 }
 
 const BEEHIIV = '/opportunity-list'

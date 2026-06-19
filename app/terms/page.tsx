@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
 export const metadata = {
-  title: 'Terms of Use | MysterMyself',
+  title: 'Terms of Use',
   description: 'Terms of Use for MysterMyself and Scott-King Coast.',
 }
 

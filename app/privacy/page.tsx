@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
 export const metadata = {
-  title: 'Privacy Policy | MysterMyself',
+  title: 'Privacy Policy',
   description: 'Privacy Policy for MysterMyself and Scott-King Coast.',
 }
 
