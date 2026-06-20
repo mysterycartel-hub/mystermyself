@@ -16,8 +16,10 @@ export default function Watchlist({
   onSymbolChange,
   onTimeframeChange,
 }: Props) {
-  const forex = KITCHEN_SYMBOLS.filter(s => s.group === 'forex')
-  const gold  = KITCHEN_SYMBOLS.filter(s => s.group === 'gold')
+  const forex   = KITCHEN_SYMBOLS.filter(s => s.group === 'forex')
+  const gold    = KITCHEN_SYMBOLS.filter(s => s.group === 'gold')
+  const equity  = KITCHEN_SYMBOLS.filter(s => s.group === 'equity')
+  const crypto  = KITCHEN_SYMBOLS.filter(s => s.group === 'crypto')
 
   const SymbolRow = ({ s }: { s: KitchenSymbol }) => {
     const active = s.id === activeSymbol.id
@@ -153,6 +155,16 @@ export default function Watchlist({
 
         <GroupLabel label="Gold Kitchen" />
         {gold.map(s => <SymbolRow key={s.id} s={s} />)}
+
+        <div style={{ height: 1, background: 'rgba(201,168,76,0.06)', margin: '8px 0' }} />
+
+        <GroupLabel label="Equity Kitchen" />
+        {equity.map(s => <SymbolRow key={s.id} s={s} />)}
+
+        <div style={{ height: 1, background: 'rgba(201,168,76,0.06)', margin: '8px 0' }} />
+
+        <GroupLabel label="Crypto Kitchen" />
+        {crypto.map(s => <SymbolRow key={s.id} s={s} />)}
       </div>
 
       {/* Active symbol info */}
@@ -177,7 +189,7 @@ export default function Watchlist({
           color: 'rgba(245,240,232,0.2)',
           lineHeight: 1.5,
         }}>
-          {activeTimeframe.label} · {activeSymbol.group === 'gold' ? 'Gold Kitchen' : 'Forex Kitchen'}
+          {activeTimeframe.label} · {activeSymbol.group === 'gold' ? 'Gold Kitchen' : activeSymbol.group === 'equity' ? 'Equity Kitchen' : activeSymbol.group === 'crypto' ? 'Crypto Kitchen' : 'Forex Kitchen'}
         </div>
       </div>
     </div>
