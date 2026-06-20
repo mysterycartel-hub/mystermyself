@@ -18,6 +18,5 @@ export async function GET(request: NextRequest) {
   }
 
   // Fallback: redirect to dashboard even if code exchange fails
-  const { origin: reqOrigin } = new URL(request.url)
-  return NextResponse.redirect(`${reqOrigin}/dashboard`)
+  return NextResponse.redirect(`${origin}/dashboard`)
 }

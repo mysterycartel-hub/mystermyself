@@ -80,8 +80,12 @@ CREATE TABLE IF NOT EXISTS journal_entries (
   symbol      text,
   timeframe   text,
   bias        text,
+  setup       text,
+  result      text,
+  lesson      text,
   notes       text,
   ai_summary  text,
+  trade_date  date,
   created_at  timestamptz DEFAULT now()
 );
 

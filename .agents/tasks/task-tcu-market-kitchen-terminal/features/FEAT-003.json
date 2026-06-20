@@ -1,0 +1,27 @@
+{
+  "id": "FEAT-003",
+  "type": "feat",
+  "description": "Rebuild /dashboard to show user stats (XP, level, rank, analyses saved, journal entries, missions completed), fix /auth redirect from /passport to /dashboard, update /journal with Supabase integration (with localStorage fallback), create /roadmap page, and ensure all routes render cleanly.",
+  "status": "completed",
+  "steps": [
+    "Rewrite /app/dashboard/page.tsx as a 'use client' page that: attempts to get the current Supabase user session (wrapped in try/catch for when Supabase is not configured); if authenticated, displays user email/name, XP, level, rank, analyses saved count, journal entries count, missions completed count, recent chart analyses list; if not authenticated OR Supabase not configured, shows a clean fallback with 'Sign in to track your progress' message and link to /auth; always shows a prominent 'Continue to Chart Kitchen' button linking to /chart-kitchen; shows navigation to /journal, /missions, /roadmap.",
+    "Update /components/auth/AuthForm.tsx to change the default redirectTo from '/passport' to '/dashboard'. Update /app/auth/page.tsx to pass redirectTo='/dashboard' to the AuthForm component instead of '/passport'. Use relative path (not absolute URL with localhost).",
+    "Create or update /app/auth/callback/route.ts (auth callback handler) that: exchanges the magic link code for a session; redirects to /dashboard after successful auth; handles errors gracefully. Check if this already exists at /app/api/passport/register or similar and reuse/adapt.",
+    "Update /app/journal/page.tsx to: attempt Supabase integration for saving/loading entries (try/catch wrapped); fall back gracefully to localStorage if Supabase is not configured; show a banner explaining 'Cloud sync available when Supabase is connected. Currently saving locally.' when in localStorage mode; keep the existing form UI but add a clear indication of save mode.",
+    "Create /app/roadmap/page.tsx - a branded TCU learning roadmap page showing the Trading Chef progression path: Level 0 Market Child -> Level 1 Candle Kitchen -> Level 2 Structure Kitchen -> Level 3 Flow Kitchen -> Level 4 AOI Kitchen -> Level 5 Delivery Kitchen -> Level 6 Confirmation Kitchen -> Level 7 The Pass -> Level 8 Tables Served -> Level 9 Head Chef. Use the existing page styling patterns (Navbar, Footer, Bebas Neue headings, Space Mono body, gold accent color). Include navigation back to /chart-kitchen and /dashboard.",
+    "Verify all required routes exist and render: /, /auth, /chart-kitchen, /dashboard, /journal, /missions, /roadmap. For any that show a blank or broken state, add a clean branded placeholder with TCU styling and navigation links."
+  ],
+  "acceptance_criteria": [
+    "/dashboard shows user stats or clean fallback when not authenticated, with navigation to Chart Kitchen",
+    "/auth page redirects to /dashboard after login (not /passport)",
+    "/journal works in localStorage mode and shows appropriate message about cloud sync",
+    "/roadmap page renders the TCU learning path with proper branding",
+    "All 7 required routes (/, /auth, /chart-kitchen, /dashboard, /journal, /missions, /roadmap) compile and render without errors",
+    "No hardcoded localhost URLs anywhere in auth flow"
+  ],
+  "verification": [
+    "Run npm run build and confirm all routes compile successfully without errors"
+  ],
+  "blocked_reason": null,
+  "findings": "All 7 routes compile successfully. Dashboard uses dynamic imports for XPRewardEngine and Supabase with full try/catch fallback. Journal persists to localStorage with key 'tcu_journal_entries'. Auth callback created at /app/auth/callback/route.ts. No StatCard component needed in new dashboard (removed dependency). Build passes clean."
+}

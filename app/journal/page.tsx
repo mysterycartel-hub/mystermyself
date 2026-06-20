@@ -68,12 +68,12 @@ export default function JournalPage() {
           .eq('user_id', user.id)
           .order('created_at', { ascending: false })
         if (!error && data && data.length > 0) {
-          const mapped: JournalEntry[] = data.map((row: { id: number; date: string; pair: string; setup: string; result: string; notes: string; lesson: string }) => ({
+          const mapped: JournalEntry[] = data.map((row: { id: number; symbol: string; setup: string; result: string; notes: string; lesson: string; trade_date: string }) => ({
             id: row.id,
-            date: row.date,
-            pair: row.pair,
-            setup: row.setup,
-            result: row.result as JournalEntry['result'],
+            date: row.trade_date || '',
+            pair: row.symbol || '',
+            setup: row.setup || '',
+            result: (row.result as JournalEntry['result']) || 'Win',
             notes: row.notes || '',
             lesson: row.lesson || '',
           }))
@@ -124,8 +124,8 @@ export default function JournalPage() {
       if (user) {
         await supabase.from('journal_entries').insert({
           user_id: user.id,
-          date: newEntry.date,
-          pair: newEntry.pair,
+          trade_date: newEntry.date,
+          symbol: newEntry.pair,
           setup: newEntry.setup,
           result: newEntry.result,
           notes: newEntry.notes,
