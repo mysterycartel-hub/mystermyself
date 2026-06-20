@@ -2,7 +2,7 @@
   "id": "FEAT-002",
   "type": "feat",
   "description": "Rebuild /chart-kitchen as a fully interactive terminal with live candlestick chart (TradingView Lightweight Charts with demo fallback), symbol selector, timeframe selector, Analyze Chart button, Save to Journal button, AI Coach panel, and character lesson cards. This is the core page of the entire app.",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "Rewrite /app/chart-kitchen/page.tsx as a 'use client' interactive terminal page. The layout should be: left sidebar (Watchlist with symbol + timeframe selectors), center (candlestick chart area), right sidebar (AI Coach panel). Below the chart area: BiasPanel for The Recipe steps. Top bar shows current symbol, timeframe, latest price from candle data, and action buttons (Analyze Chart, Save to Journal). Mobile layout stacks these vertically.",
     "Create a new component /components/kitchen/CandlestickChart.tsx that uses the lightweight-charts library (createChart, CandlestickSeries) to render candle data from /lib/marketData.ts. It should: accept symbol and timeframe props; call fetchCandles (which returns demo data when no API key exists); render the chart with dark theme matching TCU brand colors (background #060608, up candles green, down candles red, crosshair gold); support zoom/scroll; auto-resize on window resize; show latest price overlay.",
@@ -26,5 +26,5 @@
     "Run npm run build and confirm /chart-kitchen route compiles successfully"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "lightweight-charts v5 uses chart.addSeries(CandlestickSeries, opts) instead of chart.addCandlestickSeries(opts). Build passes cleanly. The page is 12.1kB compiled. All chart-kitchen, dashboard, journal, missions routes compile successfully. Used dynamic import with ssr:false for the chart component to avoid window/document issues during SSR."
 }
