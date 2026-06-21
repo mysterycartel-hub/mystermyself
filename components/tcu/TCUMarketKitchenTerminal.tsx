@@ -15,6 +15,8 @@ import {
   DEMO_CHEF_READ,
 } from '@/lib/tcu-terminal'
 import type { SessionInfo, FVGZone, ThreeTouchLevel } from '@/lib/tcu-terminal'
+import TCULogo from '@/components/tcu/TCULogo'
+import { TradingChefIcon, LouieLiquidityIcon, WickieIcon, ChefGoldieIcon, CandleKidIcon } from '@/components/tcu/CoachIcons'
 
 // ── Session Clock Widget ─────────────────────────────────────────────────────
 function SessionClock() {
@@ -299,6 +301,49 @@ function ChefReadPanel() {
   )
 }
 
+// ── Coach Panel (with SVG icons instead of initials) ──────────────────────────
+function CoachPanel() {
+  const coaches = [
+    { name: 'Trading Chef', role: 'Master Mentor', Icon: TradingChefIcon, color: '#C9A84C' },
+    { name: 'Louie Liquidity', role: 'Flow & Liquidity', Icon: LouieLiquidityIcon, color: '#3B82F6' },
+    { name: 'Wickie', role: 'Candle Reading', Icon: WickieIcon, color: '#F97316' },
+    { name: 'Chef Goldie', role: 'Structure & Execution', Icon: ChefGoldieIcon, color: '#C9A84C' },
+    { name: 'Candle Kid', role: 'Confirmation & Patience', Icon: CandleKidIcon, color: '#A855F7' },
+  ]
+
+  return (
+    <div style={{
+      background: 'rgba(0,0,0,0.4)',
+      border: '1px solid rgba(201,168,76,0.15)',
+      borderRadius: 12,
+      padding: '16px 20px',
+    }}>
+      <div style={{ fontSize: 11, fontWeight: 700, color: '#C9A84C', letterSpacing: '0.12em', marginBottom: 14 }}>
+        👨‍🍳 KITCHEN COACHES
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        {coaches.map(c => (
+          <div key={c.name} style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+            padding: '8px 10px',
+            borderRadius: 8,
+            background: `${c.color}08`,
+            border: `1px solid ${c.color}18`,
+          }}>
+            <c.Icon size={28} />
+            <div>
+              <div style={{ fontSize: 11, fontWeight: 600, color: c.color }}>{c.name}</div>
+              <div style={{ fontSize: 9, opacity: 0.4, marginTop: 1 }}>{c.role}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 // ── Main Terminal Component ───────────────────────────────────────────────────
 type TerminalTab = 'overview' | 'fvg' | 'three-touch' | 'lingo' | 'chef-read'
 
@@ -330,7 +375,7 @@ export default function TCUMarketKitchenTerminal() {
         alignItems: 'center',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <span style={{ fontSize: 24, filter: 'drop-shadow(0 0 8px #F59E0B)' }}>🍳</span>
+          <TCULogo size={36} />
           <div>
             <div style={{ fontSize: 13, fontWeight: 700, color: '#C9A84C', letterSpacing: '0.08em' }}>
               TCU MARKET KITCHEN TERMINAL
@@ -351,7 +396,7 @@ export default function TCUMarketKitchenTerminal() {
         </div>
       </div>
 
-      {/* Tab bar */}
+      {/* Tab bar — full 100% width */}
       <div style={{
         display: 'flex',
         gap: 2,
@@ -359,6 +404,7 @@ export default function TCUMarketKitchenTerminal() {
         background: 'rgba(0,0,0,0.3)',
         borderBottom: '1px solid rgba(201,168,76,0.08)',
         overflowX: 'auto',
+        width: '100%',
       }}>
         {tabs.map(t => (
           <button key={t.id}
@@ -397,13 +443,16 @@ export default function TCUMarketKitchenTerminal() {
       {/* Content */}
       <div style={{ padding: 20 }}>
         {activeTab === 'overview' && (
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+            {/* Chart / Main area — 65% */}
+            <div style={{ flex: '1 1 0', minWidth: 0, minHeight: 450, display: 'flex', flexDirection: 'column', gap: 16 }}>
               <SessionClock />
               <FVGHealthPanel zones={DEMO_FVG_ZONES.slice(0, 3)} />
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <ThreeTouchPanel levels={DEMO_THREE_TOUCH_LEVELS.slice(0, 3)} />
+            </div>
+            {/* Right panel — fixed 320px */}
+            <div style={{ width: 320, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <CoachPanel />
               <ChefReadPanel />
             </div>
           </div>
@@ -454,6 +503,14 @@ export default function TCUMarketKitchenTerminal() {
         @keyframes pulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.4; }
+        }
+        @media (max-width: 768px) {
+          .tcu-terminal-overview {
+            flex-direction: column !important;
+          }
+          .tcu-terminal-right {
+            width: 100% !important;
+          }
         }
       `}</style>
     </div>
