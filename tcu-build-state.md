@@ -46,25 +46,33 @@
 
 ---
 
-## SEPARATE REPO: tcu-market-kitchen-terminal
+## ARCHITECTURE DECISION (Confirmed 2026-06-22)
 
-**Status:** NOT accessible from this workspace
-**Action Required:** Maurice must clarify:
-1. Are `mystermyself-git` and `tcu-market-kitchen-terminal` meant to be the same project?
-2. Should `tcu-terminal-test` (local copy) be archived?
-3. Should the separate Vercel project `tcu-market-kitchen-terminal` be aliased to a domain?
+**Decision:** Separate projects with merge ability
+- `mystermyself` = main ecosystem site (mystermyself.com)
+- `tcu-market-kitchen-terminal` = standalone TCU trading terminal app
+- Both share the SAME Supabase instance for auth/data
+- `tcu-terminal-test` = local dev copy, NOT the live repo — can be archived
 
-### Tasks 1-4 from Handoff Brief (BLOCKED)
-These tasks reference the `tcu-market-kitchen-terminal` repo/Vercel project:
-- Task 1: Investigate `live: false` flag → Requires Vercel dashboard access or separate repo workspace
-- Task 2: Confirm Supabase env vars → Requires Vercel dashboard
-- Task 3: Verify live URL → Requires curl/browser access to `tcu-market-kitchen-terminal.vercel.app`
-- Task 4: Push bridge files from `tcu-terminal-test` → Local repo not in this workspace
+### Shared Supabase Connection
+- Both projects use the same Supabase project
+- Supabase anon key: `sb_publishable_...ZGmgstqf` (confirmed by Maurice)
+- Auth, passport, XP, and badges are shared across both deployments
+- Users who sign in on one site are recognized on the other
 
-**Placeholder for Maurice or Claude next steps:**
-- If `tcu-market-kitchen-terminal` is a standalone project → open that workspace separately
-- If it should merge into `mystermyself` → provide the files and I'll integrate
-- Vercel domain/alias issues require dashboard access (STOPS HERE — needs Maurice)
+### Tasks 1-4 (tcu-market-kitchen-terminal repo)
+These require opening the `tcu-market-kitchen-terminal` workspace separately:
+- Task 1: Investigate `live: false` → Vercel dashboard → Domains tab
+- Task 2: Add Supabase env vars to that Vercel project (same keys as mystermyself)
+- Task 3: Verify live URL after env vars set
+- Task 4: Archive `tcu-terminal-test` local copy
+
+### NEXT STEP FOR CLAUDE/KIRO
+When `tcu-market-kitchen-terminal` workspace is opened:
+1. Add env vars: NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY (sb_publishable_...ZGmgstqf), SUPABASE_SERVICE_ROLE_KEY
+2. Check domain alias
+3. Verify routes load
+4. Both sites share auth — user logs into one, recognized on both
 
 ---
 
