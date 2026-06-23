@@ -66,7 +66,7 @@ export async function analyzeChart(
         return getMockAnalysis(symbol, timeframe)
     }
   } catch (error) {
-    console.error('[aiCoach] Analysis error, returning mock data:', error)
+    console.error('[aiCoach] Analysis error, returning mock data')
     return getMockAnalysis(symbol, timeframe)
   }
 }

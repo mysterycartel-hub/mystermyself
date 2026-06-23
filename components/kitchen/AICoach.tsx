@@ -232,24 +232,34 @@ export default function AICoach({ symbol, timeframe }: Props) {
           </div>
         )}
 
-        {/* Error state */}
+        {/* Error / AI Safe Mode state */}
         {error && !loading && (
           <div style={{
             margin: 12,
             padding: '14px 16px',
-            background: 'rgba(239,68,68,0.05)',
-            border: '1px solid rgba(239,68,68,0.18)',
-            borderLeft: '3px solid #EF4444',
+            background: error.includes('coming soon') || error.includes('503') || error.includes('safeMode')
+              ? 'rgba(201,168,76,0.04)'
+              : 'rgba(239,68,68,0.05)',
+            border: error.includes('coming soon') || error.includes('503') || error.includes('safeMode')
+              ? '1px solid rgba(201,168,76,0.15)'
+              : '1px solid rgba(239,68,68,0.18)',
+            borderLeft: error.includes('coming soon') || error.includes('503') || error.includes('safeMode')
+              ? '3px solid #c9a84c'
+              : '3px solid #EF4444',
           }}>
             <div style={{
               fontFamily: '"Space Mono", monospace',
               fontSize: '0.44rem',
               letterSpacing: '0.15em',
               textTransform: 'uppercase',
-              color: '#EF4444',
+              color: error.includes('coming soon') || error.includes('503') || error.includes('safeMode')
+                ? '#c9a84c'
+                : '#EF4444',
               marginBottom: 6,
             }}>
-              Coach Offline
+              {error.includes('coming soon') || error.includes('503') || error.includes('safeMode')
+                ? 'AI Coach — Coming Soon'
+                : 'Coach Offline'}
             </div>
             <p style={{
               fontFamily: '"Space Mono", monospace',
@@ -258,8 +268,8 @@ export default function AICoach({ symbol, timeframe }: Props) {
               color: 'rgba(245,240,232,0.4)',
               margin: 0,
             }}>
-              {error.includes('ANTHROPIC') || error.includes('503')
-                ? 'Add ANTHROPIC_API_KEY to .env.local to activate the AI Coach.'
+              {error.includes('coming soon') || error.includes('503') || error.includes('safeMode')
+                ? 'The AI Coach feature is in development and will be activated soon. Stay tuned for live chart analysis powered by TCU methodology.'
                 : error}
             </p>
           </div>

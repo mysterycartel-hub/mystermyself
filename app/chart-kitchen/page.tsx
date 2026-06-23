@@ -263,7 +263,7 @@ export default function ChartKitchenPage() {
                   </div>
                 </div>
 
-                {/* Demo notice */}
+                {/* AI Safe Mode notice */}
                 {!process.env.NEXT_PUBLIC_AI_PROVIDER && (
                   <div style={{
                     background: 'rgba(201,168,76,0.04)',
@@ -275,7 +275,7 @@ export default function ChartKitchenPage() {
                     lineHeight: 1.6,
                     letterSpacing: '0.05em',
                   }}>
-                    Demo analysis - connect an API key for live AI coaching.
+                    AI Coach — coming soon. Demo analysis shown below.
                   </div>
                 )}
 
