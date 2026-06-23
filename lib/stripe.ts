@@ -1,8 +1,26 @@
 import Stripe from 'stripe'
 
-// Server-side Stripe client
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-06-20',
+// Server-side Stripe client — lazy singleton to avoid crash when env var is missing
+let _stripe: Stripe | null = null
+
+export function getStripe(): Stripe {
+  if (!_stripe) {
+    const key = process.env.STRIPE_SECRET_KEY
+    if (!key) {
+      throw new Error(
+        'Stripe not configured. Add STRIPE_SECRET_KEY to environment variables.'
+      )
+    }
+    _stripe = new Stripe(key, { apiVersion: '2024-06-20' })
+  }
+  return _stripe
+}
+
+// Legacy named export for dynamic imports — delegates to lazy getter
+export const stripe = new Proxy({} as Stripe, {
+  get(_, prop) {
+    return (getStripe() as unknown as Record<string | symbol, unknown>)[prop]
+  },
 })
 
 // Product price IDs — set these after creating products in Stripe Dashboard

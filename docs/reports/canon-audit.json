@@ -1,0 +1,192 @@
+{
+  "timestamp": "2026-06-23T22:53:42.148Z",
+  "districts": {
+    "total": 8,
+    "present": 8,
+    "missing": 0,
+    "details": [
+      {
+        "name": "Route Harbor",
+        "id": "route-harbor",
+        "found": true
+      },
+      {
+        "name": "Market Marina",
+        "id": "market-marina",
+        "found": true
+      },
+      {
+        "name": "Flavor District",
+        "id": "flavor-district",
+        "found": true
+      },
+      {
+        "name": "Blueprint Bay",
+        "id": "blueprint-bay",
+        "found": true
+      },
+      {
+        "name": "Creator Pier",
+        "id": "creator-pier",
+        "found": true
+      },
+      {
+        "name": "Legacy Point",
+        "id": "legacy-point",
+        "found": true
+      },
+      {
+        "name": "Fantasy Island",
+        "id": "fantasy-island",
+        "found": true
+      },
+      {
+        "name": "Library Vault",
+        "id": "library-vault",
+        "found": true
+      }
+    ]
+  },
+  "characters": {
+    "total": 9,
+    "present": 9,
+    "missing": 0,
+    "details": [
+      {
+        "name": "The Trading Chef",
+        "role": "Main narrator and system architect",
+        "found": true
+      },
+      {
+        "name": "Candle Kid",
+        "role": "Young energy, candlestick patterns, session timing",
+        "found": true
+      },
+      {
+        "name": "Wickie",
+        "role": "Wicks, stop hunts, liquidity sweeps",
+        "found": true
+      },
+      {
+        "name": "Louie Liquidity",
+        "role": "Liquidity pools, order flow, smart money",
+        "found": true
+      },
+      {
+        "name": "Chef Goldie",
+        "role": "XAUUSD specialist, gold trading mastery",
+        "found": true
+      },
+      {
+        "name": "Grandma Market",
+        "role": "Market structure, higher timeframe wisdom",
+        "found": true
+      },
+      {
+        "name": "Nana Value",
+        "role": "Fair value gaps, imbalances, discount zones",
+        "found": true
+      },
+      {
+        "name": "Melissa Mayhem",
+        "role": "Volatility, news events, session chaos",
+        "found": true
+      },
+      {
+        "name": "Melody Mayhem",
+        "role": "Rhythm of price, harmonic patterns, flow",
+        "found": true
+      }
+    ]
+  },
+  "products": {
+    "total": 8,
+    "present": 8,
+    "missing": 0,
+    "details": [
+      {
+        "name": "TCU Gold Starter Guide",
+        "division": "trading-chef-university",
+        "found": true
+      },
+      {
+        "name": "TCU Gold Playbook",
+        "division": "trading-chef-university",
+        "found": true
+      },
+      {
+        "name": "TCU Membership",
+        "division": "trading-chef-university",
+        "found": true
+      },
+      {
+        "name": "Medical Courier Starter Guide",
+        "division": "courier-income-lab",
+        "found": true
+      },
+      {
+        "name": "Food Pop-Up Blueprint",
+        "division": "breaded",
+        "found": true
+      },
+      {
+        "name": "Money Move Starter Pack",
+        "division": "playbooks",
+        "found": true
+      },
+      {
+        "name": "Fantasy Draft Bible 2025",
+        "division": "fantasy",
+        "found": true
+      },
+      {
+        "name": "AI Operator Starter Kit",
+        "division": "ai-operator-lab",
+        "found": true
+      }
+    ]
+  },
+  "keyTerms": {
+    "total": 9,
+    "present": 7,
+    "missing": 2,
+    "details": [
+      {
+        "term": "Scott-King Coast",
+        "found": true
+      },
+      {
+        "term": "MysterMyself",
+        "found": true
+      },
+      {
+        "term": "Opportunity List",
+        "found": true
+      },
+      {
+        "term": "MS Crown",
+        "found": true
+      },
+      {
+        "term": "Trading Chef Universe",
+        "found": true
+      },
+      {
+        "term": "TCU",
+        "found": true
+      },
+      {
+        "term": "Breaded Or Not",
+        "found": true
+      },
+      {
+        "term": "Knighten Route",
+        "found": false
+      },
+      {
+        "term": "Newsletter Ready Desk",
+        "found": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+name: OPS Funnel Task
+description: Improve or fix a funnel path
+title: "[OPS/FUNNEL] "
+labels: ["ops", "funnel"]
+body:
+  - type: textarea
+    id: mission
+    attributes:
+      label: Mission
+      description: What funnel needs improvement?
+    validations:
+      required: true
+  - type: dropdown
+    id: lane
+    attributes:
+      label: Lane / District
+      options:
+        - MysterMyself (general)
+        - Market Marina / TCU
+        - Route Harbor
+        - Flavor District
+        - Blueprint Bay
+        - Creator Pier
+        - Legacy Point
+        - Fantasy Island
+        - Library Vault
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Current Problem
+      description: What is the funnel gap or broken path?
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Done Means
+      description: What does the working funnel look like?
+    validations:
+      required: true
+  - type: textarea
+    id: approval
+    attributes:
+      label: Approval Gate
+      description: What requires Maurice's explicit approval?
+  - type: checkboxes
+    id: constraints
+    attributes:
+      label: Constraints
+      options:
+        - label: No paid AI keys required
+          required: true
+        - label: No new repo created
+          required: true
+        - label: No new Vercel project created
+          required: true
+        - label: No forced email subscriptions
+          required: true

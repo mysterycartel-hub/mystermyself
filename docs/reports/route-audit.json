@@ -1,0 +1,236 @@
+{
+  "timestamp": "2026-06-23T22:53:41.455Z",
+  "totalRoutes": 38,
+  "existing": 38,
+  "missing": 0,
+  "results": [
+    {
+      "path": "/",
+      "status": "active",
+      "notes": "Homepage / ecosystem portal",
+      "fileExists": true
+    },
+    {
+      "path": "/coast",
+      "status": "active",
+      "notes": "District navigation hub",
+      "fileExists": true
+    },
+    {
+      "path": "/coast/route-harbor",
+      "status": "active",
+      "notes": "Dynamic district page",
+      "fileExists": true
+    },
+    {
+      "path": "/coast/market-marina",
+      "status": "active",
+      "notes": "Dynamic district page",
+      "fileExists": true
+    },
+    {
+      "path": "/coast/flavor-district",
+      "status": "active",
+      "notes": "Dynamic district page",
+      "fileExists": true
+    },
+    {
+      "path": "/coast/blueprint-bay",
+      "status": "active",
+      "notes": "Dynamic district page",
+      "fileExists": true
+    },
+    {
+      "path": "/coast/creator-pier",
+      "status": "active",
+      "notes": "Dynamic district page",
+      "fileExists": true
+    },
+    {
+      "path": "/coast/legacy-point",
+      "status": "active",
+      "notes": "Dynamic district page",
+      "fileExists": true
+    },
+    {
+      "path": "/coast/fantasy-island",
+      "status": "active",
+      "notes": "Dynamic district page",
+      "fileExists": true
+    },
+    {
+      "path": "/coast/library-vault",
+      "status": "active",
+      "notes": "Dynamic district page",
+      "fileExists": true
+    },
+    {
+      "path": "/opportunity-list",
+      "status": "active",
+      "notes": "Main subscriber capture page",
+      "fileExists": true
+    },
+    {
+      "path": "/resources",
+      "status": "active",
+      "notes": "Resource library",
+      "fileExists": true
+    },
+    {
+      "path": "/products/medical-courier-guide",
+      "status": "active",
+      "notes": "Product landing page",
+      "fileExists": true
+    },
+    {
+      "path": "/follow-the-coast",
+      "status": "active",
+      "notes": "Social channels page",
+      "fileExists": true
+    },
+    {
+      "path": "/welcome",
+      "status": "active",
+      "notes": "Post-signup welcome",
+      "fileExists": true
+    },
+    {
+      "path": "/auth",
+      "status": "active",
+      "notes": "Auth/login page",
+      "fileExists": true
+    },
+    {
+      "path": "/dashboard",
+      "status": "active",
+      "notes": "User dashboard",
+      "fileExists": true
+    },
+    {
+      "path": "/chart-kitchen",
+      "status": "active",
+      "notes": "Market Kitchen Terminal",
+      "fileExists": true
+    },
+    {
+      "path": "/journal",
+      "status": "active",
+      "notes": "Trading journal",
+      "fileExists": true
+    },
+    {
+      "path": "/roadmap",
+      "status": "active",
+      "notes": "Project roadmap",
+      "fileExists": true
+    },
+    {
+      "path": "/pricing",
+      "status": "active",
+      "notes": "Product pricing page",
+      "fileExists": true
+    },
+    {
+      "path": "/about",
+      "status": "active",
+      "notes": "About page",
+      "fileExists": true
+    },
+    {
+      "path": "/market-marina",
+      "status": "active",
+      "notes": "TCU district landing",
+      "fileExists": true
+    },
+    {
+      "path": "/market-marina/tcu-sound-identity",
+      "status": "active",
+      "notes": "TCU Sound Identity System",
+      "fileExists": true
+    },
+    {
+      "path": "/passport",
+      "status": "active",
+      "notes": "Passport system",
+      "fileExists": true
+    },
+    {
+      "path": "/academy",
+      "status": "active",
+      "notes": "TCU Academy lessons",
+      "fileExists": true
+    },
+    {
+      "path": "/community",
+      "status": "active",
+      "notes": "Community page",
+      "fileExists": true
+    },
+    {
+      "path": "/brands",
+      "status": "active",
+      "notes": "Brand showcase",
+      "fileExists": true
+    },
+    {
+      "path": "/tools",
+      "status": "active",
+      "notes": "Tool Vault",
+      "fileExists": true
+    },
+    {
+      "path": "/missions",
+      "status": "active",
+      "notes": "Mission system",
+      "fileExists": true
+    },
+    {
+      "path": "/playbooks",
+      "status": "active",
+      "notes": "Playbook catalog",
+      "fileExists": true
+    },
+    {
+      "path": "/free-content",
+      "status": "active",
+      "notes": "Free content hub",
+      "fileExists": true
+    },
+    {
+      "path": "/library",
+      "status": "active",
+      "notes": "Library page",
+      "fileExists": true
+    },
+    {
+      "path": "/terms",
+      "status": "active",
+      "notes": "Terms of service",
+      "fileExists": true
+    },
+    {
+      "path": "/privacy",
+      "status": "active",
+      "notes": "Privacy policy",
+      "fileExists": true
+    },
+    {
+      "path": "/disclaimer",
+      "status": "active",
+      "notes": "Disclaimer",
+      "fileExists": true
+    },
+    {
+      "path": "/refund",
+      "status": "active",
+      "notes": "Refund policy",
+      "fileExists": true
+    },
+    {
+      "path": "/affiliate-disclosure",
+      "status": "active",
+      "notes": "Affiliate disclosure",
+      "fileExists": true
+    }
+  ]
+}

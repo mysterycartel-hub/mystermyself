@@ -1,0 +1,58 @@
+name: OPS Diagnosis
+description: Report a site issue found by audit or manual testing
+title: "[OPS/DIAG] "
+labels: ["ops", "diagnosis"]
+body:
+  - type: textarea
+    id: mission
+    attributes:
+      label: Mission
+      description: What needs to be diagnosed or fixed?
+    validations:
+      required: true
+  - type: dropdown
+    id: lane
+    attributes:
+      label: Lane / District
+      options:
+        - MysterMyself (general)
+        - Market Marina / TCU
+        - Route Harbor
+        - Flavor District
+        - Blueprint Bay
+        - Creator Pier
+        - Legacy Point
+        - Fantasy Island
+        - Library Vault
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Current Problem
+      description: What is broken, missing, or wrong?
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Done Means
+      description: What does success look like?
+    validations:
+      required: true
+  - type: textarea
+    id: approval
+    attributes:
+      label: Approval Gate
+      description: What requires Maurice's explicit approval?
+  - type: checkboxes
+    id: constraints
+    attributes:
+      label: Constraints
+      options:
+        - label: No paid AI keys required
+          required: true
+        - label: No new repo created
+          required: true
+        - label: No new Vercel project created
+          required: true

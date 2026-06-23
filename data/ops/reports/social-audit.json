@@ -1,0 +1,106 @@
+{
+  "timestamp": "2026-06-23T22:53:41.775Z",
+  "totalLinks": 11,
+  "confirmed": 9,
+  "problems": 2,
+  "sourceFileIssues": [
+    {
+      "reason": "placeholder_needs_url",
+      "count": 4
+    },
+    {
+      "reason": "placeholder_text",
+      "count": 1
+    }
+  ],
+  "results": [
+    {
+      "brand": "mystermyself",
+      "platform": "youtube",
+      "url": "https://www.youtube.com/@mystermyself",
+      "declaredStatus": "confirmed",
+      "issues": [],
+      "valid": true
+    },
+    {
+      "brand": "mystermyself",
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@mystermyself",
+      "declaredStatus": "confirmed",
+      "issues": [],
+      "valid": true
+    },
+    {
+      "brand": "mystermyself",
+      "platform": "instagram",
+      "url": "https://www.instagram.com/mystermyself",
+      "declaredStatus": "confirmed",
+      "issues": [],
+      "valid": true
+    },
+    {
+      "brand": "mystermyself",
+      "platform": "x",
+      "url": "https://x.com/mystermyself",
+      "declaredStatus": "confirmed",
+      "issues": [],
+      "valid": true
+    },
+    {
+      "brand": "mystermyself",
+      "platform": "rumble",
+      "url": "https://rumble.com/c/Mystermyself",
+      "declaredStatus": "confirmed",
+      "issues": [],
+      "valid": true
+    },
+    {
+      "brand": "mystermyself",
+      "platform": "facebook",
+      "url": "https://www.facebook.com/MysterMyself/",
+      "declaredStatus": "confirmed",
+      "issues": [],
+      "valid": true
+    },
+    {
+      "brand": "mystermyself",
+      "platform": "beehiiv",
+      "url": "https://maurices-newsletter-b7274b.beehiiv.com",
+      "declaredStatus": "confirmed",
+      "issues": [],
+      "valid": true
+    },
+    {
+      "brand": "breaded",
+      "platform": "instagram",
+      "url": "https://www.instagram.com/breaded_or_not/",
+      "declaredStatus": "confirmed",
+      "issues": [],
+      "valid": true
+    },
+    {
+      "brand": "breaded",
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@breaded.or.not",
+      "declaredStatus": "confirmed",
+      "issues": [],
+      "valid": true
+    },
+    {
+      "brand": "breaded",
+      "platform": "facebook",
+      "url": null,
+      "declaredStatus": "missing",
+      "issues": [],
+      "valid": false
+    },
+    {
+      "brand": "breaded",
+      "platform": "orderUrl",
+      "url": null,
+      "declaredStatus": "coming_soon",
+      "issues": [],
+      "valid": false
+    }
+  ]
+}

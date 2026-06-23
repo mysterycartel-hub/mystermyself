@@ -1,0 +1,17 @@
+{
+  "mystermyself": {
+    "youtube": { "url": "https://www.youtube.com/@mystermyself", "status": "confirmed" },
+    "tiktok": { "url": "https://www.tiktok.com/@mystermyself", "status": "confirmed" },
+    "instagram": { "url": "https://www.instagram.com/mystermyself", "status": "confirmed" },
+    "x": { "url": "https://x.com/mystermyself", "status": "confirmed" },
+    "rumble": { "url": "https://rumble.com/c/Mystermyself", "status": "confirmed" },
+    "facebook": { "url": "https://www.facebook.com/MysterMyself/", "status": "confirmed" },
+    "beehiiv": { "url": "https://maurices-newsletter-b7274b.beehiiv.com", "status": "confirmed" }
+  },
+  "breaded": {
+    "instagram": { "url": "https://www.instagram.com/breaded_or_not/", "status": "confirmed" },
+    "tiktok": { "url": "https://www.tiktok.com/@breaded.or.not", "status": "confirmed" },
+    "facebook": { "url": null, "status": "missing" },
+    "orderUrl": { "url": null, "status": "coming_soon" }
+  }
+}

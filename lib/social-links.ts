@@ -12,7 +12,7 @@ export const SOCIAL = {
   tiktok:      process.env.NEXT_PUBLIC_TIKTOK_URL     ?? 'https://www.tiktok.com/@mystermyself',
   instagram:   process.env.NEXT_PUBLIC_INSTAGRAM_URL  ?? 'https://www.instagram.com/mystermyself',
   x:           process.env.NEXT_PUBLIC_X_URL          ?? 'https://x.com/mystermyself',
-  rumble:      process.env.NEXT_PUBLIC_RUMBLE_URL      ?? '[NEEDS OWNER URL]',
+  rumble:      process.env.NEXT_PUBLIC_RUMBLE_URL      ?? 'https://rumble.com/c/Mystermyself',
   facebook:    process.env.NEXT_PUBLIC_FACEBOOK_URL   ?? 'https://www.facebook.com/MysterMyself/',
   email:       process.env.NEXT_PUBLIC_CONTACT_EMAIL  ?? 'mysterycartel@gmail.com',
 } as const
