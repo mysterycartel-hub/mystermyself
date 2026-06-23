@@ -1,6 +1,6 @@
 # Social Links Audit Report
 
-**Date**: 2026-06-23T22:53:41.775Z
+**Date**: 2026-06-23T23:38:37.781Z
 **Total Links**: 11
 **Confirmed**: 9 | **Issues**: 2
 
@@ -8,8 +8,8 @@
 
 | Brand | Platform | URL | Status | Issues |
 |-------|----------|-----|--------|--------|
-| breaded | facebook | null | missing |  |
-| breaded | orderUrl | null | coming_soon |  |
+| breaded | facebook | /follow-the-coast | coming_soon |  |
+| breaded | orderUrl | /follow-the-coast | coming_soon |  |
 
 ## ✅ Confirmed Links
 
@@ -24,8 +24,3 @@
 | mystermyself | beehiiv | https://maurices-newsletter-b7274b.beehiiv.com |
 | breaded | instagram | https://www.instagram.com/breaded_or_not/ |
 | breaded | tiktok | https://www.tiktok.com/@breaded.or.not |
-
-## Source File Issues (lib/social-links.ts)
-
-- ❌ `placeholder_needs_url` — 4 occurrences
-- ❌ `placeholder_text` — 1 occurrences

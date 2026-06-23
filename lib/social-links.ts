@@ -1,6 +1,6 @@
 // Central social link registry — all pages pull from here.
-// Replace [NEEDS OWNER URL] values in the Vercel dashboard env vars
-// or directly in this file once the real URLs are confirmed.
+// Unresolved links route to /follow-the-coast (Coming Soon).
+// Update env vars in Vercel dashboard when real URLs are confirmed.
 
 export const SOCIAL = {
   site:        'https://mystermyself.com',
@@ -18,16 +18,17 @@ export const SOCIAL = {
 } as const
 
 // ── Breaded Or Not — Flavor District brand links ──────────────────────────
+// Missing links route to /follow-the-coast until real URLs are provided.
 export const BREADED = {
   instagram: process.env.NEXT_PUBLIC_BREADED_INSTAGRAM_URL ?? 'https://www.instagram.com/breaded_or_not/',
   tiktok:    process.env.NEXT_PUBLIC_BREADED_TIKTOK_URL    ?? 'https://www.tiktok.com/@breaded.or.not',
-  facebook:  process.env.NEXT_PUBLIC_BREADED_FACEBOOK_URL  ?? '[NEEDS OWNER URL]',
-  orderUrl:  process.env.NEXT_PUBLIC_BREADED_ORDER_URL     ?? '[NEEDS OWNER URL]',
+  facebook:  process.env.NEXT_PUBLIC_BREADED_FACEBOOK_URL  ?? '/follow-the-coast',
+  orderUrl:  process.env.NEXT_PUBLIC_BREADED_ORDER_URL     ?? '/follow-the-coast',
 } as const
 
-// Returns true if a social URL is real (not a placeholder)
+// Returns true if a social URL is an external confirmed link (not a local fallback)
 export function isRealUrl(url: string): boolean {
-  return url !== '[NEEDS OWNER URL]' && url.startsWith('http')
+  return url.startsWith('http')
 }
 
 export type SocialKey = keyof typeof SOCIAL

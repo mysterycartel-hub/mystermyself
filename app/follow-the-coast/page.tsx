@@ -190,7 +190,7 @@ export default function FollowTheCoastPage() {
                             marginLeft: 10,
                             textTransform: 'uppercase',
                           }}>
-                            [NEEDS OWNER URL]
+                            Coming Soon
                           </span>
                         )}
                       </div>
@@ -322,8 +322,7 @@ export default function FollowTheCoastPage() {
             letterSpacing: '0.1em',
             lineHeight: 1.8,
           }}>
-            OWNER NOTE: Channels marked [NEEDS OWNER URL] require real social profile URLs.<br />
-            Add to Vercel env vars: NEXT_PUBLIC_YOUTUBE_URL, NEXT_PUBLIC_TIKTOK_URL, NEXT_PUBLIC_INSTAGRAM_URL, NEXT_PUBLIC_RUMBLE_URL
+            All confirmed channels are linked above. Channels marked &quot;Coming Soon&quot; will be activated when URLs are provided.
           </div>
 
         </div>

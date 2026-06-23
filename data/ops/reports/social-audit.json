@@ -1,18 +1,9 @@
 {
-  "timestamp": "2026-06-23T22:53:41.775Z",
+  "timestamp": "2026-06-23T23:38:37.781Z",
   "totalLinks": 11,
   "confirmed": 9,
   "problems": 2,
-  "sourceFileIssues": [
-    {
-      "reason": "placeholder_needs_url",
-      "count": 4
-    },
-    {
-      "reason": "placeholder_text",
-      "count": 1
-    }
-  ],
+  "sourceFileIssues": [],
   "results": [
     {
       "brand": "mystermyself",
@@ -89,15 +80,15 @@
     {
       "brand": "breaded",
       "platform": "facebook",
-      "url": null,
-      "declaredStatus": "missing",
+      "url": "/follow-the-coast",
+      "declaredStatus": "coming_soon",
       "issues": [],
       "valid": false
     },
     {
       "brand": "breaded",
       "platform": "orderUrl",
-      "url": null,
+      "url": "/follow-the-coast",
       "declaredStatus": "coming_soon",
       "issues": [],
       "valid": false

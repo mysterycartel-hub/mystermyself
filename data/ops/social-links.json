@@ -11,7 +11,7 @@
   "breaded": {
     "instagram": { "url": "https://www.instagram.com/breaded_or_not/", "status": "confirmed" },
     "tiktok": { "url": "https://www.tiktok.com/@breaded.or.not", "status": "confirmed" },
-    "facebook": { "url": null, "status": "missing" },
-    "orderUrl": { "url": null, "status": "coming_soon" }
+    "facebook": { "url": "/follow-the-coast", "status": "coming_soon" },
+    "orderUrl": { "url": "/follow-the-coast", "status": "coming_soon" }
   }
 }
