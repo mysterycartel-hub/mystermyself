@@ -7,34 +7,87 @@
 
 ---
 
-## 1. Production Project Name
+## CORRECTION NOTICE
+
+The original version of this report incorrectly stated that the production Vercel project was named `mystermyself` under the Vercel organization `mysterycartel-hub`. This was inferred from the GitHub organization name but **contradicted by the Vercel bot deployment evidence on this very PR**.
+
+**What the Vercel bot actually shows:**
+
+- The Vercel scope/account is **`maurice-s-projects8`** (a personal Vercel account, NOT a team/org named `mysterycartel-hub`)
+- Two separate Vercel projects are actively deploying from the same GitHub repo:
+  1. **`mystermyself-git`**
+  2. **`mystermysself.ver`** (note the typo: double "s" in "mystermysself")
+
+Both projects triggered deployments on PR pushes to `mysterycartel-hub/mystermyself`, confirming they are both connected to this repository.
+
+---
+
+## 1. Production Project -- What We Know vs. What Requires Dashboard Verification
+
+### Confirmed from Vercel Bot Evidence
 
 | Field | Value |
 |-------|-------|
-| Vercel Project | `mystermyself` |
-| Vercel Org | `mysterycartel-hub` |
-| Framework | Next.js 14.2.5 (auto-detected) |
+| Vercel Account/Scope | `maurice-s-projects8` (personal account) |
+| Active Project #1 | `mystermyself-git` |
+| Active Project #2 | `mystermysself.ver` (typo: double "s") |
+| Connected GitHub Repo | `mysterycartel-hub/mystermyself` |
+| Framework | Next.js 14.2.5 (auto-detected from repo) |
 | Node Version | 18.x |
 | Build Command | `npm run build` |
-| Autodeploy | Enabled (pushes to `main` trigger production deploy) |
+| Autodeploy | Enabled (both projects deploy on pushes) |
 
-The single production project is named **mystermyself** inside the **mysterycartel-hub** Vercel organization.
+### CEO Must Verify in Vercel Dashboard
 
----
-
-## 2. Domain Connection
-
-| Domain | Status | Notes |
-|--------|--------|-------|
-| `mystermyself.com` | Connected to Vercel | Primary production URL |
-| `mystermyself.vercel.app` | Active (Vercel default) | Auto-assigned, always available |
-| Preview URLs (`mystermyself-[hash]-mysterycartel-hub.vercel.app`) | Auto-generated | Created per commit on PR branches |
-
-**Confirmed:** The domain `mystermyself.com` is connected to the `mystermyself` Vercel project. SSL is provisioned via Let's Encrypt. DNS records point to Vercel.
+| Question | Why It Matters |
+|----------|---------------|
+| Which project (`mystermyself-git` or `mystermysself.ver`) has `mystermyself.com` assigned as its production domain? | Only one project should serve the live site |
+| Does the other project have any custom domain assigned? | If not, it is a duplicate that can be ignored |
+| Which project has environment variables configured? | Env vars must be on the production project |
+| Are there any additional duplicate projects under `maurice-s-projects8`? | Unknown without dashboard access |
 
 ---
 
-## 3. Latest Deployment Status
+## 2. Why the Report Originally Said "mysterycartel-hub"
+
+The GitHub organization is `mysterycartel-hub`, but the Vercel account connected to this repo is the **personal account** `maurice-s-projects8`. This is a common situation:
+
+- The repo was likely connected to Vercel via a personal account login rather than a Vercel Team/Organization
+- Vercel allows personal accounts to deploy repos from any GitHub organization the user has access to
+- There may not be a separate Vercel "mysterycartel-hub" organization at all
+
+**This is not a problem** -- it just means the Vercel billing and project management lives under Maurice's personal Vercel account rather than a team org. No action needed unless you want to migrate to a Vercel Team later.
+
+---
+
+## 3. Which Project Is Production?
+
+**We cannot determine this from the repository alone.** The production project is whichever one has `mystermyself.com` connected as its custom domain.
+
+**CEO action to identify production:**
+
+1. Open the Vercel Dashboard at [vercel.com](https://vercel.com)
+2. You should be in the `maurice-s-projects8` scope (your personal account)
+3. Click on **`mystermyself-git`** -- go to Settings > Domains
+4. Click on **`mystermysself.ver`** -- go to Settings > Domains
+5. The project that shows `mystermyself.com` in its domain list is your production project
+
+**Most likely scenario:** One of these is the production project (connected to `mystermyself.com`) and the other is an accidental duplicate created during initial Vercel setup. The typo in `mystermysself.ver` suggests it may have been an earlier attempt.
+
+---
+
+## 4. Domain Connection
+
+| Domain | Expected Status | Notes |
+|--------|----------------|-------|
+| `mystermyself.com` | Connected to ONE of the two projects | CEO must confirm which one |
+| `*.vercel.app` (preview URLs) | Auto-generated per project | Both projects generate these |
+
+**CEO must confirm:** Which project has `mystermyself.com` connected. SSL should be provisioned automatically via Let's Encrypt.
+
+---
+
+## 5. Latest Deployment Status
 
 | Metric | Value |
 |--------|-------|
@@ -51,7 +104,9 @@ The `vercel.json` file contains only redirect rules (6 vanity URL redirects). No
 
 ---
 
-## 4. Required Environment Variables
+## 6. Required Environment Variables
+
+Environment variables must be set on the **production project only** (the one connected to `mystermyself.com`). Do NOT configure them on the duplicate project.
 
 ### Critical (features fail without these)
 
@@ -79,64 +134,85 @@ The `vercel.json` file contains only redirect rules (6 vanity URL redirects). No
 
 ---
 
-## 5. Duplicate Projects to Ignore
+## 7. Duplicate Projects -- What to Ignore
 
-### Preview Deployments (NOT duplicates)
+You have two projects deploying from the same repo:
 
-The URLs matching the pattern `mystermyself-[hash]-mysterycartel-hub.vercel.app` are **not** separate Vercel projects. They are auto-generated preview deployments created by Vercel for each push or pull request. They are harmless, cost nothing, and expire automatically.
+| Project | Likely Status | Action |
+|---------|---------------|--------|
+| The one with `mystermyself.com` domain | **PRODUCTION** -- keep and maintain | Set env vars here |
+| The one WITHOUT `mystermyself.com` domain | **DUPLICATE** -- ignore for now | Do not configure, do not delete yet |
 
-### Potential Duplicate Projects
+### Why Two Projects Exist
 
-If the Vercel dashboard shows additional projects with names like:
-- `mystermyself-1`
-- `mystermyself-old`
-- `mystermyself-test`
-- Any project NOT connected to `mystermyself.com`
+This typically happens when:
+- The repo was connected to Vercel twice (perhaps during initial setup troubleshooting)
+- One was created via `vercel` CLI and the other via the Vercel dashboard "Import" flow
+- The typo in `mystermysself.ver` suggests it may have been an early attempt with a name error
 
-These are likely leftover projects from earlier setup attempts. They should be **ignored but not deleted** until a deliberate cleanup pass is scheduled. The canonical production project is the one connected to the `mystermyself.com` domain.
+### Do NOT Delete the Duplicate Yet
 
-### How to Confirm
-
-1. Open Vercel Dashboard
-2. Look at the project list under the `mysterycartel-hub` organization
-3. The correct project is the one showing `mystermyself.com` under its Domains section
-4. Any other `mystermyself*` project without a custom domain is a duplicate to ignore
+Leave it alone. It deploys on pushes but serves no traffic if it has no custom domain. A cleanup can be scheduled later once production is confirmed stable.
 
 ---
 
-## 6. Exact Next CEO Action
+## 8. Exact CEO Actions Inside Vercel
 
-**Do this now (15 minutes total):**
+**Do this now (15-20 minutes total):**
 
-1. Open the Vercel Dashboard at [vercel.com](https://vercel.com)
-2. Navigate to the `mystermyself` project under `mysterycartel-hub`
-3. Go to Settings > Environment Variables
-4. Confirm these 4 variables are set with valid values:
+### Step 1: Identify the Production Project
+
+1. Open [vercel.com](https://vercel.com) and log in
+2. Confirm you are in the **`maurice-s-projects8`** scope (top-left dropdown)
+3. You should see both `mystermyself-git` and `mystermysself.ver` in the project list
+4. Click into each one and check **Settings > Domains**
+5. The project showing `mystermyself.com` is your production project -- note its name
+
+### Step 2: Verify Environment Variables on Production Project
+
+6. In the **production project** (the one with `mystermyself.com`), go to **Settings > Environment Variables**
+7. Confirm these 4 variables are set with valid values:
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
    - `SUPABASE_SERVICE_ROLE_KEY`
    - `ANTHROPIC_API_KEY`
-5. If any are missing, add them (values are in your Supabase and Anthropic dashboards)
-6. After adding, trigger a redeploy (Deployments > Redeploy)
-7. Confirm the live site at `mystermyself.com` loads without errors
+8. If any are missing, add them (values are in your Supabase and Anthropic dashboards)
+9. After adding, trigger a redeploy: go to **Deployments > ... menu on latest > Redeploy**
+10. Confirm the live site at `mystermyself.com` loads without errors
+
+### Step 3: Confirm the Duplicate Has No Domain
+
+11. Go to the OTHER project (the one without `mystermyself.com`)
+12. Check **Settings > Domains** -- it should show only its `.vercel.app` default URL
+13. If it somehow also has `mystermyself.com`, remove the domain from this project (only one project should own it)
+
+### Step 4 (Optional): Disable the Duplicate
+
+14. If you want to stop the duplicate from deploying on every push:
+    - Go to the duplicate project > **Settings > Git**
+    - Disconnect the GitHub repository
+    - This stops future deploys without deleting the project
 
 **Do NOT:**
-- Delete any Vercel projects
-- Change the connected GitHub repository
+- Delete any Vercel projects (yet)
+- Change the connected GitHub repository on the production project
 - Modify the build command or framework preset
 - Add Stripe keys (payments are intentionally off)
+- Move to a Vercel Team/Org (not needed right now)
 
 ---
 
 ## Summary
 
 ```
-PRODUCTION PROJECT:   mystermyself (org: mysterycartel-hub)
-DOMAIN:              mystermyself.com -> connected and verified
+VERCEL ACCOUNT:       maurice-s-projects8 (personal, NOT an org)
+ACTIVE PROJECTS:      mystermyself-git AND mystermysself.ver (one is a duplicate)
+PRODUCTION PROJECT:   Whichever has mystermyself.com domain (CEO must verify)
+DUPLICATE PROJECT:    The other one -- ignore, do not delete
+DOMAIN:              mystermyself.com (connected to one of the two projects)
 BUILD STATUS:        PASSING (63 routes, 0 errors)
-ENV VARS NEEDED:     4 critical, 5+ optional
-DUPLICATES:          Ignore any extra projects; do not delete
-NEXT ACTION:         Verify env vars are set in Vercel, redeploy
+ENV VARS NEEDED:     4 critical, 5+ optional (set on production project ONLY)
+NEXT ACTION:         Identify which project is production, verify env vars, confirm site loads
 ```
 
-**Bottom line:** The Vercel production connection is correct and healthy. The build passes. The domain is connected. The only gap is confirming environment variables are populated so that auth and AI features work on the live site.
+**Bottom line:** The Vercel setup is functional but slightly messy -- there are two projects where there should be one, and they live under a personal account rather than a team org. The immediate priority is confirming which project owns `mystermyself.com` and ensuring its environment variables are set. The duplicate can be cleaned up later. The build itself is healthy and deploys are automated.
