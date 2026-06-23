@@ -43,18 +43,19 @@ const socialLinks = [
 ]
 
 function FooterLink({ href, children, external }: { href: string; children: React.ReactNode; external?: boolean }) {
-  const isMissing = href === '[NEEDS OWNER URL]'
   const style: React.CSSProperties = {
     fontSize: '0.72rem',
-    color: isMissing ? 'rgba(245,240,232,0.2)' : 'rgba(245,240,232,0.4)',
+    color: 'rgba(245,240,232,0.4)',
     textDecoration: 'none',
     fontFamily: '"Space Mono", monospace',
     display: 'block',
-    cursor: isMissing ? 'default' : 'pointer',
+    cursor: 'pointer',
   }
-  if (isMissing) return <span style={style}>{children} ⚠</span>
-  if (external || href.startsWith('http') || href.startsWith('mailto')) {
-    return <a href={href} target={href.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer" style={style} className="footer-link">{children}</a>
+  if (external && href.startsWith('http')) {
+    return <a href={href} target="_blank" rel="noopener noreferrer" style={style} className="footer-link">{children}</a>
+  }
+  if (href.startsWith('mailto')) {
+    return <a href={href} style={style} className="footer-link">{children}</a>
   }
   return <Link href={href} style={style} className="footer-link">{children}</Link>
 }

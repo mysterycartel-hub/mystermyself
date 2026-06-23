@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-06-23T22:53:42.302Z",
+  "timestamp": "2026-06-23T23:38:38.356Z",
   "totalPages": 16,
-  "clean": 3,
-  "flagged": 13,
+  "clean": 8,
+  "flagged": 8,
   "results": [
     {
       "route": "/",
@@ -37,9 +37,7 @@
       "newsletterSegment": null,
       "district": "all",
       "pageExists": true,
-      "issues": [
-        "no_capture_cta_found"
-      ]
+      "issues": []
     },
     {
       "route": "/coast/market-marina",
@@ -49,9 +47,9 @@
       "productPath": "/pricing",
       "newsletterSegment": "interest_trading_chef",
       "district": "market-marina",
-      "pageExists": false,
+      "pageExists": true,
       "issues": [
-        "page_file_missing"
+        "no_product_link_found"
       ]
     },
     {
@@ -62,9 +60,9 @@
       "productPath": "/products/medical-courier-guide",
       "newsletterSegment": "interest_route_harbor",
       "district": "route-harbor",
-      "pageExists": false,
+      "pageExists": true,
       "issues": [
-        "page_file_missing"
+        "no_product_link_found"
       ]
     },
     {
@@ -75,9 +73,9 @@
       "productPath": "/pricing",
       "newsletterSegment": "interest_food",
       "district": "flavor-district",
-      "pageExists": false,
+      "pageExists": true,
       "issues": [
-        "page_file_missing"
+        "no_product_link_found"
       ]
     },
     {
@@ -88,9 +86,9 @@
       "productPath": "/pricing",
       "newsletterSegment": "interest_ai_business",
       "district": "blueprint-bay",
-      "pageExists": false,
+      "pageExists": true,
       "issues": [
-        "page_file_missing"
+        "no_product_link_found"
       ]
     },
     {
@@ -101,10 +99,8 @@
       "productPath": null,
       "newsletterSegment": "interest_creator_tools",
       "district": "creator-pier",
-      "pageExists": false,
-      "issues": [
-        "page_file_missing"
-      ]
+      "pageExists": true,
+      "issues": []
     },
     {
       "route": "/coast/legacy-point",
@@ -114,10 +110,8 @@
       "productPath": null,
       "newsletterSegment": null,
       "district": "legacy-point",
-      "pageExists": false,
-      "issues": [
-        "page_file_missing"
-      ]
+      "pageExists": true,
+      "issues": []
     },
     {
       "route": "/coast/fantasy-island",
@@ -127,9 +121,9 @@
       "productPath": "/pricing",
       "newsletterSegment": "interest_fantasy",
       "district": "fantasy-island",
-      "pageExists": false,
+      "pageExists": true,
       "issues": [
-        "page_file_missing"
+        "no_product_link_found"
       ]
     },
     {
@@ -140,10 +134,8 @@
       "productPath": null,
       "newsletterSegment": null,
       "district": "library-vault",
-      "pageExists": false,
-      "issues": [
-        "page_file_missing"
-      ]
+      "pageExists": true,
+      "issues": []
     },
     {
       "route": "/market-marina",
@@ -154,10 +146,7 @@
       "newsletterSegment": "interest_trading_chef",
       "district": "market-marina",
       "pageExists": true,
-      "issues": [
-        "no_capture_cta_found",
-        "no_product_link_found"
-      ]
+      "issues": []
     },
     {
       "route": "/pricing",

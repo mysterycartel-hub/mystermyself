@@ -7,7 +7,7 @@
  * Usage: node scripts/ops/audit-funnels.mjs
  */
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs'
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 'fs'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 
@@ -28,6 +28,27 @@ function getPageContent(route) {
   const p2 = join(APP_DIR, segment, 'page.jsx')
   if (existsSync(p1)) return readFileSync(p1, 'utf8')
   if (existsSync(p2)) return readFileSync(p2, 'utf8')
+
+  // Check for dynamic route: /coast/market-marina → app/coast/[district]/page.tsx
+  const parts = segment.split('/')
+  if (parts.length >= 2) {
+    const parentDir = parts.slice(0, -1).join('/')
+    const parentPath = join(APP_DIR, parentDir)
+    if (existsSync(parentPath)) {
+      try {
+        const entries = readdirSync(parentPath, { withFileTypes: true })
+        for (const entry of entries) {
+          if (entry.isDirectory() && entry.name.startsWith('[') && entry.name.endsWith(']')) {
+            const dynamicPage = join(parentPath, entry.name, 'page.tsx')
+            const dynamicPageJsx = join(parentPath, entry.name, 'page.jsx')
+            if (existsSync(dynamicPage)) return readFileSync(dynamicPage, 'utf8')
+            if (existsSync(dynamicPageJsx)) return readFileSync(dynamicPageJsx, 'utf8')
+          }
+        }
+      } catch { /* ignore */ }
+    }
+  }
+
   return null
 }
 

@@ -1,6 +1,6 @@
 # CEO Automation Report — MysterMyself / Scott-King Coast
 
-**Generated**: 2026-06-23T22:53:42.450Z
+**Generated**: 2026-06-23T23:38:38.495Z
 **Domain**: mystermyself.com
 **Repo**: mysterycartel-hub/mystermyself
 
@@ -11,12 +11,12 @@
 - 38/38 expected routes have files
 - 8/8 districts referenced in code
 - 9/9 TCU characters referenced
-- 3/16 funnel pages are clean
+- 8/16 funnel pages are clean
 
 ## ❌ What Is Broken or Missing
 
 - Missing key terms: Knighten Route, Newsletter Ready Desk
-- 13 pages have funnel issues
+- 8 pages have funnel issues
 
 ## 🔨 Safe To Build Next
 

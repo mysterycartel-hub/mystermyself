@@ -102,6 +102,59 @@ export default function CoastPage() {
         </div>
       </section>
 
+      {/* Opportunity List CTA */}
+      <section style={{
+        background: 'var(--black)',
+        borderTop: '1px solid rgba(201,168,76,0.08)',
+        padding: '64px 48px',
+        textAlign: 'center',
+      }}>
+        <div style={{ maxWidth: 520, margin: '0 auto' }}>
+          <p style={{
+            fontFamily: '"Space Mono", monospace',
+            fontSize: '0.55rem',
+            letterSpacing: '0.3em',
+            textTransform: 'uppercase',
+            color: 'rgba(201,168,76,0.5)',
+            marginBottom: 16,
+          }}>
+            MysterMyself · Scott-King Coast
+          </p>
+          <h2 style={{
+            fontFamily: '"Bebas Neue", sans-serif',
+            fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+            lineHeight: 0.95,
+            marginBottom: 20,
+          }}>
+            JOIN THE<br />
+            <span style={{ color: 'var(--gold)' }}>OPPORTUNITY LIST</span>
+          </h2>
+          <p style={{
+            fontSize: '0.75rem',
+            color: 'rgba(245,240,232,0.45)',
+            lineHeight: 1.8,
+            marginBottom: 28,
+            fontFamily: '"Space Mono", monospace',
+          }}>
+            Get district drops, income plays, and resources from every lane — straight to your inbox. Free.
+          </p>
+          <a href="/opportunity-list" style={{
+            display: 'inline-block',
+            background: 'var(--gold)',
+            color: '#060608',
+            padding: '16px 40px',
+            fontFamily: '"Space Mono", monospace',
+            fontSize: '0.72rem',
+            fontWeight: 700,
+            letterSpacing: '0.14em',
+            textTransform: 'uppercase',
+            textDecoration: 'none',
+          }}>
+            Enter The Coast →
+          </a>
+        </div>
+      </section>
+
       <Footer />
     </main>
   )
