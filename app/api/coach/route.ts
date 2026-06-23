@@ -1,14 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { buildCoachSystemPrompt, buildCoachUserPrompt } from '@/lib/kitchen'
+import { isAICoachEnabled, getAISafeModeResponse } from '@/lib/ai-safe-mode'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
 export async function POST(req: NextRequest) {
+  // AI Safe Mode — graceful disable when API keys are not configured
+  if (!isAICoachEnabled()) {
+    const safeMode = getAISafeModeResponse()
+    return NextResponse.json(
+      { error: safeMode.message, safeMode: true },
+      { status: 503 }
+    )
+  }
+
   const apiKey = process.env.ANTHROPIC_API_KEY
   if (!apiKey) {
     return NextResponse.json(
-      { error: 'ANTHROPIC_API_KEY not configured' },
+      { error: 'AI Coach is currently unavailable. Coming soon.', safeMode: true },
       { status: 503 }
     )
   }
