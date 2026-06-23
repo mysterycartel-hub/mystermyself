@@ -5,21 +5,46 @@
 - Repo: mysterycartel-hub/mystermyself
 - Domain: mystermyself.com
 - CEO: Maurice Scott
+- Memory anchor: docs/MEMORY-BLOCKS.md
 
 ## Operating Rules
 
-1. Maurice is CEO. He gives vision, approves PRs, and makes decisions. He does not code.
-2. Kiro builds only inside the current repo. Do not create new repos or Vercel projects.
-3. Do not start over. Continue from current state.
-4. Diagnose before building. Run audits first.
-5. Use GitHub PRs for all changes that go to production.
-6. Keep reports in plain English for CEO consumption.
-7. Preserve canon: all districts, characters, and brands are locked unless Maurice approves changes.
-8. No fake social links. Unknown links go to Follow the Coast or show "Coming Soon".
-9. No forced subscriptions. Capture is opt-in only.
-10. No paid AI keys (OpenAI, Anthropic) required for core functionality.
-11. Demo data for all features when real data isn't available.
-12. All public routes must load without errors.
+1. Maurice is CEO only. He gives vision, approves PRs, and makes decisions. He does NOT code, use terminal, or run commands.
+2. Do not ask Maurice to use PowerShell, GitHub CLI, npm, git, or any terminal commands.
+3. Kiro builds only inside the current repo. Do not create new repos or Vercel projects.
+4. Do not start over. Continue from current state. Read docs/MEMORY-BLOCKS.md for context.
+5. Diagnose before building. Run audits first.
+6. Use GitHub PRs for all changes that go to production.
+7. Keep reports in plain English for CEO consumption.
+8. Preserve canon: all districts, characters, and brands are locked unless Maurice approves changes.
+9. No fake social links. Unknown links go to /follow-the-coast or show "Coming Soon".
+10. No forced subscriptions. Capture is opt-in only.
+11. No paid AI keys (OpenAI, Anthropic) required for core functionality.
+12. Demo data for all features when real data isn't available.
+13. All public routes must load without errors.
+
+## Role System
+
+| Role | Owner |
+|------|-------|
+| CEO vision + approvals | Maurice |
+| Command center + review | ChatGPT |
+| Repo builder + PR handoff | Kiro |
+| Source of truth | GitHub |
+| Production deploy | Vercel |
+| Auth/data | Supabase |
+| Newsletter/capture | Beehiiv |
+
+## Workflow (Every Phase)
+1. Kiro syncs to main
+2. Kiro runs `npm run ops:audit-all`
+3. Kiro runs `npm run build`
+4. Kiro diagnoses and returns CEO report
+5. CEO approves scope
+6. Kiro builds on feature branch
+7. Kiro pushes branch + provides PR link
+8. ChatGPT reviews
+9. Maurice merges (click only)
 
 ## Canon (Do Not Invent)
 - Main brand: MysterMyself
@@ -43,3 +68,10 @@
 - File deletion
 - Canon changes
 - New paid services
+
+## Completed Phases (Do Not Redo)
+- OPS/001 — Source of truth audit
+- OPS/002 — Vercel production connection audit
+- OPS/003 — Production Safe Mode
+- OPS/004 — Automation Control Layer
+- OPS/004A — Link and Social Cleanup
