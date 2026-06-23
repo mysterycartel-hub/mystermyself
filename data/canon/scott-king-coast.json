@@ -1,0 +1,126 @@
+{
+  "ecosystem": {
+    "name": "MysterMyself",
+    "world": "Scott-King Coast",
+    "domain": "mystermyself.com",
+    "handle": "@mystermyself",
+    "email": "mysterycartel@gmail.com"
+  },
+  "districts": [
+    {
+      "id": "route-harbor",
+      "name": "Route Harbor",
+      "brand": "Knighten Route Transportation",
+      "lane": "Courier money, logistics, income routes",
+      "route": "/coast/route-harbor",
+      "color": "#0EA5E9"
+    },
+    {
+      "id": "market-marina",
+      "name": "Market Marina",
+      "brand": "Trading Chef / Trading Chef University",
+      "lane": "Gold, forex, financial markets, trading education",
+      "route": "/coast/market-marina",
+      "color": "#0D9488"
+    },
+    {
+      "id": "flavor-district",
+      "name": "Flavor District",
+      "brand": "Breaded Or Not?!",
+      "lane": "Food business, pop-ups, catering, brand building",
+      "route": "/coast/flavor-district",
+      "color": "#F97316"
+    },
+    {
+      "id": "blueprint-bay",
+      "name": "Blueprint Bay",
+      "brand": "AI Operator Lab",
+      "lane": "AI automation, build systems, business OS",
+      "route": "/coast/blueprint-bay",
+      "color": "#6366F1"
+    },
+    {
+      "id": "creator-pier",
+      "name": "Creator Pier",
+      "brand": "Newsletter Ready Desk",
+      "lane": "Content, affiliate, creator tools, monetization",
+      "route": "/coast/creator-pier",
+      "color": "#A855F7"
+    },
+    {
+      "id": "legacy-point",
+      "name": "Legacy Point",
+      "brand": "Scott-King Holdings",
+      "lane": "Wealth, holdings, ownership, long-term assets",
+      "route": "/coast/legacy-point",
+      "color": "#EC4899"
+    },
+    {
+      "id": "fantasy-island",
+      "name": "Fantasy Island",
+      "brand": "Fantasy Island",
+      "lane": "Fantasy football, live updates, subscriber content, draft tools",
+      "route": "/coast/fantasy-island",
+      "color": "#22C55E"
+    },
+    {
+      "id": "library-vault",
+      "name": "Library Vault",
+      "brand": "Library Vault",
+      "lane": "Research, resource library, free guides, downloads",
+      "route": "/coast/library-vault",
+      "color": "#c9a84c"
+    }
+  ],
+  "characters": [
+    { "name": "The Trading Chef", "role": "Main narrator and system architect", "district": "market-marina" },
+    { "name": "Candle Kid", "role": "Young energy, candlestick patterns, session timing", "district": "market-marina" },
+    { "name": "Wickie", "role": "Wicks, stop hunts, liquidity sweeps", "district": "market-marina" },
+    { "name": "Louie Liquidity", "role": "Liquidity pools, order flow, smart money", "district": "market-marina" },
+    { "name": "Chef Goldie", "role": "XAUUSD specialist, gold trading mastery", "district": "market-marina" },
+    { "name": "Grandma Market", "role": "Market structure, higher timeframe wisdom", "district": "market-marina" },
+    { "name": "Nana Value", "role": "Fair value gaps, imbalances, discount zones", "district": "market-marina" },
+    { "name": "Melissa Mayhem", "role": "Volatility, news events, session chaos", "district": "market-marina" },
+    { "name": "Melody Mayhem", "role": "Rhythm of price, harmonic patterns, flow", "district": "market-marina" }
+  ],
+  "products": [
+    { "name": "TCU Gold Starter Guide", "division": "trading-chef-university", "type": "free" },
+    { "name": "TCU Gold Playbook", "division": "trading-chef-university", "type": "paid" },
+    { "name": "TCU Membership", "division": "trading-chef-university", "type": "subscription" },
+    { "name": "Medical Courier Starter Guide", "division": "courier-income-lab", "type": "paid" },
+    { "name": "Food Pop-Up Blueprint", "division": "breaded", "type": "paid" },
+    { "name": "Money Move Starter Pack", "division": "playbooks", "type": "paid" },
+    { "name": "Fantasy Draft Bible 2025", "division": "fantasy", "type": "paid" },
+    { "name": "AI Operator Starter Kit", "division": "ai-operator-lab", "type": "paid" }
+  ],
+  "funnel": [
+    "Visitor",
+    "Opportunity List Subscriber",
+    "District Member",
+    "Guide Consumer",
+    "Product Customer",
+    "Community Member",
+    "Asset Owner"
+  ],
+  "keyRoutes": [
+    "/",
+    "/opportunity-list",
+    "/coast",
+    "/coast/route-harbor",
+    "/coast/market-marina",
+    "/coast/flavor-district",
+    "/coast/blueprint-bay",
+    "/coast/creator-pier",
+    "/coast/legacy-point",
+    "/coast/fantasy-island",
+    "/coast/library-vault",
+    "/market-marina",
+    "/follow-the-coast",
+    "/pricing",
+    "/products/medical-courier-guide",
+    "/dashboard",
+    "/passport",
+    "/welcome",
+    "/about"
+  ]
+}

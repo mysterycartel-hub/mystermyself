@@ -1,0 +1,211 @@
+{
+  "timestamp": "2026-06-23T22:53:42.302Z",
+  "totalPages": 16,
+  "clean": 3,
+  "flagged": 13,
+  "results": [
+    {
+      "route": "/",
+      "audience": "Cold visitor",
+      "nextAction": "Explore districts or enter Opportunity List",
+      "capturePath": "/opportunity-list",
+      "productPath": null,
+      "newsletterSegment": null,
+      "district": null,
+      "pageExists": true,
+      "issues": [
+        "too_many_ctas_6"
+      ]
+    },
+    {
+      "route": "/opportunity-list",
+      "audience": "Interested visitor ready to subscribe",
+      "nextAction": "Submit email → enter Scott-King Coast",
+      "capturePath": "/api/newsletter/subscribe",
+      "productPath": null,
+      "newsletterSegment": "website_signup + lane tag",
+      "district": null,
+      "pageExists": true,
+      "issues": []
+    },
+    {
+      "route": "/coast",
+      "audience": "Subscriber or explorer",
+      "nextAction": "Choose a district to explore",
+      "capturePath": "/opportunity-list",
+      "productPath": null,
+      "newsletterSegment": null,
+      "district": "all",
+      "pageExists": true,
+      "issues": [
+        "no_capture_cta_found"
+      ]
+    },
+    {
+      "route": "/coast/market-marina",
+      "audience": "Trading-curious subscriber",
+      "nextAction": "Start TCU lessons or get Gold Playbook",
+      "capturePath": "/opportunity-list",
+      "productPath": "/pricing",
+      "newsletterSegment": "interest_trading_chef",
+      "district": "market-marina",
+      "pageExists": false,
+      "issues": [
+        "page_file_missing"
+      ]
+    },
+    {
+      "route": "/coast/route-harbor",
+      "audience": "Income-seeking subscriber",
+      "nextAction": "Get Medical Courier Starter Guide",
+      "capturePath": "/opportunity-list",
+      "productPath": "/products/medical-courier-guide",
+      "newsletterSegment": "interest_route_harbor",
+      "district": "route-harbor",
+      "pageExists": false,
+      "issues": [
+        "page_file_missing"
+      ]
+    },
+    {
+      "route": "/coast/flavor-district",
+      "audience": "Food entrepreneur subscriber",
+      "nextAction": "Get Food Pop-Up Blueprint",
+      "capturePath": "/opportunity-list",
+      "productPath": "/pricing",
+      "newsletterSegment": "interest_food",
+      "district": "flavor-district",
+      "pageExists": false,
+      "issues": [
+        "page_file_missing"
+      ]
+    },
+    {
+      "route": "/coast/blueprint-bay",
+      "audience": "AI/automation-interested subscriber",
+      "nextAction": "Get AI Operator Starter Kit",
+      "capturePath": "/opportunity-list",
+      "productPath": "/pricing",
+      "newsletterSegment": "interest_ai_business",
+      "district": "blueprint-bay",
+      "pageExists": false,
+      "issues": [
+        "page_file_missing"
+      ]
+    },
+    {
+      "route": "/coast/creator-pier",
+      "audience": "Creator/affiliate subscriber",
+      "nextAction": "Explore creator tools and content systems",
+      "capturePath": "/opportunity-list",
+      "productPath": null,
+      "newsletterSegment": "interest_creator_tools",
+      "district": "creator-pier",
+      "pageExists": false,
+      "issues": [
+        "page_file_missing"
+      ]
+    },
+    {
+      "route": "/coast/legacy-point",
+      "audience": "Wealth-building subscriber",
+      "nextAction": "Explore ownership systems",
+      "capturePath": "/opportunity-list",
+      "productPath": null,
+      "newsletterSegment": null,
+      "district": "legacy-point",
+      "pageExists": false,
+      "issues": [
+        "page_file_missing"
+      ]
+    },
+    {
+      "route": "/coast/fantasy-island",
+      "audience": "Fantasy sports subscriber",
+      "nextAction": "Get Fantasy Draft Bible",
+      "capturePath": "/opportunity-list",
+      "productPath": "/pricing",
+      "newsletterSegment": "interest_fantasy",
+      "district": "fantasy-island",
+      "pageExists": false,
+      "issues": [
+        "page_file_missing"
+      ]
+    },
+    {
+      "route": "/coast/library-vault",
+      "audience": "Research-focused subscriber",
+      "nextAction": "Browse free resources and guides",
+      "capturePath": "/opportunity-list",
+      "productPath": null,
+      "newsletterSegment": null,
+      "district": "library-vault",
+      "pageExists": false,
+      "issues": [
+        "page_file_missing"
+      ]
+    },
+    {
+      "route": "/market-marina",
+      "audience": "TCU explorer",
+      "nextAction": "Enter Market Kitchen Terminal or Academy",
+      "capturePath": "/opportunity-list",
+      "productPath": "/pricing",
+      "newsletterSegment": "interest_trading_chef",
+      "district": "market-marina",
+      "pageExists": true,
+      "issues": [
+        "no_capture_cta_found",
+        "no_product_link_found"
+      ]
+    },
+    {
+      "route": "/pricing",
+      "audience": "Warm lead ready to buy",
+      "nextAction": "Purchase a product via Stripe checkout",
+      "capturePath": "/api/checkout",
+      "productPath": "/api/checkout",
+      "newsletterSegment": null,
+      "district": null,
+      "pageExists": true,
+      "issues": [
+        "too_many_ctas_7"
+      ]
+    },
+    {
+      "route": "/products/medical-courier-guide",
+      "audience": "Route Harbor warm lead",
+      "nextAction": "Purchase Medical Courier Starter Guide",
+      "capturePath": "/api/checkout",
+      "productPath": "/api/checkout",
+      "newsletterSegment": "interest_route_harbor",
+      "district": "route-harbor",
+      "pageExists": true,
+      "issues": [
+        "too_many_ctas_5"
+      ]
+    },
+    {
+      "route": "/follow-the-coast",
+      "audience": "Engaged subscriber wanting all channels",
+      "nextAction": "Follow on YouTube, TikTok, Instagram, X, Rumble",
+      "capturePath": null,
+      "productPath": null,
+      "newsletterSegment": null,
+      "district": null,
+      "pageExists": true,
+      "issues": []
+    },
+    {
+      "route": "/welcome",
+      "audience": "New subscriber post-signup",
+      "nextAction": "Explore districts, claim passport",
+      "capturePath": null,
+      "productPath": null,
+      "newsletterSegment": "website_signup",
+      "district": null,
+      "pageExists": true,
+      "issues": []
+    }
+  ]
+}

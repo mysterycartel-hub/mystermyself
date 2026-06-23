@@ -1,0 +1,148 @@
+{
+  "pages": [
+    {
+      "route": "/",
+      "audience": "Cold visitor",
+      "nextAction": "Explore districts or enter Opportunity List",
+      "capturePath": "/opportunity-list",
+      "productPath": null,
+      "newsletterSegment": null,
+      "district": null
+    },
+    {
+      "route": "/opportunity-list",
+      "audience": "Interested visitor ready to subscribe",
+      "nextAction": "Submit email → enter Scott-King Coast",
+      "capturePath": "/api/newsletter/subscribe",
+      "productPath": null,
+      "newsletterSegment": "website_signup + lane tag",
+      "district": null
+    },
+    {
+      "route": "/coast",
+      "audience": "Subscriber or explorer",
+      "nextAction": "Choose a district to explore",
+      "capturePath": "/opportunity-list",
+      "productPath": null,
+      "newsletterSegment": null,
+      "district": "all"
+    },
+    {
+      "route": "/coast/market-marina",
+      "audience": "Trading-curious subscriber",
+      "nextAction": "Start TCU lessons or get Gold Playbook",
+      "capturePath": "/opportunity-list",
+      "productPath": "/pricing",
+      "newsletterSegment": "interest_trading_chef",
+      "district": "market-marina"
+    },
+    {
+      "route": "/coast/route-harbor",
+      "audience": "Income-seeking subscriber",
+      "nextAction": "Get Medical Courier Starter Guide",
+      "capturePath": "/opportunity-list",
+      "productPath": "/products/medical-courier-guide",
+      "newsletterSegment": "interest_route_harbor",
+      "district": "route-harbor"
+    },
+    {
+      "route": "/coast/flavor-district",
+      "audience": "Food entrepreneur subscriber",
+      "nextAction": "Get Food Pop-Up Blueprint",
+      "capturePath": "/opportunity-list",
+      "productPath": "/pricing",
+      "newsletterSegment": "interest_food",
+      "district": "flavor-district"
+    },
+    {
+      "route": "/coast/blueprint-bay",
+      "audience": "AI/automation-interested subscriber",
+      "nextAction": "Get AI Operator Starter Kit",
+      "capturePath": "/opportunity-list",
+      "productPath": "/pricing",
+      "newsletterSegment": "interest_ai_business",
+      "district": "blueprint-bay"
+    },
+    {
+      "route": "/coast/creator-pier",
+      "audience": "Creator/affiliate subscriber",
+      "nextAction": "Explore creator tools and content systems",
+      "capturePath": "/opportunity-list",
+      "productPath": null,
+      "newsletterSegment": "interest_creator_tools",
+      "district": "creator-pier"
+    },
+    {
+      "route": "/coast/legacy-point",
+      "audience": "Wealth-building subscriber",
+      "nextAction": "Explore ownership systems",
+      "capturePath": "/opportunity-list",
+      "productPath": null,
+      "newsletterSegment": null,
+      "district": "legacy-point"
+    },
+    {
+      "route": "/coast/fantasy-island",
+      "audience": "Fantasy sports subscriber",
+      "nextAction": "Get Fantasy Draft Bible",
+      "capturePath": "/opportunity-list",
+      "productPath": "/pricing",
+      "newsletterSegment": "interest_fantasy",
+      "district": "fantasy-island"
+    },
+    {
+      "route": "/coast/library-vault",
+      "audience": "Research-focused subscriber",
+      "nextAction": "Browse free resources and guides",
+      "capturePath": "/opportunity-list",
+      "productPath": null,
+      "newsletterSegment": null,
+      "district": "library-vault"
+    },
+    {
+      "route": "/market-marina",
+      "audience": "TCU explorer",
+      "nextAction": "Enter Market Kitchen Terminal or Academy",
+      "capturePath": "/opportunity-list",
+      "productPath": "/pricing",
+      "newsletterSegment": "interest_trading_chef",
+      "district": "market-marina"
+    },
+    {
+      "route": "/pricing",
+      "audience": "Warm lead ready to buy",
+      "nextAction": "Purchase a product via Stripe checkout",
+      "capturePath": "/api/checkout",
+      "productPath": "/api/checkout",
+      "newsletterSegment": null,
+      "district": null
+    },
+    {
+      "route": "/products/medical-courier-guide",
+      "audience": "Route Harbor warm lead",
+      "nextAction": "Purchase Medical Courier Starter Guide",
+      "capturePath": "/api/checkout",
+      "productPath": "/api/checkout",
+      "newsletterSegment": "interest_route_harbor",
+      "district": "route-harbor"
+    },
+    {
+      "route": "/follow-the-coast",
+      "audience": "Engaged subscriber wanting all channels",
+      "nextAction": "Follow on YouTube, TikTok, Instagram, X, Rumble",
+      "capturePath": null,
+      "productPath": null,
+      "newsletterSegment": null,
+      "district": null
+    },
+    {
+      "route": "/welcome",
+      "audience": "New subscriber post-signup",
+      "nextAction": "Explore districts, claim passport",
+      "capturePath": null,
+      "productPath": null,
+      "newsletterSegment": "website_signup",
+      "district": null
+    }
+  ]
+}
