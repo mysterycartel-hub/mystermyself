@@ -61,7 +61,7 @@ export default function AuthPage() {
             </p>
           </div>
 
-          <AuthForm redirectTo="/passport" />
+          <AuthForm redirectTo="/dashboard" />
 
           {/* Social methods — future */}
           <div style={{ marginTop: 32 }}>

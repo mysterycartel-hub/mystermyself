@@ -1,0 +1,24 @@
+{
+  "id": "FEAT-004",
+  "type": "chore",
+  "description": "Final build verification, fix any TypeScript or compilation errors, ensure no hardcoded localhost references, confirm all routes pass build, and commit changes.",
+  "status": "completed",
+  "steps": [
+    "Run npm run build. If there are TypeScript errors, fix them. Common issues to watch for: import path mismatches, missing type declarations for lightweight-charts, unused variables, incorrect module exports.",
+    "Search the entire codebase for hardcoded localhost references (localhost:3000, localhost:3001, 127.0.0.1:3000, 127.0.0.1:3001) and remove/replace with relative paths or environment-safe origin logic (window.location.origin).",
+    "Verify the build output shows all required routes compiled: /, /auth, /chart-kitchen, /dashboard, /journal, /missions, /roadmap.",
+    "Run git add on all new and modified files, then git commit with message 'Finalize TCU Market Kitchen Terminal'. Do NOT push."
+  ],
+  "acceptance_criteria": [
+    "npm run build passes with zero errors",
+    "No hardcoded localhost port references in any production code",
+    "All 7 required routes appear in build output",
+    "Git commit is created with message 'Finalize TCU Market Kitchen Terminal'"
+  ],
+  "verification": [
+    "Run npm run build and confirm exit code 0 with all routes listed",
+    "Run grep -r 'localhost:300' in project and confirm no matches in app/lib/components code"
+  ],
+  "blocked_reason": null,
+  "findings": "Build passed with zero errors. No hardcoded localhost references found in the codebase. All 7 required routes (/, /auth, /chart-kitchen, /dashboard, /journal, /missions, /roadmap) confirmed in build output. Commit created successfully."
+}

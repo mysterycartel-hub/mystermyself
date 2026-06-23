@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Link from 'next/link'
@@ -18,6 +18,23 @@ interface JournalEntry {
 const RESULTS = ['Win', 'Loss', 'Breakeven', 'Missed'] as const
 const RESULT_COLORS = { Win: '#22C55E', Loss: '#c0392b', Breakeven: '#c9a84c', Missed: '#94A3B8' }
 
+const STORAGE_KEY = 'tcu_journal_entries'
+
+function loadEntriesFromStorage(): JournalEntry[] {
+  if (typeof window === 'undefined') return []
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    return raw ? JSON.parse(raw) : []
+  } catch { return [] }
+}
+
+function saveEntriesToStorage(entries: JournalEntry[]): void {
+  if (typeof window === 'undefined') return
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(entries))
+  } catch { /* storage full or unavailable */ }
+}
+
 export default function JournalPage() {
   const [entries, setEntries] = useState<JournalEntry[]>([])
   const [form, setForm] = useState({
@@ -29,6 +46,51 @@ export default function JournalPage() {
     lesson: '',
   })
   const [saved, setSaved] = useState(false)
+  const [saveMode, setSaveMode] = useState<'local' | 'cloud'>('local')
+  const [mounted, setMounted] = useState(false)
+
+  // Load entries on mount
+  useEffect(() => {
+    setMounted(true)
+    loadEntries()
+  }, [])
+
+  async function loadEntries() {
+    // Attempt Supabase load first
+    try {
+      const { getSupabaseClient } = await import('@/lib/supabase')
+      const supabase = getSupabaseClient()
+      const { data: { user } } = await supabase.auth.getUser()
+      if (user) {
+        const { data, error } = await supabase
+          .from('journal_entries')
+          .select('*')
+          .eq('user_id', user.id)
+          .order('created_at', { ascending: false })
+        if (!error && data && data.length > 0) {
+          const mapped: JournalEntry[] = data.map((row: { id: number; symbol: string; setup: string; result: string; notes: string; lesson: string; trade_date: string }) => ({
+            id: row.id,
+            date: row.trade_date || '',
+            pair: row.symbol || '',
+            setup: row.setup || '',
+            result: (row.result as JournalEntry['result']) || 'Win',
+            notes: row.notes || '',
+            lesson: row.lesson || '',
+          }))
+          setEntries(mapped)
+          setSaveMode('cloud')
+          return
+        }
+      }
+    } catch {
+      // Supabase not configured or query failed - fall through to localStorage
+    }
+
+    // Fallback to localStorage
+    const localEntries = loadEntriesFromStorage()
+    setEntries(localEntries)
+    setSaveMode('local')
+  }
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
@@ -43,10 +105,39 @@ export default function JournalPage() {
     boxSizing: 'border-box',
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!form.pair || !form.setup) return
-    setEntries(prev => [{ ...form, id: Date.now() }, ...prev])
+
+    const newEntry: JournalEntry = { ...form, id: Date.now() }
+    const updatedEntries = [newEntry, ...entries]
+    setEntries(updatedEntries)
+
+    // Always save to localStorage
+    saveEntriesToStorage(updatedEntries)
+
+    // Attempt Supabase save
+    try {
+      const { getSupabaseClient } = await import('@/lib/supabase')
+      const supabase = getSupabaseClient()
+      const { data: { user } } = await supabase.auth.getUser()
+      if (user) {
+        await supabase.from('journal_entries').insert({
+          user_id: user.id,
+          trade_date: newEntry.date,
+          symbol: newEntry.pair,
+          setup: newEntry.setup,
+          result: newEntry.result,
+          notes: newEntry.notes,
+          lesson: newEntry.lesson,
+        })
+        setSaveMode('cloud')
+      }
+    } catch {
+      // Supabase not available - already saved to localStorage
+      setSaveMode('local')
+    }
+
     setForm(f => ({ ...f, pair: '', setup: '', notes: '', lesson: '' }))
     setSaved(true)
     setTimeout(() => setSaved(false), 3000)
@@ -66,17 +157,26 @@ export default function JournalPage() {
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1000, margin: '0 auto' }}>
 
           <div style={{ marginBottom: 48 }}>
-            <Link href="/market-marina" style={{
-              fontFamily: '"Space Mono", monospace',
-              fontSize: '0.55rem',
-              letterSpacing: '0.15em',
-              color: 'rgba(201,168,76,0.5)',
-              textDecoration: 'none',
-              display: 'inline-block',
-              marginBottom: 16,
-            }}>
-              ← Market Marina
-            </Link>
+            <div style={{ display: 'flex', gap: 16, marginBottom: 16 }}>
+              <Link href="/dashboard" style={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.55rem',
+                letterSpacing: '0.15em',
+                color: 'rgba(201,168,76,0.5)',
+                textDecoration: 'none',
+              }}>
+                ← Dashboard
+              </Link>
+              <Link href="/chart-kitchen" style={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.55rem',
+                letterSpacing: '0.15em',
+                color: 'rgba(201,168,76,0.5)',
+                textDecoration: 'none',
+              }}>
+                Chart Kitchen →
+              </Link>
+            </div>
             <div style={{
               fontFamily: '"Space Mono", monospace',
               fontSize: '0.52rem',
@@ -192,7 +292,7 @@ export default function JournalPage() {
                 color: 'rgba(245,240,232,0.5)',
                 marginBottom: 20,
               }}>
-                Session Log ({entries.length})
+                Session Log ({mounted ? entries.length : 0})
               </h2>
 
               {entries.length === 0 ? (
@@ -253,8 +353,22 @@ export default function JournalPage() {
             </div>
           </div>
 
-          <div style={{ marginTop: 32, padding: '16px 20px', background: 'rgba(201,168,76,0.04)', border: '1px solid rgba(201,168,76,0.08)', fontSize: '0.58rem', fontFamily: '"Space Mono", monospace', color: 'rgba(245,240,232,0.25)', lineHeight: 1.6 }}>
-            ⚠️ Journal data is stored locally in this session only. Cloud sync and Passport integration coming when accounts go live.
+          {/* Save mode banner */}
+          <div style={{
+            marginTop: 32,
+            padding: '16px 20px',
+            background: saveMode === 'cloud' ? 'rgba(34,197,94,0.04)' : 'rgba(201,168,76,0.04)',
+            border: `1px solid ${saveMode === 'cloud' ? 'rgba(34,197,94,0.15)' : 'rgba(201,168,76,0.08)'}`,
+            fontSize: '0.58rem',
+            fontFamily: '"Space Mono", monospace',
+            color: 'rgba(245,240,232,0.35)',
+            lineHeight: 1.6,
+          }}>
+            {saveMode === 'cloud' ? (
+              <>✅ Cloud sync active. Entries are saved to your account.</>
+            ) : (
+              <>💾 Currently saving locally. Connect Supabase for cloud sync.</>
+            )}
           </div>
         </div>
       </section>

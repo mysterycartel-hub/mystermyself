@@ -1,0 +1,30 @@
+{
+  "id": "FEAT-002",
+  "type": "feat",
+  "description": "Rebuild /chart-kitchen as a fully interactive terminal with live candlestick chart (TradingView Lightweight Charts with demo fallback), symbol selector, timeframe selector, Analyze Chart button, Save to Journal button, AI Coach panel, and character lesson cards. This is the core page of the entire app.",
+  "status": "completed",
+  "steps": [
+    "Rewrite /app/chart-kitchen/page.tsx as a 'use client' interactive terminal page. The layout should be: left sidebar (Watchlist with symbol + timeframe selectors), center (candlestick chart area), right sidebar (AI Coach panel). Below the chart area: BiasPanel for The Recipe steps. Top bar shows current symbol, timeframe, latest price from candle data, and action buttons (Analyze Chart, Save to Journal). Mobile layout stacks these vertically.",
+    "Create a new component /components/kitchen/CandlestickChart.tsx that uses the lightweight-charts library (createChart, CandlestickSeries) to render candle data from /lib/marketData.ts. It should: accept symbol and timeframe props; call fetchCandles (which returns demo data when no API key exists); render the chart with dark theme matching TCU brand colors (background #060608, up candles green, down candles red, crosshair gold); support zoom/scroll; auto-resize on window resize; show latest price overlay.",
+    "Create /components/kitchen/AnalyzeButton.tsx - when clicked, calls the /lib/aiCoach.ts analyzeChart function (client-side mock mode) OR the existing /api/coach API route. Displays a loading state ('Reading the chart...'), then passes results to the AI Coach panel. If no API key, shows the demo analysis with a note about connecting the key.",
+    "Create /components/kitchen/SaveToJournal.tsx - button component that: if Supabase is configured AND user is logged in, saves the current analysis to chart_analyses table; if Supabase is not configured, shows message 'Journal save needs Supabase connection.'; if user is not logged in, shows 'Sign in to save to journal' with a link to /auth. Never crashes.",
+    "Create /components/kitchen/CharacterLessons.tsx - renders character lesson cards from the AI analysis. Each card shows the character name, their emoji/icon, and their teaching point using TCU lingo. Use only the 9 locked characters: Trading Chef, Candle Kid, Wickie, Louie Liquidity, Chef Goldie, Grandma Market, Nana Value, Melissa Mayhem, Melody Mayhem.",
+    "Update the existing /components/kitchen/Watchlist.tsx to add the additional symbols from the spec that are missing: SPY, QQQ, BTCUSD. Also add the 1m and 30m timeframes. Update /lib/kitchen.ts KITCHEN_SYMBOLS array to include SPY (group 'equity'), QQQ (group 'equity'), BTCUSD (group 'crypto'). Add TIMEFRAMES entries for 1m and 30m.",
+    "Ensure the page has proper navigation links back to /dashboard, /journal, /missions, and a header showing 'TCU Market Kitchen Terminal' branding with the Trading Chef identity."
+  ],
+  "acceptance_criteria": [
+    "/chart-kitchen page renders without errors and shows an interactive candlestick chart with demo data",
+    "Symbol selector changes the chart data when a different symbol is selected",
+    "Timeframe selector updates the chart when changed",
+    "Analyze Chart button triggers analysis and displays structured TCU results in the Coach panel",
+    "Save to Journal button shows appropriate feedback (login prompt or Supabase message) without crashing",
+    "Character lesson cards display with proper TCU character names and teaching content",
+    "Page is responsive and usable on mobile (stacked layout)",
+    "No console errors or blank screens"
+  ],
+  "verification": [
+    "Run npm run build and confirm /chart-kitchen route compiles successfully"
+  ],
+  "blocked_reason": null,
+  "findings": "lightweight-charts v5 uses chart.addSeries(CandlestickSeries, opts) instead of chart.addCandlestickSeries(opts). Build passes cleanly. The page is 12.1kB compiled. All chart-kitchen, dashboard, journal, missions routes compile successfully. Used dynamic import with ssr:false for the chart component to avoid window/document issues during SSR."
+}

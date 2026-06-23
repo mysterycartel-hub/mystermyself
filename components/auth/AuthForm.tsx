@@ -27,7 +27,7 @@ export default function AuthForm({ onSuccess, redirectTo }: AuthFormProps) {
       const { error: authError } = await supabase.auth.signInWithOtp({
         email: email.toLowerCase().trim(),
         options: {
-          emailRedirectTo: redirectTo ?? `${window.location.origin}/passport`,
+          emailRedirectTo: redirectTo ?? `${window.location.origin}/dashboard`,
         },
       })
 

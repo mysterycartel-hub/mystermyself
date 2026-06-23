@@ -1,0 +1,27 @@
+{
+  "id": "FEAT-001",
+  "type": "chore",
+  "description": "Install dependencies (lightweight-charts), create core lib files (marketData.ts, tcuOverlayEngine.ts, aiCoach.ts), create TCU database schema SQL, and update .env.example with all required environment variables.",
+  "status": "completed",
+  "steps": [
+    "Run npm install lightweight-charts in the project root to add the TradingView Lightweight Charts library.",
+    "Create /lib/marketData.ts - a market data adapter module that: exports a fetchCandles function with symbol and timeframe params; supports provider selection via NEXT_PUBLIC_MARKET_DATA_PROVIDER env var; includes a generateDemoCandles() fallback function that returns realistic OHLC data for any supported symbol (XAUUSD, EURUSD, GBPUSD, USDJPY, SPY, QQQ, BTCUSD); gracefully handles missing API keys by returning demo data; supports timeframes: 1m, 5m, 15m, 30m, 1H, 4H, 1D. The demo candles should generate ~100 candles with realistic price ranges per symbol.",
+    "Create /lib/tcuOverlayEngine.ts - a structured analysis engine that takes candle data and returns: market structure (swing highs/lows, BOS, CHOCH, trend state), liquidity zones (previous high/low, equal highs/lows, session highs/lows, sweep zones), AOI (supply zones, demand zones, FVG/leftover container zones), and a trade plan skeleton (bias, the pass, burn point, tables served, invalidation, setup quality). Use TCU canon terminology throughout. This is a pure computation module with no API calls.",
+    "Create /lib/aiCoach.ts - an AI coach module that: exports an analyzeChart function accepting symbol, timeframe, and candle data; uses adapter pattern supporting NEXT_PUBLIC_AI_PROVIDER env var (openai, anthropic, mock); returns a structured TCU analysis object with fields: bias, liquidityMap, aoi, setupQuality, entryIdea, burnPoint, tablesServed, invalidation, riskNote, characterLesson, journalSummary; includes full mock/demo response when no API key is configured (returning 'Demo AI analysis. Connect API key for live coaching.' plus structured sample data); integrates TCU canon vocabulary; includes character lesson generation using the 9 locked characters.",
+    "Create /db/tcu-schema.sql with tables: profiles (id uuid PK, user_id uuid unique references auth.users, email text, display_name text, xp integer default 0, level text default 'Recruit', rank text default 'Kitchen Recruit', created_at timestamptz, updated_at timestamptz), missions (id uuid PK, title text, description text, district text, difficulty text, xp_reward integer, is_active boolean default true, created_at timestamptz), mission_progress (id uuid PK, user_id uuid references auth.users, mission_id uuid references missions, status text default 'pending', completed_at timestamptz, created_at timestamptz), journal_entries (id uuid PK, user_id uuid references auth.users, symbol text, timeframe text, bias text, notes text, ai_summary text, created_at timestamptz), chart_analyses (id uuid PK, user_id uuid references auth.users, symbol text, timeframe text, bias text, liquidity text, aoi text, entry_area text, burn_point text, tables_served text, invalidation text, ai_summary text, character_lesson text, screenshot_url text, created_at timestamptz). Enable RLS on all tables. Add policies so users can only access their own data. Include seed INSERT for 6 starter missions covering Market Marina beginner tasks.",
+    "Update the existing .env.example file (or create .env.local.example if it exists already) to include all required vars: NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, NEXT_PUBLIC_MARKET_DATA_PROVIDER, NEXT_PUBLIC_MARKET_DATA_API_KEY, NEXT_PUBLIC_AI_PROVIDER, OPENAI_API_KEY, ANTHROPIC_API_KEY, MARKET_DATA_API_KEY, SUPABASE_SERVICE_ROLE_KEY. Add comments explaining each var."
+  ],
+  "acceptance_criteria": [
+    "npm install completes without errors and lightweight-charts appears in package.json dependencies",
+    "/lib/marketData.ts exports fetchCandles and generateDemoCandles functions that return typed candle data without crashing when no env vars are set",
+    "/lib/tcuOverlayEngine.ts exports an analyzeStructure function that takes candle data and returns structured TCU analysis objects",
+    "/lib/aiCoach.ts exports analyzeChart that returns a full mock response object when no API keys are present",
+    "/db/tcu-schema.sql contains all 5 tables with RLS policies and seed missions",
+    ".env.example (or .env.local.example) contains all documented variables"
+  ],
+  "verification": [
+    "Run npm run build and confirm it completes successfully with no type errors in the new lib files"
+  ],
+  "blocked_reason": null,
+  "findings": "lightweight-charts installed as v5.2.0. Build passes cleanly. All 3 lib files compile without type errors. Demo candles generate deterministic output via seeded PRNG. AI coach mock returns full structured data without env vars."
+}

@@ -3,7 +3,7 @@ export interface KitchenSymbol {
   ticker: string          // TradingView symbol code
   label: string
   short: string
-  group: 'forex' | 'gold'
+  group: 'forex' | 'gold' | 'equity' | 'crypto'
   pip: number             // pip value for display
   sessionNote: string
 }
@@ -65,6 +65,35 @@ export const KITCHEN_SYMBOLS: KitchenSymbol[] = [
     pip: 0.1,
     sessionNote: 'London session & US open are prime delivery windows for Gold',
   },
+  // ── Equity Kitchen ─────────────────────────────────────────────
+  {
+    id: 'spy',
+    ticker: 'AMEX:SPY',
+    label: 'S&P 500 ETF',
+    short: 'SPY',
+    group: 'equity',
+    pip: 0.01,
+    sessionNote: 'NY session only — watch the 9:30 AM open and power hour (3 PM)',
+  },
+  {
+    id: 'qqq',
+    ticker: 'NASDAQ:QQQ',
+    label: 'Nasdaq 100 ETF',
+    short: 'QQQ',
+    group: 'equity',
+    pip: 0.01,
+    sessionNote: 'Tech-heavy — correlates with NQ futures. Volatile around earnings.',
+  },
+  // ── Crypto Kitchen ─────────────────────────────────────────────
+  {
+    id: 'btcusd',
+    ticker: 'BITSTAMP:BTCUSD',
+    label: 'Bitcoin / US Dollar',
+    short: 'BTCUSD',
+    group: 'crypto',
+    pip: 1,
+    sessionNote: '24/7 market — major moves often during US session or weekends.',
+  },
 ]
 
 export const DEFAULT_SYMBOL = KITCHEN_SYMBOLS[5] // XAUUSD
@@ -75,8 +104,10 @@ export interface Timeframe {
 }
 
 export const TIMEFRAMES: Timeframe[] = [
+  { label: '1M',  value: '1'   },
   { label: '5M',  value: '5'   },
   { label: '15M', value: '15'  },
+  { label: '30M', value: '30'  },
   { label: '1H',  value: '60'  },
   { label: '4H',  value: '240' },
   { label: '1D',  value: 'D'   },

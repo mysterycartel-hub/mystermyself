@@ -1,32 +1,99 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import StatCard from '@/components/StatCard'
 
-const DISTRICTS = [
-  { name: 'Market Marina',   href: '/market-marina',  emoji: '⚓', color: '#c9a84c', tag: 'Trading',    locked: false },
-  { name: 'Route Harbor',    href: '/route-harbor',   emoji: '🚢', color: '#0EA5E9', tag: 'Logistics',  locked: false },
-  { name: 'Fantasy Island',  href: '/fantasy',        emoji: '🏈', color: '#22C55E', tag: 'Fantasy',    locked: false },
-  { name: 'Creator Pier',    href: '/creator-pier',   emoji: '🎬', color: '#A855F7', tag: 'AI Creator', locked: false },
-  { name: 'Flavor District', href: '/flavor-district',emoji: '🍗', color: '#c0392b', tag: 'Food Biz',   locked: false },
-  { name: 'Blueprint Bay',   href: '/blueprint-bay',  emoji: '📐', color: '#22C55E', tag: 'Systems',    locked: true  },
-  { name: 'Legacy Point',    href: '/legacy-point',   emoji: '🎓', color: '#c9a84c', tag: 'Academy',    locked: true  },
-  { name: 'Library Vault',   href: '/library',        emoji: '📖', color: '#94A3B8', tag: 'Free',       locked: false },
-  { name: 'Founder Island',  href: '/founder-island', emoji: '🏝️', color: '#c9a84c', tag: 'Origin',     locked: false },
-]
-
-const STATS = [
-  { label: 'XP Earned',      value: '0',   sub: 'Start exploring to earn XP',     icon: '⚡', color: '#c9a84c' },
-  { label: 'Districts Visited', value: '0/9', sub: 'Enter a district to progress', icon: '🗺️', color: '#0EA5E9' },
-  { label: 'Current Rank',   value: 'NEW', sub: 'Dockworker · Level 0',            icon: '🏅', color: '#22C55E' },
-  { label: 'Streak',         value: '0',   sub: 'Days active',                     icon: '🔥', color: '#c0392b' },
-]
+interface UserStats {
+  email: string | null
+  totalXP: number
+  rank: number
+  rankLabel: string
+  analysesCount: number
+  journalCount: number
+  missionsCount: number
+}
 
 export default function DashboardPage() {
-  const [activeDistrict, setActiveDistrict] = useState<string | null>(null)
+  const [stats, setStats] = useState<UserStats | null>(null)
+  const [authenticated, setAuthenticated] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function loadDashboard() {
+      let email: string | null = null
+
+      // Try to get the authenticated user
+      try {
+        const { getSupabaseClient } = await import('@/lib/supabase')
+        const supabase = getSupabaseClient()
+        const { data: { user } } = await supabase.auth.getUser()
+        if (user?.email) {
+          email = user.email
+          setAuthenticated(true)
+        }
+      } catch {
+        // Supabase not configured - continue with local data
+      }
+
+      // Load XP and rank from localStorage via the engine
+      let totalXP = 0
+      let rank = 1
+      let rankLabel = 'Kitchen Recruit'
+      try {
+        const { XPRewardEngine } = await import('@/lib/xp-reward-engine')
+        totalXP = XPRewardEngine.getTotalXP()
+        rank = XPRewardEngine.getRank(totalXP)
+        rankLabel = XPRewardEngine.getRankLabel(rank)
+      } catch {
+        // Engine not available
+      }
+
+      // Count analyses from localStorage
+      let analysesCount = 0
+      try {
+        const raw = localStorage.getItem('tcu_analyses')
+        if (raw) {
+          const arr = JSON.parse(raw)
+          analysesCount = Array.isArray(arr) ? arr.length : 0
+        }
+      } catch { /* ignore */ }
+
+      // Count journal entries from localStorage
+      let journalCount = 0
+      try {
+        const raw = localStorage.getItem('tcu_journal_entries')
+        if (raw) {
+          const arr = JSON.parse(raw)
+          journalCount = Array.isArray(arr) ? arr.length : 0
+        }
+      } catch { /* ignore */ }
+
+      // Count missions from localStorage
+      let missionsCount = 0
+      try {
+        const raw = localStorage.getItem('tcu_missions_completed')
+        if (raw) {
+          const arr = JSON.parse(raw)
+          missionsCount = Array.isArray(arr) ? arr.length : 0
+        }
+      } catch { /* ignore */ }
+
+      setStats({ email, totalXP, rank, rankLabel, analysesCount, journalCount, missionsCount })
+      setLoading(false)
+    }
+
+    loadDashboard()
+  }, [])
+
+  const statCards = stats ? [
+    { label: 'Total XP', value: String(stats.totalXP), icon: '⚡', color: '#c9a84c' },
+    { label: 'Rank', value: `${stats.rank}`, icon: '🏅', color: '#22C55E', sub: stats.rankLabel },
+    { label: 'Analyses Saved', value: String(stats.analysesCount), icon: '📊', color: '#0EA5E9' },
+    { label: 'Journal Entries', value: String(stats.journalCount), icon: '📓', color: '#A855F7' },
+    { label: 'Missions Done', value: String(stats.missionsCount), icon: '🎯', color: '#c0392b' },
+  ] : []
 
   return (
     <main>
@@ -40,7 +107,7 @@ export default function DashboardPage() {
       }}>
         <div className="hero-grid" style={{ opacity: 0.3 }} />
 
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: 1200, margin: '0 auto' }}>
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: 1000, margin: '0 auto' }}>
 
           {/* Header */}
           <div style={{ marginBottom: 48 }}>
@@ -52,7 +119,7 @@ export default function DashboardPage() {
               color: 'rgba(201,168,76,0.5)',
               marginBottom: 12,
             }}>
-              Scott-King Coast · Member Dashboard
+              Trading Chef University · Dashboard
             </div>
             <h1 style={{
               fontFamily: '"Bebas Neue", sans-serif',
@@ -62,134 +129,219 @@ export default function DashboardPage() {
             }}>
               YOUR <span style={{ color: 'var(--gold)' }}>DASHBOARD</span>
             </h1>
-          </div>
-
-          {/* Stats */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-            gap: 2,
-            marginBottom: 48,
-          }}>
-            {STATS.map((stat, i) => (
-              <StatCard key={stat.label} {...stat} index={i} />
-            ))}
-          </div>
-
-          {/* Passport CTA */}
-          <div style={{
-            background: 'var(--deep)',
-            border: '1px solid rgba(201,168,76,0.12)',
-            padding: '28px 32px',
-            marginBottom: 48,
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: 16,
-          }}>
-            <div>
-              <div style={{
-                fontFamily: '"Bebas Neue", sans-serif',
-                fontSize: '1.3rem',
-                letterSpacing: '0.04em',
-                color: 'var(--gold)',
-                marginBottom: 4,
-              }}>
-                📋 Get Your Passport
-              </div>
+            {stats?.email && (
               <p style={{
-                fontSize: '0.68rem',
-                color: 'rgba(245,240,232,0.45)',
                 fontFamily: '"Space Mono", monospace',
+                fontSize: '0.7rem',
+                color: 'rgba(245,240,232,0.5)',
+                marginTop: 12,
               }}>
-                Sign in to track XP, earn district stamps, and unlock missions.
+                Signed in as <span style={{ color: 'var(--gold)' }}>{stats.email}</span>
+              </p>
+            )}
+          </div>
+
+          {loading ? (
+            <div style={{
+              background: 'var(--deep)',
+              border: '1px solid rgba(201,168,76,0.08)',
+              padding: '48px 32px',
+              textAlign: 'center',
+            }}>
+              <p style={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.7rem',
+                color: 'rgba(245,240,232,0.4)',
+              }}>
+                Loading your stats...
               </p>
             </div>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <Link href="/passport/login" style={{ textDecoration: 'none' }}>
-                <div className="btn-primary"><span>Sign In →</span></div>
-              </Link>
-              <Link href="/opportunity-list" style={{ textDecoration: 'none' }}>
-                <div className="btn-secondary">Join Free First</div>
-              </Link>
-            </div>
-          </div>
-
-          {/* District Access */}
-          <div style={{ marginBottom: 12 }}>
-            <div style={{
-              fontFamily: '"Space Mono", monospace',
-              fontSize: '0.55rem',
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              color: 'rgba(245,240,232,0.35)',
-              marginBottom: 20,
-            }}>
-              District Access
-            </div>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-              gap: 2,
-            }}>
-              {DISTRICTS.map((d) => (
-                <div
-                  key={d.name}
-                  onClick={() => !d.locked && setActiveDistrict(activeDistrict === d.name ? null : d.name)}
-                  style={{
-                    background: activeDistrict === d.name ? `${d.color}08` : 'var(--deep)',
-                    border: `1px solid ${activeDistrict === d.name ? d.color + '35' : 'rgba(201,168,76,0.06)'}`,
-                    padding: '20px 24px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 16,
-                    cursor: d.locked ? 'default' : 'pointer',
-                    opacity: d.locked ? 0.4 : 1,
-                    transition: 'all 0.2s',
-                  }}
-                >
-                  <span style={{ fontSize: '1.4rem', flexShrink: 0 }}>{d.emoji}</span>
-                  <div style={{ flex: 1, minWidth: 0 }}>
+          ) : (
+            <>
+              {/* Stats Grid */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
+                gap: 2,
+                marginBottom: 48,
+              }}>
+                {statCards.map((card) => (
+                  <div
+                    key={card.label}
+                    style={{
+                      background: 'var(--deep)',
+                      border: '1px solid rgba(201,168,76,0.08)',
+                      padding: '24px 20px',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+                      <span style={{ fontSize: '1.2rem' }}>{card.icon}</span>
+                      <span style={{
+                        fontFamily: '"Space Mono", monospace',
+                        fontSize: '0.5rem',
+                        letterSpacing: '0.15em',
+                        textTransform: 'uppercase',
+                        color: 'rgba(245,240,232,0.4)',
+                      }}>
+                        {card.label}
+                      </span>
+                    </div>
                     <div style={{
                       fontFamily: '"Bebas Neue", sans-serif',
-                      fontSize: '1rem',
-                      letterSpacing: '0.04em',
-                      color: activeDistrict === d.name ? d.color : 'var(--cream)',
+                      fontSize: '2rem',
+                      color: card.color,
+                      letterSpacing: '0.02em',
                       lineHeight: 1,
-                      marginBottom: 3,
                     }}>
-                      {d.name}
+                      {card.value}
                     </div>
-                    <div style={{
-                      fontFamily: '"Space Mono", monospace',
-                      fontSize: '0.5rem',
-                      letterSpacing: '0.12em',
-                      color: 'rgba(245,240,232,0.3)',
-                    }}>
-                      {d.tag}
-                    </div>
+                    {card.sub && (
+                      <div style={{
+                        fontFamily: '"Space Mono", monospace',
+                        fontSize: '0.55rem',
+                        color: 'rgba(245,240,232,0.3)',
+                        marginTop: 6,
+                      }}>
+                        {card.sub}
+                      </div>
+                    )}
                   </div>
-                  {d.locked ? (
-                    <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.2)' }}>🔒</span>
-                  ) : (
-                    <Link href={d.href} style={{
-                      fontFamily: '"Space Mono", monospace',
-                      fontSize: '0.5rem',
-                      letterSpacing: '0.15em',
-                      textTransform: 'uppercase',
-                      color: d.color,
-                      textDecoration: 'none',
-                      flexShrink: 0,
-                    }}>
-                      Enter →
-                    </Link>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
+                ))}
+              </div>
 
+              {/* Primary CTA - Chart Kitchen */}
+              <Link href="/chart-kitchen" style={{ textDecoration: 'none', display: 'block', marginBottom: 32 }}>
+                <div style={{
+                  background: 'rgba(201,168,76,0.08)',
+                  border: '1px solid rgba(201,168,76,0.25)',
+                  padding: '28px 32px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                }}>
+                  <div>
+                    <div style={{
+                      fontFamily: '"Bebas Neue", sans-serif',
+                      fontSize: '1.5rem',
+                      letterSpacing: '0.04em',
+                      color: 'var(--gold)',
+                      marginBottom: 4,
+                    }}>
+                      Continue to Chart Kitchen
+                    </div>
+                    <p style={{
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '0.65rem',
+                      color: 'rgba(245,240,232,0.4)',
+                      margin: 0,
+                    }}>
+                      Analyze charts, earn XP, and level up your trading skills.
+                    </p>
+                  </div>
+                  <span style={{
+                    fontFamily: '"Space Mono", monospace',
+                    fontSize: '1.2rem',
+                    color: 'var(--gold)',
+                  }}>
+                    →
+                  </span>
+                </div>
+              </Link>
+
+              {/* Navigation Grid */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+                gap: 2,
+                marginBottom: 48,
+              }}>
+                {[
+                  { href: '/journal', label: 'Trade Journal', icon: '📓', desc: 'Log your sessions' },
+                  { href: '/missions', label: 'Missions', icon: '🎯', desc: 'Complete challenges' },
+                  { href: '/roadmap', label: 'Roadmap', icon: '🗺️', desc: 'Your learning path' },
+                ].map((nav) => (
+                  <Link key={nav.href} href={nav.href} style={{ textDecoration: 'none' }}>
+                    <div style={{
+                      background: 'var(--deep)',
+                      border: '1px solid rgba(201,168,76,0.08)',
+                      padding: '24px 20px',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                    }}>
+                      <span style={{ fontSize: '1.4rem', display: 'block', marginBottom: 10 }}>{nav.icon}</span>
+                      <div style={{
+                        fontFamily: '"Bebas Neue", sans-serif',
+                        fontSize: '1.1rem',
+                        letterSpacing: '0.04em',
+                        color: 'var(--cream)',
+                        marginBottom: 4,
+                      }}>
+                        {nav.label}
+                      </div>
+                      <div style={{
+                        fontFamily: '"Space Mono", monospace',
+                        fontSize: '0.55rem',
+                        color: 'rgba(245,240,232,0.35)',
+                      }}>
+                        {nav.desc}
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+
+              {/* Auth prompt if not signed in */}
+              {!authenticated && (
+                <div style={{
+                  background: 'var(--deep)',
+                  border: '1px solid rgba(201,168,76,0.12)',
+                  padding: '28px 32px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  flexWrap: 'wrap',
+                  gap: 16,
+                }}>
+                  <div>
+                    <div style={{
+                      fontFamily: '"Bebas Neue", sans-serif',
+                      fontSize: '1.3rem',
+                      letterSpacing: '0.04em',
+                      color: 'var(--gold)',
+                      marginBottom: 4,
+                    }}>
+                      Sign In to Track Progress
+                    </div>
+                    <p style={{
+                      fontSize: '0.65rem',
+                      color: 'rgba(245,240,232,0.4)',
+                      fontFamily: '"Space Mono", monospace',
+                      margin: 0,
+                    }}>
+                      Connect your account to sync XP, journal entries, and missions across devices.
+                    </p>
+                  </div>
+                  <Link href="/auth" style={{ textDecoration: 'none' }}>
+                    <div style={{
+                      background: 'var(--gold)',
+                      color: '#060608',
+                      padding: '12px 24px',
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '0.65rem',
+                      fontWeight: 700,
+                      letterSpacing: '0.12em',
+                      textTransform: 'uppercase',
+                      cursor: 'pointer',
+                    }}>
+                      Sign In →
+                    </div>
+                  </Link>
+                </div>
+              )}
+            </>
+          )}
         </div>
       </section>
 
