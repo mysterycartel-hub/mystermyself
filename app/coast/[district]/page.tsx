@@ -442,14 +442,33 @@ export default function DistrictPage({ params }: { params: { district: string } 
           }}>
             Build your life like a business. New income plays, district drops, and resources — straight to your inbox.
           </p>
-          <Link
-            href="/opportunity-list"
-            style={{ textDecoration: 'none', display: 'inline-block' }}
-          >
-            <div className="btn-primary" style={{ padding: '14px 36px' }}>
-              <span>Join The Opportunity List →</span>
-            </div>
-          </Link>
+          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link
+              href="/opportunity-list"
+              style={{ textDecoration: 'none', display: 'inline-block' }}
+            >
+              <div className="btn-primary" style={{ padding: '14px 36px' }}>
+                <span>Join The Opportunity List →</span>
+              </div>
+            </Link>
+            <Link
+              href="/pricing"
+              style={{ textDecoration: 'none', display: 'inline-block' }}
+            >
+              <div style={{
+                padding: '14px 36px',
+                border: '1px solid rgba(201,168,76,0.3)',
+                color: 'var(--gold)',
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.65rem',
+                fontWeight: 700,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+              }}>
+                View Products
+              </div>
+            </Link>
+          </div>
         </div>
       </section>
 
