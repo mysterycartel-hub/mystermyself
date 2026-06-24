@@ -1,0 +1,11 @@
+# CODEOWNERS — MysterMyself / Scott-King Coast
+# Maurice Scott (mysterycartel-hub) owns all production decisions.
+# Kiro creates PRs. GitHub Actions runs checks. Maurice approves via label.
+
+# Default owner for all files
+* @mysterycartel-hub
+
+# Canon files — extra protection
+data/canon/ @mysterycartel-hub
+.kiro/steering/ @mysterycartel-hub
+docs/MEMORY-BLOCKS.md @mysterycartel-hub

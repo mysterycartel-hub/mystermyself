@@ -1,48 +1,50 @@
 ## CEO Summary
 
-<!-- One paragraph: what does this PR do and why? -->
+<!-- Plain-English explanation of what this PR does for the business -->
 
-## Files Changed
 
-<!-- List key files modified/created -->
+## What Changed
+
+<!-- List files and areas modified -->
+- 
 
 ## Route Impact
 
-- [ ] No routes changed
-- [ ] New routes added: 
-- [ ] Routes modified: 
-- [ ] Routes removed: 
+<!-- Which public routes were added, changed, or affected? -->
+- No route changes / Routes affected:
 
 ## Funnel Impact
 
-- [ ] No funnel changes
-- [ ] Capture path changed
-- [ ] Product path changed
-- [ ] Newsletter segment changed
+<!-- Did the capture/subscriber/product flow change? -->
+- No funnel changes / Funnel changes:
 
-## Canon Impact
+## Audit Results
 
-- [ ] No canon changes
-- [ ] District reference added/changed
-- [ ] Character reference added/changed
-- [ ] Brand reference added/changed
+<!-- Paste or summarize from npm run ops:audit-all -->
+- Routes: /38
+- Links: issues
+- Socials: confirmed
+- Canon: /8 districts, /9 characters
+- Funnels: /16 clean
 
-## Test Results
+## Build Result
 
-- [ ] `npm run build` passes
-- [ ] `npm run ops:audit-all` passes
-- [ ] Manual route check done
-- [ ] No new paid API keys required
+- [ ] `npm run build` passes with 0 errors
 
-## Vercel Status
+## External Blockers (if any)
 
-- [ ] Preview deploy working
-- [ ] Production deploy NOT triggered (awaiting approval)
+<!-- Only list items requiring Maurice's Vercel/Stripe/Beehiiv account access -->
+- None / Blockers:
 
-## Rollback Note
+---
 
-<!-- How to undo this if something breaks -->
+## CEO Decision
 
-## Next CEO Decision
+**To approve and merge this PR:**
+1. Add the label `ceo-approved`
+2. GitHub will auto-merge once all checks pass
+3. Vercel will deploy automatically after merge
 
-<!-- What should Maurice approve or decide after this merges? -->
+**To request changes:**
+- Comment what needs to change
+- Kiro will fix and push updates to the same branch
