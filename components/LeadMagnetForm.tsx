@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { captureFullFunnel } from '@/lib/capture'
 
 interface Props {
   division?: string
@@ -42,12 +43,14 @@ export default function LeadMagnetForm({
     setError('')
     setStatus('loading')
     try {
-      const res = await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, division }),
+      const result = await captureFullFunnel({
+        email: form.email,
+        name: form.name,
+        interest: form.interest,
+        division,
+        source: division,
       })
-      if (!res.ok) throw new Error('Failed')
+      if (!result.ok && !result.fallback) throw new Error(result.reason || 'Failed')
       setStatus('success')
     } catch {
       setStatus('error')

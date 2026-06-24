@@ -53,10 +53,11 @@ export default function OpportunitySignup({ source = 'website', accentColor = '#
       // Store join source for welcome page personalization
       try {
         localStorage.setItem('skc_join_source', source)
+        if (lane) localStorage.setItem('skc_join_lane', lane)
       } catch { /* noop */ }
 
       // Immediately redirect to welcome — no code gate, no success screen
-      router.push('/welcome')
+      router.push(`/welcome${lane ? `?lane=${lane}` : ''}`)
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Something went wrong'
       setError(msg)
