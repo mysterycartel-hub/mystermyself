@@ -1,0 +1,13 @@
+{
+  "name": "Scope Guard",
+  "version": "1.0.0",
+  "description": "Before write operations, verify the change belongs to the current spec and does not violate canon rules.",
+  "when": {
+    "type": "preToolUse",
+    "toolTypes": ["write"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Before writing, verify: 1) This change belongs to the current spec (ops-004b-full-mvp-funnel-build). 2) It does not create a new repo or Vercel project. 3) It does not require paid AI keys (OpenAI/Anthropic). 4) It does not invent fake social/order links. 5) It does not delete canon data from data/canon/. 6) It does not rename locked districts or characters. 7) It does not redesign unrelated pages. If all checks pass, proceed with the write."
+  }
+}

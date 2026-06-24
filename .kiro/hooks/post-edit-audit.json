@@ -1,0 +1,13 @@
+{
+  "name": "Post-Edit Audit",
+  "version": "1.0.0",
+  "description": "After code files are edited, run the full audit suite to catch issues early.",
+  "when": {
+    "type": "fileEdited",
+    "patterns": ["*.ts", "*.tsx", "*.jsx", "*.json"]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "node scripts/ops/run-all.mjs"
+  }
+}
