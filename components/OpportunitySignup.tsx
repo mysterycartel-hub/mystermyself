@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
+import OpportunityLanePreview from '@/components/OpportunityLanePreview'
 
 const LANES = [
   { value: 'interest_trading_chef',   label: 'Trading Chef / Market Marina',         emoji: '⚓' },
@@ -172,6 +173,11 @@ export default function OpportunitySignup({ source = 'website', accentColor = '#
                   ))}
                 </select>
               </div>
+            )}
+
+            {/* Lane preview — shows what the selected district offers */}
+            {!compact && lane && (
+              <OpportunityLanePreview selectedLane={lane} />
             )}
 
             {error && (
