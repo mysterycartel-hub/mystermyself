@@ -76,12 +76,19 @@ const SOCIAL_BUTTONS = [
 
 export default function WelcomePage() {
   const [source, setSource] = useState<string | null>(null)
+  const [lane, setLane] = useState<string | null>(null)
 
   useEffect(() => {
     try {
       setSource(localStorage.getItem('skc_join_source'))
+      setLane(localStorage.getItem('skc_join_lane'))
       localStorage.removeItem('skc_return_path')
     } catch { /* noop */ }
+
+    // Also check URL params
+    const params = new URLSearchParams(window.location.search)
+    const urlLane = params.get('lane')
+    if (urlLane) setLane(urlLane)
   }, [])
 
   return (
@@ -108,7 +115,7 @@ export default function WelcomePage() {
               color: 'rgba(201,168,76,0.55)',
               marginBottom: 20,
             }}>
-              {source && source !== 'website' ? `Joined via ${source}` : 'Scott-King Coast · The Opportunity List'}
+              {lane ? `Your lane: ${lane.replace('interest_', '').replace(/_/g, ' ')}` : source && source !== 'website' ? `Joined via ${source}` : 'Scott-King Coast · The Opportunity List'}
             </div>
 
             <h1 style={{

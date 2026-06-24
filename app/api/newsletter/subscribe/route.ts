@@ -112,6 +112,28 @@ export async function POST(req: NextRequest) {
     }
 
     const data = await beehiivRes.json()
+
+    // Backup: also store in Supabase leads table if configured
+    try {
+      if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
+        const { createServerClient } = await import('@/lib/supabase')
+        const supabase = createServerClient()
+        await supabase.from('leads').upsert(
+          {
+            name: name?.trim() || 'Subscriber',
+            email: email.toLowerCase().trim(),
+            interest: selectedLane || 'general',
+            division: source || 'website',
+            source: 'newsletter_subscribe',
+          },
+          { onConflict: 'email', ignoreDuplicates: true }
+        )
+      }
+    } catch (dbErr) {
+      // Non-blocking — Beehiiv is primary, Supabase is backup
+      console.warn('[newsletter/subscribe] Supabase backup write failed:', dbErr)
+    }
+
     return NextResponse.json({ ok: true, id: data?.data?.id })
 
   } catch (err) {
