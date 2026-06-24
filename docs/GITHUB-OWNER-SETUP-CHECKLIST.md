@@ -43,7 +43,7 @@ After completing this checklist, Kiro branches auto-create PRs, GitHub checks qu
 2. Click **Add branch protection rule**
 3. Branch name pattern: `main`
 4. Check: ✅ **Require status checks to pass before merging**
-5. Add required check: search for `quality-gate` (this is the job from pr-quality-gate.yml)
+5. Add required check: search for `PR Quality Gate / Audit + Build`
 6. Check: ✅ **Require branches to be up to date before merging**
 7. Click **Create**
 
@@ -90,6 +90,6 @@ After completing all steps, the system is verified when:
 | Issue | Fix |
 |-------|-----|
 | PR not auto-created | Check Actions permissions (Step 2) |
-| `ceo-approved` label doesn't merge | Check branch protection (Step 4) — ensure `quality-gate` is the required check name |
+| `ceo-approved` label doesn't merge | Check branch protection (Step 4) — ensure `PR Quality Gate / Audit + Build` is the required check name |
 | Workflow not triggering | The `auto-open-pr.yml` must be on `main` branch (it is ✅) |
 | Quality Gate fails | Kiro must fix the branch before it can merge |
