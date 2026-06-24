@@ -4,72 +4,109 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 
+/**
+ * TCU Canon Characters — locked. Do not invent new characters.
+ * Source: data/canon/scott-king-coast.json
+ */
 const characters = [
   {
-    name: 'Chef Goldie',
+    name: 'The Trading Chef',
     emoji: '👨‍🍳',
-    role: 'The Strategist',
+    role: 'System Architect',
     color: '#c9a84c',
-    tagline: 'Cooking up golden setups and smart moves.',
-    bio: 'Chef Goldie is the master of patience. He never chases a candle — he waits for the setup to come to him, then executes with precision. His kitchen runs on structure, liquidity, and discipline.',
-    lessons: ['Wait for the setup', 'Read the structure first', 'Patience IS the edge', 'Every trade is a recipe'],
-    cta: 'Learn The TCU Method',
-    href: '/trading-chef-university',
-  },
-  {
-    name: 'Penny The Saver',
-    emoji: '💰',
-    role: 'The Stacker',
-    color: '#22C55E',
-    tagline: 'She saves, she stacks, she builds wealth.',
-    bio: 'Penny understands that wealth is built in the quiet moments — consistent deposits, compounding returns, and the discipline to not touch what\'s growing. She\'s not flashy, but she wins.',
-    lessons: ['Automate the savings', 'Compound is the game', 'Discipline beats motivation', 'Stack before you spend'],
-    cta: 'Get The Playbook',
-    href: '/playbooks',
-  },
-  {
-    name: 'Flip The Risk-Taker',
-    emoji: '🎯',
-    role: 'The Bold One',
-    color: '#c0392b',
-    tagline: 'Big dreams. Calculated risks. Bigger wins.',
-    bio: 'Flip doesn\'t take blind risks — he takes educated ones. He\'s done the research, knows the downside, and commits fully. Most people see volatility; Flip sees opportunity.',
-    lessons: ['Know your downside first', 'Size positions correctly', 'Conviction comes from research', 'Bold is not reckless'],
-    cta: 'Find Your Play',
-    href: '/#lead',
-  },
-  {
-    name: 'Grandma Market',
-    emoji: '🧓',
-    role: 'The Elder',
-    color: '#7a6230',
-    tagline: 'Wisdom, patience, and generational knowledge.',
-    bio: 'Grandma Market has seen every cycle — bear markets, crashes, euphoria, and everything between. She doesn\'t panic because she\'s been here before. Her perspective is the rarest edge in trading.',
-    lessons: ['This has happened before', 'Markets always recover', 'Long-term thinking wins', 'Don\'t trade with emotion'],
-    cta: 'Join The Community',
-    href: '/community',
-  },
-  {
-    name: 'Louie The Liquidity Chef',
-    emoji: '🌊',
-    role: 'The Flow King',
-    color: '#3B82F6',
-    tagline: 'Adds liquidity, stirs the market just right.',
-    bio: 'Louie understands where the money is — literally. He tracks liquidity pools, understands institutional footprints, and knows where price needs to go before it gets there. He reads the flow.',
-    lessons: ['Follow the liquidity', 'Institutions leave footprints', 'The wick tells the story', 'Smart money moves first'],
-    cta: 'Learn Liquidity',
-    href: '/trading-chef-university#curriculum',
+    tagline: 'The kitchen is open. The recipe is the framework.',
+    bio: 'The Trading Chef built the entire system. Eight steps from chart to execution. He doesn\'t chase — he reads the structure, identifies the flow, and lets the recipe do the work. Education-first. Execution-second.',
+    lessons: ['Read before you trade', 'The recipe IS the edge', 'Patience makes the profit', 'Structure over signals'],
+    cta: 'Enter Market Marina',
+    href: '/market-marina',
   },
   {
     name: 'Candle Kid',
     emoji: '🕯️',
-    role: 'The Reader',
+    role: 'Pattern Reader',
     color: '#A855F7',
-    tagline: 'Reads candles, tells the future — almost.',
-    bio: 'Candle Kid is obsessed with price action. Every wick, every body, every gap tells a story — and Candle Kid reads all of it. Not a guesser, a reader. There\'s a difference.',
+    tagline: 'Every candle tells a story. He reads all of them.',
+    bio: 'Candle Kid is obsessed with price action. Every wick, every body, every gap tells a story — and Candle Kid reads all of it. Not a guesser, a reader. Session timing, candlestick patterns, and entries that make sense.',
     lessons: ['Every candle has a story', 'The close matters most', 'Wicks hunt stops', 'Context makes patterns'],
-    cta: 'Start Reading Charts',
-    href: '/trading-chef',
+    cta: 'Learn Price Action',
+    href: '/academy',
+  },
+  {
+    name: 'Wickie',
+    emoji: '🎯',
+    role: 'Wick Hunter',
+    color: '#EF4444',
+    tagline: 'Wicks don\'t lie. They just move fast.',
+    bio: 'Wickie understands stop hunts better than anyone on the coast. When price spikes through a level and reverses — that\'s his territory. He teaches you where stops get hit and why smart money needs your liquidity before the real move.',
+    lessons: ['Stop hunts create entries', 'Wicks reveal intent', 'Patience past the spike', 'Smart money needs your stops'],
+    cta: 'Study Wicks',
+    href: '/academy',
+  },
+  {
+    name: 'Louie Liquidity',
+    emoji: '🌊',
+    role: 'Flow King',
+    color: '#3B82F6',
+    tagline: 'Follow the liquidity. That\'s where price is going.',
+    bio: 'Louie understands where the money is — literally. He tracks liquidity pools, understands institutional footprints, and knows where price needs to go before it gets there. He reads the order flow.',
+    lessons: ['Follow the liquidity', 'Institutions leave footprints', 'The wick tells the story', 'Smart money moves first'],
+    cta: 'Learn Order Flow',
+    href: '/academy',
+  },
+  {
+    name: 'Chef Goldie',
+    emoji: '✨',
+    role: 'Gold Specialist',
+    color: '#c9a84c',
+    tagline: 'XAUUSD is the main dish. He cooks it daily.',
+    bio: 'Chef Goldie is the master of gold. XAUUSD is his market and his obsession. He never chases a candle — he waits for the setup to come to him, then executes with precision. His kitchen runs on structure, liquidity, and discipline.',
+    lessons: ['Wait for the setup', 'Gold has rhythm', 'Patience IS the edge', 'Every trade is a recipe'],
+    cta: 'Learn Gold Trading',
+    href: '/market-marina',
+  },
+  {
+    name: 'Grandma Market',
+    emoji: '🧓',
+    role: 'Structure Elder',
+    color: '#7a6230',
+    tagline: 'She\'s seen every cycle. She doesn\'t panic.',
+    bio: 'Grandma Market has seen every cycle — bear markets, crashes, euphoria, and everything between. She doesn\'t panic because she\'s been here before. Her perspective is the rarest edge in trading. Higher timeframe wisdom.',
+    lessons: ['This has happened before', 'Structure always wins', 'Long-term thinking wins', 'Don\'t trade with emotion'],
+    cta: 'Learn Market Structure',
+    href: '/academy',
+  },
+  {
+    name: 'Nana Value',
+    emoji: '💎',
+    role: 'Gap Finder',
+    color: '#22C55E',
+    tagline: 'Fair value gaps are her love language.',
+    bio: 'Nana Value finds where price left imbalances. Fair value gaps, discount zones, and premium levels — she maps them all. When price returns to fill an imbalance, she\'s already positioned. She doesn\'t chase. She waits at value.',
+    lessons: ['Imbalances always fill', 'Buy at discount', 'Sell at premium', 'Fair value is the magnet'],
+    cta: 'Study Fair Value',
+    href: '/academy',
+  },
+  {
+    name: 'Melissa Mayhem',
+    emoji: '⚡',
+    role: 'Volatility Expert',
+    color: '#F97316',
+    tagline: 'News hits. Volatility spikes. She\'s ready.',
+    bio: 'Melissa Mayhem thrives in chaos. News events, NFP, FOMC, rate decisions — when volatility spikes and everyone panics, she\'s already reading the structure underneath. She doesn\'t avoid events. She trades the reaction.',
+    lessons: ['Volatility is opportunity', 'Trade the reaction', 'News is noise without structure', 'Sessions have personality'],
+    cta: 'Study News Trading',
+    href: '/academy',
+  },
+  {
+    name: 'Melody Mayhem',
+    emoji: '🎵',
+    role: 'Rhythm Trader',
+    color: '#EC4899',
+    tagline: 'Price has a rhythm. She hears it.',
+    bio: 'Melody Mayhem feels the rhythm of price. Harmonic patterns, confluences, and flow states — she finds the music in the market. When price is in rhythm, the entries are clean and the flow is natural.',
+    lessons: ['Price moves in rhythm', 'Confluences compound', 'Flow state is real', 'The pattern repeats'],
+    cta: 'Learn Market Rhythm',
+    href: '/academy',
   },
 ]
 
@@ -88,21 +125,22 @@ export default function CharacterSection() {
       >
         <div className="section-label">
           <div className="section-label-line" />
-          <span className="section-label-text">The Characters</span>
+          <span className="section-label-text">Market Marina · TCU Canon</span>
         </div>
         <h2 className="section-title">
           MEET THE<br />
-          <span style={{ color: 'var(--gold)' }}>CAST</span>
+          <span style={{ color: 'var(--gold)' }}>TCU KITCHEN</span>
         </h2>
-        <p style={{ fontSize: '0.82rem', color: 'rgba(245,240,232,0.5)', maxWidth: 440, lineHeight: 1.8 }}>
-          Each character represents a money mindset. Click to learn their lessons.
+        <p style={{ fontSize: '0.82rem', color: 'rgba(245,240,232,0.5)', maxWidth: 500, lineHeight: 1.8 }}>
+          Nine characters. Each one represents a trading concept inside Trading Chef University.
+          Click to learn their lessons. These are the voices of Market Marina.
         </p>
       </motion.div>
 
       {/* Character grid */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
         gap: 2,
         marginBottom: 2,
       }}>
@@ -112,21 +150,21 @@ export default function CharacterSection() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.08 }}
+            transition={{ duration: 0.5, delay: i * 0.06 }}
             onClick={() => setSelected(selected === c.name ? null : c.name)}
             className="character-card"
             style={{
               borderColor: selected === c.name ? c.color : 'rgba(201,168,76,0.1)',
               boxShadow: selected === c.name ? `0 0 30px ${c.color}20` : 'none',
-              cursor: 'none',
+              cursor: 'pointer',
             }}
           >
             {/* Avatar */}
             <motion.div
               animate={{ y: selected === c.name ? -4 : 0 }}
               style={{
-                fontSize: '3.5rem',
-                marginBottom: 16,
+                fontSize: '3rem',
+                marginBottom: 12,
                 display: 'block',
                 lineHeight: 1,
               }}
@@ -137,30 +175,30 @@ export default function CharacterSection() {
             {/* Role badge */}
             <span style={{
               fontFamily: '"Space Mono", monospace',
-              fontSize: '0.5rem',
-              letterSpacing: '0.2em',
+              fontSize: '0.45rem',
+              letterSpacing: '0.18em',
               textTransform: 'uppercase',
-              padding: '3px 10px',
+              padding: '3px 8px',
               background: `${c.color}20`,
               color: c.color,
               display: 'inline-block',
-              marginBottom: 12,
+              marginBottom: 10,
             }}>
               {c.role}
             </span>
 
             <h3 style={{
               fontFamily: '"Bebas Neue", sans-serif',
-              fontSize: '1.3rem',
+              fontSize: '1.15rem',
               letterSpacing: '0.05em',
               color: selected === c.name ? c.color : 'var(--cream)',
-              marginBottom: 8,
+              marginBottom: 6,
             }}>
               {c.name}
             </h3>
 
-            <p style={{ fontSize: '0.68rem', color: 'rgba(245,240,232,0.45)', lineHeight: 1.6, fontStyle: 'italic' }}>
-              "{c.tagline}"
+            <p style={{ fontSize: '0.6rem', color: 'rgba(245,240,232,0.4)', lineHeight: 1.6, fontStyle: 'italic' }}>
+              &ldquo;{c.tagline}&rdquo;
             </p>
           </motion.div>
         ))}
@@ -182,7 +220,7 @@ export default function CharacterSection() {
               border: `1px solid ${active.color}25`,
               padding: '48px',
               display: 'grid',
-              gridTemplateColumns: '1fr 1fr 1fr',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
               gap: 48,
             }}>
               {/* Bio */}
@@ -222,7 +260,7 @@ export default function CharacterSection() {
               {/* CTA */}
               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', gap: 20 }}>
                 <p style={{ fontSize: '0.78rem', color: 'rgba(245,240,232,0.5)', fontStyle: 'italic', lineHeight: 1.7 }}>
-                  Ready to think like {active.name.split(' ')[0]}?
+                  Ready to think like {active.name.split(' ').pop()}?
                 </p>
                 <Link href={active.href} className="btn-primary">
                   <span>{active.cta} →</span>
@@ -232,6 +270,29 @@ export default function CharacterSection() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Bottom CTA */}
+      <div style={{
+        textAlign: 'center',
+        padding: '48px 20px',
+        borderTop: '1px solid rgba(201,168,76,0.06)',
+      }}>
+        <p style={{
+          fontFamily: '"Space Mono", monospace',
+          fontSize: '0.55rem',
+          letterSpacing: '0.2em',
+          textTransform: 'uppercase',
+          color: 'rgba(201,168,76,0.4)',
+          marginBottom: 16,
+        }}>
+          Trading Chef Universe · 9 Characters · Market Marina
+        </p>
+        <Link href="/market-marina" style={{ textDecoration: 'none' }}>
+          <div className="btn-secondary">
+            Enter Market Marina →
+          </div>
+        </Link>
+      </div>
     </section>
   )
 }

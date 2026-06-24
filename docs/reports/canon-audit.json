@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-06-24T01:34:10.692Z",
+  "timestamp": "2026-06-24T17:28:06.918Z",
   "districts": {
     "total": 8,
     "present": 8,
@@ -148,8 +148,8 @@
   },
   "keyTerms": {
     "total": 9,
-    "present": 7,
-    "missing": 2,
+    "present": 9,
+    "missing": 0,
     "details": [
       {
         "term": "Scott-King Coast",
@@ -181,11 +181,11 @@
       },
       {
         "term": "Knighten Route",
-        "found": false
+        "found": true
       },
       {
         "term": "Newsletter Ready Desk",
-        "found": false
+        "found": true
       }
     ]
   }

@@ -19,6 +19,7 @@ const scripts = [
   { name: 'Social Audit', file: 'audit-socials.mjs' },
   { name: 'Canon Audit', file: 'audit-canon.mjs' },
   { name: 'Funnel Audit', file: 'audit-funnels.mjs' },
+  { name: 'Experience Audit', file: 'audit-experience.mjs' },
   { name: 'CEO Report', file: 'generate-ceo-report.mjs' },
 ]
 

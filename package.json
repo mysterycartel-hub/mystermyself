@@ -12,6 +12,7 @@
     "ops:audit-socials": "node scripts/ops/audit-socials.mjs",
     "ops:audit-canon": "node scripts/ops/audit-canon.mjs",
     "ops:audit-funnels": "node scripts/ops/audit-funnels.mjs",
+    "ops:audit-experience": "node scripts/ops/audit-experience.mjs",
     "ops:ceo-report": "node scripts/ops/generate-ceo-report.mjs",
     "ops:audit-all": "node scripts/ops/run-all.mjs"
   },
