@@ -19,8 +19,15 @@ export default function DashboardPage() {
   const [stats, setStats] = useState<UserStats | null>(null)
   const [authenticated, setAuthenticated] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [userLane, setUserLane] = useState<string | null>(null)
 
   useEffect(() => {
+    // Load lane/district context from localStorage
+    try {
+      const lane = localStorage.getItem('skc_join_lane')
+      if (lane) setUserLane(lane)
+    } catch { /* noop */ }
+
     async function loadDashboard() {
       let email: string | null = null
 
@@ -208,6 +215,72 @@ export default function DashboardPage() {
                   </div>
                 ))}
               </div>
+
+              {/* Your Lane / Recommended Next */}
+              {userLane && (
+                <div style={{
+                  background: 'var(--deep)',
+                  border: '1px solid rgba(201,168,76,0.15)',
+                  padding: '24px 28px',
+                  marginBottom: 32,
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  flexWrap: 'wrap',
+                  gap: 16,
+                }}>
+                  <div>
+                    <div style={{
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '0.5rem',
+                      letterSpacing: '0.2em',
+                      textTransform: 'uppercase',
+                      color: 'rgba(201,168,76,0.5)',
+                      marginBottom: 8,
+                    }}>
+                      Your Selected Lane
+                    </div>
+                    <div style={{
+                      fontFamily: '"Bebas Neue", sans-serif',
+                      fontSize: '1.4rem',
+                      color: 'var(--gold)',
+                      letterSpacing: '0.04em',
+                    }}>
+                      {userLane.replace('interest_', '').replace(/_/g, ' ').toUpperCase()}
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                    <Link href="/coast" style={{ textDecoration: 'none' }}>
+                      <div style={{
+                        border: '1px solid rgba(201,168,76,0.3)',
+                        color: 'var(--gold)',
+                        padding: '10px 18px',
+                        fontFamily: '"Space Mono", monospace',
+                        fontSize: '0.58rem',
+                        fontWeight: 700,
+                        letterSpacing: '0.1em',
+                        textTransform: 'uppercase',
+                      }}>
+                        Explore Districts
+                      </div>
+                    </Link>
+                    <Link href="/pricing" style={{ textDecoration: 'none' }}>
+                      <div style={{
+                        border: '1px solid rgba(201,168,76,0.3)',
+                        color: 'var(--gold)',
+                        padding: '10px 18px',
+                        fontFamily: '"Space Mono", monospace',
+                        fontSize: '0.58rem',
+                        fontWeight: 700,
+                        letterSpacing: '0.1em',
+                        textTransform: 'uppercase',
+                      }}>
+                        View Products
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              )}
 
               {/* Primary CTA - Chart Kitchen */}
               <Link href="/chart-kitchen" style={{ textDecoration: 'none', display: 'block', marginBottom: 32 }}>

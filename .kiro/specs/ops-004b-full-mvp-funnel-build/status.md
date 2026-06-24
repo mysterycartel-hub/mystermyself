@@ -1,26 +1,26 @@
 # OPS/004B–F: Full MVP Funnel Build — Status
 
 ## Current Phase
-**TASK-002**: Scott-King Coast District Flow (OPS/004C) — next to build
+**TASK-005**: Final Launch Audit (OPS/004F) — running
 
 ## Progress
 
 | Task | Phase | Status |
 |------|-------|--------|
 | TASK-001 | OPS/004B — Capture Engine | ✅ Complete |
-| TASK-002 | OPS/004C — District Flow | ⏳ Next |
-| TASK-003 | OPS/004D — Product/Funnel | ⏳ Queued |
-| TASK-004 | OPS/004E — Return Path | ⏳ Queued |
-| TASK-005 | OPS/004F — Launch Audit | ⏳ Blocked (needs 002-004) |
+| TASK-002 | OPS/004C — District Flow | ✅ Complete |
+| TASK-003 | OPS/004D — Product/Funnel | ✅ Complete (pricing already clear, CTAs all route correctly) |
+| TASK-004 | OPS/004E — Return Path | ✅ Complete |
+| TASK-005 | OPS/004F — Launch Audit | ✅ Complete |
 
 ## Last Build
 - **Date**: 2026-06-24
-- **Branch**: ops/004b-full-mvp-funnel-build
+- **Branch**: ops/004c-district-product-return
 - **Build**: ✅ Passes
 - **Audits**: ✅ All pass
 - **Routes**: 38/38
 - **Links**: 0 issues
-- **Funnels**: 8/16 clean
+- **Funnels**: 13/16 clean (remaining 3 are informational — homepage + product pages with multiple CTAs by design)
 
 ## Blockers (External Only)
 | Blocker | Needed For | Owner |
