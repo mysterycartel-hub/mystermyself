@@ -1,0 +1,12 @@
+{
+  "name": "CEO Report Generator",
+  "version": "1.0.0",
+  "description": "After agent stops (task batch complete), generate a CEO report summarizing work done.",
+  "when": {
+    "type": "agentStop"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Generate a CEO report. Include: phase completed, files changed, routes improved, funnel changes, fallbacks used, audit result (run npm run ops:audit-all), build result (run npm run build), branch name, PR link if pushed, and remaining external blockers only. Do not ask Maurice to run terminal commands. Format for CEO consumption in plain English."
+  }
+}

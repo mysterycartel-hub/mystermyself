@@ -1,0 +1,12 @@
+{
+  "name": "Memory Load",
+  "version": "1.0.0",
+  "description": "Before any task execution, remind Kiro to read memory blocks and canon data for context continuity.",
+  "when": {
+    "type": "preTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Before executing this task, read these files for context: docs/MEMORY-BLOCKS.md, .kiro/steering/mystermyself-automation.md, data/canon/scott-king-coast.json, data/ops/route-map.json, data/ops/funnel-map.json, data/ops/social-links.json. Continue from the current spec status at .kiro/specs/ops-004b-full-mvp-funnel-build/status.md. Do not start over. Do not invent new canon."
+  }
+}

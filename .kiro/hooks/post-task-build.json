@@ -1,0 +1,12 @@
+{
+  "name": "Post-Task Build Check",
+  "version": "1.0.0",
+  "description": "After a spec task is completed, run the build to confirm no breakage.",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "npx next build"
+  }
+}

@@ -1,43 +1,50 @@
-# Kiro Hooks — MysterMyself Automation
+# Kiro Hooks — MysterMyself Autopilot Layer
 
-## Planned Hooks
+These hooks automate the build workflow so Maurice does not need to repeat prompts.
 
-### After Code Change (fileEdited)
-- Run `npm run ops:audit-all`
-- Run `npm run build`
-- Summarize results
+## Active Hooks
 
-### Before PR (preToolUse — write)
-- Generate CEO report
-- Check no duplicate project references
-- Check no OpenAI/Anthropic requirement added
+| Hook | Trigger | Action |
+|------|---------|--------|
+| `memory-load.json` | Before task execution | Reminds Kiro to read memory blocks and canon data |
+| `scope-guard.json` | Before write operations | Validates change belongs to current spec and respects canon rules |
+| `post-edit-audit.json` | After code file edits | Runs `npm run ops:audit-all` automatically |
+| `post-task-build.json` | After task completion | Runs `npm run build` to catch breakage |
+| `ceo-report.json` | When agent session ends | Generates a CEO-ready summary report |
 
-### After Deployment (userTriggered)
-- Verify Vercel production ready
-- Remind CEO to test live site
-- Run site audit against production URL
+## What This Means for Maurice
 
-## Hook Configuration
+Maurice gives a mission once. Kiro picks up from specs + hooks automatically:
+1. Memory is loaded (no context drift)
+2. Scope is enforced (no rogue changes)
+3. Audits run after edits (no broken links slip through)
+4. Build runs after tasks (no deploy failures)
+5. CEO report generated at end (no asking "what happened?")
 
-Hooks are defined in `.kiro/hooks/` as JSON files following the Kiro hook schema:
+## Hook Schema
 
+Each hook is a JSON file following this structure:
 ```json
 {
   "name": "Hook Name",
   "version": "1.0.0",
-  "description": "What the hook does",
+  "description": "What this hook does",
   "when": {
-    "type": "fileEdited | userTriggered | preToolUse | postToolUse",
-    "patterns": ["*.ts", "*.tsx"]
+    "type": "eventType",
+    "patterns": ["optional file patterns"],
+    "toolTypes": ["optional tool categories"]
   },
   "then": {
-    "type": "askAgent | runCommand",
-    "prompt": "instruction for askAgent",
-    "command": "command for runCommand"
+    "type": "askAgent or runCommand",
+    "prompt": "for askAgent",
+    "command": "for runCommand"
   }
 }
 ```
 
-## Current Status
-
-Hooks are documented here for future implementation. Exact hook files will be created once the automation scripts are validated and the workflow is stable.
+## Event Types Used
+- `preTaskExecution` — before a spec task starts
+- `postTaskExecution` — after a spec task completes
+- `preToolUse` — before a tool (write, shell, etc.) is used
+- `fileEdited` — when a code file is saved
+- `agentStop` — when the agent session ends
