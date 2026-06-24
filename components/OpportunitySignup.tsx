@@ -6,13 +6,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 import OpportunityLanePreview from '@/components/OpportunityLanePreview'
 
 const LANES = [
-  { value: 'interest_trading_chef',   label: 'Trading Chef / Market Marina',         emoji: '⚓' },
-  { value: 'interest_route_harbor',   label: 'Courier Money / Route Harbor',          emoji: '🚢' },
-  { value: 'interest_creator_tools',  label: 'Affiliate & Creator Tools / Creator Pier', emoji: '🎬' },
-  { value: 'interest_fantasy',        label: 'Fantasy Island',                        emoji: '🏈' },
-  { value: 'interest_ai_business',    label: 'AI Business Systems / Blueprint Bay',   emoji: '📐' },
-  { value: 'interest_food',           label: 'Food Business / Breaded Or Not',        emoji: '🍗' },
-  { value: 'interest_fast_income',    label: 'Jobs & Fast Income',                    emoji: '⚡' },
+  { value: 'interest_trading_chef',   label: 'Market Marina — Gold Trading & TCU',    emoji: '⚓' },
+  { value: 'interest_route_harbor',   label: 'Route Harbor — Courier & Logistics',     emoji: '🚢' },
+  { value: 'interest_food',           label: 'Flavor District — Breaded Or Not?!',     emoji: '🍗' },
+  { value: 'interest_ai_business',    label: 'Blueprint Bay — Business & AI Systems',  emoji: '📐' },
+  { value: 'interest_creator_tools',  label: 'Creator Pier — Content & Digital',       emoji: '🎬' },
+  { value: 'interest_legacy',         label: 'Legacy Point — Wealth & Ownership',      emoji: '🏛️' },
 ]
 
 interface Props {
@@ -107,7 +106,7 @@ export default function OpportunitySignup({ source = 'website', accentColor = '#
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Maurice"
+                  placeholder="Your first name"
                   style={inputStyle}
                   onFocus={(e) => { e.target.style.borderColor = accentColor }}
                   onBlur={(e)  => { e.target.style.borderColor = 'rgba(201,168,76,0.2)' }}

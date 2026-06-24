@@ -1,33 +1,21 @@
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import OpportunitySignup from '@/components/OpportunitySignup'
+import OpportunityCharacterStrip from '@/components/OpportunityCharacterStrip'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'The Opportunity List',
-  description: 'Your entry pass into Scott-King Coast. Get courier drops, trading lessons, AI tools, fantasy updates, creator plays, food business resources, and ownership systems delivered to your inbox.',
+  title: 'The Opportunity List | Scott-King Coast',
+  description: 'Your entry pass into Scott-King Coast. Get courier drops, trading lessons, AI tools, food business resources, and ownership systems delivered to your inbox.',
 }
 
 const DISTRICTS = [
-  { label: 'Route Harbor',    color: '#0EA5E9' },
-  { label: 'Market Marina',   color: '#0D9488' },
-  { label: 'Blueprint Bay',   color: '#6366F1' },
-  { label: 'Fantasy Island',  color: '#22C55E' },
-  { label: 'Creator Pier',    color: '#A855F7' },
-  { label: 'Flavor District', color: '#F97316' },
-  { label: 'Library Vault',   color: '#c9a84c' },
-  { label: 'Legacy Point',    color: '#EC4899' },
-]
-
-const LANES = [
-  { emoji: '⚓', label: 'Trading Chef / TCU',    desc: 'Gold trading education, market structure, and beginner lessons from Market Marina.', next: 'TCU Academy + Market Kitchen' },
-  { emoji: '🚢', label: 'Courier income',        desc: 'Medical, pharmacy, and lab courier routes from Route Harbor.', next: 'Medical Courier Insider Edge' },
-  { emoji: '📐', label: 'AI automation',          desc: 'Agents, workflows, and business OS from Blueprint Bay.', next: 'AI Operator Starter Kit' },
-  { emoji: '🏈', label: 'Fantasy football',      desc: 'Rankings, injury alerts, and draft strategy from Fantasy Island.', next: 'Fantasy Draft Bible' },
-  { emoji: '🎬', label: 'Creator & affiliate',   desc: 'Content systems, newsletters, and monetization from Creator Pier.', next: 'Newsletter Ready Desk' },
-  { emoji: '🍗', label: 'Food business',          desc: 'Pop-up systems, catering, and food brand building from Flavor District.', next: 'Food Pop-Up Blueprint' },
-  { emoji: '🏛️', label: 'Wealth & ownership',    desc: 'Credit, assets, and generational wealth from Legacy Point.', next: 'Ownership playbooks' },
-  { emoji: '📚', label: 'Free resources',         desc: 'Starter guides and downloads from Library Vault.', next: 'Resource library access' },
+  { label: 'Route Harbor', desc: 'Courier & Logistics Income', color: '#0EA5E9', href: '/coast/route-harbor' },
+  { label: 'Market Marina', desc: 'Gold Trading & TCU Education', color: '#0D9488', href: '/coast/market-marina' },
+  { label: 'Flavor District', desc: 'Breaded Or Not?! Food Brand', color: '#F97316', href: '/coast/flavor-district' },
+  { label: 'Blueprint Bay', desc: 'Business Structure & Legal', color: '#6366F1', href: '/coast/blueprint-bay' },
+  { label: 'Creator Pier', desc: 'Content, YouTube & Digital Products', color: '#A855F7', href: '/coast/creator-pier' },
+  { label: 'Legacy Point', desc: 'Wealth, Trust & Ownership', color: '#EC4899', href: '/coast/legacy-point' },
 ]
 
 export default function OpportunityListPage() {
@@ -35,7 +23,7 @@ export default function OpportunityListPage() {
     <main>
       <Navbar />
 
-      {/* Hero — Entry Gate */}
+      {/* SECTION 1 — HERO */}
       <section style={{
         minHeight: '100vh',
         background: 'var(--black)',
@@ -59,8 +47,25 @@ export default function OpportunityListPage() {
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1200, margin: '0 auto', width: '100%' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 64, alignItems: 'center' }}>
 
-            {/* Left — copy */}
+            {/* Left — Trading Chef character + copy */}
             <div>
+              {/* Trading Chef Avatar Placeholder */}
+              <div style={{
+                width: 140,
+                height: 140,
+                borderRadius: '50%',
+                border: '3px solid rgba(201,168,76,0.6)',
+                background: 'radial-gradient(circle, rgba(201,168,76,0.12) 0%, rgba(6,6,8,0.9) 70%)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: 32,
+                boxShadow: '0 0 40px rgba(201,168,76,0.15), inset 0 0 30px rgba(201,168,76,0.05)',
+              }}>
+                {/* TODO: replace with actual Trading Chef asset */}
+                <span style={{ fontSize: '4rem' }}>👨‍🍳</span>
+              </div>
+
               <div style={{
                 display: 'inline-block',
                 padding: '6px 14px',
@@ -106,49 +111,107 @@ export default function OpportunityListPage() {
                 maxWidth: 480,
                 marginBottom: 32,
               }}>
-                Get courier drops, trading lessons, AI tools, fantasy updates, creator plays, food business resources, and ownership systems delivered to your inbox.
-              </p>
-
-              {/* District chips */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 36 }}>
-                {DISTRICTS.map((d) => (
-                  <span key={d.label} style={{
-                    fontFamily: '"Space Mono", monospace',
-                    fontSize: '0.48rem',
-                    letterSpacing: '0.12em',
-                    textTransform: 'uppercase',
-                    padding: '5px 12px',
-                    background: `${d.color}10`,
-                    color: d.color,
-                    border: `1px solid ${d.color}25`,
-                    whiteSpace: 'nowrap',
-                  }}>
-                    {d.label}
-                  </span>
-                ))}
-              </div>
-
-              <p style={{
-                fontFamily: '"Space Mono", monospace',
-                fontSize: '0.5rem',
-                letterSpacing: '0.2em',
-                textTransform: 'uppercase',
-                color: 'rgba(201,168,76,0.4)',
-              }}>
-                One City. One System. Your Legacy.
+                Get courier drops, trading lessons, AI tools, food business resources, and ownership systems delivered to your inbox.
               </p>
             </div>
 
-            {/* Right — form */}
-            <div>
+            {/* Right — form with gold glow border */}
+            <div style={{
+              border: '1px solid rgba(201,168,76,0.3)',
+              padding: '36px 32px',
+              background: 'rgba(6,6,8,0.8)',
+              boxShadow: '0 0 60px rgba(201,168,76,0.08), 0 0 120px rgba(201,168,76,0.04)',
+              position: 'relative',
+            }}>
+              {/* Animated gold top border */}
+              <div style={{
+                position: 'absolute',
+                top: 0, left: 0, right: 0,
+                height: 2,
+                background: 'linear-gradient(90deg, transparent, #c9a84c, transparent)',
+              }} />
               <OpportunitySignup source="opportunity_list_page" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* What You Get */}
-      <section style={{ background: 'var(--deep)', padding: '80px 48px' }}>
+      {/* SECTION 2 — CHARACTER STRIP */}
+      <OpportunityCharacterStrip />
+
+      {/* SECTION 3 — VIDEO EMBED (Coming Soon slot) */}
+      <section style={{ background: 'var(--deep)', padding: '80px 48px', borderTop: '1px solid rgba(201,168,76,0.08)' }}>
+        <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
+          <div style={{
+            fontFamily: '"Space Mono", monospace',
+            fontSize: '0.52rem',
+            letterSpacing: '0.22em',
+            textTransform: 'uppercase',
+            color: 'rgba(201,168,76,0.5)',
+            marginBottom: 16,
+          }}>
+            Coming Soon
+          </div>
+          <h2 style={{
+            fontFamily: '"Bebas Neue", sans-serif',
+            fontSize: 'clamp(2rem, 4vw, 3rem)',
+            letterSpacing: '0.03em',
+            color: 'var(--cream)',
+            marginBottom: 32,
+          }}>
+            What Is The <span style={{ color: 'var(--gold)' }}>Opportunity List</span>?
+          </h2>
+
+          {/* Video placeholder */}
+          {/* CEO: paste YouTube/TikTok embed URL here when ready */}
+          <div id="opportunity-video" style={{
+            width: '100%',
+            maxWidth: 640,
+            margin: '0 auto',
+            aspectRatio: '16/9',
+            background: 'var(--black)',
+            border: '1px solid rgba(201,168,76,0.15)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'relative',
+          }}>
+            {/* Play button */}
+            <div style={{
+              width: 72,
+              height: 72,
+              borderRadius: '50%',
+              background: 'rgba(201,168,76,0.15)',
+              border: '2px solid rgba(201,168,76,0.4)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <div style={{
+                width: 0, height: 0,
+                borderLeft: '20px solid var(--gold)',
+                borderTop: '12px solid transparent',
+                borderBottom: '12px solid transparent',
+                marginLeft: 4,
+              }} />
+            </div>
+            <div style={{
+              position: 'absolute',
+              bottom: 16,
+              fontFamily: '"Space Mono", monospace',
+              fontSize: '0.5rem',
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              color: 'rgba(201,168,76,0.4)',
+            }}>
+              Video Coming Soon
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 4 — DISTRICTS (6 approved only) */}
+      <section style={{ background: 'var(--black)', padding: '80px 48px', borderTop: '1px solid rgba(201,168,76,0.08)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={{ marginBottom: 48, textAlign: 'center' }}>
             <div style={{
@@ -159,7 +222,7 @@ export default function OpportunityListPage() {
               color: 'rgba(201,168,76,0.5)',
               marginBottom: 12,
             }}>
-              What&apos;s Inside
+              Choose Your Lane
             </div>
             <h2 style={{
               fontFamily: '"Bebas Neue", sans-serif',
@@ -167,48 +230,84 @@ export default function OpportunityListPage() {
               letterSpacing: '0.03em',
               color: 'var(--cream)',
             }}>
-              Eight Lanes. One Free Drop.
+              Six Districts. <span style={{ color: 'var(--gold)' }}>Your Path.</span>
             </h2>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 2 }}>
-            {LANES.map((item) => (
-              <div key={item.label} style={{
-                background: 'var(--black)',
-                padding: '28px 24px',
-                border: '1px solid rgba(201,168,76,0.06)',
-              }}>
-                <div style={{ fontSize: '1.8rem', marginBottom: 12 }}>{item.emoji}</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 2 }}>
+            {DISTRICTS.map((d) => (
+              <Link key={d.label} href={d.href} style={{ textDecoration: 'none' }}>
                 <div style={{
-                  fontFamily: '"Bebas Neue", sans-serif',
-                  fontSize: '1.1rem',
-                  letterSpacing: '0.04em',
-                  color: 'var(--gold)',
-                  marginBottom: 8,
+                  background: 'var(--deep)',
+                  border: `1px solid ${d.color}20`,
+                  padding: '28px 24px',
+                  cursor: 'pointer',
+                  transition: 'border-color 0.2s, box-shadow 0.2s',
                 }}>
-                  {item.label}
+                  <div style={{
+                    fontFamily: '"Bebas Neue", sans-serif',
+                    fontSize: '1.3rem',
+                    letterSpacing: '0.04em',
+                    color: d.color,
+                    marginBottom: 8,
+                  }}>
+                    {d.label}
+                  </div>
+                  <p style={{
+                    fontSize: '0.72rem',
+                    color: 'rgba(245,240,232,0.5)',
+                    lineHeight: 1.75,
+                    fontFamily: '"Space Mono", monospace',
+                  }}>
+                    {d.desc}
+                  </p>
                 </div>
-                <p style={{ fontSize: '0.7rem', color: 'rgba(245,240,232,0.5)', lineHeight: 1.75, marginBottom: 10 }}>
-                  {item.desc}
-                </p>
-                <div style={{
-                  fontFamily: '"Space Mono", monospace',
-                  fontSize: '0.45rem',
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                  color: 'rgba(201,168,76,0.4)',
-                  borderTop: '1px solid rgba(201,168,76,0.06)',
-                  paddingTop: 10,
-                }}>
-                  Next: {item.next}
-                </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Follow The Coast section */}
+      {/* SECTION 5 — SOCIAL PROOF / MISSION COPY */}
+      <section style={{ background: 'var(--deep)', padding: '80px 48px', borderTop: '1px solid rgba(201,168,76,0.08)' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{
+            fontFamily: '"Bebas Neue", sans-serif',
+            fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+            lineHeight: 0.95,
+            letterSpacing: '0.02em',
+            marginBottom: 24,
+          }}>
+            ONE COAST. SIX DISTRICTS.<br />
+            <span style={{ color: 'var(--gold)' }}>ONE MISSION.</span>
+          </h2>
+          <p style={{
+            fontSize: '0.85rem',
+            color: 'rgba(245,240,232,0.6)',
+            lineHeight: 1.9,
+            maxWidth: 600,
+            margin: '0 auto 36px',
+          }}>
+            Maurice Scott built The Scott-King Coast as a living map of every income lane he&apos;s navigating — trading, food, logistics, content, and legacy. The Opportunity List is how you ride along. Free drops. Real systems. No fluff.
+          </p>
+          <Link href="/about" style={{
+            display: 'inline-block',
+            border: '1px solid rgba(201,168,76,0.3)',
+            color: 'var(--gold)',
+            padding: '14px 32px',
+            fontFamily: '"Space Mono", monospace',
+            fontSize: '0.65rem',
+            fontWeight: 700,
+            letterSpacing: '0.12em',
+            textTransform: 'uppercase',
+            textDecoration: 'none',
+          }}>
+            Meet The Founder →
+          </Link>
+        </div>
+      </section>
+
+      {/* Follow The Coast CTA */}
       <section style={{ background: 'var(--black)', padding: '80px 48px', borderTop: '1px solid rgba(201,168,76,0.08)' }}>
         <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
           <div style={{
