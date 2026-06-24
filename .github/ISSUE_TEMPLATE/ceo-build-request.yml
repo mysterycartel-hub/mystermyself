@@ -1,0 +1,71 @@
+name: CEO Build Request
+description: Submit a plain-English build mission for the team
+title: "[CEO REQUEST] "
+labels: ["ceo-request", "needs-triage"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## CEO Build Request
+        Describe what you want built in plain English. No code knowledge required.
+        Kiro will pick this up and convert it into a build task.
+
+  - type: textarea
+    id: mission
+    attributes:
+      label: Mission
+      description: What do you want built, fixed, or improved?
+      placeholder: "Example: Make the Opportunity List feel faster and show a success animation after signup"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: lane
+    attributes:
+      label: Ecosystem Lane
+      description: Which part of Scott-King Coast does this affect?
+      options:
+        - Whole ecosystem
+        - Market Marina / Trading Chef
+        - Route Harbor / Courier
+        - Flavor District / Breaded
+        - Blueprint Bay / AI Systems
+        - Creator Pier / Content
+        - Fantasy Island
+        - Legacy Point / Wealth
+        - Library Vault / Resources
+        - Opportunity List / Capture
+        - Dashboard / Passport
+    validations:
+      required: true
+
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired Outcome
+      description: What does success look like to you?
+      placeholder: "Example: A visitor should be able to sign up in under 10 seconds and immediately see their chosen district"
+    validations:
+      required: true
+
+  - type: textarea
+    id: blockers
+    attributes:
+      label: Known Blockers
+      description: Anything you know might prevent this from shipping?
+      placeholder: "Example: Stripe isn't activated yet so checkout won't work live"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: approval
+    attributes:
+      label: Approval Level
+      description: How much control do you want over this?
+      options:
+        - Build it and show me the PR (standard)
+        - Build it and auto-merge if checks pass (trust mode)
+        - Show me a plan first before building (cautious)
+    validations:
+      required: true

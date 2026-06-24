@@ -1,0 +1,53 @@
+name: PR Quality Gate
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  quality-gate:
+    name: Audit + Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run full audit suite
+        run: node scripts/ops/run-all.mjs
+
+      - name: Run production build
+        run: npx next build
+
+      - name: Verify no placeholder URLs
+        run: |
+          if grep -r "\[NEEDS OWNER URL\]" lib/ components/ app/ --include="*.ts" --include="*.tsx"; then
+            echo "❌ Found [NEEDS OWNER URL] placeholders in source code"
+            exit 1
+          fi
+          echo "✅ No placeholder URLs found"
+
+      - name: Verify canon data exists
+        run: |
+          test -f data/canon/scott-king-coast.json || (echo "❌ Canon file missing" && exit 1)
+          test -f data/ops/social-links.json || (echo "❌ Social links file missing" && exit 1)
+          test -f data/ops/funnel-map.json || (echo "❌ Funnel map file missing" && exit 1)
+          echo "✅ All canon/ops data files present"
+
+      - name: Upload audit reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-reports
+          path: |
+            docs/reports/
+            data/ops/reports/

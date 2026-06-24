@@ -1,0 +1,70 @@
+name: CEO Auto-Merge
+
+on:
+  pull_request:
+    types: [labeled]
+  check_suite:
+    types: [completed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  automerge:
+    name: Auto-merge if CEO-approved
+    runs-on: ubuntu-latest
+    if: >
+      github.event.pull_request.draft == false &&
+      !contains(github.event.pull_request.title, 'WIP') &&
+      !contains(github.event.pull_request.title, 'BLOCKED') &&
+      !contains(github.event.pull_request.title, 'DO-NOT-MERGE')
+    steps:
+      - name: Check for ceo-approved label
+        id: check-label
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            if (!pr) {
+              console.log('No PR in context, skipping');
+              return;
+            }
+            const labels = pr.labels.map(l => l.name);
+            if (!labels.includes('ceo-approved')) {
+              console.log('PR does not have ceo-approved label, skipping');
+              core.setOutput('should_merge', 'false');
+              return;
+            }
+            // Verify PR targets main
+            if (pr.base.ref !== 'main') {
+              console.log('PR does not target main, skipping');
+              core.setOutput('should_merge', 'false');
+              return;
+            }
+            // Verify PR is from this repo (not a fork)
+            if (pr.head.repo.full_name !== pr.base.repo.full_name) {
+              console.log('PR is from a fork, skipping');
+              core.setOutput('should_merge', 'false');
+              return;
+            }
+            core.setOutput('should_merge', 'true');
+
+      - name: Auto-merge PR
+        if: steps.check-label.outputs.should_merge == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            try {
+              await github.rest.pulls.merge({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pr.number,
+                merge_method: 'squash',
+              });
+              console.log(`✅ PR #${pr.number} merged successfully`);
+            } catch (error) {
+              console.log(`❌ Could not merge: ${error.message}`);
+              console.log('Checks may still be pending. Will retry on next event.');
+            }
