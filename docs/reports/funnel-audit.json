@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-06-24T01:34:10.872Z",
+  "timestamp": "2026-06-24T17:28:06.966Z",
   "totalPages": 16,
-  "clean": 13,
-  "flagged": 3,
+  "clean": 9,
+  "flagged": 7,
   "results": [
     {
       "route": "/",
@@ -13,9 +13,7 @@
       "newsletterSegment": null,
       "district": null,
       "pageExists": true,
-      "issues": [
-        "too_many_ctas_6"
-      ]
+      "issues": []
     },
     {
       "route": "/opportunity-list",
@@ -48,7 +46,9 @@
       "newsletterSegment": "interest_trading_chef",
       "district": "market-marina",
       "pageExists": true,
-      "issues": []
+      "issues": [
+        "no_product_link_found"
+      ]
     },
     {
       "route": "/coast/route-harbor",
@@ -59,7 +59,9 @@
       "newsletterSegment": "interest_route_harbor",
       "district": "route-harbor",
       "pageExists": true,
-      "issues": []
+      "issues": [
+        "no_product_link_found"
+      ]
     },
     {
       "route": "/coast/flavor-district",
@@ -70,7 +72,9 @@
       "newsletterSegment": "interest_food",
       "district": "flavor-district",
       "pageExists": true,
-      "issues": []
+      "issues": [
+        "no_product_link_found"
+      ]
     },
     {
       "route": "/coast/blueprint-bay",
@@ -81,7 +85,9 @@
       "newsletterSegment": "interest_ai_business",
       "district": "blueprint-bay",
       "pageExists": true,
-      "issues": []
+      "issues": [
+        "no_product_link_found"
+      ]
     },
     {
       "route": "/coast/creator-pier",
@@ -114,7 +120,9 @@
       "newsletterSegment": "interest_fantasy",
       "district": "fantasy-island",
       "pageExists": true,
-      "issues": []
+      "issues": [
+        "no_product_link_found"
+      ]
     },
     {
       "route": "/coast/library-vault",

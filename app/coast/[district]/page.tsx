@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import DistrictCard from '@/components/map/DistrictCard'
 import { districts, getDistrict } from '@/lib/districts'
+import { getDistrictContent } from '@/lib/district-content'
 
 export async function generateStaticParams() {
   return districts.map((d) => ({ district: d.slug }))
@@ -22,6 +23,7 @@ export default function DistrictPage({ params }: { params: { district: string } 
   const d = getDistrict(params.district)
   if (!d) notFound()
 
+  const content = getDistrictContent(params.district)
   const others = districts.filter((x) => x.id !== d.id).slice(0, 3)
 
   return (
@@ -39,7 +41,6 @@ export default function DistrictPage({ params }: { params: { district: string } 
         overflow: 'hidden',
       }}>
         <div className="hero-grid" />
-        {/* Colored glow for district */}
         <div style={{
           position: 'absolute',
           width: 800, height: 800,
@@ -49,7 +50,6 @@ export default function DistrictPage({ params }: { params: { district: string } 
           pointerEvents: 'none',
         }} />
 
-        {/* Ghost stamp */}
         <div style={{
           position: 'absolute',
           right: 48, bottom: 40,
@@ -77,7 +77,7 @@ export default function DistrictPage({ params }: { params: { district: string } 
             }}>
               Scott-King Coast
             </Link>
-            <span style={{ color: 'rgba(201,168,76,0.25)', fontSize: '0.6rem' }}>›</span>
+            <span style={{ color: 'rgba(201,168,76,0.25)', fontSize: '0.6rem' }}>&rsaquo;</span>
             <span style={{
               fontSize: '0.6rem',
               letterSpacing: '0.2em',
@@ -89,23 +89,33 @@ export default function DistrictPage({ params }: { params: { district: string } 
             </span>
           </div>
 
-          {/* Tag */}
-          <div style={{
-            display: 'inline-block',
-            fontFamily: '"Space Mono", monospace',
-            fontSize: '0.55rem',
-            letterSpacing: '0.2em',
-            textTransform: 'uppercase',
-            padding: '5px 14px',
-            background: `${d.color}15`,
-            color: d.color,
-            border: `1px solid ${d.color}30`,
-            marginBottom: 24,
-          }}>
-            {d.tag} · {d.terrain.toUpperCase()}
+          {/* Tag + brand */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24, flexWrap: 'wrap' }}>
+            <div style={{
+              fontFamily: '"Space Mono", monospace',
+              fontSize: '0.55rem',
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              padding: '5px 14px',
+              background: `${d.color}15`,
+              color: d.color,
+              border: `1px solid ${d.color}30`,
+            }}>
+              {d.tag} &middot; {d.terrain.toUpperCase()}
+            </div>
+            {content && (
+              <span style={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.48rem',
+                letterSpacing: '0.12em',
+                color: 'rgba(245,240,232,0.35)',
+              }}>
+                {content.brand}
+              </span>
+            )}
           </div>
 
-          {/* Emoji + Name */}
+          {/* Name */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 24, marginBottom: 24 }}>
             <span style={{ fontSize: '4rem' }}>{d.emoji}</span>
             <h1 style={{
@@ -129,57 +139,38 @@ export default function DistrictPage({ params }: { params: { district: string } 
             textTransform: 'uppercase',
             marginBottom: 24,
           }}>
-            "{d.tagline}"
+            &ldquo;{d.tagline}&rdquo;
           </p>
 
+          {/* Purpose from enriched content */}
           <p style={{
             fontSize: '0.85rem',
             color: 'rgba(245,240,232,0.6)',
             lineHeight: 1.8,
             maxWidth: 600,
-            marginBottom: 40,
+            marginBottom: 16,
           }}>
-            {d.longDescription}
+            {content?.purpose || d.longDescription}
           </p>
 
+          {content && (
+            <p style={{
+              fontSize: '0.75rem',
+              color: 'rgba(245,240,232,0.4)',
+              lineHeight: 1.7,
+              maxWidth: 560,
+              marginBottom: 40,
+              fontFamily: '"Space Mono", monospace',
+            }}>
+              {content.problemSolved}
+            </p>
+          )}
+
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            {d.externalHref && (
-              d.externalHref.startsWith('http') ? (
-                <a href={d.externalHref} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                  <div style={{
-                    background: d.color,
-                    color: '#060608',
-                    padding: '16px 36px',
-                    fontFamily: '"Space Mono", monospace',
-                    fontSize: '0.7rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.15em',
-                    textTransform: 'uppercase',
-                  }}>
-                    {d.cta} →
-                  </div>
-                </a>
-              ) : (
-                <Link href={d.externalHref} style={{ textDecoration: 'none' }}>
-                  <div style={{
-                    background: d.color,
-                    color: '#060608',
-                    padding: '16px 36px',
-                    fontFamily: '"Space Mono", monospace',
-                    fontSize: '0.7rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.15em',
-                    textTransform: 'uppercase',
-                  }}>
-                    {d.cta} →
-                  </div>
-                </Link>
-              )
-            )}
-            <Link href="/coast" style={{ textDecoration: 'none' }}>
+            <Link href="/opportunity-list" style={{ textDecoration: 'none' }}>
               <div style={{
-                border: `1px solid ${d.color}40`,
-                color: d.color,
+                background: d.color,
+                color: '#060608',
                 padding: '16px 36px',
                 fontFamily: '"Space Mono", monospace',
                 fontSize: '0.7rem',
@@ -187,99 +178,289 @@ export default function DistrictPage({ params }: { params: { district: string } 
                 letterSpacing: '0.15em',
                 textTransform: 'uppercase',
               }}>
-                ← All Districts
+                Join The Opportunity List &rarr;
+              </div>
+            </Link>
+            {content?.relatedProducts[0] && (
+              <Link href={content.relatedProducts[0].href} style={{ textDecoration: 'none' }}>
+                <div style={{
+                  border: `1px solid ${d.color}40`,
+                  color: d.color,
+                  padding: '16px 36px',
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '0.7rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                }}>
+                  View Products
+                </div>
+              </Link>
+            )}
+            <Link href="/coast" style={{ textDecoration: 'none' }}>
+              <div style={{
+                border: '1px solid rgba(201,168,76,0.25)',
+                color: 'rgba(201,168,76,0.6)',
+                padding: '16px 36px',
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.7rem',
+                fontWeight: 700,
+                letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+              }}>
+                &larr; All Districts
               </div>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Features section */}
-      <section style={{ background: 'var(--deep)', borderTop: `1px solid ${d.color}20` }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64 }}>
-          <div>
-            <div className="section-label" style={{ marginBottom: 32 }}>
-              <div className="section-label-line" style={{ background: d.color }} />
-              <span className="section-label-text" style={{ color: d.color }}>What&apos;s Inside</span>
-            </div>
-            <h2 className="section-title" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: 40 }}>
-              {d.name.toUpperCase().split(' ').map((word, i) => (
-                <span key={i} style={{ display: 'block', color: i === 0 ? 'var(--cream)' : d.color }}>
-                  {word}
-                </span>
-              ))}
-            </h2>
-            <p style={{ fontSize: '0.8rem', color: 'rgba(245,240,232,0.55)', lineHeight: 1.9, marginBottom: 32 }}>
-              {d.longDescription}
-            </p>
+      {/* What's Inside — Live Offers + Coming Soon */}
+      {content && (
+        <section style={{
+          background: 'var(--deep)',
+          borderTop: `1px solid ${d.color}20`,
+          padding: 'clamp(64px, 8vw, 100px) clamp(20px, 5vw, 80px)',
+        }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 64 }}>
+              {/* Left — live offers */}
+              <div>
+                <div className="section-label" style={{ marginBottom: 24 }}>
+                  <div className="section-label-line" style={{ background: d.color }} />
+                  <span className="section-label-text" style={{ color: d.color }}>Live Now</span>
+                </div>
+                <h2 style={{
+                  fontFamily: '"Bebas Neue", sans-serif',
+                  fontSize: 'clamp(2rem, 4vw, 3rem)',
+                  color: 'var(--cream)',
+                  letterSpacing: '0.03em',
+                  marginBottom: 28,
+                }}>
+                  AVAILABLE <span style={{ color: d.color }}>NOW</span>
+                </h2>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+                  {content.liveOffers.map((offer, i) => (
+                    <div key={offer} style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 16,
+                      padding: '18px 0',
+                      borderBottom: '1px solid rgba(201,168,76,0.07)',
+                    }}>
+                      <span style={{
+                        fontFamily: '"Bebas Neue", sans-serif',
+                        fontSize: '1.4rem',
+                        color: `${d.color}50`,
+                        minWidth: 36,
+                      }}>
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <span style={{
+                        fontSize: '0.8rem',
+                        color: 'rgba(245,240,232,0.7)',
+                        flex: 1,
+                      }}>
+                        {offer}
+                      </span>
+                      <div style={{
+                        width: 8, height: 8,
+                        background: '#22C55E',
+                        borderRadius: '50%',
+                        flexShrink: 0,
+                        boxShadow: '0 0 6px rgba(34,197,94,0.4)',
+                      }} />
+                    </div>
+                  ))}
+                </div>
+              </div>
 
-            {/* Passport stamp */}
+              {/* Right — coming soon */}
+              <div>
+                <div className="section-label" style={{ marginBottom: 24 }}>
+                  <div className="section-label-line" style={{ background: 'rgba(245,240,232,0.2)' }} />
+                  <span className="section-label-text">Coming Soon</span>
+                </div>
+                <h2 style={{
+                  fontFamily: '"Bebas Neue", sans-serif',
+                  fontSize: 'clamp(2rem, 4vw, 3rem)',
+                  color: 'var(--cream)',
+                  letterSpacing: '0.03em',
+                  marginBottom: 28,
+                }}>
+                  ON THE <span style={{ color: 'rgba(245,240,232,0.4)' }}>HORIZON</span>
+                </h2>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+                  {content.comingSoon.map((item, i) => (
+                    <div key={item} style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 16,
+                      padding: '18px 0',
+                      borderBottom: '1px solid rgba(201,168,76,0.05)',
+                    }}>
+                      <span style={{
+                        fontFamily: '"Bebas Neue", sans-serif',
+                        fontSize: '1.4rem',
+                        color: 'rgba(245,240,232,0.12)',
+                        minWidth: 36,
+                      }}>
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <span style={{
+                        fontSize: '0.78rem',
+                        color: 'rgba(245,240,232,0.4)',
+                        flex: 1,
+                      }}>
+                        {item}
+                      </span>
+                      <div style={{
+                        fontFamily: '"Space Mono", monospace',
+                        fontSize: '0.4rem',
+                        letterSpacing: '0.15em',
+                        textTransform: 'uppercase',
+                        color: 'rgba(245,240,232,0.2)',
+                        border: '1px solid rgba(245,240,232,0.1)',
+                        padding: '3px 8px',
+                      }}>
+                        SOON
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Audience + Problem */}
             <div style={{
-              display: 'inline-block',
-              border: `2px solid ${d.color}35`,
-              padding: '12px 24px',
-              fontFamily: '"Bebas Neue", sans-serif',
-              fontSize: '1.4rem',
-              letterSpacing: '0.25em',
-              color: `${d.color}50`,
-              transform: 'rotate(-2deg)',
+              marginTop: 48,
+              padding: '32px',
+              background: 'var(--black)',
+              border: `1px solid ${d.color}15`,
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              gap: 32,
             }}>
-              {d.passportStamp}
+              <div>
+                <div style={{
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '0.48rem',
+                  letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                  color: d.color,
+                  marginBottom: 10,
+                }}>
+                  Who This Is For
+                </div>
+                <p style={{ fontSize: '0.8rem', color: 'rgba(245,240,232,0.6)', lineHeight: 1.7 }}>
+                  {content.audience}
+                </p>
+              </div>
+              <div>
+                <div style={{
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '0.48rem',
+                  letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                  color: d.color,
+                  marginBottom: 10,
+                }}>
+                  Problem Solved
+                </div>
+                <p style={{ fontSize: '0.8rem', color: 'rgba(245,240,232,0.6)', lineHeight: 1.7 }}>
+                  {content.problemSolved}
+                </p>
+              </div>
+              <div>
+                <div style={{
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '0.48rem',
+                  letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                  color: d.color,
+                  marginBottom: 10,
+                }}>
+                  Your Next Step
+                </div>
+                <p style={{ fontSize: '0.8rem', color: 'rgba(245,240,232,0.6)', lineHeight: 1.7 }}>
+                  {content.districtLanguage.callToAction}
+                </p>
+                <Link href="/opportunity-list" style={{
+                  display: 'inline-block',
+                  marginTop: 12,
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '0.55rem',
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  color: d.color,
+                  textDecoration: 'none',
+                  borderBottom: `1px solid ${d.color}40`,
+                  paddingBottom: 2,
+                }}>
+                  Join Opportunity List &rarr;
+                </Link>
+              </div>
             </div>
           </div>
+        </section>
+      )}
 
-          <div>
-            <p style={{
-              fontSize: '0.55rem',
-              letterSpacing: '0.25em',
-              textTransform: 'uppercase',
-              color: d.color,
-              marginBottom: 28,
-              fontFamily: '"Space Mono", monospace',
-            }}>
-              Features & Resources
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-              {d.features.map((f, fi) => (
-                <div key={f} style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 20,
-                  padding: '20px 0',
-                  borderBottom: '1px solid rgba(201,168,76,0.07)',
+      {/* Features section */}
+      <section style={{
+        background: 'var(--black)',
+        padding: 'clamp(64px, 8vw, 100px) clamp(20px, 5vw, 80px)',
+        borderTop: `1px solid ${d.color}10`,
+      }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div className="section-label" style={{ marginBottom: 24 }}>
+            <div className="section-label-line" style={{ background: d.color }} />
+            <span className="section-label-text" style={{ color: d.color }}>Features &amp; Resources</span>
+          </div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+            gap: 2,
+          }}>
+            {d.features.map((f, fi) => (
+              <div key={f} style={{
+                background: 'var(--deep)',
+                border: '1px solid rgba(201,168,76,0.06)',
+                padding: '28px 24px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 16,
+              }}>
+                <span style={{
+                  fontFamily: '"Bebas Neue", sans-serif',
+                  fontSize: '1.6rem',
+                  color: `${d.color}30`,
+                  minWidth: 40,
+                  lineHeight: 1,
                 }}>
-                  <span style={{
-                    fontFamily: '"Bebas Neue", sans-serif',
-                    fontSize: '1.8rem',
-                    color: `${d.color}30`,
-                    minWidth: 48,
-                    lineHeight: 1,
-                  }}>
-                    {String(fi + 1).padStart(2, '0')}
-                  </span>
-                  <span style={{ fontSize: '0.8rem', color: 'rgba(245,240,232,0.65)', flex: 1 }}>{f}</span>
-                  <div style={{ width: 6, height: 6, background: d.color, borderRadius: '50%', opacity: 0.5, flexShrink: 0 }} />
-                </div>
-              ))}
-            </div>
+                  {String(fi + 1).padStart(2, '0')}
+                </span>
+                <span style={{ fontSize: '0.8rem', color: 'rgba(245,240,232,0.65)', flex: 1 }}>{f}</span>
+                <div style={{ width: 6, height: 6, background: d.color, borderRadius: '50%', opacity: 0.4, flexShrink: 0 }} />
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Passport + Academy CTA */}
-      <section style={{ background: 'var(--black)', borderTop: '1px solid rgba(201,168,76,0.08)' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
-          {/* Passport */}
-          <div style={{
-            border: '1px solid rgba(201,168,76,0.15)',
-            padding: '40px',
-            background: 'rgba(201,168,76,0.02)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 16,
-            justifyContent: 'space-between',
-          }}>
-            <div>
+      {/* Passport + Dashboard Return */}
+      <section style={{
+        background: 'var(--deep)',
+        borderTop: '1px solid rgba(201,168,76,0.08)',
+        padding: 'clamp(48px, 6vw, 80px) clamp(20px, 5vw, 80px)',
+      }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 2 }}>
+            {/* Passport */}
+            <div style={{
+              border: '1px solid rgba(201,168,76,0.15)',
+              padding: '32px',
+              background: 'rgba(201,168,76,0.02)',
+            }}>
               <div style={{
                 fontFamily: '"Space Mono", monospace',
                 fontSize: '0.5rem',
@@ -288,215 +469,171 @@ export default function DistrictPage({ params }: { params: { district: string } 
                 color: 'rgba(201,168,76,0.5)',
                 marginBottom: 12,
               }}>
-                V3 · Live Now
+                Coast Passport
               </div>
               <h3 style={{
                 fontFamily: '"Bebas Neue", sans-serif',
-                fontSize: '1.8rem',
+                fontSize: '1.6rem',
                 color: 'var(--gold)',
                 letterSpacing: '0.04em',
                 marginBottom: 10,
-                lineHeight: 1,
               }}>
-                Coast Passport
+                Collect Your Stamp
               </h3>
               <p style={{
                 fontFamily: '"Space Mono", monospace',
-                fontSize: '0.65rem',
-                color: 'rgba(245,240,232,0.45)',
-                lineHeight: 1.8,
+                fontSize: '0.6rem',
+                color: 'rgba(245,240,232,0.4)',
+                lineHeight: 1.7,
+                marginBottom: 16,
               }}>
-                Visit this district. Collect the stamp. Earn XP toward Captain, Admiral, and Legend levels.
+                Visit this district. Earn XP. Track your progress across all of Scott-King Coast.
               </p>
-            </div>
-            <div style={{ display: 'flex', gap: 10 }}>
-              <Link href="/passport" style={{ textDecoration: 'none' }}>
-                <div className="btn-primary" style={{ padding: '10px 20px' }}><span>Claim Stamp →</span></div>
-              </Link>
-              <div style={{
-                border: '2px solid rgba(201,168,76,0.2)',
-                padding: '10px 20px',
-                fontFamily: '"Bebas Neue", sans-serif',
-                fontSize: '1.4rem',
-                letterSpacing: '0.25em',
-                color: 'rgba(201,168,76,0.3)',
-                transform: 'rotate(-3deg)',
-                flexShrink: 0,
-                display: 'flex',
-                alignItems: 'center',
-              }}>
-                {d.passportStamp}
+              <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+                <Link href="/passport" style={{ textDecoration: 'none' }}>
+                  <div className="btn-primary" style={{ padding: '10px 18px' }}><span>Claim Stamp &rarr;</span></div>
+                </Link>
+                <div style={{
+                  border: '2px solid rgba(201,168,76,0.2)',
+                  padding: '8px 16px',
+                  fontFamily: '"Bebas Neue", sans-serif',
+                  fontSize: '1.2rem',
+                  letterSpacing: '0.25em',
+                  color: 'rgba(201,168,76,0.3)',
+                  transform: 'rotate(-3deg)',
+                }}>
+                  {d.passportStamp}
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Academy — only show for market-marina */}
-          <div style={{
-            border: '1px solid rgba(34,197,94,0.15)',
-            padding: '40px',
-            background: 'rgba(34,197,94,0.02)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 16,
-            justifyContent: 'space-between',
-          }}>
-            <div>
+            {/* Dashboard return */}
+            <div style={{
+              border: `1px solid ${d.color}20`,
+              padding: '32px',
+              background: `${d.color}05`,
+            }}>
               <div style={{
                 fontFamily: '"Space Mono", monospace',
                 fontSize: '0.5rem',
                 letterSpacing: '0.25em',
                 textTransform: 'uppercase',
-                color: 'rgba(34,197,94,0.5)',
+                color: `${d.color}80`,
                 marginBottom: 12,
               }}>
-                V4 · Trading Chef Academy
+                Your Dashboard
               </div>
               <h3 style={{
                 fontFamily: '"Bebas Neue", sans-serif',
-                fontSize: '1.8rem',
-                color: '#22C55E',
+                fontSize: '1.6rem',
+                color: d.color,
                 letterSpacing: '0.04em',
                 marginBottom: 10,
-                lineHeight: 1,
               }}>
-                Learn the Market
+                Return Hub
               </h3>
               <p style={{
                 fontFamily: '"Space Mono", monospace',
-                fontSize: '0.65rem',
-                color: 'rgba(245,240,232,0.45)',
-                lineHeight: 1.8,
+                fontSize: '0.6rem',
+                color: 'rgba(245,240,232,0.4)',
+                lineHeight: 1.7,
+                marginBottom: 16,
               }}>
-                13 lessons. Bias → Flow → AOI → Delivery → Confirmation → The Pass → Tables Served → Management.
+                Track your lane, see your next actions, and navigate back to any district from one place.
               </p>
-            </div>
-            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-              <Link href="/academy" style={{ textDecoration: 'none' }}>
+              <Link href="/dashboard" style={{ textDecoration: 'none' }}>
                 <div style={{
-                  background: '#22C55E',
-                  color: '#060608',
-                  padding: '10px 20px',
+                  background: `${d.color}20`,
+                  border: `1px solid ${d.color}40`,
+                  color: d.color,
+                  padding: '10px 18px',
                   fontFamily: '"Space Mono", monospace',
                   fontSize: '0.6rem',
                   fontWeight: 700,
                   letterSpacing: '0.12em',
                   textTransform: 'uppercase',
-                  textDecoration: 'none',
+                  display: 'inline-block',
                 }}>
-                  Academy →
-                </div>
-              </Link>
-              <Link href="/kitchen" style={{ textDecoration: 'none' }}>
-                <div style={{
-                  border: '1px solid rgba(34,197,94,0.3)',
-                  color: '#22C55E',
-                  padding: '10px 20px',
-                  fontFamily: '"Space Mono", monospace',
-                  fontSize: '0.6rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                }}>
-                  Market Kitchen
+                  Go To Dashboard &rarr;
                 </div>
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Opportunity List CTA */}
-      <section style={{
-        background: 'var(--black)',
-        borderTop: '1px solid rgba(201,168,76,0.08)',
-        borderBottom: '1px solid rgba(201,168,76,0.08)',
-        padding: '64px 48px',
-        textAlign: 'center',
-      }}>
-        <div style={{ maxWidth: 520, margin: '0 auto' }}>
-          <p style={{
-            fontFamily: '"Space Mono", monospace',
-            fontSize: '0.55rem',
-            letterSpacing: '0.3em',
-            textTransform: 'uppercase',
-            color: 'rgba(201,168,76,0.5)',
-            marginBottom: 16,
-          }}>
-            MysterMyself · Scott-King Coast
-          </p>
-          <h2 style={{
-            fontFamily: '"Bebas Neue", sans-serif',
-            fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-            lineHeight: 0.95,
-            marginBottom: 20,
-          }}>
-            JOIN THE<br />
-            <span style={{ color: 'var(--gold)' }}>OPPORTUNITY LIST</span>
-          </h2>
-          <p style={{
-            fontSize: '0.75rem',
-            color: 'rgba(245,240,232,0.45)',
-            lineHeight: 1.8,
-            marginBottom: 28,
-            fontFamily: '"Space Mono", monospace',
-          }}>
-            Build your life like a business. New income plays, district drops, and resources — straight to your inbox.
-          </p>
-          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link
-              href="/opportunity-list"
-              style={{ textDecoration: 'none', display: 'inline-block' }}
-            >
-              <div className="btn-primary" style={{ padding: '14px 36px' }}>
-                <span>Join The Opportunity List →</span>
-              </div>
-            </Link>
-            <Link
-              href="/pricing"
-              style={{ textDecoration: 'none', display: 'inline-block' }}
-            >
+            {/* Opportunity List */}
+            <div style={{
+              border: '1px solid rgba(201,168,76,0.15)',
+              padding: '32px',
+              background: 'rgba(201,168,76,0.02)',
+            }}>
               <div style={{
-                padding: '14px 36px',
-                border: '1px solid rgba(201,168,76,0.3)',
-                color: 'var(--gold)',
                 fontFamily: '"Space Mono", monospace',
-                fontSize: '0.65rem',
-                fontWeight: 700,
-                letterSpacing: '0.12em',
+                fontSize: '0.5rem',
+                letterSpacing: '0.25em',
                 textTransform: 'uppercase',
+                color: 'rgba(201,168,76,0.5)',
+                marginBottom: 12,
               }}>
-                View Products
+                Get Drops From This District
               </div>
-            </Link>
+              <h3 style={{
+                fontFamily: '"Bebas Neue", sans-serif',
+                fontSize: '1.6rem',
+                color: 'var(--gold)',
+                letterSpacing: '0.04em',
+                marginBottom: 10,
+              }}>
+                Opportunity List
+              </h3>
+              <p style={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.6rem',
+                color: 'rgba(245,240,232,0.4)',
+                lineHeight: 1.7,
+                marginBottom: 16,
+              }}>
+                {content?.districtLanguage.greeting || 'Join the list.'} Free resources, updates, and opportunities from {d.name}.
+              </p>
+              <Link href="/opportunity-list" style={{ textDecoration: 'none' }}>
+                <div className="btn-primary" style={{ padding: '10px 18px' }}>
+                  <span>Join Free &rarr;</span>
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Other Districts */}
-      <section style={{ background: 'var(--deep)' }}>
-        <div className="section-label">
-          <div className="section-label-line" />
-          <span className="section-label-text">Continue Exploring</span>
-        </div>
-        <h2 className="section-title" style={{ marginBottom: 40 }}>
-          OTHER<br />
-          <span style={{ color: 'var(--gold)' }}>DISTRICTS</span>
-        </h2>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: 2,
-          marginBottom: 40,
-        }}>
-          {others.map((other, i) => (
-            <DistrictCard key={other.id} district={other} index={i} variant="grid" />
-          ))}
-        </div>
-        <Link href="/coast" style={{ textDecoration: 'none', display: 'inline-flex' }}>
-          <div className="btn-secondary">
-            View All 9 Districts →
+      <section style={{
+        background: 'var(--black)',
+        padding: 'clamp(48px, 6vw, 80px) clamp(20px, 5vw, 80px)',
+        borderTop: '1px solid rgba(201,168,76,0.08)',
+      }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div className="section-label">
+            <div className="section-label-line" />
+            <span className="section-label-text">Continue Exploring</span>
           </div>
-        </Link>
+          <h2 className="section-title" style={{ marginBottom: 40 }}>
+            OTHER<br />
+            <span style={{ color: 'var(--gold)' }}>DISTRICTS</span>
+          </h2>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: 2,
+            marginBottom: 40,
+          }}>
+            {others.map((other, i) => (
+              <DistrictCard key={other.id} district={other} index={i} variant="grid" />
+            ))}
+          </div>
+          <Link href="/coast" style={{ textDecoration: 'none', display: 'inline-flex' }}>
+            <div className="btn-secondary">
+              View All Districts &rarr;
+            </div>
+          </Link>
+        </div>
       </section>
 
       <Footer />

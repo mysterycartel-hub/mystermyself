@@ -1,6 +1,6 @@
 # Canon Audit Report
 
-**Date**: 2026-06-24T01:34:10.692Z
+**Date**: 2026-06-24T17:28:06.918Z
 
 ## Districts (8/8 present)
 
@@ -36,7 +36,7 @@
 - ✅ Fantasy Draft Bible 2025 (fantasy)
 - ✅ AI Operator Starter Kit (ai-operator-lab)
 
-## Key Terms (7/9 present)
+## Key Terms (9/9 present)
 
 - ✅ Scott-King Coast
 - ✅ MysterMyself
@@ -45,9 +45,5 @@
 - ✅ Trading Chef Universe
 - ✅ TCU
 - ✅ Breaded Or Not
-- ❌ Knighten Route
-- ❌ Newsletter Ready Desk
-
-## ⚠️ Canon Gaps
-
-**Missing terms**: Knighten Route, Newsletter Ready Desk
+- ✅ Knighten Route
+- ✅ Newsletter Ready Desk

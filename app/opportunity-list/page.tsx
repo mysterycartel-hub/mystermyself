@@ -20,13 +20,14 @@ const DISTRICTS = [
 ]
 
 const LANES = [
-  { emoji: '⚓', label: 'Trading drops',    desc: 'Market structure, XAUUSD setups, and beginner lessons from Market Marina.' },
-  { emoji: '🚢', label: 'Courier routes',   desc: 'Medical, pharmacy, and lab courier opportunities from Route Harbor.' },
-  { emoji: '📐', label: 'AI systems',       desc: 'Automation, agents, and business OS drops from Blueprint Bay.' },
-  { emoji: '🏈', label: 'Fantasy intel',    desc: 'Rankings, injury alerts, and draft plays from Fantasy Island.' },
-  { emoji: '🎬', label: 'Creator tools',    desc: 'AI workflows, affiliate picks, and content systems from Creator Pier.' },
-  { emoji: '🍗', label: 'Food biz plays',   desc: 'Pop-up systems, catering frameworks, and food brand builds from Flavor District.' },
-  { emoji: '📚', label: 'Free resources',   desc: 'Downloads, guides, and learning content from Library Vault.' },
+  { emoji: '⚓', label: 'Trading Chef / TCU',    desc: 'Gold trading education, market structure, and beginner lessons from Market Marina.', next: 'TCU Academy + Market Kitchen' },
+  { emoji: '🚢', label: 'Courier income',        desc: 'Medical, pharmacy, and lab courier routes from Route Harbor.', next: 'Medical Courier Insider Edge' },
+  { emoji: '📐', label: 'AI automation',          desc: 'Agents, workflows, and business OS from Blueprint Bay.', next: 'AI Operator Starter Kit' },
+  { emoji: '🏈', label: 'Fantasy football',      desc: 'Rankings, injury alerts, and draft strategy from Fantasy Island.', next: 'Fantasy Draft Bible' },
+  { emoji: '🎬', label: 'Creator & affiliate',   desc: 'Content systems, newsletters, and monetization from Creator Pier.', next: 'Newsletter Ready Desk' },
+  { emoji: '🍗', label: 'Food business',          desc: 'Pop-up systems, catering, and food brand building from Flavor District.', next: 'Food Pop-Up Blueprint' },
+  { emoji: '🏛️', label: 'Wealth & ownership',    desc: 'Credit, assets, and generational wealth from Legacy Point.', next: 'Ownership playbooks' },
+  { emoji: '📚', label: 'Free resources',         desc: 'Starter guides and downloads from Library Vault.', next: 'Resource library access' },
 ]
 
 export default function OpportunityListPage() {
@@ -166,7 +167,7 @@ export default function OpportunityListPage() {
               letterSpacing: '0.03em',
               color: 'var(--cream)',
             }}>
-              Seven Lanes. One Free Drop.
+              Eight Lanes. One Free Drop.
             </h2>
           </div>
 
@@ -187,9 +188,20 @@ export default function OpportunityListPage() {
                 }}>
                   {item.label}
                 </div>
-                <p style={{ fontSize: '0.7rem', color: 'rgba(245,240,232,0.5)', lineHeight: 1.75 }}>
+                <p style={{ fontSize: '0.7rem', color: 'rgba(245,240,232,0.5)', lineHeight: 1.75, marginBottom: 10 }}>
                   {item.desc}
                 </p>
+                <div style={{
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '0.45rem',
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  color: 'rgba(201,168,76,0.4)',
+                  borderTop: '1px solid rgba(201,168,76,0.06)',
+                  paddingTop: 10,
+                }}>
+                  Next: {item.next}
+                </div>
               </div>
             ))}
           </div>
