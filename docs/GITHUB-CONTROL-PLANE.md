@@ -88,7 +88,7 @@ These settings need to be enabled once in the GitHub repository settings:
 
 2. **Settings → Branches → Branch Protection Rules** (for `main`):
    - ✅ Require status checks to pass before merging
-   - Add required check: `quality-gate` (the job name from pr-quality-gate.yml)
+   - Add required check: `PR Quality Gate / Audit + Build`
    - ✅ Require branches to be up to date before merging
 
 3. **Settings → Actions → General**:
