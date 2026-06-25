@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { districts } from '@/lib/districts'
@@ -32,10 +32,34 @@ const connections = [
 
 export default function ScottKingCoastMap() {
   const [active, setActive] = useState<string | null>(null)
+  const [ambientNode, setAmbientNode] = useState<string | null>(null)
+  const ambientTimer = useRef<NodeJS.Timeout | null>(null)
   const activeDistrict = districts.find((d) => d.id === active)
+
+  // Ambient auto-cycle: highlights nodes one by one when nothing is selected
+  useEffect(() => {
+    if (active) {
+      setAmbientNode(null)
+      if (ambientTimer.current) clearInterval(ambientTimer.current)
+      return
+    }
+
+    let idx = 0
+    ambientTimer.current = setInterval(() => {
+      setAmbientNode(mapNodes[idx % mapNodes.length].id)
+      idx++
+    }, 2500)
+
+    return () => {
+      if (ambientTimer.current) clearInterval(ambientTimer.current)
+    }
+  }, [active])
 
   const getNode = (id: string) => mapNodes.find((n) => n.id === id)!
   const getDistrict = (id: string) => districts.find((d) => d.id === id)!
+
+  // Determine which node is "lit" — user selection overrides ambient
+  const litNode = active || ambientNode
 
   return (
     <section style={{
@@ -115,16 +139,26 @@ export default function ScottKingCoastMap() {
               const na = getNode(a)
               const nb = getNode(b)
               const da = getDistrict(a)
+              const isLit = litNode === a || litNode === b
               return (
                 <line
                   key={`${a}-${b}`}
                   x1={na.cx} y1={na.cy}
                   x2={nb.cx} y2={nb.cy}
-                  stroke={active === a || active === b ? da.color : 'rgba(201,168,76,0.12)'}
-                  strokeWidth={active === a || active === b ? 0.4 : 0.2}
+                  stroke={isLit ? da.color : 'rgba(201,168,76,0.12)'}
+                  strokeWidth={isLit ? 0.4 : 0.2}
                   strokeDasharray="1,1.5"
-                  style={{ transition: 'all 0.3s' }}
-                />
+                  style={{ transition: 'all 0.6s ease' }}
+                >
+                  {isLit && (
+                    <animate
+                      attributeName="stroke-opacity"
+                      values="0.4;1;0.4"
+                      dur="2s"
+                      repeatCount="indefinite"
+                    />
+                  )}
+                </line>
               )
             })}
 
@@ -132,13 +166,38 @@ export default function ScottKingCoastMap() {
             {mapNodes.map((node) => {
               const d = getDistrict(node.id)
               const isActive = active === node.id
+              const isLit = litNode === node.id
               return (
                 <g
                   key={node.id}
                   style={{ cursor: 'pointer' }}
                   onClick={() => setActive(isActive ? null : node.id)}
                 >
-                  {/* Pulse ring */}
+                  {/* Breathing pulse ring — always visible, subtle */}
+                  <circle
+                    cx={node.cx} cy={node.cy}
+                    r={node.r + 3}
+                    fill="none"
+                    stroke={d.color}
+                    strokeWidth="0.2"
+                    opacity={isLit ? 0.6 : 0.15}
+                    style={{ transition: 'opacity 0.6s' }}
+                  >
+                    <animate
+                      attributeName="r"
+                      values={`${node.r + 2};${node.r + 5};${node.r + 2}`}
+                      dur="3s"
+                      repeatCount="indefinite"
+                    />
+                    <animate
+                      attributeName="opacity"
+                      values={isLit ? '0.6;0.2;0.6' : '0.15;0.05;0.15'}
+                      dur="3s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+
+                  {/* Active pulse ring */}
                   {isActive && (
                     <circle
                       cx={node.cx} cy={node.cy}
@@ -156,20 +215,20 @@ export default function ScottKingCoastMap() {
                     cx={node.cx} cy={node.cy}
                     r={node.r + 1.5}
                     fill="none"
-                    stroke={isActive ? d.color : 'rgba(201,168,76,0.2)'}
+                    stroke={isLit ? d.color : 'rgba(201,168,76,0.2)'}
                     strokeWidth="0.3"
-                    style={{ transition: 'all 0.3s' }}
+                    style={{ transition: 'all 0.6s' }}
                   />
 
                   {/* Main circle */}
                   <circle
                     cx={node.cx} cy={node.cy}
                     r={node.r}
-                    fill={isActive ? `${d.color}20` : 'rgba(13,13,16,0.85)'}
-                    stroke={isActive ? d.color : `${d.color}40`}
-                    strokeWidth={isActive ? '0.6' : '0.4'}
-                    filter={isActive ? 'url(#glow-coast)' : undefined}
-                    style={{ transition: 'all 0.35s' }}
+                    fill={isLit ? `${d.color}20` : 'rgba(13,13,16,0.85)'}
+                    stroke={isLit ? d.color : `${d.color}40`}
+                    strokeWidth={isLit ? '0.6' : '0.4'}
+                    filter={isLit ? 'url(#glow-coast)' : undefined}
+                    style={{ transition: 'all 0.5s ease' }}
                   />
 
                   {/* Emoji */}
@@ -190,10 +249,10 @@ export default function ScottKingCoastMap() {
                       y={node.cy + 4 + li * 3.2}
                       textAnchor="middle"
                       fontSize="2.2"
-                      fill={isActive ? d.color : 'rgba(245,240,232,0.7)'}
+                      fill={isLit ? d.color : 'rgba(245,240,232,0.7)'}
                       fontFamily="'Bebas Neue', sans-serif"
                       letterSpacing="0.3"
-                      style={{ transition: 'fill 0.3s', userSelect: 'none' }}
+                      style={{ transition: 'fill 0.5s', userSelect: 'none' }}
                     >
                       {line}
                     </text>
@@ -241,10 +300,10 @@ export default function ScottKingCoastMap() {
                 alignItems: 'center',
                 gap: 14,
                 padding: '16px 20px',
-                background: active === d.id ? `${d.color}10` : 'transparent',
-                borderLeft: `3px solid ${active === d.id ? d.color : 'transparent'}`,
+                background: litNode === d.id ? `${d.color}10` : 'transparent',
+                borderLeft: `3px solid ${litNode === d.id ? d.color : 'transparent'}`,
                 cursor: 'none',
-                transition: 'all 0.25s',
+                transition: 'all 0.4s ease',
                 borderBottom: '1px solid rgba(201,168,76,0.06)',
               }}
             >
@@ -254,12 +313,13 @@ export default function ScottKingCoastMap() {
                   fontFamily: '"Bebas Neue", sans-serif',
                   fontSize: '0.85rem',
                   letterSpacing: '0.06em',
-                  color: active === d.id ? d.color : 'var(--cream)',
+                  color: litNode === d.id ? d.color : 'var(--cream)',
                   lineHeight: 1,
                   marginBottom: 2,
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
+                  transition: 'color 0.4s',
                 }}>
                   {d.name}
                 </div>
@@ -278,8 +338,10 @@ export default function ScottKingCoastMap() {
                 fontFamily: '"Space Mono", monospace',
                 letterSpacing: '0.1em',
                 flexShrink: 0,
+                transition: 'opacity 0.4s',
+                opacity: litNode === d.id ? 1 : 0.4,
               }}>
-                {active === d.id ? '●' : '○'}
+                {litNode === d.id ? '●' : '○'}
               </span>
             </div>
           ))}
