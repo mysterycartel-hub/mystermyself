@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import OpportunitySignup from '@/components/OpportunitySignup'
@@ -139,7 +140,9 @@ export default function OpportunityListPage() {
 
             {/* Right — form */}
             <div>
-              <OpportunitySignup source="opportunity_list_page" />
+              <Suspense fallback={null}>
+                <OpportunitySignup source="opportunity_list_page" />
+              </Suspense>
             </div>
           </div>
         </div>
