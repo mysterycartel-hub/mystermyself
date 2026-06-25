@@ -267,6 +267,12 @@ body::before {
     100% { transform: translateX(-50%); }
   }
 
+  /* Shimmer animation for form button */
+  @keyframes shimmer {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
   /* Module card (TCU style) */
   .module-card {
     background: var(--deep);

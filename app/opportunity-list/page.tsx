@@ -9,14 +9,12 @@ export const metadata = {
 }
 
 const DISTRICTS = [
-  { label: 'Route Harbor',    color: '#0EA5E9' },
   { label: 'Market Marina',   color: '#0D9488' },
+  { label: 'Route Harbor',    color: '#0EA5E9' },
   { label: 'Blueprint Bay',   color: '#6366F1' },
   { label: 'Fantasy Island',  color: '#22C55E' },
   { label: 'Creator Pier',    color: '#A855F7' },
   { label: 'Flavor District', color: '#F97316' },
-  { label: 'Library Vault',   color: '#c9a84c' },
-  { label: 'Legacy Point',    color: '#EC4899' },
 ]
 
 const LANES = [
@@ -143,6 +141,60 @@ export default function OpportunityListPage() {
             <div>
               <OpportunitySignup source="opportunity_list_page" />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Character Strip — TCU Canon */}
+      <section style={{
+        background: 'var(--black)',
+        padding: '32px 48px',
+        borderTop: '1px solid rgba(201,168,76,0.06)',
+        borderBottom: '1px solid rgba(201,168,76,0.06)',
+        overflow: 'hidden',
+      }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{
+            fontFamily: '"Space Mono", monospace',
+            fontSize: '0.45rem',
+            letterSpacing: '0.22em',
+            textTransform: 'uppercase',
+            color: 'rgba(201,168,76,0.4)',
+            marginBottom: 16,
+            textAlign: 'center',
+          }}>
+            TCU Canon Characters
+          </div>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            gap: 24,
+          }}>
+            {[
+              { name: 'Trading Chef', emoji: '👨‍🍳' },
+              { name: 'Candle Kid', emoji: '🕯️' },
+              { name: 'Wickie', emoji: '🎯' },
+              { name: 'Louie Liquidity', emoji: '🌊' },
+              { name: 'Chef Goldie', emoji: '✨' },
+              { name: 'Grandma Market', emoji: '🧓' },
+              { name: 'Nana Value', emoji: '💎' },
+              { name: 'Melissa Mayhem', emoji: '⚡' },
+              { name: 'Melody Mayhem', emoji: '🎵' },
+            ].map((c) => (
+              <div key={c.name} style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '1.6rem', marginBottom: 4 }}>{c.emoji}</div>
+                <div style={{
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '0.42rem',
+                  letterSpacing: '0.1em',
+                  color: 'rgba(245,240,232,0.4)',
+                  textTransform: 'uppercase',
+                }}>
+                  {c.name}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
