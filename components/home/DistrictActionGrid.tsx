@@ -155,6 +155,11 @@ export default function DistrictActionGrid() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-30px' }}
             transition={{ duration: 0.45, delay: (i % 4) * 0.06 }}
+            whileHover={{
+              y: -6,
+              boxShadow: `0 12px 40px ${d.color}20, 0 0 0 1px ${d.color}40`,
+              transition: { duration: 0.25, ease: 'easeOut' },
+            }}
             style={{
               background: 'var(--black)',
               border: `1px solid ${d.color}18`,
@@ -162,11 +167,50 @@ export default function DistrictActionGrid() {
               display: 'flex',
               flexDirection: 'column',
               gap: 12,
+              position: 'relative',
+              overflow: 'hidden',
+              cursor: 'pointer',
             }}
           >
+            {/* Hover glow overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileHover={{ opacity: 1 }}
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: `radial-gradient(ellipse at 50% 0%, ${d.color}08 0%, transparent 70%)`,
+                pointerEvents: 'none',
+              }}
+            />
+
+            {/* Top accent line that glows on hover */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: (i % 4) * 0.08 + 0.3 }}
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: 2,
+                background: `linear-gradient(90deg, transparent, ${d.color}, transparent)`,
+                transformOrigin: 'left',
+                opacity: 0.6,
+              }}
+            />
+
             {/* Header */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-              <span style={{ fontSize: '1.6rem', lineHeight: 1 }}>{d.emoji}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, position: 'relative' }}>
+              <motion.span
+                whileHover={{ scale: 1.2, rotate: [0, -5, 5, 0] }}
+                transition={{ type: 'spring', stiffness: 300 }}
+                style={{ fontSize: '1.6rem', lineHeight: 1 }}
+              >
+                {d.emoji}
+              </motion.span>
               <div>
                 <h3 style={{
                   fontFamily: '"Bebas Neue", sans-serif',
@@ -195,6 +239,7 @@ export default function DistrictActionGrid() {
               color: 'rgba(245,240,232,0.55)',
               lineHeight: 1.7,
               flexGrow: 1,
+              position: 'relative',
             }}>
               {d.purpose}
             </p>
@@ -206,26 +251,35 @@ export default function DistrictActionGrid() {
               color: 'rgba(245,240,232,0.3)',
               lineHeight: 1.5,
               fontStyle: 'italic',
+              position: 'relative',
             }}>
               For: {d.audience}
             </p>
 
-            {/* Action button */}
-            <Link href={d.href} style={{ textDecoration: 'none' }}>
-              <div style={{
-                padding: '12px 20px',
-                background: `${d.color}18`,
-                border: `1px solid ${d.color}40`,
-                color: d.color,
-                fontFamily: '"Space Mono", monospace',
-                fontSize: '0.6rem',
-                fontWeight: 700,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                textAlign: 'center',
-              }}>
+            {/* Action button with hover energy */}
+            <Link href={d.href} style={{ textDecoration: 'none', position: 'relative' }}>
+              <motion.div
+                whileHover={{
+                  background: `${d.color}30`,
+                  borderColor: d.color,
+                  boxShadow: `0 0 20px ${d.color}25`,
+                }}
+                transition={{ duration: 0.2 }}
+                style={{
+                  padding: '12px 20px',
+                  background: `${d.color}18`,
+                  border: `1px solid ${d.color}40`,
+                  color: d.color,
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '0.6rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  textAlign: 'center',
+                }}
+              >
                 {d.cta} →
-              </div>
+              </motion.div>
             </Link>
           </motion.div>
         ))}

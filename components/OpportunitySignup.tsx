@@ -28,6 +28,7 @@ export default function OpportunitySignup({ source = 'website', accentColor = '#
   const [lane, setLane]       = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError]     = useState<string | null>(null)
+  const [missionAccepted, setMissionAccepted] = useState(false)
 
   // Pre-fill lane from URL param (?lane=interest_trading_chef)
   useEffect(() => {
@@ -65,7 +66,11 @@ export default function OpportunitySignup({ source = 'website', accentColor = '#
         if (lane) localStorage.setItem('skc_join_lane', lane)
       } catch { /* noop */ }
 
-      // Immediately redirect to welcome — no code gate, no success screen
+      // Show mission accepted animation before redirect
+      setMissionAccepted(true)
+      await new Promise((resolve) => setTimeout(resolve, 1800))
+
+      // Redirect to welcome
       router.push(`/welcome${lane ? `?lane=${lane}` : ''}`)
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Something went wrong'
@@ -91,6 +96,70 @@ export default function OpportunitySignup({ source = 'website', accentColor = '#
   return (
     <div style={{ maxWidth: compact ? 480 : 560, width: '100%' }}>
       <AnimatePresence mode="wait">
+        {missionAccepted ? (
+          <motion.div
+            key="mission-accepted"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.1 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '48px 24px',
+              textAlign: 'center',
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0, rotate: -20 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.1 }}
+              style={{ fontSize: '4rem', marginBottom: 20 }}
+            >
+              🎯
+            </motion.div>
+            <motion.h3
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              style={{
+                fontFamily: '"Bebas Neue", sans-serif',
+                fontSize: '2.5rem',
+                color: 'var(--gold)',
+                letterSpacing: '0.08em',
+                marginBottom: 8,
+                textShadow: '0 0 30px rgba(201,168,76,0.4)',
+              }}
+            >
+              MISSION ACCEPTED
+            </motion.h3>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              style={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '0.65rem',
+                color: 'rgba(245,240,232,0.5)',
+                letterSpacing: '0.1em',
+              }}
+            >
+              Welcome to the Coast. Check your email.
+            </motion.p>
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: '60%' }}
+              transition={{ delay: 0.7, duration: 1, ease: 'easeInOut' }}
+              style={{
+                height: 2,
+                background: 'linear-gradient(90deg, transparent, var(--gold), transparent)',
+                marginTop: 20,
+              }}
+            />
+          </motion.div>
+        ) : (
         <motion.form
             key="form"
             initial={{ opacity: 0, y: 16 }}
@@ -250,6 +319,7 @@ export default function OpportunitySignup({ source = 'website', accentColor = '#
               Free. No card. Unsubscribe anytime.
             </p>
           </motion.form>
+        )}
       </AnimatePresence>
     </div>
   )
