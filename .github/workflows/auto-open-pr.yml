@@ -107,12 +107,12 @@ jobs:
             
             ---
             
-            ## CEO Decision
+            ## Merge Policy
             
-            **To approve and merge this PR:**
-            1. Add the label \`ceo-approved\`
-            2. GitHub will auto-merge once all checks pass
-            3. Vercel will deploy automatically after merge
+            This PR will **auto-merge** when the PR Quality Gate passes (audits + build = 0 errors).
+            No manual label or approval needed.
+            
+            Maurice only needs to act if this PR body contains: CEO-DECISION-REQUIRED
             
             **To request changes:**
             - Comment what needs to change

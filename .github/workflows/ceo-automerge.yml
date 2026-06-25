@@ -1,10 +1,16 @@
-name: CEO Auto-Merge
+name: Auto-Merge on Quality Gate Pass
 
 on:
-  pull_request:
-    types: [labeled]
+  # Trigger when check suites complete (quality gate finishes)
   check_suite:
     types: [completed]
+  # Also trigger when PR checks finish via workflow_run
+  workflow_run:
+    workflows: ["PR Quality Gate"]
+    types: [completed]
+  # Keep label trigger as fallback for non-ops branches
+  pull_request:
+    types: [labeled]
 
 permissions:
   contents: write
@@ -12,59 +18,107 @@ permissions:
 
 jobs:
   automerge:
-    name: Auto-merge if CEO-approved
+    name: Auto-merge qualified PRs
     runs-on: ubuntu-latest
-    if: >
-      github.event.pull_request.draft == false &&
-      !contains(github.event.pull_request.title, 'WIP') &&
-      !contains(github.event.pull_request.title, 'BLOCKED') &&
-      !contains(github.event.pull_request.title, 'DO-NOT-MERGE')
     steps:
-      - name: Check for ceo-approved label
-        id: check-label
+      - name: Find eligible PRs and merge
         uses: actions/github-script@v7
         with:
           script: |
-            const pr = context.payload.pull_request;
-            if (!pr) {
-              console.log('No PR in context, skipping');
-              return;
-            }
-            const labels = pr.labels.map(l => l.name);
-            if (!labels.includes('ceo-approved')) {
-              console.log('PR does not have ceo-approved label, skipping');
-              core.setOutput('should_merge', 'false');
-              return;
-            }
-            // Verify PR targets main
-            if (pr.base.ref !== 'main') {
-              console.log('PR does not target main, skipping');
-              core.setOutput('should_merge', 'false');
-              return;
-            }
-            // Verify PR is from this repo (not a fork)
-            if (pr.head.repo.full_name !== pr.base.repo.full_name) {
-              console.log('PR is from a fork, skipping');
-              core.setOutput('should_merge', 'false');
-              return;
-            }
-            core.setOutput('should_merge', 'true');
+            // Collect candidate PRs
+            let pullRequests = [];
 
-      - name: Auto-merge PR
-        if: steps.check-label.outputs.should_merge == 'true'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const pr = context.payload.pull_request;
-            try {
-              await github.rest.pulls.merge({
+            // If triggered by label event, check that specific PR
+            if (context.eventName === 'pull_request' && context.payload.pull_request) {
+              pullRequests = [context.payload.pull_request];
+            }
+            // If triggered by check_suite or workflow_run, find associated PRs
+            else {
+              const { data: openPRs } = await github.rest.pulls.list({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                pull_number: pr.number,
-                merge_method: 'squash',
+                state: 'open',
+                base: 'main',
               });
-              console.log(`✅ PR #${pr.number} merged successfully`);
-            } catch (error) {
-              console.log(`❌ Could not merge: ${error.message}`);
-              console.log('Checks may still be pending. Will retry on next event.');
+              pullRequests = openPRs;
+            }
+
+            for (const pr of pullRequests) {
+              console.log(`\n--- Evaluating PR #${pr.number}: ${pr.title} ---`);
+
+              // RULE 1: Must target main
+              if (pr.base.ref !== 'main') {
+                console.log('  ⏭️ Skip: does not target main');
+                continue;
+              }
+
+              // RULE 2: Must not be draft, WIP, BLOCKED, or DO-NOT-MERGE
+              if (pr.draft) {
+                console.log('  ⏭️ Skip: draft PR');
+                continue;
+              }
+              if (/WIP|BLOCKED|DO-NOT-MERGE/i.test(pr.title)) {
+                console.log('  ⏭️ Skip: title contains WIP/BLOCKED/DO-NOT-MERGE');
+                continue;
+              }
+
+              // RULE 3: Must not be from a fork
+              if (pr.head.repo.full_name !== pr.base.repo.full_name) {
+                console.log('  ⏭️ Skip: fork PR');
+                continue;
+              }
+
+              // RULE 4: Check for CEO-DECISION-REQUIRED flag
+              const body = pr.body || '';
+              if (body.includes('CEO-DECISION-REQUIRED')) {
+                console.log('  🛑 Skip: PR body contains CEO-DECISION-REQUIRED — manual approval needed');
+                continue;
+              }
+
+              // RULE 5: Must be from ops/* OR feature/* branch (auto-merge eligible)
+              const branch = pr.head.ref;
+              const isOps = branch.startsWith('ops/');
+              const isFeature = branch.startsWith('feature/');
+              const hasLabel = pr.labels && pr.labels.some(l => l.name === 'ceo-approved');
+
+              if (!isOps && !isFeature && !hasLabel) {
+                console.log(`  ⏭️ Skip: branch "${branch}" is not ops/* or feature/*, and no ceo-approved label`);
+                continue;
+              }
+
+              // RULE 6: All checks must pass
+              const { data: checks } = await github.rest.checks.listForRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: pr.head.sha,
+              });
+
+              const checkRuns = checks.check_runs.filter(c => c.name !== 'Auto-merge qualified PRs');
+              const allComplete = checkRuns.length > 0 && checkRuns.every(c => c.status === 'completed');
+              const allPassed = checkRuns.every(c => c.conclusion === 'success' || c.conclusion === 'skipped');
+
+              if (!allComplete) {
+                console.log(`  ⏳ Skip: checks still running (${checkRuns.filter(c => c.status !== 'completed').length} pending)`);
+                continue;
+              }
+
+              if (!allPassed) {
+                const failed = checkRuns.filter(c => c.conclusion !== 'success' && c.conclusion !== 'skipped');
+                console.log(`  ❌ Skip: ${failed.length} check(s) failed: ${failed.map(c => c.name).join(', ')}`);
+                continue;
+              }
+
+              // ALL RULES PASSED — MERGE
+              console.log(`  ✅ All conditions met. Merging PR #${pr.number}...`);
+              try {
+                await github.rest.pulls.merge({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: pr.number,
+                  merge_method: 'squash',
+                });
+                console.log(`  🎉 PR #${pr.number} merged successfully`);
+              } catch (error) {
+                console.log(`  ⚠️ Could not merge PR #${pr.number}: ${error.message}`);
+              }
             }

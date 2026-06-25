@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import OpportunityLanePreview from '@/components/OpportunityLanePreview'
 
@@ -12,7 +12,6 @@ const LANES = [
   { value: 'interest_fantasy',        label: 'Fantasy Island',                        emoji: '🏈' },
   { value: 'interest_ai_business',    label: 'AI Business Systems / Blueprint Bay',   emoji: '📐' },
   { value: 'interest_food',           label: 'Food Business / Breaded Or Not',        emoji: '🍗' },
-  { value: 'interest_fast_income',    label: 'Jobs & Fast Income',                    emoji: '⚡' },
 ]
 
 interface Props {
@@ -23,11 +22,20 @@ interface Props {
 
 export default function OpportunitySignup({ source = 'website', accentColor = '#c9a84c', compact = false }: Props) {
   const router                = useRouter()
+  const searchParams          = useSearchParams()
   const [email, setEmail]     = useState('')
   const [name, setName]       = useState('')
   const [lane, setLane]       = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError]     = useState<string | null>(null)
+
+  // Pre-fill lane from URL param (?lane=interest_trading_chef)
+  useEffect(() => {
+    const urlLane = searchParams.get('lane')
+    if (urlLane && LANES.some(l => l.value === urlLane)) {
+      setLane(urlLane)
+    }
+  }, [searchParams])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -197,6 +205,7 @@ export default function OpportunitySignup({ source = 'website', accentColor = '#
             <button
               type="submit"
               disabled={loading || !email.trim()}
+              className={loading ? 'shimmer-btn' : ''}
               style={{
                 width: '100%',
                 background: loading ? 'rgba(201,168,76,0.5)' : accentColor,
@@ -210,9 +219,24 @@ export default function OpportunitySignup({ source = 'website', accentColor = '#
                 border: 'none',
                 cursor: loading ? 'not-allowed' : 'pointer',
                 transition: 'all 0.2s',
+                position: 'relative',
+                overflow: 'hidden',
               }}
             >
-              {loading ? 'Entering...' : 'Enter The Coast →'}
+              {loading && (
+                <span style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: '-100%',
+                  width: '200%',
+                  height: '100%',
+                  background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
+                  animation: 'shimmer 1.5s infinite',
+                }} />
+              )}
+              <span style={{ position: 'relative', zIndex: 1 }}>
+                {loading ? 'Entering...' : 'Enter The Coast →'}
+              </span>
             </button>
 
             <p style={{
