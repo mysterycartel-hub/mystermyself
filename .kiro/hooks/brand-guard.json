@@ -1,0 +1,14 @@
+{
+  "name": "Brand Guard",
+  "version": "2.0.0",
+  "description": "Before writing public-facing content, enforce brand voice, canon, and entity rules from the CEO brand bible.",
+  "when": {
+    "type": "preToolUse",
+    "toolTypes": ["write"],
+    "patterns": ["app/**", "components/**", "content/**"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Before writing this content, verify: 1) Public brand is MysterMyself / Scott-King Coast (NOT MysteryCartel on public UI). 2) No em dashes in copy. 3) No corporate words — use 5th grade reading level, short sentences. 4) No fake social links (use /follow-the-coast or Coming Soon). 5) Trading content uses Chef Lingo from .kiro/steering/ceo-brand-bible.md. 6) Characters are from the locked canon list only. 7) Entity names match: Breaded Or Not?! LLC, Knighten Route Transportation LLC, Scott-King IP LLC. 8) No new districts or characters invented. If all checks pass, proceed."
+  }
+}

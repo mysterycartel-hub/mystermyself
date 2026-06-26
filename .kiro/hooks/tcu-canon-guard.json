@@ -1,0 +1,13 @@
+{
+  "name": "TCU Canon Guard",
+  "version": "1.0.0",
+  "description": "After editing TCU-related files, run canon audit to ensure no banned characters slip in.",
+  "when": {
+    "type": "fileEdited",
+    "patterns": ["components/tcu/**", "data/tcu-*", "app/market-marina/**", "app/academy/**", "app/chart-kitchen/**"]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "node scripts/audit-canon.mjs"
+  }
+}
