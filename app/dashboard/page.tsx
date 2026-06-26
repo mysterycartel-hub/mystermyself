@@ -233,6 +233,55 @@ export default function DashboardPage() {
                 </div>
               )}
 
+              {/* Trading Chef Next Step — shows when lane is TCU */}
+              {userLane === 'interest_trading_chef' && (
+                <div style={{
+                  background: 'rgba(13,148,136,0.04)',
+                  border: '1px solid rgba(13,148,136,0.2)',
+                  padding: '24px 28px',
+                  marginBottom: 32,
+                  display: 'flex',
+                  gap: 20,
+                  alignItems: 'center',
+                  flexWrap: 'wrap',
+                }}>
+                  <span style={{ fontSize: '2.5rem' }}>👨‍🍳</span>
+                  <div style={{ flex: 1, minWidth: 200 }}>
+                    <div style={{
+                      fontFamily: '"Bebas Neue", sans-serif',
+                      fontSize: '1.3rem',
+                      color: '#0D9488',
+                      letterSpacing: '0.04em',
+                      marginBottom: 4,
+                    }}>
+                      Trading Chef Next Step
+                    </div>
+                    <p style={{
+                      fontSize: '0.7rem',
+                      color: 'rgba(245,240,232,0.5)',
+                      fontFamily: '"Space Mono", monospace',
+                    }}>
+                      Road Map Step 1 — Read the Menu (Bias). Check the daily/weekly structure.
+                    </p>
+                  </div>
+                  <Link href="/market-marina" style={{ textDecoration: 'none' }}>
+                    <div style={{
+                      background: '#0D9488',
+                      color: '#060608',
+                      padding: '12px 20px',
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '0.58rem',
+                      fontWeight: 700,
+                      letterSpacing: '0.1em',
+                      textTransform: 'uppercase',
+                      whiteSpace: 'nowrap',
+                    }}>
+                      Today&apos;s Kitchen &rarr;
+                    </div>
+                  </Link>
+                </div>
+              )}
+
               {/* Stats Grid */}
               <div style={{
                 display: 'grid',

@@ -6,7 +6,6 @@ import EcosystemMarquee from '@/components/EcosystemMarquee'
 import LeadMagnetForm from '@/components/LeadMagnetForm'
 import HomeHero from '@/components/home/HomeHero'
 import HomeRoadmap from '@/components/home/HomeRoadmap'
-import CharacterSection from '@/components/home/CharacterSection'
 import FlagshipVideos from '@/components/home/FlagshipVideos'
 import ScottKingCoastMap from '@/components/map/ScottKingCoastMap'
 import PassportPreview from '@/components/passport/PassportPreview'
@@ -14,6 +13,8 @@ import ProductPriority from '@/components/home/ProductPriority'
 import CoastIntro from '@/components/home/CoastIntro'
 import DistrictActionGrid from '@/components/home/DistrictActionGrid'
 import CoastOpportunities from '@/components/home/CoastOpportunities'
+import TradingChefSpotlight from '@/components/tcu/TradingChefSpotlight'
+import TCUCharacterCanonStrip from '@/components/tcu/TCUCharacterCanonStrip'
 
 /**
  * Homepage — Scott-King Coast Portal
@@ -23,14 +24,15 @@ import CoastOpportunities from '@/components/home/CoastOpportunities'
  * 2. CoastIntro — explains what Scott-King Coast is and how it fits together
  * 3. EcosystemMarquee — visual brand movement
  * 4. DistrictActionGrid — real districts as destinations
- * 5. ProductPriority — featured live opportunity (Route Harbor)
- * 6. CharacterSection — TCU canon characters (Meet the Kitchen)
- * 7. FlagshipVideos — content proof
- * 8. ScottKingCoastMap — interactive world map
- * 9. CoastOpportunities — Coming Soon + Current Opportunities
- * 10. PassportPreview — passport/progress system
- * 11. HomeRoadmap — what is being built
- * 12. LeadMagnetForm — final capture
+ * 5. TradingChefSpotlight — TCU Road Map, lingo, golden rule
+ * 6. TCUCharacterCanonStrip — 9 canon characters
+ * 7. ProductPriority — featured live opportunity (Route Harbor)
+ * 8. FlagshipVideos — content proof
+ * 9. ScottKingCoastMap — interactive world map
+ * 10. CoastOpportunities — Coming Soon + Current Opportunities
+ * 11. PassportPreview — passport/progress system
+ * 12. HomeRoadmap — what is being built
+ * 13. LeadMagnetForm — final capture
  */
 export default function Home() {
   return (
@@ -40,8 +42,9 @@ export default function Home() {
       <CoastIntro />
       <EcosystemMarquee />
       <DistrictActionGrid />
+      <TradingChefSpotlight />
+      <TCUCharacterCanonStrip />
       <ProductPriority />
-      <CharacterSection />
       <FlagshipVideos />
       <EcosystemMarquee variant="dark" reverse />
       <ScottKingCoastMap />

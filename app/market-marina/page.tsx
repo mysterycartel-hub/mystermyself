@@ -6,10 +6,13 @@ import MarketMarinaCharacters from '@/components/market-marina/MarketMarinaChara
 import MarketMarinaAcademy from '@/components/market-marina/MarketMarinaAcademy'
 import MarketMarinaKitchen from '@/components/market-marina/MarketMarinaKitchen'
 import TCUMarketKitchenTerminal from '@/components/tcu/TCUMarketKitchenTerminal'
+import TradingChefSpotlight from '@/components/tcu/TradingChefSpotlight'
+import TCUCharacterCanonStrip from '@/components/tcu/TCUCharacterCanonStrip'
+import CharacterCoachCards from '@/components/tcu/CharacterCoachCards'
 
 export const metadata = {
-  title: 'Market Marina | Trading Chef Universe — Scott-King Coast',
-  description: 'The trading district of the Scott-King Coast. Learn gold, forex, and financial markets through the Trading Chef Universe framework.',
+  title: 'Market Marina · The Trading Chef Kitchen | Scott-King Coast',
+  description: 'The trading district of the Scott-King Coast. Learn gold, forex, and financial markets through the Trading Chef Universe framework. 8-step Road Map. Kitchen lingo. No setup, no serve.',
 }
 
 export default function MarketMarinaPage() {
@@ -17,6 +20,9 @@ export default function MarketMarinaPage() {
     <main>
       <Navbar />
       <MarketMarinaHero />
+      <TradingChefSpotlight />
+      <TCUCharacterCanonStrip />
+      <CharacterCoachCards />
       <MarketMarinaCharacters />
       <MarketMarinaAcademy />
 
@@ -115,7 +121,7 @@ export default function MarketMarinaPage() {
             Join The Opportunity List for free trading drops, or grab the TCU Gold Playbook to go deeper.
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/opportunity-list" style={{
+            <Link href="/opportunity-list?lane=interest_trading_chef" style={{
               display: 'inline-block',
               background: 'var(--gold)',
               color: '#060608',
@@ -127,7 +133,7 @@ export default function MarketMarinaPage() {
               textTransform: 'uppercase',
               textDecoration: 'none',
             }}>
-              Join Free →
+              Enter the Kitchen →
             </Link>
             <Link href="/pricing" style={{
               display: 'inline-block',
