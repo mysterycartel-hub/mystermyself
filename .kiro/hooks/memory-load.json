@@ -1,12 +1,12 @@
 {
   "name": "Memory Load",
-  "version": "1.0.0",
-  "description": "Before any task execution, remind Kiro to read memory blocks and canon data for context continuity.",
+  "version": "2.0.0",
+  "description": "Before any task execution, load brand bible, canon data, and current spec context for continuity.",
   "when": {
     "type": "preTaskExecution"
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Before executing this task, read these files for context: docs/MEMORY-BLOCKS.md, .kiro/steering/mystermyself-automation.md, data/canon/scott-king-coast.json, data/ops/route-map.json, data/ops/funnel-map.json, data/ops/social-links.json. Continue from the current spec status at .kiro/specs/ops-004b-full-mvp-funnel-build/status.md. Do not start over. Do not invent new canon."
+    "prompt": "Before executing this task, read these files for context: .kiro/steering/ceo-brand-bible.md, .kiro/steering/mystermyself-automation.md, data/tcu-character-canon.ts. Check which spec is active by listing .kiro/specs/ directories. Do not start over. Do not invent new canon. Do not invent new characters. TCU MASTER LAW: No Sweep. No Shift. No Trade."
   }
 }

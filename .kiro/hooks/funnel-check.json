@@ -1,0 +1,13 @@
+{
+  "name": "Funnel Architecture Check",
+  "version": "1.0.0",
+  "description": "After modifying capture, checkout, or product pages, verify the funnel structure follows the default pattern.",
+  "when": {
+    "type": "fileEdited",
+    "patterns": ["app/opportunity-list/**", "app/pricing/**", "app/products/**", "components/OpportunitySignup*", "app/api/checkout/**", "app/api/newsletter/**"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Verify funnel integrity: 1) Free hook captures email via Beehiiv (no paywall on capture). 2) Lane selection maps to correct Beehiiv tags. 3) Paid products link to Stripe checkout (not broken links). 4) Funnel follows: free hook → email capture → $27-47 ebook → high-ticket. 5) Payment CTAs include relevant options (Stripe for digital, Cash App/PayPal/Zelle for services). 6) Capture is opt-in only — no forced subscriptions. Report any issues found."
+  }
+}
