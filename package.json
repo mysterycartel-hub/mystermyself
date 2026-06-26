@@ -10,7 +10,7 @@
     "ops:audit-routes": "node scripts/ops/audit-routes.mjs",
     "ops:audit-links": "node scripts/ops/audit-links.mjs",
     "ops:audit-socials": "node scripts/ops/audit-socials.mjs",
-    "ops:audit-canon": "node scripts/ops/audit-canon.mjs",
+    "ops:audit-canon": "node scripts/audit-canon.mjs",
     "ops:audit-funnels": "node scripts/ops/audit-funnels.mjs",
     "ops:audit-experience": "node scripts/ops/audit-experience.mjs",
     "ops:ceo-report": "node scripts/ops/generate-ceo-report.mjs",

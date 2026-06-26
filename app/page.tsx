@@ -14,6 +14,8 @@ import CoastIntro from '@/components/home/CoastIntro'
 import DistrictActionGrid from '@/components/home/DistrictActionGrid'
 import CoastOpportunities from '@/components/home/CoastOpportunities'
 import CoastPassportProgress from '@/components/home/CoastPassportProgress'
+import TradingChefSpotlight from '@/components/tcu/TradingChefSpotlight'
+import TCUCharacterCanonStrip from '@/components/tcu/TCUCharacterCanonStrip'
 
 /**
  * Homepage — Scott-King Coast Portal
@@ -23,14 +25,16 @@ import CoastPassportProgress from '@/components/home/CoastPassportProgress'
  * 2. CoastIntro — explains what Scott-King Coast is and how it fits together
  * 3. EcosystemMarquee — visual brand movement
  * 4. DistrictActionGrid — real districts as destinations (hover-reactive)
- * 5. ProductPriority — featured live opportunity (Route Harbor)
- * 6. CharacterSection — TCU canon characters (Meet the Kitchen)
- * 7. FlagshipVideos — content proof
- * 8. ScottKingCoastMap — interactive world map (ambient auto-cycle)
- * 9. CoastOpportunities — Coming Soon + Current Opportunities
- * 10. CoastPassportProgress — passport XP teaser + 3 next actions
- * 11. HomeRoadmap — what is being built
- * 12. LeadMagnetForm — final capture
+ * 5. TradingChefSpotlight — TCU Road Map, lingo, golden rule
+ * 6. TCUCharacterCanonStrip — 9 canon characters
+ * 7. ProductPriority — featured live opportunity (Route Harbor)
+ * 8. CharacterSection — TCU canon characters detail (Meet the Kitchen)
+ * 9. FlagshipVideos — content proof
+ * 10. ScottKingCoastMap — interactive world map (ambient auto-cycle)
+ * 11. CoastOpportunities — Coming Soon + Current Opportunities
+ * 12. CoastPassportProgress — passport XP teaser + 3 next actions
+ * 13. HomeRoadmap — what is being built
+ * 14. LeadMagnetForm — final capture
  */
 export default function Home() {
   return (
@@ -40,6 +44,8 @@ export default function Home() {
       <CoastIntro />
       <EcosystemMarquee />
       <DistrictActionGrid />
+      <TradingChefSpotlight />
+      <TCUCharacterCanonStrip />
       <ProductPriority />
       <CharacterSection />
       <FlagshipVideos />

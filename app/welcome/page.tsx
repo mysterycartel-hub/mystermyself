@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { SOCIAL, isRealUrl } from '@/lib/social-links'
+import TCUCharacterCanonStrip from '@/components/tcu/TCUCharacterCanonStrip'
 
 const DISTRICTS = [
   {
@@ -142,6 +143,107 @@ export default function WelcomePage() {
 
           {/* District grid */}
           <div style={{ marginBottom: 80 }}>
+
+            {/* TCU Welcome — when user chose trading lane */}
+            {(lane === 'interest_trading_chef' || lane === 'trading' || lane === 'market-marina') && (
+              <div style={{
+                background: 'var(--deep)',
+                border: '1px solid rgba(13,148,136,0.2)',
+                padding: '32px',
+                marginBottom: 32,
+              }}>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 12,
+                  marginBottom: 20,
+                }}>
+                  <span style={{ fontSize: '2rem' }}>👨‍🍳</span>
+                  <div>
+                    <h3 style={{
+                      fontFamily: '"Bebas Neue", sans-serif',
+                      fontSize: '1.5rem',
+                      color: '#0D9488',
+                      letterSpacing: '0.04em',
+                      lineHeight: 1,
+                    }}>
+                      Welcome to the Trading Chef Kitchen
+                    </h3>
+                    <span style={{
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '0.5rem',
+                      color: 'rgba(245,240,232,0.4)',
+                    }}>
+                      Market Marina · TCU
+                    </span>
+                  </div>
+                </div>
+
+                <p style={{
+                  fontSize: '0.78rem',
+                  color: 'rgba(245,240,232,0.55)',
+                  lineHeight: 1.8,
+                  marginBottom: 20,
+                }}>
+                  You chose the trading lane. Here are your first 3 steps:
+                </p>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 }}>
+                  {[
+                    { step: '1', label: "Check today's bias", desc: 'Is gold bullish or bearish? Read the daily/weekly structure.' },
+                    { step: '2', label: 'Find the liquidity', desc: 'Where are the equal highs/lows? Price sweeps them first.' },
+                    { step: '3', label: 'Watch for the FVG', desc: "Mark the fair value gap (leftover container). That's your zone." },
+                  ].map((item) => (
+                    <div key={item.step} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+                      <span style={{
+                        fontFamily: '"Bebas Neue", sans-serif',
+                        fontSize: '1.4rem',
+                        color: 'var(--gold)',
+                        minWidth: 24,
+                      }}>
+                        {item.step}
+                      </span>
+                      <div>
+                        <div style={{
+                          fontFamily: '"Bebas Neue", sans-serif',
+                          fontSize: '1rem',
+                          color: 'var(--cream)',
+                          marginBottom: 2,
+                        }}>
+                          {item.label}
+                        </div>
+                        <p style={{
+                          fontSize: '0.65rem',
+                          color: 'rgba(245,240,232,0.4)',
+                          fontFamily: '"Space Mono", monospace',
+                        }}>
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Compact character strip */}
+                <TCUCharacterCanonStrip subset={['candle-kid', 'wickie', 'louie-liquidity']} />
+
+                <Link href="/market-marina" style={{ textDecoration: 'none', display: 'inline-block', marginTop: 20 }}>
+                  <div style={{
+                    background: '#0D9488',
+                    color: '#060608',
+                    padding: '14px 28px',
+                    fontFamily: '"Space Mono", monospace',
+                    fontSize: '0.62rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                  }}>
+                    Go to Market Marina →
+                  </div>
+                </Link>
+              </div>
+            )}
+
             <div style={{
               fontFamily: '"Space Mono", monospace',
               fontSize: '0.52rem',

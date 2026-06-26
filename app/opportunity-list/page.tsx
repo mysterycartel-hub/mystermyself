@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import OpportunitySignup from '@/components/OpportunitySignup'
+import TCUCharacterCanonStrip from '@/components/tcu/TCUCharacterCanonStrip'
 import Link from 'next/link'
 
 export const metadata = {
@@ -166,39 +167,9 @@ export default function OpportunityListPage() {
             marginBottom: 16,
             textAlign: 'center',
           }}>
-            TCU Canon Characters
+            TCU Canon Characters · Market Marina
           </div>
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-            gap: 24,
-          }}>
-            {[
-              { name: 'Trading Chef', emoji: '👨‍🍳' },
-              { name: 'Candle Kid', emoji: '🕯️' },
-              { name: 'Wickie', emoji: '🎯' },
-              { name: 'Louie Liquidity', emoji: '🌊' },
-              { name: 'Chef Goldie', emoji: '✨' },
-              { name: 'Grandma Market', emoji: '🧓' },
-              { name: 'Nana Value', emoji: '💎' },
-              { name: 'Melissa Mayhem', emoji: '⚡' },
-              { name: 'Melody Mayhem', emoji: '🎵' },
-            ].map((c) => (
-              <div key={c.name} style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '1.6rem', marginBottom: 4 }}>{c.emoji}</div>
-                <div style={{
-                  fontFamily: '"Space Mono", monospace',
-                  fontSize: '0.42rem',
-                  letterSpacing: '0.1em',
-                  color: 'rgba(245,240,232,0.4)',
-                  textTransform: 'uppercase',
-                }}>
-                  {c.name}
-                </div>
-              </div>
-            ))}
-          </div>
+          <TCUCharacterCanonStrip compact />
         </div>
       </section>
 
