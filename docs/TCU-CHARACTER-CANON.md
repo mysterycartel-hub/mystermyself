@@ -8,8 +8,9 @@
 
 ## Canon Rules
 
-1. **9 characters only.** No additions. No inventions. No "temporary" characters.
-2. **BANNED names:** Penny, Rico Rhythm, Burn Alarm, Profit Plate (as characters). Never use these.
+1. **10 characters only.** No additions. No inventions. No "temporary" characters.
+2. **BANNED names:** Penny, Burn Alarm, Profit Plate (as characters). Never use these.
+3. **TCMOS Expansion (coming soon only):** Mr. Stocks, Dave Dollar, Crypto Carl
 3. **All character data imports from** `data/tcu-character-canon.ts` — never hardcode character info in components.
 4. **Art direction:** Urban cartoon style. See `docs/VISUAL-CANON.md` for full specs.
 5. **Characters are not mascots.** Each one teaches a specific market concept through the chef/kitchen metaphor.
@@ -29,6 +30,7 @@
 | 7 | `nana-value` | Nana Value | Gap Finder · Value Zone Specialist | `#22C55E` | 💎 |
 | 8 | `melissa-mayhem` | Melissa Mayhem | Volatility Expert · Chaos Teacher | `#F97316` | ⚡ |
 | 9 | `melody-mayhem` | Melody Mayhem | Rhythm Trader · Session Timer | `#EC4899` | 🎵 |
+| 10 | `rico-rhythm` | Rico Rhythm | Momentum Trader · Flow State Master | `#8B5CF6` | 🎶 |
 
 ---
 
@@ -45,6 +47,7 @@
 | Nana Value | "Fair value gaps are her love language." |
 | Melissa Mayhem | "News hits. Volatility spikes. She's ready." |
 | Melody Mayhem | "Price has a rhythm. She hears it." |
+| Rico Rhythm | "Feel the momentum. Ride the rhythm." |
 
 ---
 
@@ -64,6 +67,7 @@ public/characters/grandma-market.png
 public/characters/nana-value.png
 public/characters/melissa-mayhem.png
 public/characters/melody-mayhem.png
+public/characters/rico-rhythm.png
 ```
 
 Art direction: Urban cartoon. Transparent background PNG. Min 200x200 for avatars, 800x600 for hero images.

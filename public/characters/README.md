@@ -14,6 +14,7 @@ and copied here automatically during OPS/008B. No manual upload required from CE
 - nana-value.png
 - melissa-mayhem.png
 - melody-mayhem.png
+- rico-rhythm.png
 
 ## Art direction:
 - Urban cartoon style
