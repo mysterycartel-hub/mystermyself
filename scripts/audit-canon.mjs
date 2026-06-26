@@ -22,7 +22,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 const ROOT = join(__dirname, '..')
 
-const BANNED_CHARACTERS = ['penny', 'rico rhythm', 'burn alarm', 'profit plate']
+const BANNED_CHARACTERS = ['penny', 'burn alarm', 'profit plate']
 
 let errors = 0
 let warnings = 0

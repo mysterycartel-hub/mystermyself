@@ -1,11 +1,15 @@
 /**
  * TCU Character Canon — Single Source of Truth
  *
- * LOCKED. Do not add characters. Do not rename. Do not modify canon data
- * without CEO approval. This file is the authoritative reference for all
- * TCU character rendering across the MysterMyself ecosystem.
+ * LOCKED (10 characters). Do not add characters beyond these 10.
+ * Do not rename. Do not modify canon data without CEO approval.
+ * This file is the authoritative reference for all TCU character
+ * rendering across the MysterMyself ecosystem.
  *
- * BANNED characters (never use): Penny, Rico Rhythm, Burn Alarm, Profit Plate
+ * BANNED characters (never use as active characters): Penny, Burn Alarm, Profit Plate
+ * TCMOS EXPANSION (allowed but marked as "coming soon"): Mr. Stocks, Dave Dollar, Crypto Carl
+ *
+ * TCU MASTER LAW: No Sweep. No Shift. No Trade.
  */
 
 export interface TCUCharacter {
@@ -160,6 +164,21 @@ export const TCU_CHARACTERS: TCUCharacter[] = [
     avatarImagePath: '/characters/melody-mayhem.png',
     usedOn: ['/', '/market-marina'],
   },
+  {
+    id: 'rico-rhythm',
+    name: 'Rico Rhythm',
+    role: 'Momentum Trader · Flow State Master',
+    marketLesson: 'Momentum is the rhythm of price. When it flows, ride it. When it stalls, step back.',
+    chefMetaphor: 'The sous chef who keeps the kitchen moving. When orders are flowing, Rico keeps the pace.',
+    visualDescription: 'Smooth, confident character with headphones and a beat-driven energy. Musical flow meets market momentum. Urban cartoon style.',
+    color: '#8B5CF6',
+    emoji: '🎶',
+    shortQuote: '"Feel the momentum. Ride the rhythm."',
+    longQuote: '"When the market has rhythm, you flow with it. When it breaks tempo, you step off the floor."',
+    imagePath: '/characters/rico-rhythm.png',
+    avatarImagePath: '/characters/rico-rhythm.png',
+    usedOn: ['/', '/market-marina'],
+  },
 ]
 
 export const TRADING_CHEF_ROAD_MAP = [
@@ -189,6 +208,9 @@ export const CHEF_LINGO: Record<string, string> = {
   'Overtrading': 'Burning the food',
   'Revenge trade': 'Ordering off-menu',
 }
+
+/** TCU MASTER LAW — Never remove from TCU content */
+export const TCU_MASTER_LAW = 'No Sweep. No Shift. No Trade.'
 
 /** Helper: get a character by ID */
 export function getCharacter(id: string): TCUCharacter | undefined {
