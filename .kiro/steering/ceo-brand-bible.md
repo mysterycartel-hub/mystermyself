@@ -27,7 +27,7 @@
 - **Brand Voice:** Short sentences. 5th grade reading level. No corporate words. No em dashes. Sounds like a real person.
 - **Brand Truth:** "I had the vision for years. I just had to start."
 - **F1 Outro:** Every Trading Chef piece ends with — Chef's Golden Rule: [trading wisdom in kitchen metaphor]
-- **Newsletter:** Beehiiv — The Opportunity List — maurices-newsletter-b7274b.beehiiv.com
+- **Newsletter:** Beehiiv — The Opportunity List — maurices-newsletter-b7274b.beehiiv.com (FREE Launch Plan, permanently active)
 
 ## Trading Chef Lingo (F1 Sessions)
 
@@ -48,15 +48,15 @@
 
 **TCU MASTER LAW (never remove):** No Sweep. No Shift. No Trade.
 
-## Locked TCU Characters
+## Locked TCU Characters — 10 Total
 
 Trading Chef | Candle Kid | Wickie | Louie Liquidity | Chef Goldie | Grandma Market | Nana Value | Melissa Mayhem | Melody Mayhem | Rico Rhythm
 
 **TCMOS Expansion:** Mr. Stocks (equities) | Dave Dollar (forex) | Crypto Carl (crypto)
 
-## Locked Districts
+## Locked Districts — 9 Total
 
-Route Harbor (courier) | Market Marina (trading) | Flavor District (food) | Blueprint Bay (legal) | Creator Pier (content) | Legacy Point (IP/legacy)
+Founder Island (HQ) | Market Marina (trading) | Route Harbor (courier) | Blueprint Bay (AI/automation) | Creator Pier (content) | Flavor District (food) | Legacy Point (wealth/assets) | Fantasy Island (fantasy sports) | Library Vault (free resources)
 
 ## Live Builds
 
