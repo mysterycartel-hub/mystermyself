@@ -1,0 +1,39 @@
+{
+  "id": "FEAT-002",
+  "type": "chore",
+  "description": "Copy Remotion video engine into tools/trading-chef-studio/ and Pine Script + AI prompts into scripts/trading-chef/, then configure Next.js and TypeScript to exclude tools/ from compilation",
+  "status": "completed",
+  "steps": [
+    "Create directory: tools/trading-chef-studio/",
+    "Copy the entire /projects/sandbox/trading-chef-studio/trading-chef-remotion-os-v2/ directory into tools/trading-chef-studio/ (this is the active production version with compositions, components, data, types, prompts, public/chef/, README.md, package.json)",
+    "Also copy /projects/sandbox/trading-chef-studio/trading-chef-remotion-starter/ into tools/trading-chef-studio/trading-chef-remotion-starter/ (reference template)",
+    "Copy /projects/sandbox/trading-chef-studio/CLAUDE.md into tools/trading-chef-studio/CLAUDE.md (brand rules and project overview)",
+    "Copy /projects/sandbox/trading-chef-studio/README.md into tools/trading-chef-studio/README-REPO.md (original repo readme, renamed to avoid conflict)",
+    "Create directory: scripts/trading-chef/",
+    "Copy /projects/sandbox/trading-chef-studio/scripts/trading_chef_xauusd_v1.pine into scripts/trading-chef/",
+    "Copy /projects/sandbox/trading-chef-studio/scripts/trading_chef_claude_prompt.md into scripts/trading-chef/",
+    "Update next.config.js to exclude tools/ directory from Next.js compilation. Add the webpack config to ignore tools/**: use config.watchOptions.ignored and ensure the directory is not processed. Specifically, set the 'exclude' pattern so Next.js does not try to compile .tsx/.ts files inside tools/",
+    "Update tsconfig.json to add 'tools' to the exclude array so TypeScript does not compile Remotion source files",
+    "Update .eslintrc.json to add ignorePatterns for 'tools/' so ESLint does not lint Remotion files (they use different React version and patterns)"
+  ],
+  "acceptance_criteria": [
+    "tools/trading-chef-studio/ contains the full Remotion engine (src/, package.json, prompts/, public/, README.md)",
+    "tools/trading-chef-studio/trading-chef-remotion-starter/ contains the starter template",
+    "tools/trading-chef-studio/CLAUDE.md exists with brand rules",
+    "scripts/trading-chef/trading_chef_xauusd_v1.pine exists",
+    "scripts/trading-chef/trading_chef_claude_prompt.md exists",
+    "next.config.js excludes tools/ from webpack compilation",
+    "tsconfig.json excludes tools/ from TypeScript compilation",
+    ".eslintrc.json ignores tools/ directory",
+    "npm run lint passes without errors",
+    "npm run build succeeds (tools/ not compiled by Next.js)"
+  ],
+  "verification": [
+    "Run npm run lint and confirm it passes",
+    "Run npm run build and confirm it succeeds",
+    "Verify tools/trading-chef-studio/src/compositions/TradingChefFVG.tsx exists",
+    "Verify scripts/trading-chef/trading_chef_xauusd_v1.pine exists"
+  ],
+  "blocked_reason": null,
+  "findings": "npm install was needed (node_modules were empty despite context claiming it was done). npm install succeeded under current network mode. Build and lint both pass. Created .eslintrc.json from scratch since no eslint config existed previously (Next.js was using defaults). Added webpack exclude rule in next.config.js in addition to tsconfig exclude and eslint ignorePatterns. All three layers of exclusion ensure tools/ is completely ignored during build."
+}

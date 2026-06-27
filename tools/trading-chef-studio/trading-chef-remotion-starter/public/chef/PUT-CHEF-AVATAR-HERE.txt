@@ -1,0 +1,1 @@
+Place your chef-avatar.png file in this folder.

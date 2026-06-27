@@ -1,0 +1,14 @@
+{
+  "task_id": "task-repo-consolidation",
+  "task_description": "Consolidate all mysterycartel-hub GitHub org repos into the main mystermyself production repo. Copy TCU terminal legacy docs to docs/archive/, Remotion video engine to tools/trading-chef-studio/, Pine Script and AI prompts to scripts/trading-chef/. Exclude tools/ from Next.js/TS compilation. Create consolidation report.",
+  "status": "completed",
+  "feature_order": ["FEAT-001", "FEAT-002", "FEAT-003"],
+  "blocked_reason": null,
+  "verification": {
+    "build": "pass",
+    "tests": "pass",
+    "test_quality": "skipped",
+    "docker_build": "skipped",
+    "summary": "npm run lint passes (only pre-existing warnings in LessonTemplate.tsx). npm run build succeeds with all routes compiled. tools/ directory excluded from TS and ESLint via tsconfig.json and .eslintrc.json. No test framework configured in this project so test_quality is skipped. No Dockerfile present."
+  }
+}
