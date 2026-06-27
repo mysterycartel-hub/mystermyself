@@ -1,0 +1,21 @@
+{
+  "project_type": "Next.js 14.2.5 production site with TypeScript and Tailwind",
+  "language": "TypeScript",
+  "build_system": "npm with next build",
+  "test_framework": "No test framework configured - validation is lint + build",
+  "build_command": "npm run lint && npm run build",
+  "test_command": "npm run lint && npm run build",
+  "verification_instructions": "1. Run npm run lint to check for linting errors. 2. Run npm run build to verify Next.js compiles successfully. 3. Confirm tools/trading-chef-studio/ is excluded from TypeScript/Next.js compilation.",
+  "snapshot_or_generated_files": null,
+  "setup_instructions": "cd /projects/sandbox/mystermyself && npm install (already done)",
+  "environment_constraints": "Network is repos-only (INTEGRATIONS_ONLY). Cannot npm install new packages. All repos are already cloned locally. Use github power for pushing.",
+  "contribution_requirements": "Branch naming: ops/NNN-description. Commits explain the change clearly. Do NOT modify existing routes or code.",
+  "key_patterns": "next.config.js uses module.exports CommonJS. tsconfig.json excludes node_modules only. ESLint extends next/core-web-vitals. Scripts live in scripts/ directory. Docs live in docs/ directory.",
+  "relevant_files": [
+    "next.config.js",
+    "tsconfig.json",
+    ".eslintrc.json",
+    "package.json"
+  ],
+  "directory_structure": "app/ - Next.js app router pages, components/ - React components, lib/ - utilities, docs/ - documentation, scripts/ - ops scripts, public/ - static assets, src/ - source code modules"
+}

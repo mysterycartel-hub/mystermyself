@@ -1,0 +1,26 @@
+{
+  "id": "FEAT-003",
+  "type": "docs",
+  "description": "Create docs/REPO-CONSOLIDATION-REPORT.md summarizing everything brought in, categorized by TOOLS, DOCS, PROMPTS, ARCHIVE. Then commit all changes with a clear message.",
+  "status": "completed",
+  "steps": [
+    "Create docs/REPO-CONSOLIDATION-REPORT.md with the following sections: (1) Header explaining the consolidation from 4 repos into 1, (2) TOOLS section listing Remotion video engine at tools/trading-chef-studio/ and Pine Script indicator at scripts/trading-chef/trading_chef_xauusd_v1.pine, (3) DOCS section listing CLAUDE.md brand rules, build bibles, asset manifests, visual reference maps, (4) PROMPTS section listing trading_chef_claude_prompt.md AI chart analysis prompt, MASTER_PROMPT.md, tcu-agent-rules.md, chatgpt-remotion-ecosystem-architect.md, (5) ARCHIVE section listing all legacy TCU terminal docs in docs/archive/tcu-terminal-legacy/ that are superseded by current mystermyself build, (6) Note that -tcu-market-kitchen-terminal was empty/dead and discarded",
+    "Stage all new files with git add",
+    "Commit with message: 'OPS/011: Consolidate org repos into monorepo (tcu-terminal docs + trading-chef-studio tools)'"
+  ],
+  "acceptance_criteria": [
+    "docs/REPO-CONSOLIDATION-REPORT.md exists and contains TOOLS, DOCS, PROMPTS, ARCHIVE sections",
+    "All files are committed on branch ops/011-repo-consolidation",
+    "Commit message is clear and descriptive",
+    "npm run lint and npm run build still pass after commit"
+  ],
+  "verification": [
+    "cat docs/REPO-CONSOLIDATION-REPORT.md confirms all 4 categories present",
+    "git log --oneline -1 shows the consolidation commit",
+    "git status shows clean working tree",
+    "npm run lint passes",
+    "npm run build passes"
+  ],
+  "blocked_reason": null,
+  "findings": "Created docs/REPO-CONSOLIDATION-REPORT.md with all 4 sections (TOOLS, DOCS, PROMPTS, ARCHIVE) plus Source Repos table. All 54 files from FEAT-001, FEAT-002, and FEAT-003 committed together. npm run lint and npm run build both pass (only pre-existing useCallback warnings in LessonTemplate.tsx). Commit: 7a89d9a."
+}

@@ -1,0 +1,437 @@
+// ================================================================
+//  THE TRADING CHEF — XAUUSD INSTITUTIONAL STRATEGY SCANNER
+//  Creator  : Maurice Scott  |  @mysterymyself
+//  Brand    : The Trading Chef
+//  Version  : 1.0
+//  Rule #1  : "Don't chase the candle. Wait for the recipe."
+// ================================================================
+//@version=5
+indicator("The Trading Chef | XAUUSD Scanner", 
+          overlay          = true, 
+          max_boxes_count  = 300, 
+          max_lines_count  = 300, 
+          max_labels_count = 300)
+
+// ──────────────────────────────────────────────────────────────
+//  INPUT GROUPS
+// ──────────────────────────────────────────────────────────────
+G_SESS = "🍳  Kitchen Sessions"
+G_FVG  = "📦  Leftover Containers (FVG)"
+G_MS   = "📊  Market Structure"
+G_LIQ  = "💧  Liquidity"
+G_SD   = "🏪  Supply & Demand"
+
+// Sessions
+show_asian  = input.bool(true, "Asian  | Prep Kitchen  (8 PM – 12 AM EST)", group = G_SESS)
+show_london = input.bool(true, "London | Sous Chef     (2 AM –  5 AM EST)", group = G_SESS)
+show_ny     = input.bool(true, "NY     | The Pass      (7 AM – 12 PM EST)", group = G_SESS)
+show_8am    = input.bool(true, "8 AM NY Open Signal",                       group = G_SESS)
+
+// FVG
+show_fvg  = input.bool(true, "Show Bullish / Bearish FVGs", group = G_FVG)
+show_ifvg = input.bool(true, "Show Inverted FVGs",          group = G_FVG)
+fvg_ext   = input.int(15,    "Extend FVG Boxes (bars)",     group = G_FVG, minval = 1, maxval = 50)
+
+// Market Structure
+show_ms = input.bool(true, "Show BOS / CHoCH Labels", group = G_MS)
+ms_len  = input.int(5,     "Swing Pivot Length",       group = G_MS, minval = 2, maxval = 20)
+
+// Liquidity
+show_liq = input.bool(true, "Show Liquidity Levels + Sweeps", group = G_LIQ)
+liq_len  = input.int(20,    "Sweep Lookback (bars)",           group = G_LIQ, minval = 5, maxval = 100)
+
+// Supply & Demand
+show_sd = input.bool(true, "Show Supply / Demand Zones", group = G_SD)
+sd_ext  = input.int(20,    "Extend Zone Boxes (bars)",   group = G_SD, minval = 1, maxval = 100)
+
+// ──────────────────────────────────────────────────────────────
+//  BRAND COLORS  (Black / Gold / Red / Green / Fire-Orange)
+// ──────────────────────────────────────────────────────────────
+C_GOLD      = color.new(#FFD700, 0)
+C_FIRE      = color.new(#FF6600, 0)
+C_GREEN     = color.new(color.green, 0)
+C_RED       = color.new(color.red,   0)
+C_PURPLE    = color.new(#9C27B0,  0)
+
+C_ASIAN_BG  = color.new(#1A237E, 92)
+C_LONDON_BG = color.new(#F57F17, 88)
+C_NY_BG     = color.new(#BF360C, 88)
+
+C_FVG_BULL  = color.new(color.green, 82)
+C_FVG_BEAR  = color.new(color.red,   82)
+C_IFVG_UP   = color.new(#FF6600,     82)
+C_IFVG_DN   = color.new(#9C27B0,     82)
+C_SUPPLY    = color.new(color.red,   78)
+C_DEMAND    = color.new(color.green, 78)
+C_LIQ_HIGH  = color.new(#FFD700,     0)
+C_LIQ_LOW   = color.new(#00E5FF,     0)
+
+// ──────────────────────────────────────────────────────────────
+//  SESSION DETECTION  (America/New_York timezone)
+// ──────────────────────────────────────────────────────────────
+// Raw session membership — resolved independently then gated by user toggle
+_asian_raw  = not na(time(timeframe.period, "2000-0000", "America/New_York"))
+_london_raw = not na(time(timeframe.period, "0200-0530", "America/New_York"))
+_ny_raw     = not na(time(timeframe.period, "0700-1200", "America/New_York"))
+
+in_asian    = _asian_raw  and show_asian
+in_london   = _london_raw and show_london
+in_ny       = _ny_raw     and show_ny
+
+// Session background — first match wins; overlaps favour NY priority
+bgcolor(in_ny     ? C_NY_BG     :
+        in_london ? C_LONDON_BG :
+        in_asian  ? C_ASIAN_BG  : na,
+        title = "Session Background")
+
+// 8 AM NY "Kitchen Opens" signal
+_ny_hour   = hour(time,   "America/New_York")
+_ny_minute = minute(time, "America/New_York")
+_weekday   = dayofweek != dayofweek.saturday and dayofweek != dayofweek.sunday
+is_8am     = show_8am and (_ny_hour == 8) and (_ny_minute == 0) and _weekday
+
+if is_8am
+    label.new(bar_index, low, "🍳 Kitchen\nOpens",
+              color = C_GOLD, textcolor = color.black,
+              style = label.style_label_up, size = size.small)
+
+// ──────────────────────────────────────────────────────────────
+//  FAIR VALUE GAPS — "Leftover Containers"
+//
+//  Bullish FVG : candle[2].high < candle[0].low   → gap above c2 high
+//  Bearish FVG : candle[2].low  > candle[0].high  → gap below c2 low
+//
+//  FIX: box.new() uses (left, TOP_price, right, BOTTOM_price)
+// ──────────────────────────────────────────────────────────────
+bull_fvg = show_fvg and (high[2] < low)   // upside gap
+bear_fvg = show_fvg and (low[2]  > high)  // downside gap
+
+// Track last zones for IFVG detection
+var float last_bfvg_top = na  // bull FVG: price top   = candle[0].low
+var float last_bfvg_bot = na  // bull FVG: price bot   = candle[2].high
+var float last_sfvg_top = na  // bear FVG: price top   = candle[2].low
+var float last_sfvg_bot = na  // bear FVG: price bot   = candle[0].high
+
+if bull_fvg
+    last_bfvg_top := low        // top of the gap  (upper boundary)
+    last_bfvg_bot := high[2]    // bottom of the gap (lower boundary)
+    // box.new(left, top, right, bottom, ...)
+    box.new(bar_index - 2, low, bar_index + fvg_ext, high[2],
+            bgcolor = C_FVG_BULL, border_color = C_GREEN, border_width = 1)
+    label.new(bar_index, low, "🥡 Bull FVG",
+              color = C_GREEN, textcolor = color.white,
+              style = label.style_label_up, size = size.tiny)
+
+if bear_fvg
+    last_sfvg_top := low[2]     // top of the gap  (upper boundary)
+    last_sfvg_bot := high       // bottom of the gap (lower boundary)
+    box.new(bar_index - 2, low[2], bar_index + fvg_ext, high,
+            bgcolor = C_FVG_BEAR, border_color = C_RED, border_width = 1)
+    label.new(bar_index, high, "🥡 Bear FVG",
+              color = C_RED, textcolor = color.white,
+              style = label.style_label_down, size = size.tiny)
+
+// ─── Inverted FVG ─────────────────────────────────────────────
+// Price re-enters a prior FVG zone → it now acts as opposing magnet
+// ifvg_bull : price dips back into a prior BEAR FVG → expect bullish reaction
+// ifvg_bear : price rallies back into a prior BULL FVG → expect bearish reaction
+
+ifvg_bull = show_ifvg and not na(last_sfvg_top) and not bear_fvg and
+            (low <= last_sfvg_top) and (high >= last_sfvg_bot)
+
+ifvg_bear = show_ifvg and not na(last_bfvg_top) and not bull_fvg and
+            (high >= last_bfvg_bot) and (low <= last_bfvg_top)
+
+if ifvg_bull
+    label.new(bar_index, low, "♻️ IFVG↑",
+              color = C_FIRE, textcolor = color.white,
+              style = label.style_label_up, size = size.tiny)
+
+if ifvg_bear
+    label.new(bar_index, high, "♻️ IFVG↓",
+              color = C_PURPLE, textcolor = color.white,
+              style = label.style_label_down, size = size.tiny)
+
+// ──────────────────────────────────────────────────────────────
+//  MARKET STRUCTURE — BOS & CHoCH
+//
+//  BOS   (Break of Structure)   : continuation — "New dish on menu"
+//  CHoCH (Change of Character)  : reversal     — "Menu is changing"
+//
+//  FIX: pivot bar index stored as (bar_index - ms_len) at detection time
+// ──────────────────────────────────────────────────────────────
+ph = ta.pivothigh(high, ms_len, ms_len)
+pl = ta.pivotlow(low,  ms_len, ms_len)
+
+var float last_ph     = na
+var int   last_ph_idx = na
+var float last_pl     = na
+var int   last_pl_idx = na
+var float prev_ph     = na
+var float prev_pl     = na
+
+if not na(ph)
+    prev_ph     := last_ph
+    last_ph     := ph
+    last_ph_idx := bar_index - ms_len   // correct: pivot occurred ms_len bars ago
+
+if not na(pl)
+    prev_pl     := last_pl
+    last_pl     := pl
+    last_pl_idx := bar_index - ms_len
+
+// Swing high / low labels at the actual pivot bar
+if show_ms and not na(ph)
+    label.new(bar_index - ms_len, ph, "SH",
+              color = color.new(C_RED, 20), textcolor = color.white,
+              style = label.style_label_down, size = size.tiny)
+
+if show_ms and not na(pl)
+    label.new(bar_index - ms_len, pl, "SL",
+              color = color.new(C_GREEN, 20), textcolor = color.white,
+              style = label.style_label_up, size = size.tiny)
+
+// BOS — close crosses last pivot in direction of current trend
+bull_bos = show_ms and not na(last_ph) and
+           (close > last_ph) and (close[1] <= last_ph)
+
+bear_bos = show_ms and not na(last_pl) and
+           (close < last_pl) and (close[1] >= last_pl)
+
+// CHoCH — break of prior pivot when structure was already shifting
+// Bull CHoCH : previous highs were declining (LH pattern), now price breaks above last LH
+// Bear CHoCH : previous lows were rising   (HL pattern), now price breaks below last HL
+bull_choch = show_ms and not na(prev_ph) and not na(last_ph) and
+             (last_ph < prev_ph) and (close > last_ph) and (close[1] <= last_ph)
+
+bear_choch = show_ms and not na(prev_pl) and not na(last_pl) and
+             (last_pl > prev_pl) and (close < last_pl) and (close[1] >= last_pl)
+
+// Draw BOS — dashed horizontal line from pivot to break bar
+if bull_bos and not bull_choch
+    line.new(last_ph_idx, last_ph, bar_index, last_ph,
+             color = C_GREEN, width = 2, style = line.style_dashed)
+    label.new(bar_index, last_ph, "BOS ✅",
+              color = C_GREEN, textcolor = color.white,
+              style = label.style_label_left, size = size.small)
+
+if bear_bos and not bear_choch
+    line.new(last_pl_idx, last_pl, bar_index, last_pl,
+             color = C_RED, width = 2, style = line.style_dashed)
+    label.new(bar_index, last_pl, "BOS ❌",
+              color = C_RED, textcolor = color.white,
+              style = label.style_label_left, size = size.small)
+
+// Draw CHoCH — solid line (stronger signal)
+if bull_choch
+    line.new(last_ph_idx, last_ph, bar_index, last_ph,
+             color = C_FIRE, width = 2, style = line.style_solid)
+    label.new(bar_index, last_ph, "CHoCH 🔄",
+              color = C_FIRE, textcolor = color.white,
+              style = label.style_label_left, size = size.small)
+
+if bear_choch
+    line.new(last_pl_idx, last_pl, bar_index, last_pl,
+             color = C_PURPLE, width = 2, style = line.style_solid)
+    label.new(bar_index, last_pl, "CHoCH 🔄",
+              color = C_PURPLE, textcolor = color.white,
+              style = label.style_label_left, size = size.small)
+
+// ──────────────────────────────────────────────────────────────
+//  LIQUIDITY — Buy Side / Sell Side + Sweep Detection
+//
+//  FIX: lines drawn only on new range extremes (not every bar)
+//       using prev-bar comparison to avoid duplicate draws
+// ──────────────────────────────────────────────────────────────
+rec_high = ta.highest(high, liq_len)
+rec_low  = ta.lowest(low,  liq_len)
+
+// New range extreme = today's bar is the extreme AND wasn't already the extreme last bar
+is_new_high = show_liq and (high == rec_high) and (high != rec_high[1])
+is_new_low  = show_liq and (low  == rec_low)  and (low  != rec_low[1])
+
+if is_new_high
+    line.new(bar_index - liq_len, rec_high, bar_index + 5, rec_high,
+             color = C_LIQ_HIGH, width = 1, style = line.style_dotted)
+    label.new(bar_index, rec_high, "💧 Buy Liq",
+              color = color.new(#FFD700, 10), textcolor = color.black,
+              style = label.style_label_left, size = size.tiny)
+
+if is_new_low
+    line.new(bar_index - liq_len, rec_low, bar_index + 5, rec_low,
+             color = C_LIQ_LOW, width = 1, style = line.style_dotted)
+    label.new(bar_index, rec_low, "💧 Sell Liq",
+              color = color.new(#00E5FF, 10), textcolor = color.black,
+              style = label.style_label_left, size = size.tiny)
+
+// Sweep: wick pierces prior extreme but CLOSES back through it
+bull_sweep = show_liq and (low < rec_low[1])  and (close > rec_low[1])
+bear_sweep = show_liq and (high > rec_high[1]) and (close < rec_high[1])
+
+if bull_sweep
+    label.new(bar_index, low, "🔱 Bull Sweep",
+              color = C_GREEN, textcolor = color.white,
+              style = label.style_label_up, size = size.small)
+
+if bear_sweep
+    label.new(bar_index, high, "🔱 Bear Sweep",
+              color = C_RED, textcolor = color.white,
+              style = label.style_label_down, size = size.small)
+
+// ──────────────────────────────────────────────────────────────
+//  SUPPLY & DEMAND ZONES — "Kitchen Inventory"
+//
+//  Logic: strong impulse candle (body ≥ 60 % of range) that
+//         follows a consolidation (prior bar range ≤ 0.6 × ATR14)
+//
+//  FIX: box.new uses (left, TOP, right, BOTTOM) — corrected for
+//       both demand (close > open) and supply (close < open)
+// ──────────────────────────────────────────────────────────────
+atr14       = ta.atr(14)
+body        = math.abs(close - open)
+bar_range   = high - low
+is_strong   = bar_range > 0 and (body / bar_range >= 0.6)
+consol_prev = (high[1] - low[1]) <= (atr14 * 0.6)
+
+demand_cond = show_sd and is_strong and (close > open) and consol_prev
+supply_cond = show_sd and is_strong and (close < open) and consol_prev
+
+if demand_cond
+    // Demand zone body: top = close, bottom = open (since close > open)
+    box.new(bar_index, close, bar_index + sd_ext, open,
+            bgcolor = C_DEMAND, border_color = C_GREEN, border_width = 1)
+
+if supply_cond
+    // Supply zone body: top = open, bottom = close (since open > close)
+    box.new(bar_index, open, bar_index + sd_ext, close,
+            bgcolor = C_SUPPLY, border_color = C_RED, border_width = 1)
+
+// ──────────────────────────────────────────────────────────────
+//  "DON'T CHASE THE CANDLE" — Overextension Warning
+//  Fires when candle body exceeds 1.5 × ATR14
+// ──────────────────────────────────────────────────────────────
+chasing_bull = (body > atr14 * 1.5) and (close > open)
+chasing_bear = (body > atr14 * 1.5) and (close < open)
+
+if chasing_bull
+    label.new(bar_index, high, "⚠️ Don't Chase!",
+              color = C_FIRE, textcolor = color.white,
+              style = label.style_label_down, size = size.tiny)
+
+if chasing_bear
+    label.new(bar_index, low, "⚠️ Don't Chase!",
+              color = C_FIRE, textcolor = color.white,
+              style = label.style_label_up, size = size.tiny)
+
+// ──────────────────────────────────────────────────────────────
+//  CHEF'S DASHBOARD TABLE  (top-right corner)
+// ──────────────────────────────────────────────────────────────
+var table dash = table.new(position.top_right, 2, 8,
+                            bgcolor       = color.new(color.black, 5),
+                            border_color  = C_GOLD,
+                            border_width  = 1,
+                            frame_color   = C_GOLD,
+                            frame_width   = 2)
+
+ema50      = ta.ema(close, 50)
+trend_bull = close > ema50
+
+sess_lbl = in_ny     ? "🔥 The Pass (NY)"      :
+           in_london ? "☕ Sous Chef (London)"  :
+           in_asian  ? "🌙 Prep Kitchen (Asian)": "⏳ Kitchen Closed"
+
+sess_col = in_ny     ? #BF360C :
+           in_london ? #F57F17 :
+           in_asian  ? #1A237E : color.gray
+
+// Row 0 — Header
+table.cell(dash, 0, 0, "THE TRADING CHEF",
+           bgcolor = color.black, text_color = C_GOLD, text_size = size.small)
+table.cell(dash, 1, 0, "XAUUSD Scanner",
+           bgcolor = color.black, text_color = C_GOLD, text_size = size.small)
+
+// Row 1 — Session
+table.cell(dash, 0, 1, "Session",
+           bgcolor = color.new(color.black, 30), text_color = color.white, text_size = size.tiny)
+table.cell(dash, 1, 1, sess_lbl,
+           bgcolor = color.new(sess_col, 40), text_color = color.white, text_size = size.tiny)
+
+// Row 2 — Bias
+table.cell(dash, 0, 2, "Bias",
+           bgcolor = color.new(color.black, 30), text_color = color.white, text_size = size.tiny)
+table.cell(dash, 1, 2, trend_bull ? "🐂 Bullish" : "🐻 Bearish",
+           bgcolor     = color.new(trend_bull ? color.green : color.red, 50),
+           text_color  = color.white, text_size = size.tiny)
+
+// Row 3 — FVG
+table.cell(dash, 0, 3, "FVG",
+           bgcolor = color.new(color.black, 30), text_color = color.white, text_size = size.tiny)
+table.cell(dash, 1, 3, bull_fvg ? "🥡 Bullish" : bear_fvg ? "🥡 Bearish" : "—",
+           bgcolor     = color.new(bull_fvg ? color.green : bear_fvg ? color.red : color.gray, 50),
+           text_color  = color.white, text_size = size.tiny)
+
+// Row 4 — Sweep
+table.cell(dash, 0, 4, "Sweep",
+           bgcolor = color.new(color.black, 30), text_color = color.white, text_size = size.tiny)
+table.cell(dash, 1, 4, bull_sweep ? "🔱 Bull" : bear_sweep ? "🔱 Bear" : "—",
+           bgcolor     = color.new(bull_sweep ? color.green : bear_sweep ? color.red : color.gray, 50),
+           text_color  = color.white, text_size = size.tiny)
+
+// Row 5 — BOS
+table.cell(dash, 0, 5, "BOS",
+           bgcolor = color.new(color.black, 30), text_color = color.white, text_size = size.tiny)
+table.cell(dash, 1, 5, bull_bos ? "✅ Bull" : bear_bos ? "❌ Bear" : "—",
+           bgcolor     = color.new(bull_bos ? color.green : bear_bos ? color.red : color.gray, 50),
+           text_color  = color.white, text_size = size.tiny)
+
+// Row 6 — CHoCH
+table.cell(dash, 0, 6, "CHoCH",
+           bgcolor = color.new(color.black, 30), text_color = color.white, text_size = size.tiny)
+table.cell(dash, 1, 6, bull_choch ? "🔄 Bull" : bear_choch ? "🔄 Bear" : "—",
+           bgcolor     = color.new(bull_choch ? color.green : bear_choch ? color.red : color.gray, 50),
+           text_color  = color.white, text_size = size.tiny)
+
+// Row 7 — Golden Rule
+table.cell(dash, 0, 7, "Chef's Rule",
+           bgcolor = color.black, text_color = C_GOLD, text_size = size.tiny)
+table.cell(dash, 1, 7, "Don't Chase the Candle",
+           bgcolor = color.black, text_color = C_FIRE, text_size = size.tiny)
+
+// ──────────────────────────────────────────────────────────────
+//  ALERT CONDITIONS
+// ──────────────────────────────────────────────────────────────
+alertcondition(bull_sweep,
+               title   = "🔱 Bull Liquidity Sweep",
+               message = "Trading Chef: Bull sweep — check for demand zone + FVG confluence entry")
+
+alertcondition(bear_sweep,
+               title   = "🔱 Bear Liquidity Sweep",
+               message = "Trading Chef: Bear sweep — check for supply zone + FVG confluence entry")
+
+alertcondition(bull_bos,
+               title   = "✅ Bullish BOS",
+               message = "Trading Chef: Bullish Break of Structure — the recipe is forming. Wait for pullback.")
+
+alertcondition(bear_bos,
+               title   = "❌ Bearish BOS",
+               message = "Trading Chef: Bearish Break of Structure — flip to the short menu.")
+
+alertcondition(bull_choch,
+               title   = "🔄 Bullish CHoCH",
+               message = "Trading Chef: Bullish Change of Character — menu is changing. Structure shifting up.")
+
+alertcondition(bear_choch,
+               title   = "🔄 Bearish CHoCH",
+               message = "Trading Chef: Bearish Change of Character — menu is changing. Structure shifting down.")
+
+alertcondition(bull_fvg,
+               title   = "🥡 Bull FVG Detected",
+               message = "Trading Chef: Bullish leftover container identified. Watch for price return.")
+
+alertcondition(bear_fvg,
+               title   = "🥡 Bear FVG Detected",
+               message = "Trading Chef: Bearish leftover container identified. Watch for price return.")
+
+alertcondition(is_8am,
+               title   = "🍳 Kitchen Opens — 8 AM NY",
+               message = "Trading Chef: Kitchen is open. NY session begins. Wait for the recipe. Don't chase the candle.")

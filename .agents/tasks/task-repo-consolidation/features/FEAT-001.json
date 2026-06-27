@@ -1,0 +1,29 @@
+{
+  "id": "FEAT-001",
+  "type": "chore",
+  "description": "Set up branch ops/011-repo-consolidation from main and copy all TCU terminal legacy docs into docs/archive/tcu-terminal-legacy/",
+  "status": "completed",
+  "steps": [
+    "Switch to main branch: git checkout main",
+    "Create and switch to new branch: git checkout -b ops/011-repo-consolidation",
+    "Create directory: docs/archive/tcu-terminal-legacy/",
+    "Copy all 12 files from /projects/sandbox/tcu-market-kitchen-terminal/docs/ into docs/archive/tcu-terminal-legacy/ (AGENT_BLOCKERS.md, KIRO_LOG.md, MASTER_PROMPT.md, ai-content-ecosystem-architecture.md, chatgpt-remotion-ecosystem-architect.md, master-inventory-notes.md, tcu-agent-rules.md, tcu-asset-manifest.md, tcu-character-canon.md, tcu-feature-priority.md, tcu-terminal-to-video-factory.md, tcu-visual-reference-map.md)",
+    "Copy /projects/sandbox/tcu-market-kitchen-terminal/_build-bibles/mystermyself-source-of-truth.md into docs/archive/tcu-terminal-legacy/_build-bibles/",
+    "Copy /projects/sandbox/tcu-market-kitchen-terminal/_build-bibles/tcu-terminal-master-build-bible.md into docs/archive/tcu-terminal-legacy/_build-bibles/",
+    "Copy /projects/sandbox/tcu-market-kitchen-terminal/scripts/validate-env.js into docs/archive/tcu-terminal-legacy/scripts/"
+  ],
+  "acceptance_criteria": [
+    "Branch ops/011-repo-consolidation exists and is checked out",
+    "All 12 doc files from tcu-market-kitchen-terminal/docs/ exist in docs/archive/tcu-terminal-legacy/",
+    "Both _build-bibles files exist in docs/archive/tcu-terminal-legacy/_build-bibles/",
+    "validate-env.js exists in docs/archive/tcu-terminal-legacy/scripts/"
+  ],
+  "verification": [
+    "git branch --show-current outputs ops/011-repo-consolidation",
+    "ls docs/archive/tcu-terminal-legacy/ shows all 12 doc files",
+    "ls docs/archive/tcu-terminal-legacy/_build-bibles/ shows 2 files",
+    "ls docs/archive/tcu-terminal-legacy/scripts/ shows validate-env.js"
+  ],
+  "blocked_reason": null,
+  "findings": "Branch created from main successfully. All 12 docs, 2 build-bibles, and validate-env.js copied. Files not yet staged or committed per orchestrator instructions."
+}
