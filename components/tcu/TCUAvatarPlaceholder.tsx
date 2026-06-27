@@ -202,7 +202,7 @@ export default function TCUAvatarPlaceholder({
               color: 'rgba(245,240,232,0.4)',
               letterSpacing: '0.05em',
             }}>
-              Art pending
+              Character art coming
             </span>
           )}
         </div>

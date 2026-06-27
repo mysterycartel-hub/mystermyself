@@ -108,6 +108,17 @@ const characters = [
     cta: 'Learn Market Rhythm',
     href: '/academy',
   },
+  {
+    name: 'Rico Rhythm',
+    emoji: '🎶',
+    role: 'Momentum Trader',
+    color: '#8B5CF6',
+    tagline: 'Feel the momentum. Ride the rhythm.',
+    bio: 'Rico Rhythm is the flow state master of Market Marina. When the market builds momentum, Rico is already positioned. He reads the tempo of price — knowing when to ride the wave and when to step off the floor. Momentum is the rhythm. Flow is the edge.',
+    lessons: ['Momentum needs confirmation', 'Flow state is repeatable', 'Exit before the beat drops', 'Ride it — don\'t chase it'],
+    cta: 'Learn Momentum',
+    href: '/academy',
+  },
 ]
 
 export default function CharacterSection() {
@@ -132,7 +143,7 @@ export default function CharacterSection() {
           <span style={{ color: 'var(--gold)' }}>TCU KITCHEN</span>
         </h2>
         <p style={{ fontSize: '0.82rem', color: 'rgba(245,240,232,0.5)', maxWidth: 500, lineHeight: 1.8 }}>
-          Nine characters. Each one represents a trading concept inside Trading Chef University.
+          Ten characters. One trading kitchen. Each one represents a trading concept inside Trading Chef University.
           Click to learn their lessons. These are the voices of Market Marina.
         </p>
       </motion.div>
@@ -285,7 +296,7 @@ export default function CharacterSection() {
           color: 'rgba(201,168,76,0.4)',
           marginBottom: 16,
         }}>
-          Trading Chef Universe · 9 Characters · Market Marina
+          Trading Chef Universe · 10 Characters · Market Marina
         </p>
         <Link href="/market-marina" style={{ textDecoration: 'none' }}>
           <div className="btn-secondary">
