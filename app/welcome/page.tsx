@@ -126,8 +126,8 @@ export default function WelcomePage() {
               letterSpacing: '0.03em',
               marginBottom: 20,
             }}>
-              Welcome to<br />
-              <span style={{ color: 'var(--gold)' }}>Scott-King Coast.</span>
+              You&apos;re in<br />
+              <span style={{ color: 'var(--gold)' }}>The Opportunity List.</span>
             </h1>
 
             <p style={{
@@ -137,7 +137,7 @@ export default function WelcomePage() {
               maxWidth: 520,
               margin: '0 auto',
             }}>
-              You&apos;re inside The Opportunity List. Choose your district so you can receive the right drops.
+              Your first opportunity drop is on the way. Check your email, then choose your lane so MysterMyself can send the right plays first.
             </p>
           </div>
 

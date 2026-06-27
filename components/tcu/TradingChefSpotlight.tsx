@@ -69,7 +69,7 @@ export default function TradingChefSpotlight() {
           >
             <div className="section-label" style={{ marginBottom: 20 }}>
               <div className="section-label-line" />
-              <span className="section-label-text">Market Marina · TCU</span>
+              <span className="section-label-text">Market Marina · Trading Chef University</span>
             </div>
 
             <h2 style={{
@@ -90,9 +90,8 @@ export default function TradingChefSpotlight() {
               marginBottom: 16,
               maxWidth: 440,
             }}>
-              Trading Chef University turns market education into a kitchen system.
-              Every concept has a recipe. Every setup follows the 8-step Road Map.
-              No guessing. No gambling. Just the framework.
+              Trading Chef University teaches market structure, liquidity, risk, and patience through a kitchen system.
+              Every setup has a recipe. Every trade must follow the road map.
             </p>
 
             <p style={{

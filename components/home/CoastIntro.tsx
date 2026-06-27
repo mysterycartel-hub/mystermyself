@@ -59,7 +59,7 @@ export default function CoastIntro() {
               lineHeight: 1.9,
               marginBottom: 20,
             }}>
-              Scott-King Coast is a world. Eight districts. Each one is a real income lane,
+              Scott-King Coast is a world. Nine districts. One system. Each district is a real income lane,
               a learning path, and a community. MysterMyself is the hub that connects them all.
             </p>
 
@@ -121,7 +121,7 @@ export default function CoastIntro() {
 
             {[
               { label: 'MysterMyself', desc: 'The hub. The brand. The entry point.', color: '#c9a84c' },
-              { label: 'Scott-King Coast', desc: 'The world. Eight districts. One ecosystem.', color: '#c9a84c' },
+              { label: 'Scott-King Coast', desc: 'Nine districts. One system.', color: '#c9a84c' },
               { label: 'Trading Chef / TCU', desc: 'Gold trading education. Market Marina district.', color: '#0D9488' },
               { label: 'Breaded Or Not?!', desc: 'Food business and catering. Flavor District.', color: '#F97316' },
               { label: 'Route Harbor', desc: 'Medical courier income. Logistics lanes.', color: '#0EA5E9' },

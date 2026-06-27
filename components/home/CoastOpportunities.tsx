@@ -10,6 +10,7 @@ const CURRENT = [
   { label: 'Free Content Hub — guides & resources', district: 'Library Vault', color: '#c9a84c', href: '/free-content' },
   { label: 'Trade Journal — log sessions', district: 'Market Marina', color: '#0D9488', href: '/journal' },
   { label: 'Coast Passport — collect stamps', district: 'All Districts', color: '#c9a84c', href: '/passport' },
+  { label: 'The Opportunity List — free newsletter', district: 'All Districts', color: '#c9a84c', href: '/opportunity-list' },
 ]
 
 const COMING_SOON = [
