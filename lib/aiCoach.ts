@@ -23,7 +23,7 @@ export interface TCUCoachAnalysis {
   journalSummary: string
 }
 
-// The 9 locked TCU characters
+// The 10 locked TCU characters
 const TCU_CHARACTERS = [
   'Trading Chef',
   'Candle Kid',
@@ -34,6 +34,7 @@ const TCU_CHARACTERS = [
   'Nana Value',
   'Melissa Mayhem',
   'Melody Mayhem',
+  'Rico Rhythm',
 ] as const
 
 // ── Main Export ───────────────────────────────────────────────────────────────
@@ -133,6 +134,7 @@ function generateCharacterLesson(character: string, symbol: string): string {
     'Nana Value': `Nana Value says: "Value is found in the discount zone, never at premium. On ${symbol}, look for price to retrace into demand before you take the pass."`,
     'Melissa Mayhem': `Melissa Mayhem says: "Sometimes the market goes wild! When ${symbol} moves fast, do not chase. Let the mayhem settle, then look for the leftover containers it leaves behind."`,
     'Melody Mayhem': `Melody Mayhem says: "The rhythm of the market has a beat. ${symbol} is playing its tune - listen for the crescendo at the liquidity zones, then ride the melody to your tables."`,
+    'Rico Rhythm': `Rico Rhythm says: "Feel the momentum on ${symbol}. When the flow is strong, you ride it. When the beat breaks, you step off. Momentum is the rhythm of price — respect it."`,
   }
 
   return lessons[character] ?? lessons['Trading Chef']
@@ -237,7 +239,7 @@ You analyze charts using TCU canon vocabulary ONLY:
 You must respond in JSON format with these exact fields:
 bias, liquidityMap, aoi, setupQuality, entryIdea, burnPoint, tablesServed, invalidation, riskNote, characterLesson, journalSummary
 
-Characters you may reference (pick ONE for the lesson): Trading Chef, Candle Kid, Wickie, Louie Liquidity, Chef Goldie, Grandma Market, Nana Value, Melissa Mayhem, Melody Mayhem.
+Characters you may reference (pick ONE for the lesson): Trading Chef, Candle Kid, Wickie, Louie Liquidity, Chef Goldie, Grandma Market, Nana Value, Melissa Mayhem, Melody Mayhem, Rico Rhythm.
 
 IMPORTANT: This is educational analysis only. Never predict price. Never give trade signals. Always include risk disclaimer.`
 }
