@@ -92,3 +92,5 @@
 - OPS/004A — Link and Social Cleanup
 - OPS/008B — Canon Correction (Rico Rhythm as 10th character)
 - **CEO-START v3.0 — Routing table rewrite, relay-merge contract installed**
+- OPS/010 — Site error fixes (district count, art, TCU canon, signup flow, welcome page)
+- OPS/011 — Repo consolidation (monorepo: TCU terminal docs + trading-chef-studio tools absorbed)

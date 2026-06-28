@@ -1,6 +1,6 @@
 # Funnel Audit Report
 
-**Date**: 2026-06-24T22:21:16.720Z
+**Date**: 2026-06-28T00:03:31.831Z
 **Pages Audited**: 16
 **Clean**: 9 | **Flagged**: 7
 
