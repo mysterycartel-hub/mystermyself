@@ -1,3 +1,10 @@
+---
+name: CEO-START
+description: CEO workflow routing, system diagnostics, and session initialization
+trigger: start | go | brief me | CEO brief | audit the system | check the builds | what's live
+version: "3.0"
+---
+
 # MYSTERYCARTEL CEO SYSTEM — v3.0
 
 ## Metadata
