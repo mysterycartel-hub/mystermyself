@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Auto PR After Tasks",
+  "description": "After a spec task finishes execution, check if all tasks on the current branch are complete. If so, run build, commit, push, and create a GitHub PR automatically. Reports the PR URL to CEO for merge approval.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Check if all spec tasks are now completed. If yes: 1) Run `npm run build` to confirm no errors. 2) Stage and commit any uncommitted changes with prefix format (e.g., \"content:\", \"ops:\"). 3) Push the branch with `git push -u origin HEAD`. 4) Refresh PATH and run `gh pr create --base main --fill` to open the PR. 5) Report the PR URL. If gh auth fails, write the one-click URL to `docs/outbox/`. Never merge — only create the PR. If tasks remain incomplete, do nothing."
+  }
+}
