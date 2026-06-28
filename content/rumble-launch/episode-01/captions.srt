@@ -1,0 +1,1470 @@
+1
+00:00:00,000 --> 00:00:00,000
+Yo. I'm going to tell you
+something that cost me weeks.
+
+2
+00:00:00,000 --> 00:00:00,000
+Real weeks.
+
+3
+00:00:00,000 --> 00:00:00,000
+Not "I lost a couple hours" weeks.
+
+4
+00:00:00,000 --> 00:00:00,000
+I mean full rebuilds.
+
+5
+00:00:00,000 --> 00:00:00,000
+Started-over-from-scratch weeks.
+
+6
+00:00:00,000 --> 00:00:00,000
+And nobody warned me
+it was coming.
+
+7
+00:00:00,000 --> 00:00:00,000
+I run five businesses
+out of West Palm Beach.
+
+8
+00:00:00,000 --> 00:00:00,000
+A restaurant.
+
+9
+00:00:00,000 --> 00:00:00,000
+A courier company.
+
+10
+00:00:00,000 --> 00:00:00,000
+A trading education brand.
+
+11
+00:00:00,000 --> 00:00:00,000
+A content funnel engine.
+
+12
+00:00:00,000 --> 00:00:00,000
+And the legal structure
+holding it all together.
+
+13
+00:00:00,000 --> 00:00:00,000
+All under one roof
+called MysterMyself.
+
+14
+00:00:00,000 --> 00:00:00,000
+Scott-King Coast. One ecosystem.
+
+15
+00:00:00,000 --> 00:00:00,000
+And I decided to let AI run
+the day-to-day operations.
+
+16
+00:00:00,000 --> 00:00:00,000
+Not just one AI.
+A whole team of them.
+
+17
+00:00:00,000 --> 00:00:00,000
+Claude for strategy.
+Kiro for code.
+
+18
+00:00:00,000 --> 00:00:00,000
+Cowork for desktop automation.
+The whole stack working together.
+
+19
+00:00:00,000 --> 00:00:00,000
+Sounds futuristic right? It is.
+
+20
+00:00:00,000 --> 00:00:00,000
+Until you hit the wall.
+
+21
+00:00:00,000 --> 00:00:00,000
+Here's the thing nobody
+warns you about.
+
+22
+00:00:00,000 --> 00:00:00,000
+These AI agents?
+They don't remember anything.
+
+23
+00:00:00,000 --> 00:00:00,000
+Nothing. Zero.
+
+24
+00:00:00,000 --> 00:00:00,000
+You have a two hour session.
+
+25
+00:00:00,000 --> 00:00:00,000
+You build something incredible.
+
+26
+00:00:00,000 --> 00:00:00,000
+You map out your whole system.
+
+27
+00:00:00,000 --> 00:00:00,000
+You explain your brand.
+Your characters. Your colors.
+
+28
+00:00:00,000 --> 00:00:00,000
+Your rules. You go deep.
+
+29
+00:00:00,000 --> 00:00:00,000
+You explain that Trading Chef
+is the avatar.
+
+30
+00:00:00,000 --> 00:00:00,000
+You explain the six districts.
+
+31
+00:00:00,000 --> 00:00:00,000
+You explain the ten characters.
+
+32
+00:00:00,000 --> 00:00:00,000
+Everything is perfect.
+The agent understands.
+
+33
+00:00:00,000 --> 00:00:00,000
+You're cooking.
+
+34
+00:00:00,000 --> 00:00:00,000
+Then you close that window.
+
+35
+00:00:00,000 --> 00:00:00,000
+And it's gone. All of it. Erased.
+
+36
+00:00:00,000 --> 00:00:00,000
+Next session? That agent has
+no idea who you are.
+
+37
+00:00:00,000 --> 00:00:00,000
+No idea what you built yesterday.
+
+38
+00:00:00,000 --> 00:00:00,000
+No idea that your brand color
+is Gold, not yellow.
+
+39
+00:00:00,000 --> 00:00:00,000
+No idea that your handle
+is @mysterycartel.
+
+40
+00:00:00,000 --> 00:00:00,000
+No idea that you have ten locked
+characters that cannot be changed.
+
+41
+00:00:00,000 --> 00:00:00,000
+No idea that you already built
+half the website.
+
+42
+00:00:00,000 --> 00:00:00,000
+It just starts fresh.
+Every single time.
+
+43
+00:00:00,000 --> 00:00:00,000
+Like you never met.
+
+44
+00:00:00,000 --> 00:00:00,000
+I'm not exaggerating.
+
+45
+00:00:00,000 --> 00:00:00,000
+I lost entire product builds
+because an agent invented
+
+46
+00:00:00,000 --> 00:00:00,000
+new characters that don't exist
+in my world.
+
+47
+00:00:00,000 --> 00:00:00,000
+It changed my color palette
+without asking.
+
+48
+00:00:00,000 --> 00:00:00,000
+Called my brand the wrong name.
+
+49
+00:00:00,000 --> 00:00:00,000
+Made up features I never approved.
+
+50
+00:00:00,000 --> 00:00:00,000
+Added a seventh district
+when I only have six.
+
+51
+00:00:00,000 --> 00:00:00,000
+Created an eleventh character
+when I only have ten.
+
+52
+00:00:00,000 --> 00:00:00,000
+And the worst part?
+
+53
+00:00:00,000 --> 00:00:00,000
+I didn't catch it until
+three sessions later.
+
+54
+00:00:00,000 --> 00:00:00,000
+By then everything
+was tangled up.
+
+55
+00:00:00,000 --> 00:00:00,000
+I had code referencing things
+that shouldn't exist.
+
+56
+00:00:00,000 --> 00:00:00,000
+Pages built for characters
+nobody created.
+
+57
+00:00:00,000 --> 00:00:00,000
+The whole thing was a mess.
+
+58
+00:00:00,000 --> 00:00:00,000
+That's the problem.
+AI has amnesia.
+
+59
+00:00:00,000 --> 00:00:00,000
+And if you're building anything
+serious with it,
+
+60
+00:00:00,000 --> 00:00:00,000
+anything with a brand,
+characters, rules, a world...
+
+61
+00:00:00,000 --> 00:00:00,000
+that amnesia will destroy
+your work quietly.
+
+62
+00:00:00,000 --> 00:00:00,000
+You won't even notice
+until it's too late.
+
+63
+00:00:00,000 --> 00:00:00,000
+So I fixed it.
+
+64
+00:00:00,000 --> 00:00:00,000
+I built my own system
+from scratch.
+
+65
+00:00:00,000 --> 00:00:00,000
+Three pieces that work together.
+
+66
+00:00:00,000 --> 00:00:00,000
+And it changed everything
+about how I use AI.
+
+67
+00:00:00,000 --> 00:00:00,000
+That's what this series is about.
+
+68
+00:00:00,000 --> 00:00:00,000
+I'm calling it
+The Claude Chronicles.
+
+69
+00:00:00,000 --> 00:00:00,000
+Let's get into it.
+
+70
+00:00:00,000 --> 00:00:00,000
+First thing I built was what I
+call canon anchors.
+
+71
+00:00:00,000 --> 00:00:00,000
+This is the foundation.
+
+72
+00:00:00,000 --> 00:00:00,000
+Without this, nothing else works.
+
+73
+00:00:00,000 --> 00:00:00,000
+Think about it like this.
+
+74
+00:00:00,000 --> 00:00:00,000
+You're building a world.
+Not just a product. A world.
+
+75
+00:00:00,000 --> 00:00:00,000
+I'm building Scott-King Coast.
+
+76
+00:00:00,000 --> 00:00:00,000
+It has six districts.
+
+77
+00:00:00,000 --> 00:00:00,000
+Route Harbor
+for courier operations.
+
+78
+00:00:00,000 --> 00:00:00,000
+Market Marina
+for trading education.
+
+79
+00:00:00,000 --> 00:00:00,000
+Flavor District for food.
+
+80
+00:00:00,000 --> 00:00:00,000
+Blueprint Bay for legal.
+
+81
+00:00:00,000 --> 00:00:00,000
+Creator Pier for content.
+
+82
+00:00:00,000 --> 00:00:00,000
+Legacy Point
+for intellectual property.
+
+83
+00:00:00,000 --> 00:00:00,000
+Six districts. Each one locked.
+
+84
+00:00:00,000 --> 00:00:00,000
+It has characters. Trading Chef.
+
+85
+00:00:00,000 --> 00:00:00,000
+That's my avatar.
+
+86
+00:00:00,000 --> 00:00:00,000
+Black male, chef hat, apron,
+gold chain, glasses.
+
+87
+00:00:00,000 --> 00:00:00,000
+Confident. Urban cartoon style.
+
+88
+00:00:00,000 --> 00:00:00,000
+Then there's Candle Kid. Wickie.
+
+89
+00:00:00,000 --> 00:00:00,000
+Louie Liquidity. Chef Goldie.
+
+90
+00:00:00,000 --> 00:00:00,000
+Grandma Market. Nana Value.
+
+91
+00:00:00,000 --> 00:00:00,000
+Melissa Mayhem. Melody Mayhem.
+
+92
+00:00:00,000 --> 00:00:00,000
+Rico Rhythm. Ten characters total.
+
+93
+00:00:00,000 --> 00:00:00,000
+Each one locked. No agent
+can invent an eleventh.
+
+94
+00:00:00,000 --> 00:00:00,000
+It has colors.
+Black. Gold. Red. Green.
+
+95
+00:00:00,000 --> 00:00:00,000
+Fire Orange. That's the palette.
+
+96
+00:00:00,000 --> 00:00:00,000
+Locked.
+
+97
+00:00:00,000 --> 00:00:00,000
+No agent can decide "hey let's
+add some blue in there." No.
+
+98
+00:00:00,000 --> 00:00:00,000
+It has rules.
+
+99
+00:00:00,000 --> 00:00:00,000
+The handle is always
+@mysterycartel.
+
+100
+00:00:00,000 --> 00:00:00,000
+The avatar always has the chef
+hat, the apron, the gold chain.
+
+101
+00:00:00,000 --> 00:00:00,000
+Always urban cartoon style.
+
+102
+00:00:00,000 --> 00:00:00,000
+The brand name is always
+MysterMyself.
+
+103
+00:00:00,000 --> 00:00:00,000
+No abbreviations.
+No alternate spellings.
+
+104
+00:00:00,000 --> 00:00:00,000
+No nicknames.
+
+105
+00:00:00,000 --> 00:00:00,000
+None of that can change without
+my explicit approval. Period.
+
+106
+00:00:00,000 --> 00:00:00,000
+So what did I do?
+
+107
+00:00:00,000 --> 00:00:00,000
+I wrote it all down in one file.
+
+108
+00:00:00,000 --> 00:00:00,000
+A canon document.
+One source of truth.
+
+109
+00:00:00,000 --> 00:00:00,000
+And I told every single agent
+in my system:
+
+110
+00:00:00,000 --> 00:00:00,000
+before you do anything,
+
+111
+00:00:00,000 --> 00:00:00,000
+before you write one line
+of code,
+
+112
+00:00:00,000 --> 00:00:00,000
+before you draft one piece
+of content, read this file first.
+
+113
+00:00:00,000 --> 00:00:00,000
+If what you're about to create
+contradicts this file
+
+114
+00:00:00,000 --> 00:00:00,000
+in any way, stop. Don't do it.
+
+115
+00:00:00,000 --> 00:00:00,000
+That's a canon anchor.
+
+116
+00:00:00,000 --> 00:00:00,000
+It's a fixed point in space
+that cannot drift.
+
+117
+00:00:00,000 --> 00:00:00,000
+No matter how creative
+the AI wants to get,
+
+118
+00:00:00,000 --> 00:00:00,000
+it has boundaries. It has laws.
+
+119
+00:00:00,000 --> 00:00:00,000
+Before I had this? Chaos.
+
+120
+00:00:00,000 --> 00:00:00,000
+Agents would invent characters
+I never created.
+
+121
+00:00:00,000 --> 00:00:00,000
+They'd add districts
+that don't exist.
+
+122
+00:00:00,000 --> 00:00:00,000
+They'd change my slogan.
+
+123
+00:00:00,000 --> 00:00:00,000
+They'd use the wrong handle.
+
+124
+00:00:00,000 --> 00:00:00,000
+They'd describe my avatar
+without the gold chain.
+
+125
+00:00:00,000 --> 00:00:00,000
+Small things. Tiny details.
+
+126
+00:00:00,000 --> 00:00:00,000
+But they compound into a mess
+that takes days to untangle.
+
+127
+00:00:00,000 --> 00:00:00,000
+Now? The canon is law.
+
+128
+00:00:00,000 --> 00:00:00,000
+The agents read it at the start
+of every session.
+
+129
+00:00:00,000 --> 00:00:00,000
+They cannot drift because
+the anchor holds them in place.
+
+130
+00:00:00,000 --> 00:00:00,000
+Like a ship tied to a dock.
+
+131
+00:00:00,000 --> 00:00:00,000
+The water moves. The ship stays.
+
+132
+00:00:00,000 --> 00:00:00,000
+Simple concept.
+Not complicated to implement.
+
+133
+00:00:00,000 --> 00:00:00,000
+But it changed everything about
+the quality of what my agents
+
+134
+00:00:00,000 --> 00:00:00,000
+produce.
+
+135
+00:00:00,000 --> 00:00:00,000
+Canon anchors solve
+the "what is true" problem.
+
+136
+00:00:00,000 --> 00:00:00,000
+But there's a second problem
+that's just as bad.
+
+137
+00:00:00,000 --> 00:00:00,000
+The "where were we" problem.
+
+138
+00:00:00,000 --> 00:00:00,000
+Let me paint the picture.
+
+139
+00:00:00,000 --> 00:00:00,000
+Monday I'm working with Kiro
+on the website.
+
+140
+00:00:00,000 --> 00:00:00,000
+We fix three bugs
+on the homepage.
+
+141
+00:00:00,000 --> 00:00:00,000
+We update the navigation to
+include all six districts.
+
+142
+00:00:00,000 --> 00:00:00,000
+We start building a new page
+for the Trading Chef
+
+143
+00:00:00,000 --> 00:00:00,000
+tutorial system
+but don't finish it.
+
+144
+00:00:00,000 --> 00:00:00,000
+Good session. Productive.
+We made progress.
+
+145
+00:00:00,000 --> 00:00:00,000
+Tuesday I come back.
+Open a new session.
+
+146
+00:00:00,000 --> 00:00:00,000
+The agent doesn't know
+any of that happened.
+
+147
+00:00:00,000 --> 00:00:00,000
+It doesn't know
+what bugs we fixed.
+
+148
+00:00:00,000 --> 00:00:00,000
+Doesn't know
+the navigation changed.
+
+149
+00:00:00,000 --> 00:00:00,000
+Doesn't know there's a
+half-built page sitting
+
+150
+00:00:00,000 --> 00:00:00,000
+in the codebase.
+
+151
+00:00:00,000 --> 00:00:00,000
+As far as it knows,
+nothing happened yesterday.
+
+152
+00:00:00,000 --> 00:00:00,000
+So what does it do? It guesses.
+
+153
+00:00:00,000 --> 00:00:00,000
+It looks at the code and tries
+to figure out the current state.
+
+154
+00:00:00,000 --> 00:00:00,000
+Or worse, it starts suggesting
+things we already tried.
+
+155
+00:00:00,000 --> 00:00:00,000
+It re-introduces bugs
+we already fixed.
+
+156
+00:00:00,000 --> 00:00:00,000
+It suggests building a page
+that already half-exists.
+
+157
+00:00:00,000 --> 00:00:00,000
+It proposes changes to code
+that already changed.
+
+158
+00:00:00,000 --> 00:00:00,000
+You end up going backwards.
+
+159
+00:00:00,000 --> 00:00:00,000
+Undoing progress.
+Fighting your own system.
+
+160
+00:00:00,000 --> 00:00:00,000
+Session state management
+solves this.
+
+161
+00:00:00,000 --> 00:00:00,000
+And it's simpler than you think.
+
+162
+00:00:00,000 --> 00:00:00,000
+Here's how I do it.
+
+163
+00:00:00,000 --> 00:00:00,000
+At the end of every working
+session, the agent writes
+
+164
+00:00:00,000 --> 00:00:00,000
+a memory block. Plain English.
+
+165
+00:00:00,000 --> 00:00:00,000
+What was built. What was changed.
+
+166
+00:00:00,000 --> 00:00:00,000
+What files were modified.
+
+167
+00:00:00,000 --> 00:00:00,000
+What's still pending.
+
+168
+00:00:00,000 --> 00:00:00,000
+What was approved by me.
+What was rejected by me.
+
+169
+00:00:00,000 --> 00:00:00,000
+What needs to happen next.
+
+170
+00:00:00,000 --> 00:00:00,000
+It's like shift notes
+at a restaurant.
+
+171
+00:00:00,000 --> 00:00:00,000
+The dinner crew writes down
+what happened during their shift
+
+172
+00:00:00,000 --> 00:00:00,000
+so the morning crew
+knows what's up.
+
+173
+00:00:00,000 --> 00:00:00,000
+No surprises. No repeated work.
+
+174
+00:00:00,000 --> 00:00:00,000
+Next session starts?
+
+175
+00:00:00,000 --> 00:00:00,000
+First thing the agent does
+is read those memory blocks.
+
+176
+00:00:00,000 --> 00:00:00,000
+The latest entries.
+
+177
+00:00:00,000 --> 00:00:00,000
+It knows exactly
+where we left off.
+
+178
+00:00:00,000 --> 00:00:00,000
+What we accomplished.
+What's still open.
+
+179
+00:00:00,000 --> 00:00:00,000
+No guessing. No repeating work.
+
+180
+00:00:00,000 --> 00:00:00,000
+No re-introducing bugs
+we already squashed.
+
+181
+00:00:00,000 --> 00:00:00,000
+I keep these in a file
+called MEMORY-BLOCKS.
+
+182
+00:00:00,000 --> 00:00:00,000
+It's a running log
+in the docs folder.
+
+183
+00:00:00,000 --> 00:00:00,000
+Every session adds to it.
+
+184
+00:00:00,000 --> 00:00:00,000
+The agent reads the latest
+entries and picks up
+
+185
+00:00:00,000 --> 00:00:00,000
+like we never stopped talking.
+
+186
+00:00:00,000 --> 00:00:00,000
+Like a real person
+coming back from lunch.
+
+187
+00:00:00,000 --> 00:00:00,000
+They don't forget the entire
+morning just because
+
+188
+00:00:00,000 --> 00:00:00,000
+they ate a sandwich.
+
+189
+00:00:00,000 --> 00:00:00,000
+It's not complicated technology.
+
+190
+00:00:00,000 --> 00:00:00,000
+It's just discipline baked
+into the system.
+
+191
+00:00:00,000 --> 00:00:00,000
+The system writes its own
+context at the end.
+
+192
+00:00:00,000 --> 00:00:00,000
+The system reads its own
+context at the start.
+
+193
+00:00:00,000 --> 00:00:00,000
+The human, that's me,
+
+194
+00:00:00,000 --> 00:00:00,000
+doesn't have to repeat
+themselves every single session.
+
+195
+00:00:00,000 --> 00:00:00,000
+I don't have to
+re-explain my brand.
+
+196
+00:00:00,000 --> 00:00:00,000
+I don't have to re-explain
+what we built yesterday.
+
+197
+00:00:00,000 --> 00:00:00,000
+The system already knows.
+
+198
+00:00:00,000 --> 00:00:00,000
+That's session state management.
+
+199
+00:00:00,000 --> 00:00:00,000
+Your AI picks up where
+it left off. Every time.
+
+200
+00:00:00,000 --> 00:00:00,000
+Automatically.
+
+201
+00:00:00,000 --> 00:00:00,000
+Here's where it gets
+really interesting.
+
+202
+00:00:00,000 --> 00:00:00,000
+I don't use one agent.
+I use four. Working together.
+
+203
+00:00:00,000 --> 00:00:00,000
+Like a team.
+
+204
+00:00:00,000 --> 00:00:00,000
+Claude handles strategy.
+
+205
+00:00:00,000 --> 00:00:00,000
+Big picture thinking. Writing.
+Planning.
+
+206
+00:00:00,000 --> 00:00:00,000
+Architecture decisions.
+
+207
+00:00:00,000 --> 00:00:00,000
+When I need to think through
+a problem or plan a new feature,
+
+208
+00:00:00,000 --> 00:00:00,000
+that's Claude.
+
+209
+00:00:00,000 --> 00:00:00,000
+Kiro handles code.
+
+210
+00:00:00,000 --> 00:00:00,000
+Building features.
+Git operations. Pull requests.
+
+211
+00:00:00,000 --> 00:00:00,000
+Pushing to production.
+
+212
+00:00:00,000 --> 00:00:00,000
+When something needs to get
+built and deployed, that's Kiro.
+
+213
+00:00:00,000 --> 00:00:00,000
+Cowork handles my desktop.
+
+214
+00:00:00,000 --> 00:00:00,000
+Moving files between folders.
+Opening applications.
+
+215
+00:00:00,000 --> 00:00:00,000
+Local file management.
+
+216
+00:00:00,000 --> 00:00:00,000
+Anything that requires touching
+my actual computer,
+
+217
+00:00:00,000 --> 00:00:00,000
+that's Cowork.
+
+218
+00:00:00,000 --> 00:00:00,000
+GitHub is the source of truth.
+The repo.
+
+219
+00:00:00,000 --> 00:00:00,000
+Everything lives there.
+
+220
+00:00:00,000 --> 00:00:00,000
+If it's not in the repo,
+it doesn't exist.
+
+221
+00:00:00,000 --> 00:00:00,000
+Four agents. One system.
+
+222
+00:00:00,000 --> 00:00:00,000
+And they have to talk to each
+other without me
+
+223
+00:00:00,000 --> 00:00:00,000
+playing telephone.
+
+224
+00:00:00,000 --> 00:00:00,000
+That's relay agent architecture.
+
+225
+00:00:00,000 --> 00:00:00,000
+It works exactly
+like a relay race.
+
+226
+00:00:00,000 --> 00:00:00,000
+One runner does their leg
+of the track.
+
+227
+00:00:00,000 --> 00:00:00,000
+Then they pass the baton
+to the next runner.
+
+228
+00:00:00,000 --> 00:00:00,000
+Clean handoff. Full speed.
+
+229
+00:00:00,000 --> 00:00:00,000
+No dropped context.
+No fumbled baton.
+
+230
+00:00:00,000 --> 00:00:00,000
+Here's how a real task flows
+through my system.
+
+231
+00:00:00,000 --> 00:00:00,000
+I tell Claude what I want.
+
+232
+00:00:00,000 --> 00:00:00,000
+"Build me a thumbnail system
+for the YouTube channel."
+
+233
+00:00:00,000 --> 00:00:00,000
+Claude thinks about it.
+Writes the strategy.
+
+234
+00:00:00,000 --> 00:00:00,000
+Figures out the file structure.
+
+235
+00:00:00,000 --> 00:00:00,000
+Defines the acceptance criteria.
+
+236
+00:00:00,000 --> 00:00:00,000
+Then Claude drops a relay task
+into an inbox folder
+
+237
+00:00:00,000 --> 00:00:00,000
+on my desktop.
+
+238
+00:00:00,000 --> 00:00:00,000
+Kiro picks up that relay task.
+Reads it.
+
+239
+00:00:00,000 --> 00:00:00,000
+Has everything it needs.
+
+240
+00:00:00,000 --> 00:00:00,000
+The what. The why.
+The constraints.
+
+241
+00:00:00,000 --> 00:00:00,000
+The exact files to create.
+
+242
+00:00:00,000 --> 00:00:00,000
+Kiro executes. Writes the code.
+
+243
+00:00:00,000 --> 00:00:00,000
+Pushes it to a branch.
+Creates a pull request.
+
+244
+00:00:00,000 --> 00:00:00,000
+Reports back.
+
+245
+00:00:00,000 --> 00:00:00,000
+I never touch the terminal.
+
+246
+00:00:00,000 --> 00:00:00,000
+Never type a git command.
+
+247
+00:00:00,000 --> 00:00:00,000
+Never open VS Code.
+Never install a package.
+
+248
+00:00:00,000 --> 00:00:00,000
+I just say what I want
+in plain English
+
+249
+00:00:00,000 --> 00:00:00,000
+and the relay handles the rest.
+
+250
+00:00:00,000 --> 00:00:00,000
+But here's the key
+that makes it work.
+
+251
+00:00:00,000 --> 00:00:00,000
+Each agent knows its role
+and only its role.
+
+252
+00:00:00,000 --> 00:00:00,000
+Claude doesn't try
+to write code.
+
+253
+00:00:00,000 --> 00:00:00,000
+Kiro doesn't try to do strategy.
+
+254
+00:00:00,000 --> 00:00:00,000
+Cowork doesn't try
+to push to GitHub.
+
+255
+00:00:00,000 --> 00:00:00,000
+They stay in their lane.
+No overlap. No confusion.
+
+256
+00:00:00,000 --> 00:00:00,000
+And the handoff document?
+
+257
+00:00:00,000 --> 00:00:00,000
+That relay task? That's the baton.
+
+258
+00:00:00,000 --> 00:00:00,000
+It contains everything the next
+agent needs to execute
+
+259
+00:00:00,000 --> 00:00:00,000
+without asking questions.
+
+260
+00:00:00,000 --> 00:00:00,000
+The full context.
+The instructions.
+
+261
+00:00:00,000 --> 00:00:00,000
+The constraints. The brand rules.
+
+262
+00:00:00,000 --> 00:00:00,000
+The acceptance criteria.
+Everything pre-loaded.
+
+263
+00:00:00,000 --> 00:00:00,000
+No ambiguity. No re-explaining.
+
+264
+00:00:00,000 --> 00:00:00,000
+No "hey can you remind me
+what we're doing?"
+
+265
+00:00:00,000 --> 00:00:00,000
+The baton carries the truth.
+
+266
+00:00:00,000 --> 00:00:00,000
+That's what makes this
+work at scale.
+
+267
+00:00:00,000 --> 00:00:00,000
+Five businesses. Four agents.
+One system. Zero confusion.
+
+268
+00:00:00,000 --> 00:00:00,000
+I wake up and my agents already
+know what to do
+
+269
+00:00:00,000 --> 00:00:00,000
+because the system tells them.
+
+270
+00:00:00,000 --> 00:00:00,000
+Look. I'm not a developer.
+
+271
+00:00:00,000 --> 00:00:00,000
+I don't have a computer
+science degree.
+
+272
+00:00:00,000 --> 00:00:00,000
+I'm a CEO from West Palm Beach
+
+273
+00:00:00,000 --> 00:00:00,000
+running a restaurant,
+a courier company,
+
+274
+00:00:00,000 --> 00:00:00,000
+a trading brand, a content
+engine, and the legal
+
+275
+00:00:00,000 --> 00:00:00,000
+holding company that ties
+it all together.
+
+276
+00:00:00,000 --> 00:00:00,000
+I'm not sitting here writing
+Python or debugging JavaScript.
+
+277
+00:00:00,000 --> 00:00:00,000
+But I needed a system where
+I could say what I want
+
+278
+00:00:00,000 --> 00:00:00,000
+and it gets built.
+
+279
+00:00:00,000 --> 00:00:00,000
+Correctly. Every time.
+
+280
+00:00:00,000 --> 00:00:00,000
+Without me babysitting it.
+
+281
+00:00:00,000 --> 00:00:00,000
+Without me repeating myself
+every session.
+
+282
+00:00:00,000 --> 00:00:00,000
+Without my brand drifting
+off course.
+
+283
+00:00:00,000 --> 00:00:00,000
+Three pieces.
+That's the whole system.
+
+284
+00:00:00,000 --> 00:00:00,000
+Canon anchors make sure the AI
+never forgets what's true.
+
+285
+00:00:00,000 --> 00:00:00,000
+The characters. The districts.
+The colors. The rules. Locked.
+
+286
+00:00:00,000 --> 00:00:00,000
+Session state makes sure the AI
+never forgets what happened.
+
+287
+00:00:00,000 --> 00:00:00,000
+What we built yesterday.
+What's pending.
+
+288
+00:00:00,000 --> 00:00:00,000
+What's approved. Continuous.
+
+289
+00:00:00,000 --> 00:00:00,000
+Relay architecture makes sure
+multiple agents work together
+
+290
+00:00:00,000 --> 00:00:00,000
+without stepping on each other.
+
+291
+00:00:00,000 --> 00:00:00,000
+Clean handoffs. Clear roles.
+No confusion.
+
+292
+00:00:00,000 --> 00:00:00,000
+That's it. That's the system.
+
+293
+00:00:00,000 --> 00:00:00,000
+And it runs every single day
+across all five of my businesses
+
+294
+00:00:00,000 --> 00:00:00,000
+without me touching a terminal
+
+295
+00:00:00,000 --> 00:00:00,000
+or writing a single line of code.
+
+296
+00:00:00,000 --> 00:00:00,000
+If you're building with AI
+right now
+
+297
+00:00:00,000 --> 00:00:00,000
+and you're frustrated because
+it keeps forgetting things,
+
+298
+00:00:00,000 --> 00:00:00,000
+keeps contradicting itself,
+
+299
+00:00:00,000 --> 00:00:00,000
+keeps making you repeat the same
+context over and over...
+
+300
+00:00:00,000 --> 00:00:00,000
+this is the fix.
+
+301
+00:00:00,000 --> 00:00:00,000
+It's not a smarter prompt.
+It's not a better model.
+
+302
+00:00:00,000 --> 00:00:00,000
+It's structure.
+
+303
+00:00:00,000 --> 00:00:00,000
+It's about building a smarter
+system around the model.
+
+304
+00:00:00,000 --> 00:00:00,000
+Give it anchors.
+Give it memory. Give it a relay.
+
+305
+00:00:00,000 --> 00:00:00,000
+Then get out of the way.
+
+306
+00:00:00,000 --> 00:00:00,000
+This is The Claude Chronicles.
+
+307
+00:00:00,000 --> 00:00:00,000
+I'm going to show you
+everything.
+
+308
+00:00:00,000 --> 00:00:00,000
+How I built it step by step.
+
+309
+00:00:00,000 --> 00:00:00,000
+How it breaks when it breaks.
+
+310
+00:00:00,000 --> 00:00:00,000
+How I fix it.
+
+311
+00:00:00,000 --> 00:00:00,000
+The real files.
+The real workflows.
+
+312
+00:00:00,000 --> 00:00:00,000
+The real problems
+and the real solutions.
+
+313
+00:00:00,000 --> 00:00:00,000
+No theory. No corporate fluff.
+
+314
+00:00:00,000 --> 00:00:00,000
+Just a guy from the 561 running
+five businesses
+
+315
+00:00:00,000 --> 00:00:00,000
+with AI agents
+that actually deliver.
+
+316
+00:00:00,000 --> 00:00:00,000
+Follow @mysterycartel on Rumble.
+
+317
+00:00:00,000 --> 00:00:00,000
+Hit subscribe.
+
+318
+00:00:00,000 --> 00:00:00,000
+Next episode I'm going deep on
+how the canon documents work.
+
+319
+00:00:00,000 --> 00:00:00,000
+The exact format. The exact
+rules.
+
+320
+00:00:00,000 --> 00:00:00,000
+How to write them so your agents
+physically cannot ignore them.
+
+321
+00:00:00,000 --> 00:00:00,000
+Chef's Golden Rule:
+
+322
+00:00:00,000 --> 00:00:00,000
+A recipe without measurements
+is just a wish.
+
+323
+00:00:00,000 --> 00:00:00,000
+Your AI needs measurements too.
+
+324
+00:00:00,000 --> 00:00:00,000
+See you next time.
